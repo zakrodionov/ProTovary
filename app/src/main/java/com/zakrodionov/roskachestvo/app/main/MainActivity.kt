@@ -1,7 +1,8 @@
-package com.zakrodionov.roskachestvo
+package com.zakrodionov.roskachestvo.app.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.zakrodionov.roskachestvo.R
 
 class MainActivity : AppCompatActivity() {
 
