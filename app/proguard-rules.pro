@@ -19,16 +19,20 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 
--keepattributes *Annotation*
 -keepattributes Signature
 -keepattributes MethodParameters
 
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
 
 #okhttp3 https://github.com/square/okhttp/blob/5fe3cc2d089810032671d6135ad137af6f491d28/README.md#proguard
 -dontwarn okhttp3.**
@@ -42,7 +46,6 @@
 ## https://square.github.io/retrofit/ ##
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
--keepattributes Exceptions
 
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
