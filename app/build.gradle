@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -12,13 +15,32 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        setProperty("archivesBaseName", "roskachestvo-$versionName($versionCode)")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        def API_ENDPOINT = "API_ENDPOINT"
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", API_ENDPOINT, '"google"'
+
         }
+        debug {
+            debuggable true
+            zipAlignEnabled false
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", API_ENDPOINT, '"google"'
+        }
+        staging {
+            initWith debug
+            minifyEnabled true
+            buildConfigField "String", API_ENDPOINT, '"google"'
+        }
+
     }
 }
 
@@ -54,7 +76,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitRxJava2Version"
 
     //Okhttp Interceptor
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     //Cicerone
     implementation 'ru.terrakok.cicerone:cicerone:3.0.0'
@@ -70,7 +92,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:4.8.0"
 
     //AdapterDelegates
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+    implementation 'com.hannesdorfmann:adapterdelegates3:3.1.0'
 
     //RxBinding
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
@@ -94,4 +116,11 @@ dependencies {
 
     //Anko
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
+
+    //Moxy
+    implementation 'com.arello-mobile:moxy:1.5.5'
+    implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    kapt 'com.arello-mobile:moxy-compiler:1.5.5'
+
 }
