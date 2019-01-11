@@ -122,7 +122,6 @@ dependencies {
 
     //RxPermissions
     implementation 'com.vanniktech:rxpermission:0.3.0'
-    implementation 'com.patloew.rxlocation:rxlocation:1.0.5'
 
     //animation
     implementation 'com.daimajia.easing:library:2.0@aar'
