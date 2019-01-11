@@ -102,7 +102,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     //Cicerone
-    implementation 'ru.terrakok.cicerone:cicerone:3.0.0'
+    implementation 'ru.terrakok.cicerone:cicerone:4.0.2'
 
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
