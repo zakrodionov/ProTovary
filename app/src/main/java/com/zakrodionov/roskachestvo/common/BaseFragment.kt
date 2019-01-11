@@ -38,5 +38,5 @@ abstract class BaseFragment : MvpAppXFragment(), BaseView {
 
     abstract fun prepareUi(view: View)
 
-    open fun onBackPressed() {}
+    open fun onBackPressed(): Boolean = false
 }

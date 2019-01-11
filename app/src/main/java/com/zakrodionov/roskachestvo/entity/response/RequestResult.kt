@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.model
+package com.zakrodionov.roskachestvo.entity.response
 
 sealed class RequestResult<out T> {
     data class Success<out T>(val data: T) : RequestResult<T>()

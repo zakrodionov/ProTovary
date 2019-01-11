@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.model
+package com.zakrodionov.roskachestvo.entity.response
 
 import com.google.gson.annotations.SerializedName
 

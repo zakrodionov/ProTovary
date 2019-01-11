@@ -1,9 +1,9 @@
 package com.zakrodionov.roskachestvo.server
 
-import com.zakrodionov.roskachestvo.model.ProductInfoResp
-import com.zakrodionov.roskachestvo.model.ProductResp
-import com.zakrodionov.roskachestvo.model.ProductsResp
-import com.zakrodionov.roskachestvo.model.ResearchesResp
+import com.zakrodionov.roskachestvo.entity.response.ProductInfoResp
+import com.zakrodionov.roskachestvo.entity.response.ProductResp
+import com.zakrodionov.roskachestvo.entity.response.ProductsResp
+import com.zakrodionov.roskachestvo.entity.response.ResearchesResp
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

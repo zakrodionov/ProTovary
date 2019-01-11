@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxrelay2.Relay
-import com.zakrodionov.roskachestvo.model.RequestResult
+import com.zakrodionov.roskachestvo.entity.response.RequestResult
 import com.zakrodionov.roskachestvo.util.RetryWithDelay
 import io.reactivex.Completable
 import io.reactivex.Flowable

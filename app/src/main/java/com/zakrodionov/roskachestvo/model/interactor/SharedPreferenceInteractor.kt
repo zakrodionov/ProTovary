@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.common.interactor
+package com.zakrodionov.roskachestvo.model.interactor
 
 import com.orhanobut.hawk.Hawk
 

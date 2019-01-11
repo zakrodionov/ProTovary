@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.util
+package com.zakrodionov.roskachestvo.model
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

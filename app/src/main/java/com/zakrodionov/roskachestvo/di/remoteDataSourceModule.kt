@@ -1,7 +1,7 @@
 package com.zakrodionov.roskachestvo.di
 
-import com.zakrodionov.roskachestvo.common.interactor.MainInteractor
 import com.zakrodionov.roskachestvo.di.Properties.SERVER_URL
+import com.zakrodionov.roskachestvo.model.interactor.MainInteractor
 import com.zakrodionov.roskachestvo.server.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,11 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val remoteDataSourceModule = module {
-    // provided web components
     single { createOkHttpClient() }
-    // Fill property
     single { createWebService<Api>(get(), getProperty(SERVER_URL)) }
-
     single { MainInteractor(get(), get()) }
 }
 
