@@ -5,62 +5,62 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.arellomobile.mvp.MvpDelegate;
 
 public class MvpAppXActivity extends AppCompatActivity {
-	private MvpDelegate<? extends MvpAppXActivity> mMvpDelegate;
+    private MvpDelegate<? extends MvpAppXActivity> mMvpDelegate;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		getMvpDelegate().onCreate(savedInstanceState);
-	}
+        getMvpDelegate().onCreate(savedInstanceState);
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-		getMvpDelegate().onAttach();
-	}
+        getMvpDelegate().onAttach();
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-		getMvpDelegate().onAttach();
-	}
+        getMvpDelegate().onAttach();
+    }
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-		getMvpDelegate().onSaveInstanceState(outState);
-		getMvpDelegate().onDetach();
-	}
+        getMvpDelegate().onSaveInstanceState(outState);
+        getMvpDelegate().onDetach();
+    }
 
-	@Override
-	protected void onStop() {
-		super.onStop();
+    @Override
+    protected void onStop() {
+        super.onStop();
 
-		getMvpDelegate().onDetach();
-	}
+        getMvpDelegate().onDetach();
+    }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-		getMvpDelegate().onDestroyView();
+        getMvpDelegate().onDestroyView();
 
-		if (isFinishing()) {
-			getMvpDelegate().onDestroy();
-		}
-	}
+        if (isFinishing()) {
+            getMvpDelegate().onDestroy();
+        }
+    }
 
-	/**
-	 * @return The {@link MvpDelegate} being used by this Activity.
-	 */
-	public MvpDelegate getMvpDelegate() {
-		if (mMvpDelegate == null) {
-			mMvpDelegate = new MvpDelegate<>(this);
-		}
-		return mMvpDelegate;
-	}
+    /**
+     * @return The {@link MvpDelegate} being used by this Activity.
+     */
+    public MvpDelegate getMvpDelegate() {
+        if (mMvpDelegate == null) {
+            mMvpDelegate = new MvpDelegate<>(this);
+        }
+        return mMvpDelegate;
+    }
 }

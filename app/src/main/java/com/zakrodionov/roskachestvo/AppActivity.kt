@@ -1,22 +1,36 @@
 package com.zakrodionov.roskachestvo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.zakrodionov.roskachestvo.common.BaseFragment
 import com.zakrodionov.roskachestvo.common.MvpAppXActivity
 import com.zakrodionov.roskachestvo.common.SupportXAppNavigator
+import com.zakrodionov.roskachestvo.common.interactor.MainInteractor
+import com.zakrodionov.roskachestvo.common.interactor.SharedPreferenceInteractor
+import org.jetbrains.anko.toast
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 
 class AppActivity : MvpAppXActivity() {
 
-    lateinit var navigatorHolder: NavigatorHolder
+    var navigatorHolder: NavigatorHolder = object : NavigatorHolder {
+        override fun setNavigator(navigator: Navigator?) {
+        }
+
+        override fun removeNavigator() {
+        }
+
+    }
 
     private val currentFragment: BaseFragment?
         get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
+
+    val preferences: SharedPreferenceInteractor by inject()
 
     private val navigator: Navigator =
         object : SupportXAppNavigator(this, supportFragmentManager, R.id.container) {
@@ -34,6 +48,13 @@ class AppActivity : MvpAppXActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_container)
+
+        val interactor: MainInteractor = get()
+
+        interactor.getResearches().subscribe({
+            toast(it.size.toString())
+            Log.d("testinet", it.size.toString())
+        }, { it.printStackTrace() })
     }
 
     override fun onResumeFragments() {
