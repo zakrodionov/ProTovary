@@ -24,7 +24,7 @@ android {
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "0.01"
         setProperty("archivesBaseName", "roskachestvo-$versionName($versionCode)")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,6 +72,11 @@ android {
 }
 
 dependencies {
+    def room_version = "2.1.0-alpha03"
+    def retrofitRxJava2Version = '2.3.0'
+    def retrofitVersion = '2.3.0'
+    def koin_version = '1.0.2'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
@@ -85,6 +90,11 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.media:media:1.1.0-alpha01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
 
     //RxKotlin2
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
