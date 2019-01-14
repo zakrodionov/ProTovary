@@ -11,7 +11,10 @@ import com.zakrodionov.roskachestvo.common.BaseFragment
 import com.zakrodionov.roskachestvo.common.Layout
 import com.zakrodionov.roskachestvo.common.SupportXAppScreen
 import com.zakrodionov.roskachestvo.extensions.colors
+import com.zakrodionov.roskachestvo.extensions.strings
 import kotlinx.android.synthetic.main.view_main_fragment.*
+import kotlinx.android.synthetic.main.view_main_fragment.view.*
+import kotlinx.android.synthetic.main.view_toolbar.view.*
 import org.koin.android.ext.android.inject
 import ru.terrakok.cicerone.Router
 
@@ -38,34 +41,6 @@ class MainFragment : BaseFragment(), MainView {
         AHBottomNavigationAdapter(activity, R.menu.main_bottom_menu).apply {
             setupWithBottomNavigation(bottomBar)
         }
-
-
-        with(bottomBar) {
-            accentColor = colors[R.color.colorPrimary]
-            inactiveColor = colors[R.color.silver]
-
-            setOnTabSelectedListener { position, wasSelected ->
-                if (!wasSelected) selectTab(
-                    when (position) {
-                        0 -> researchTab
-                        1 -> barcodeTab
-                        2 -> searchTab
-                        else -> favoritesTab
-                    }
-                )
-                true
-            }
-        }
-
-        selectTab(
-            when (currentTabFragment?.tag) {
-                researchTab.screenKey -> researchTab
-                barcodeTab.screenKey -> barcodeTab
-                searchTab.screenKey -> searchTab
-                favoritesTab.screenKey -> favoritesTab
-                else -> researchTab
-            }
-        )
     }
 
     private fun selectTab(tab: SupportXAppScreen) {
@@ -92,11 +67,46 @@ class MainFragment : BaseFragment(), MainView {
 
     override fun prepareUi(view: View) {
 
-    }
+        view.toolbar.tvTitle.text = strings[R.string.research]
+        selectTab(
+            when (currentTabFragment?.tag) {
+                researchTab.screenKey -> researchTab
+                barcodeTab.screenKey -> barcodeTab
+                searchTab.screenKey -> searchTab
+                favoritesTab.screenKey -> favoritesTab
+                else -> researchTab
+            }
+        )
 
-    override fun onBackPressed(): Boolean {
-        router.exit()
-        return true
+        with(view.bottomBar) {
+            accentColor = colors[R.color.colorPrimary]
+            inactiveColor = colors[R.color.silver]
+
+            setOnTabSelectedListener { position, wasSelected ->
+                if (!wasSelected) selectTab(
+                    when (position) {
+                        0 ->  {
+                            view.toolbar.tvTitle.text = strings[R.string.research]
+                            researchTab
+                        }
+                        1 -> {
+                            view.toolbar.tvTitle.text = strings[R.string.barcode]
+                            barcodeTab
+                        }
+                        2 -> {
+                            view.toolbar.tvTitle.text = strings[R.string.search]
+                            searchTab
+                        }
+
+                        else -> {
+                            view.toolbar.tvTitle.text = strings[R.string.favorites]
+                            favoritesTab
+                        }
+                    }
+                )
+                true
+            }
+        }
     }
 
     companion object {

@@ -14,7 +14,6 @@ class App : Application() {
 
         Hawk.init(this).build()
 
-        // start Koin context
         startKoin(
             this,
             onlineApp,

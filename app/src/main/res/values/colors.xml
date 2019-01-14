@@ -6,5 +6,7 @@
 
 
     <color name="silver">#6A8398</color>
+    <color name="primary_text">#434242</color>
+
 
 </resources>
