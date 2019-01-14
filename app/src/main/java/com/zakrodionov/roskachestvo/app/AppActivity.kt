@@ -8,10 +8,6 @@ import com.zakrodionov.roskachestvo.Screens
 import com.zakrodionov.roskachestvo.common.BaseFragment
 import com.zakrodionov.roskachestvo.common.MvpAppXActivity
 import com.zakrodionov.roskachestvo.common.SupportXAppNavigator
-import com.zakrodionov.roskachestvo.model.interactor.MainInteractor
-import com.zakrodionov.roskachestvo.model.interactor.SharedPreferenceInteractor
-import org.jetbrains.anko.toast
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -21,7 +17,6 @@ import ru.terrakok.cicerone.commands.Command
 class AppActivity : MvpAppXActivity() {
 
     val navigatorHolder: NavigatorHolder by inject()
-    val preferences: SharedPreferenceInteractor by inject()
     val router: Router by inject()
 
     private val currentFragment: BaseFragment?
@@ -33,10 +28,6 @@ class AppActivity : MvpAppXActivity() {
             override fun applyCommands(commands: Array<out Command>?) {
                 super.applyCommands(commands)
 
-            }
-
-            override fun activityBack() {
-                router.exit()
             }
 
             override fun setupFragmentTransaction(
@@ -54,13 +45,8 @@ class AppActivity : MvpAppXActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_container)
 
-        val interactor: MainInteractor = get()
+        router.replaceScreen(Screens.MainFrag)
 
-        router.navigateTo(Screens.MainFrag)
-
-        interactor.getResearches().subscribe(
-            { toast(it.size.toString()) },
-            { it.printStackTrace() })
     }
 
     override fun onResumeFragments() {
@@ -74,6 +60,9 @@ class AppActivity : MvpAppXActivity() {
     }
 
     override fun onBackPressed() {
+//        if (supportFragmentManager.backStackEntryCount == 1 ) {
+//           this.finish()
+//        }
         if (currentFragment?.onBackPressed() == true) else super.onBackPressed()
     }
 }

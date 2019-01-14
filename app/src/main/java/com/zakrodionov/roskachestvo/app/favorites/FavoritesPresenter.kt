@@ -1,9 +1,9 @@
-package com.zakrodionov.roskachestvo.app.main
+package com.zakrodionov.roskachestvo.app.favorites
 
 import com.arellomobile.mvp.InjectViewState
 import com.zakrodionov.roskachestvo.common.BasePresenter
 
 @InjectViewState
-class MainPresenter : BasePresenter<MainView>() {
+class FavoritesPresenter : BasePresenter<FavoritesView>() {
 
 }

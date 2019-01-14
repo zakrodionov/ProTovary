@@ -1,13 +1,15 @@
 package com.zakrodionov.roskachestvo.common
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zakrodionov.roskachestvo.extensions.ContextAware
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment : MvpAppXFragment(), BaseView {
+abstract class BaseFragment : MvpAppXFragment(), BaseView, ContextAware {
     private var disposables = CompositeDisposable()
     private val viewHandler = Handler()
 
@@ -35,6 +37,8 @@ abstract class BaseFragment : MvpAppXFragment(), BaseView {
         super.onDestroyView()
         viewHandler.removeCallbacksAndMessages(null)
     }
+
+    override fun getContext(): Context = super.getContext()!!
 
     abstract fun prepareUi(view: View)
 

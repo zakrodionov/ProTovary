@@ -155,6 +155,10 @@ dependencies {
     //Koin
     implementation "org.koin:koin-androidx-scope:$koin_version"
 
+    //Ahbottom Navigation
+    implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
