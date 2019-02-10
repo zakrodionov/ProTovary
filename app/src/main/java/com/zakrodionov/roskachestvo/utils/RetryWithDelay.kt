@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.util
+package com.zakrodionov.roskachestvo.utils
 
 import io.reactivex.Flowable
 import io.reactivex.functions.Function

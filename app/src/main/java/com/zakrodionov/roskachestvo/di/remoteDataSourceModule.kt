@@ -1,8 +1,8 @@
 package com.zakrodionov.roskachestvo.di
 
 import com.zakrodionov.roskachestvo.di.Properties.SERVER_URL
+import com.zakrodionov.roskachestvo.model.data.server.Api
 import com.zakrodionov.roskachestvo.model.interactor.MainInteractor
-import com.zakrodionov.roskachestvo.server.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module

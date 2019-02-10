@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.app.main
+package com.zakrodionov.roskachestvo.ui.main
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,8 @@ import com.zakrodionov.roskachestvo.common.Layout
 import com.zakrodionov.roskachestvo.common.SupportXAppScreen
 import com.zakrodionov.roskachestvo.extensions.colors
 import com.zakrodionov.roskachestvo.extensions.strings
+import com.zakrodionov.roskachestvo.presentation.main.MainPresenter
+import com.zakrodionov.roskachestvo.presentation.main.MainView
 import kotlinx.android.synthetic.main.view_main_fragment.*
 import kotlinx.android.synthetic.main.view_main_fragment.view.*
 import kotlinx.android.synthetic.main.view_toolbar.view.*
@@ -85,7 +87,7 @@ class MainFragment : BaseFragment(), MainView {
             setOnTabSelectedListener { position, wasSelected ->
                 if (!wasSelected) selectTab(
                     when (position) {
-                        0 ->  {
+                        0 -> {
                             view.toolbar.tvTitle.text = strings[R.string.research]
                             researchTab
                         }

@@ -21,7 +21,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxrelay2.Relay
 import com.zakrodionov.roskachestvo.entity.response.RequestResult
-import com.zakrodionov.roskachestvo.util.RetryWithDelay
+import com.zakrodionov.roskachestvo.utils.RetryWithDelay
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable

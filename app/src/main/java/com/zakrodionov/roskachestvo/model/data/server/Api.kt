@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.server
+package com.zakrodionov.roskachestvo.model.data.server
 
 import com.zakrodionov.roskachestvo.entity.response.ProductInfoResp
 import com.zakrodionov.roskachestvo.entity.response.ProductResp

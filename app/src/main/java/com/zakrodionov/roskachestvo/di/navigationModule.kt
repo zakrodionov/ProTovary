@@ -1,6 +1,6 @@
 package com.zakrodionov.roskachestvo.di
 
-import com.zakrodionov.roskachestvo.util.LocalCiceroneHolder
+import com.zakrodionov.roskachestvo.utils.LocalCiceroneHolder
 import org.koin.dsl.module.module
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router

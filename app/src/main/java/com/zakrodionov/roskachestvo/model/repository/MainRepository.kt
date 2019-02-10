@@ -1,7 +1,7 @@
 package com.zakrodionov.roskachestvo.model.repository
 
 import com.zakrodionov.roskachestvo.model.ApplicationSchedulerProvider
-import com.zakrodionov.roskachestvo.server.Api
+import com.zakrodionov.roskachestvo.model.data.server.Api
 
 class MainRepository(private val api: Api, private val schedulerProvider: ApplicationSchedulerProvider) {
     fun getProducts() = api.getProducts()

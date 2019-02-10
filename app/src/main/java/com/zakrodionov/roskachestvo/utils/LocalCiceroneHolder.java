@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.util;
+package com.zakrodionov.roskachestvo.utils;
 
 import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.Router;

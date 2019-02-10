@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.app
+package com.zakrodionov.roskachestvo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
