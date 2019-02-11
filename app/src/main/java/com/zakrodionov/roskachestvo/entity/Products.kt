@@ -1,8 +1,8 @@
-package com.zakrodionov.roskachestvo.entity.response
+package com.zakrodionov.roskachestvo.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductsResp(
+data class Products(
     @SerializedName("barcode")
     val barcode: Long? = 0,
     @SerializedName("category")
@@ -21,15 +21,4 @@ data class ProductsResp(
     val trademark: String? = "",
     @SerializedName("url")
     val url: String? = ""
-) {
-    data class Image(
-        @SerializedName("height")
-        val height: Int? = 0,
-        @SerializedName("size")
-        val size: Int? = 0,
-        @SerializedName("src")
-        val src: String? = "",
-        @SerializedName("width")
-        val width: Int? = 0
-    )
-}
+)

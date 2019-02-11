@@ -1,8 +1,8 @@
-package com.zakrodionov.roskachestvo.entity.response
+package com.zakrodionov.roskachestvo.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ResearchesResp(
+data class Researches(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("image")
@@ -10,11 +10,11 @@ data class ResearchesResp(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("researches")
-    val researches: List<Researche?>? = listOf(),
+    val researches: List<Research?>? = listOf(),
     @SerializedName("utime")
     val utime: Int? = 0
 ) {
-    data class Researche(
+    data class Research(
         @SerializedName("category")
         val category: String? = "",
         @SerializedName("id")
@@ -40,27 +40,5 @@ data class ResearchesResp(
             @SerializedName("withviolation")
             val withviolation: String? = ""
         )
-
-        data class Image(
-            @SerializedName("height")
-            val height: Int? = 0,
-            @SerializedName("size")
-            val size: Int? = 0,
-            @SerializedName("src")
-            val src: String? = "",
-            @SerializedName("width")
-            val width: Int? = 0
-        )
     }
-
-    data class Image(
-        @SerializedName("height")
-        val height: Int? = 0,
-        @SerializedName("size")
-        val size: Int? = 0,
-        @SerializedName("src")
-        val src: String? = "",
-        @SerializedName("width")
-        val width: Int? = 0
-    )
 }

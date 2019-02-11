@@ -1,8 +1,8 @@
-package com.zakrodionov.roskachestvo.entity.response
+package com.zakrodionov.roskachestvo.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductResp(
+data class Product(
     @SerializedName("id")
     val id: String? = "",
     @SerializedName("name")

@@ -72,7 +72,7 @@ android {
 }
 
 dependencies {
-    def room_version = "2.1.0-alpha03"
+    def room_version = "2.1.0-alpha04"
     def retrofitRxJava2Version = '2.3.0'
     def retrofitVersion = '2.3.0'
     def koin_version = '1.0.2'
@@ -84,8 +84,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     //Support Libraries
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.media:media:1.1.0-alpha01'
@@ -98,7 +98,7 @@ dependencies {
 
     //RxKotlin2
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
     //Retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
