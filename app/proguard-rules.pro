@@ -198,4 +198,4 @@
 -dontwarn android.support.test.**
 -dontwarn org.junit.**
 
--keepclassmembers class com.zakrodionov.roskachestvo.entity** { <fields>; }
+-keepclassmembers class com.zakrodionov.roskachestvo.domain.entity** { <fields>; }
