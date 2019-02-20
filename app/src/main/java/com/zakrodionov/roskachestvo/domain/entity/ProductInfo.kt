@@ -4,43 +4,27 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductInfo(
     @SerializedName("+")
-    val pluses: List<String?>? = listOf(),
+    val pluses: List<String>?,
     @SerializedName("-")
-    val minuses: List<String?>? = listOf(),
+    val minuses: List<String>?,
     @SerializedName("image")
-    val image: Image? = Image(),
+    val image: Image?,
     @SerializedName("indicators")
-    val indicators: List<Indicator?>? = listOf(),
+    val indicators: List<Indicator>?,
     @SerializedName("name")
-    val name: String? = "",
+    val name: String?,
     @SerializedName("producer")
-    val producer: String? = "",
+    val producer: String?,
     @SerializedName("properties")
-    val properties: List<Property?>? = listOf(),
+    val properties: List<Property>?,
     @SerializedName("research_results")
-    val researchResults: String? = "",
+    val researchResults: String?,
     @SerializedName("status")
-    val status: String? = "",
+    val status: String?,
     @SerializedName("trademark")
-    val trademark: String? = "",
+    val trademark: String? ,
     @SerializedName("url")
-    val url: String? = "",
+    val url: String? ,
     @SerializedName("violations")
-    val violations: Any? = Any()
-) {
-    data class Property(
-        @SerializedName("name")
-        val name: String? = "",
-        @SerializedName("value")
-        val value: String? = ""
-    )
-
-    data class Indicator(
-        @SerializedName("group")
-        val group: String? = "",
-        @SerializedName("name")
-        val name: String? = "",
-        @SerializedName("value")
-        val value: String? = ""
-    )
-}
+    val violations: Any?
+)

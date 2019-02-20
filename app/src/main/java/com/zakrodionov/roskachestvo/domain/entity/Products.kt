@@ -4,21 +4,21 @@ import com.google.gson.annotations.SerializedName
 
 data class Products(
     @SerializedName("barcode")
-    val barcode: Long? = 0,
+    val barcode: Long?,
     @SerializedName("category")
-    val category: String? = "",
+    val category: String?,
     @SerializedName("id")
-    val id: String? = "",
+    val id: String?,
     @SerializedName("image")
-    val image: Image? = Image(),
+    val image: Image?,
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("producer")
-    val producer: String? = "",
+    val producer: String?,
     @SerializedName("status")
-    val status: String? = "",
+    val status: String?,
     @SerializedName("trademark")
-    val trademark: String? = "",
+    val trademark: String?,
     @SerializedName("url")
-    val url: String? = ""
+    val url: String?
 )

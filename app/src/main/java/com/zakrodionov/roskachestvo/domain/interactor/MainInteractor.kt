@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.domain.interactor
 
-import com.zakrodionov.roskachestvo.data.network.ApplicationSchedulerProvider
 import com.zakrodionov.roskachestvo.domain.repository.MainRepository
 
 class MainInteractor(
