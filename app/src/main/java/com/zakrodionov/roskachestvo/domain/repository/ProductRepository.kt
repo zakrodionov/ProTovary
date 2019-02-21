@@ -1,18 +1,16 @@
 package com.zakrodionov.roskachestvo.domain.repository
 
+import com.zakrodionov.roskachestvo.app.functional.Either
+import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.domain.entity.Product
 import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
 import com.zakrodionov.roskachestvo.domain.entity.Products
-import com.zakrodionov.roskachestvo.domain.entity.Researches
-import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
 
 interface ProductRepository {
 
-    fun getProduct(id: String): ArrayList<Product>
+    suspend fun getProduct(id: String): Either<Failure, List<Product>>
 
-    fun getProductInfo(id: String): ArrayList<ProductInfo>
+    suspend fun getProductInfo(id: String): Either<Failure, List<ProductInfo>>
 
-    fun getProducts(): ArrayList<Products>
+    suspend fun getProducts(): Either<Failure, List<Products>>
 }

@@ -48,18 +48,20 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): Api  =  retrofit.create(Api::class.java)
+    fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
 
 
-   @Provides @Singleton fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepositoryImpl =
-       ProductRepositoryImpl(api, productDao, errorHandler)
+    @Provides
+    @Singleton
+    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepositoryImpl =
+        ProductRepositoryImpl(api, productDao, errorHandler)
 
     @Provides
     @Singleton
     fun provideDb(app: Context): ProductDatabase =
-            Room.databaseBuilder(app, ProductDatabase::class.java, "main.db")
-                .fallbackToDestructiveMigration()
-                .build()
+        Room.databaseBuilder(app, ProductDatabase::class.java, "main.db")
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     @Singleton

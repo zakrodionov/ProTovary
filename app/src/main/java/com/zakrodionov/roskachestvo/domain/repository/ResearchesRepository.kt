@@ -1,9 +1,10 @@
 package com.zakrodionov.roskachestvo.domain.repository
 
+import com.zakrodionov.roskachestvo.app.functional.Either
+import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.domain.entity.Researches
-import io.reactivex.Single
 
 interface ResearchesRepository {
 
-    fun getResearches(): ArrayList<Researches>
+    suspend fun getResearches(): Either<Failure, List<Researches>>
 }

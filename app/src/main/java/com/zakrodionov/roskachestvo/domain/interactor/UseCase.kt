@@ -2,10 +2,8 @@ package com.zakrodionov.roskachestvo.domain.interactor
 
 import com.zakrodionov.roskachestvo.app.functional.Either
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
 /**
@@ -18,16 +16,33 @@ import kotlinx.coroutines.withContext
  */
 abstract class UseCase<out Type, in Params> where Type : Any {
 
+    private var parentJob: Job = Job()
+    var backgroundContext: CoroutineContext = Dispatchers.IO
+    var foregroundContext: CoroutineContext = Dispatchers.Main
+
     abstract suspend fun run(params: Params): Either<Failure, Type>
 
     operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = run(params)
-            withContext(Dispatchers.Main) {
-                onResult(result)
+
+        unsubscribe()
+        parentJob = Job()
+
+        CoroutineScope(foregroundContext + parentJob).launch {
+            val result = withContext(backgroundContext) {
+                run(params)
             }
+
+            onResult(result)
+
         }
 
+    }
+
+    fun unsubscribe() {
+        parentJob.apply {
+            cancelChildren()
+            cancel()
+        }
     }
 
     class None

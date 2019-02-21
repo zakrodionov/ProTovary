@@ -22,9 +22,9 @@ data class ProductInfo(
     @SerializedName("status")
     val status: String?,
     @SerializedName("trademark")
-    val trademark: String? ,
+    val trademark: String?,
     @SerializedName("url")
-    val url: String? ,
+    val url: String?,
     @SerializedName("violations")
     val violations: Any?
 )
