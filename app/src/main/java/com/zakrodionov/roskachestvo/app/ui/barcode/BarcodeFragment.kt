@@ -9,7 +9,7 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 class BarcodeFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_barcode
-    override fun navigationLayoutId() = R.id.hostHomeFragment
+    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var barcodeViewModel: BarcodeViewModel
 

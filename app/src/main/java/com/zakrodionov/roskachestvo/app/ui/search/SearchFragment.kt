@@ -8,7 +8,7 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 class SearchFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_search
-    override fun navigationLayoutId() = R.id.hostHomeFragment
+    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var searchViewModel: SearchViewModel
 

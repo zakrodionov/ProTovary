@@ -2,8 +2,6 @@ package com.zakrodionov.roskachestvo.app.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseActivity
@@ -12,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class AppActivity : BaseActivity() {
 
     override fun fragmentContainer() = flFragmentContainer
-    override fun navigationLayoutId() = R.id.hostAppActivity
+    override fun navigationLayoutId() = R.id.hostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

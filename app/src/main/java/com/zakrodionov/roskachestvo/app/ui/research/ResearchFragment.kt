@@ -10,7 +10,7 @@ class ResearchFragment : BaseFragment() {
     override fun layoutId() = R.layout.view_research
 
     private lateinit var researchViewModel: ResearchViewModel
-    override fun navigationLayoutId() = R.id.hostHomeFragment
+    override fun navigationLayoutId() = R.id.hostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
