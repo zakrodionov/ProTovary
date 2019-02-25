@@ -3,29 +3,27 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/shareAction"
+            android:id="@+id/researchFragment"
             android:icon="@drawable/research"
             android:title="@string/research"
             app:showAsAction="always"/>
 
     <item
-            android:id="@+id/filesAction"
+            android:id="@+id/barcode"
             android:icon="@drawable/barcode"
             android:title="@string/barcode"
             app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/labelAction"
+            android:id="@+id/searchFragment"
             android:icon="@drawable/search"
             android:title="@string/search"
-            app:iconTint="@android:color/white"
             app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/milestonesAction"
+            android:id="@+id/favoritesFragment"
             android:icon="@drawable/favorites"
             android:title="@string/favorites"
-            app:iconTint="@android:color/white"
             app:showAsAction="ifRoom"/>
 
 </menu>

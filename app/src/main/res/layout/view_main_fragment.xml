@@ -6,39 +6,28 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <include layout="@layout/view_toolbar"
-             android:id="@+id/incToolbar"
-    />
-
-    <FrameLayout
-            android:id="@+id/fullMainScreenContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <fragment
+            android:id="@+id/hostMainFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:navGraph="@navigation/navigation_fragments"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+
     />
 
-    <FrameLayout
-            android:id="@+id/mainScreenContainer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/incToolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomBar"
-    />
-
-    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-            android:id="@+id/bottomBar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+            app:menu="@menu/main_bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

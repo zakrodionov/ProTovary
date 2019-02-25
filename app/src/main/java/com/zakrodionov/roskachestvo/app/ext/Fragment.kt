@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider.Factory
 import androidx.lifecycle.ViewModelProviders
 import com.zakrodionov.roskachestvo.app.platform.BaseActivity
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
-import kotlinx.android.synthetic.main.activity_layout.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 inline fun androidx.fragment.app.FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> androidx.fragment.app.FragmentTransaction) =
     beginTransaction().func().commit()
@@ -21,6 +21,6 @@ inline fun <reified T : ViewModel> androidx.fragment.app.Fragment.viewModel(fact
 
 fun BaseFragment.close() = fragmentManager?.popBackStack()
 
-val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer
+//val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer
 
 val BaseFragment.appContext: Context get() = activity?.applicationContext!!
