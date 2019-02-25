@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeViewModel
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
-import com.zakrodionov.roskachestvo.app.ui.home.HomeViewModel
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.search.SearchViewModel
 import dagger.Binds
@@ -15,11 +14,6 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    abstract fun bindsMainViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap
