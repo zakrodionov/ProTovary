@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeViewModel
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
-import com.zakrodionov.roskachestvo.app.ui.main.MainViewModel
+import com.zakrodionov.roskachestvo.app.ui.home.HomeViewModel
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.search.SearchViewModel
 import dagger.Binds
@@ -18,8 +18,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindsMainViewModel(mainViewModel: MainViewModel): ViewModel
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindsMainViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -41,4 +41,4 @@ abstract class ViewModelModule {
     @ViewModelKey(SearchViewModel::class)
     abstract fun bindsSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 
-    }
+}

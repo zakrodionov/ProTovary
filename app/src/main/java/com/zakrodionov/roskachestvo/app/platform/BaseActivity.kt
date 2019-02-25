@@ -1,10 +1,8 @@
 package com.zakrodionov.roskachestvo.app.platform
 
-import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.zakrodionov.roskachestvo.R
-import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class BaseActivity : AppCompatActivity() {
-
+    abstract fun fragmentContainer(): View
 }

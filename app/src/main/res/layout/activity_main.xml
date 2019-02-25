@@ -3,6 +3,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/flFragmentContainer"
 >
 
     <fragment
@@ -11,6 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation_activity" />
+            app:navGraph="@navigation/nav_app" />
 
 </FrameLayout>

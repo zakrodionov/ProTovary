@@ -1,14 +1,18 @@
 package com.zakrodionov.roskachestvo.app.platform
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.di.ApplicationComponent
+import com.zakrodionov.roskachestvo.app.ext.viewContainer
 import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
@@ -21,9 +25,14 @@ import javax.inject.Inject
 abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     abstract fun layoutId(): Int
+    abstract fun navigationLayoutId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (activity?.application as AndroidApplication).appComponent
+    }
+
+    protected val navController: NavController by lazy {
+        Navigation.findNavController(activity as Activity, navigationLayoutId())
     }
 
     @Inject
@@ -43,15 +52,15 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     private fun progressStatus(viewStatus: Int) =
         with(activity) { if (this is BaseActivity) this.progress.visibility = viewStatus }
 
-    /*internal fun notify(@StringRes message: Int) =
+    internal fun notify(@StringRes message: Int) =
         Snackbar.make(viewContainer, message, Snackbar.LENGTH_SHORT).show()
 
     internal fun notifyWithAction(@StringRes message: Int, @StringRes actionText: Int, action: () -> Any) {
         val snackBar = Snackbar.make(viewContainer, message, Snackbar.LENGTH_INDEFINITE)
         snackBar.setAction(actionText) { _ -> action.invoke() }
-        snackBar.setActionTextColor(
-            ContextCompat.getColor(appContext,
-                color.colorTextPrimary))
+        /* snackBar.setActionTextColor(
+             ContextCompat.getColor(appContext,
+                 color.colorTextPrimary))*/
         snackBar.show()
-    }*/
+    }
 }

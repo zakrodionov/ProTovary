@@ -8,6 +8,7 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
+    override fun navigationLayoutId() = R.id.hostHomeFragment
 
     private lateinit var favoritesViewModel: FavoritesViewModel
 

@@ -1,6 +1,7 @@
 package com.zakrodionov.roskachestvo.app.ui.barcode
 
 import android.os.Bundle
+import android.view.View
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
@@ -8,6 +9,7 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 class BarcodeFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_barcode
+    override fun navigationLayoutId() = R.id.hostHomeFragment
 
     private lateinit var barcodeViewModel: BarcodeViewModel
 
@@ -21,4 +23,9 @@ class BarcodeFragment : BaseFragment() {
         }
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 }

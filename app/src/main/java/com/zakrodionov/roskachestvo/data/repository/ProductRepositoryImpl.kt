@@ -27,7 +27,7 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProducts(): Either<Failure, List<Products>> {
-      return  try {
+        return try {
             val result = api.getProducts().await()
             val data = result //тут мап
             //тут вставляем в дб

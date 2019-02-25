@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/navigation_fragments"
-            app:startDestination="@id/barcodeFragment"
->
+            app:startDestination="@id/researchFragment">
 
     <fragment android:id="@+id/barcodeFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment"

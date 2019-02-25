@@ -9,7 +9,7 @@
             app:showAsAction="always"/>
 
     <item
-            android:id="@+id/barcode"
+            android:id="@+id/barcodeFragment"
             android:icon="@drawable/barcode"
             android:title="@string/barcode"
             app:showAsAction="ifRoom"/>

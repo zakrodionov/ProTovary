@@ -1,35 +1,26 @@
-package com.zakrodionov.roskachestvo.app.ui.main
+package com.zakrodionov.roskachestvo.app.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
-import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
 import kotlinx.android.synthetic.main.view_main_fragment.*
 
-class MainFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_main_fragment
+    override fun navigationLayoutId() = R.id.hostHomeFragment
 
-    private val currentTabFragment: BaseFragment?
-        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
-
-//    protected val navController: NavController by lazy {
-//        Navigation.findNavController(navigation_fragments)
-//    }
-
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var homeViewModel: HomeViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        mainViewModel = viewModel(viewModelFactory) {
+        homeViewModel = viewModel(viewModelFactory) {
 
         }
     }
@@ -38,21 +29,21 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupNavigation()
+
+
     }
 
-    private fun setupNavigation(){
-
-        val navController = Navigation.findNavController(view!!)
+    private fun setupNavigation() {
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                 R.id.mainFragment -> showBottomNavBar()
-                 R.id.barcodeFragment -> showBottomNavBar()
-                 R.id.favoritesFragment  -> showBottomNavBar()
-                 R.id.researchFragment ->  showBottomNavBar()
-                 R.id.searchFragment-> showBottomNavBar()
-                 else -> hideBottomNavBar()
+                R.id.mainFragment -> showBottomNavBar()
+                R.id.barcodeFragment -> showBottomNavBar()
+                R.id.favoritesFragment -> showBottomNavBar()
+                R.id.researchFragment -> showBottomNavBar()
+                R.id.searchFragment -> showBottomNavBar()
+                else -> hideBottomNavBar()
             }
         }
     }

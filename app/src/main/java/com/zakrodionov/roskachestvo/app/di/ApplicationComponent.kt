@@ -4,7 +4,7 @@ import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.di.viewmodel.ViewModelModule
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment
-import com.zakrodionov.roskachestvo.app.ui.main.MainFragment
+import com.zakrodionov.roskachestvo.app.ui.home.HomeFragment
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchFragment
 import com.zakrodionov.roskachestvo.app.ui.search.SearchFragment
 import dagger.Component
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(application: AndroidApplication)
 
-    fun inject(fragment: MainFragment)
+    fun inject(fragment: HomeFragment)
     fun inject(fragment: BarcodeFragment)
     fun inject(fragment: FavoritesFragment)
     fun inject(fragment: ResearchFragment)
