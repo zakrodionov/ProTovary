@@ -22,6 +22,4 @@ fun BaseFragment.close() = fragmentManager?.popBackStack()
 
 val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer()
 
-val BaseFragment.snackHolder: View get() = (activity as BaseActivity).snackHolderContainer()
-
 val BaseFragment.appContext: Context get() = activity?.applicationContext!!

@@ -12,7 +12,6 @@ class AppActivity : BaseActivity() {
 
     override fun navigationLayoutId() = R.id.hostFragment
     override fun fragmentContainer() = flFragmentContainer
-    override fun snackHolderContainer() = clSnackHolder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +23,11 @@ class AppActivity : BaseActivity() {
     private fun setupNavigation() {
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
+
+        bottomNavigation.setOnNavigationItemSelectedListener{
+            navController.popBackStack()
+            NavigationUI.onNavDestinationSelected(it, navController)
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

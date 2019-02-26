@@ -22,9 +22,10 @@ class ResearchFragment : BaseFragment() {
     lateinit var researchesAdapter: ResearchesAdapter
 
     override fun layoutId() = R.layout.view_research
+    override fun snackHolderContainer() = R.id.clSnackHolder
+    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var researchViewModel: ResearchViewModel
-    override fun navigationLayoutId() = R.id.hostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class ResearchFragment : BaseFragment() {
 
         researchViewModel = viewModel(viewModelFactory) {
             observe(researches, ::renderResearchesList)
+            observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
     }
@@ -51,17 +53,14 @@ class ResearchFragment : BaseFragment() {
     }
 
     private fun loadResearchList() {
-        showProgress()
         researchViewModel.loadResearches()
     }
 
     private fun renderResearchesList(researches: List<Researches>?) {
         researchesAdapter.collection = researches.orEmpty()
-        hideProgress()
     }
 
     private fun handleFailure(failure: Failure?) {
-        hideProgress()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.NetworkConnection -> notifyWithAction(R.string.failure_network_connection, R.string.action_refresh, ::loadResearchList)

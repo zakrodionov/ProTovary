@@ -11,9 +11,13 @@ class ResearchViewModel @Inject constructor(val getResearches: GetResearches) : 
 
     val researches = MutableLiveData<List<Researches>>()
 
-    fun loadResearches() = getResearches.invoke(UseCase.None()){ it.either(::handleFailure, ::handleResearches) }
+    fun loadResearches() {
+        loading.value = true
+        getResearches.invoke(UseCase.None()){ it.either(::handleFailure, ::handleResearches) }
+    }
 
     private fun handleResearches(list: List<Researches>){
+        loading.value = false
         researches.value = list
     }
 }

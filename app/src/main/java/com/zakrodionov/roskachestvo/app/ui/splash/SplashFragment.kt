@@ -9,6 +9,7 @@ class SplashFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_splash
     override fun navigationLayoutId() = R.id.hostFragment
+    override fun snackHolderContainer() = R.id.clSnackHolder
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
