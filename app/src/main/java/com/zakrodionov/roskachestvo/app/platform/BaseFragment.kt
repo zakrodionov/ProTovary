@@ -28,7 +28,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     abstract fun layoutId(): Int
     abstract fun navigationLayoutId(): Int
-    abstract fun snackHolderContainer(): Int
+    abstract fun failureHolderId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (activity?.application as AndroidApplication).appComponent
@@ -51,19 +51,24 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     internal fun loadingStatus(flag: Boolean?) = if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)
 
     private fun progressStatus(viewStatus: Int) =
-        with(activity) { if (this is BaseActivity) this.progressLayout.visibility = viewStatus }
+        with(activity) { if (this is BaseActivity) this.progressLayout?.visibility = viewStatus }
 
-    internal fun notify(@StringRes message: Int) =
-       Snackbar.make(snackHolder(), message, Snackbar.LENGTH_SHORT).show()
-
-
-    internal fun notifyWithAction(@StringRes message: Int, @StringRes actionText: Int, action: () -> Any) {
-        val snackBar = Snackbar.make(snackHolder(), message, Snackbar.LENGTH_INDEFINITE)
-        snackBar.setAction(actionText) { _ -> action.invoke() }
-        snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
-        snackBar.show()
+    internal fun notify(@StringRes message: Int) {
+        snackHolder()?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
-    fun snackHolder() = activity!!.findViewById<CoordinatorLayout>(snackHolderContainer())
+    internal fun notifyWithAction(@StringRes message: Int, @StringRes actionText: Int, action: () -> Any) {
+        snackHolder()?.let {
+            val snackBar = Snackbar.make(it, message, Snackbar.LENGTH_INDEFINITE)
+            snackBar.setAction(actionText) { _ -> action.invoke() }
+            snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
+            snackBar.show()
+        }
+
+    }
+
+    fun snackHolder() = activity!!.findViewById<CoordinatorLayout>(failureHolderId())
 
 }

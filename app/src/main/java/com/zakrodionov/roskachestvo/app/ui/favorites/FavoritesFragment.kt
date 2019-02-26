@@ -9,7 +9,7 @@ class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
     override fun navigationLayoutId() = R.id.hostFragment
-    override fun snackHolderContainer() = R.id.clSnackHolder
+    override fun failureHolderId() = R.id.failureHolder
 
     private lateinit var favoritesViewModel: FavoritesViewModel
 

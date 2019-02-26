@@ -6,7 +6,7 @@ import androidx.navigation.ui.NavigationUI
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.snack_holder.*
+import kotlinx.android.synthetic.main.failure_holder.*
 
 class AppActivity : BaseActivity() {
 
