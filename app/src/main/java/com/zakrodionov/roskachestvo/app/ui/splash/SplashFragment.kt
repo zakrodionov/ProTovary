@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.app.ui.splash
 
-import android.os.Bundle
 import android.os.Handler
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
@@ -12,9 +11,15 @@ class SplashFragment : BaseFragment() {
     override fun failureHolderId() = R.id.failureHolder
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    //Avoid "navigate() call: FragmentManager has already saved its state" when run this code in onCreate()
+    override fun onResume() {
+        super.onResume()
 
-        Handler().postDelayed({ navController.navigate(R.id.action_splashFragment_to_homeFragment) },1000)
+        Handler().postDelayed({
+            if (navController.currentDestination?.id != R.id.researchFragment) {
+                navController.navigate(R.id.action_splashFragment_to_researchFragment)
+            }
+
+        }, 1000)
     }
 }

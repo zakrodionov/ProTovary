@@ -35,7 +35,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     }
 
     protected val navController: NavController by lazy {
-        Navigation.findNavController(activity as Activity, navigationLayoutId())
+        Navigation.findNavController(activity!!, navigationLayoutId())
     }
 
     @Inject
