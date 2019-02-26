@@ -1,8 +1,8 @@
 package com.zakrodionov.roskachestvo.app.ui.splash
 
-import android.os.Handler
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
+import kotlinx.coroutines.*
 
 class SplashFragment : BaseFragment() {
 
@@ -15,11 +15,14 @@ class SplashFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        Handler().postDelayed({
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000L)
             if (navController.currentDestination?.id != R.id.researchFragment) {
                 navController.navigate(R.id.action_splashFragment_to_researchFragment)
             }
-
-        }, 1000)
+        }
     }
+
+
+
 }
