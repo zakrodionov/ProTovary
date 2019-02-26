@@ -12,7 +12,7 @@ class ErrorHandler @Inject constructor(private val networkHandler: NetworkHandle
     ): Either<Failure, R> {
         if (!networkHandler.isConnected) {
             val data = updateFromDb?.invoke()
-            return if (data == null) Either.Left(Failure.ServerError) else Either.Left(Failure.CacheFailure(data))
+            return if (data == null) Either.Left(Failure.NetworkConnection) else Either.Left(Failure.CacheFailure(data))
 
         }
         when (exception) {

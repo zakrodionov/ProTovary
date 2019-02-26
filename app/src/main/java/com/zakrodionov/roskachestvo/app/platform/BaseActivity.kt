@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun navigationLayoutId(): Int
+    abstract fun snackHolderContainer(): View
     abstract fun fragmentContainer(): View
 
     protected val navController: NavController by lazy {

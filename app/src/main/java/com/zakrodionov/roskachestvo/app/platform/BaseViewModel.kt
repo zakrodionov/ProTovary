@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
  */
 abstract class BaseViewModel : ViewModel() {
 
-    var failure: MutableLiveData<Failure> = MutableLiveData()
+    var failure: MutableLiveData<Failure> = SingleLiveEvent()
 
     protected fun handleFailure(failure: Failure) {
         this.failure.value = failure

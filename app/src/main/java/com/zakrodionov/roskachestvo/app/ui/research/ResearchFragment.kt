@@ -11,6 +11,7 @@ import com.zakrodionov.roskachestvo.app.ext.observe
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
+import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.Researches
 import kotlinx.android.synthetic.main.view_research.*
 import javax.inject.Inject
@@ -44,6 +45,7 @@ class ResearchFragment : BaseFragment() {
 
 
     private fun initializeView() {
+        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
     }
@@ -59,9 +61,10 @@ class ResearchFragment : BaseFragment() {
     }
 
     private fun handleFailure(failure: Failure?) {
+        hideProgress()
         when (failure) {
-            is Failure.NetworkConnection -> notify(R.string.failure_network_connection)
             is Failure.ServerError -> notify(R.string.failure_server_error)
+            is Failure.NetworkConnection -> notifyWithAction(R.string.failure_network_connection, R.string.action_refresh, ::loadResearchList)
             is Failure.CacheFailure<*> ->  notifyWithAction(R.string.failure_cache_date, R.string.action_refresh, ::loadResearchList)
         }
     }

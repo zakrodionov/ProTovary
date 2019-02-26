@@ -6,11 +6,13 @@ import androidx.navigation.ui.NavigationUI
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.snack_holder.*
 
 class AppActivity : BaseActivity() {
 
-    override fun fragmentContainer() = flFragmentContainer
     override fun navigationLayoutId() = R.id.hostFragment
+    override fun fragmentContainer() = flFragmentContainer
+    override fun snackHolderContainer() = clSnackHolder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

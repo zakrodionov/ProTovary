@@ -1,5 +1,6 @@
 package com.zakrodionov.roskachestvo.app.ext
 
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,11 @@ import com.bumptech.glide.request.target.BaseTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+
+
+fun Int.pxToDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 fun View.cancelTransition() {
     transitionName = null
@@ -60,3 +66,4 @@ private class ImageViewBaseTarget(var imageView: ImageView?, var activity: andro
 
     override fun getSize(cb: SizeReadyCallback) = cb.onSizeReady(SIZE_ORIGINAL, SIZE_ORIGINAL)
 }
+
