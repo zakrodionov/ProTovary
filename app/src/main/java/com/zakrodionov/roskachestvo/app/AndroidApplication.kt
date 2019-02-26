@@ -1,6 +1,7 @@
 package com.zakrodionov.roskachestvo.app
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.orhanobut.hawk.Hawk
 import com.zakrodionov.roskachestvo.app.di.ApplicationComponent
 import com.zakrodionov.roskachestvo.app.di.ApplicationModule
@@ -21,6 +22,8 @@ class AndroidApplication : Application() {
         this.injectMembers()
 
         Hawk.init(this).build()
+        Stetho.initializeWithDefaults(this)
+
     }
 
     private fun injectMembers() = appComponent.inject(this)

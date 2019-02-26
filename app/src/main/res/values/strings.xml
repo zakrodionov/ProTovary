@@ -5,6 +5,10 @@
     <string name="barcode">Штрихкод</string>
     <string name="search">Поиск</string>
     <string name="favorites">Избранное</string>
+    <string name="failure_network_connection">Отсутствует подключение к интрнету</string>
+    <string name="failure_server_error">Ошибка при работе с сервером</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="failure_cache_date">Похоже отсутствует подключение к интренету. Достаем данные из кеша.</string>
 
 
 </resources>

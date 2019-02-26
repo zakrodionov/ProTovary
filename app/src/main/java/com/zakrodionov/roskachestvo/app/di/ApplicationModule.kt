@@ -2,6 +2,7 @@ package com.zakrodionov.roskachestvo.app.di
 
 import android.content.Context
 import androidx.room.Room
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.app.AndroidApplication
@@ -11,6 +12,9 @@ import com.zakrodionov.roskachestvo.data.db.ProductDao
 import com.zakrodionov.roskachestvo.data.db.ProductDatabase
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.data.repository.ProductRepositoryImpl
+import com.zakrodionov.roskachestvo.data.repository.ResearchesRepositoryImpl
+import com.zakrodionov.roskachestvo.domain.repository.ProductRepository
+import com.zakrodionov.roskachestvo.domain.repository.ResearchesRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,7 +34,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://roskachestvo.gov.ru/api/")
+            .baseUrl(BuildConfig.API_ENDPOINT)
             .client(createClient())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
@@ -42,7 +46,9 @@ class ApplicationModule(private val application: AndroidApplication) {
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
+            okHttpClientBuilder.addNetworkInterceptor(StethoInterceptor())
         }
+
         return okHttpClientBuilder.build()
     }
 
@@ -53,8 +59,13 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepositoryImpl =
+    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepository =
         ProductRepositoryImpl(api, productDao, errorHandler)
+
+    @Provides
+    @Singleton
+    fun provideResearchesRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ResearchesRepository =
+        ResearchesRepositoryImpl(api, productDao, errorHandler)
 
     @Provides
     @Singleton
