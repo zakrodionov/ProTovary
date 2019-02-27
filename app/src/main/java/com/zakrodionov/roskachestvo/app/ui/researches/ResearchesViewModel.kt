@@ -1,27 +1,28 @@
 package com.zakrodionov.roskachestvo.app.ui.researches
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
+import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearch
+import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearchesCategory
+import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearchesCategory.*
 import javax.inject.Inject
 
-class ResearchesViewModel @Inject constructor(val getResearch: GetResearch) : BaseViewModel() {
+class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetResearchesCategory) : BaseViewModel() {
 
-    val researches = MutableLiveData<List<ResearchCompact>>()
+    var researches = MutableLiveData<ResearchesCategory>()
 
-//    fun loadResearch(id: Long) {
-//        loading.value = true
-//        getResearch.invoke(Params(id)){ it.either(::handleFailure, ::handleResearch) }
-//    }
-//
-//    private fun handleResearch(research: Research){
-//        loading.value = false
-//        this.research.value = research
-//        Log.d("inet", research.toString())
-//    }
+    fun loadResearchesCategory(id: Long) {
+        loading.value = true
+        getResearchesCategory.invoke(Params(id)){ it.either(::handleFailure, ::handleResearch) }
+    }
 
-    fun setResearches(researches: List<ResearchCompact>) {
+    private fun handleResearch(researches: ResearchesCategory){
+        loading.value = false
         this.researches.value = researches
     }
+
+
 }

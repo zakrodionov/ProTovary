@@ -1,16 +1,27 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import com.zakrodionov.roskachestvo.data.db.converter.ResearchesCompactConverter
 
+@Entity
+@TypeConverters(ResearchesCompactConverter::class)
 data class ResearchesCategory(
+    @PrimaryKey
     @SerializedName("id")
-    val id: Long,
+    var id: Long,
+
+    @Embedded
     @SerializedName("image")
-    val image: Image?,
+    var image: Image?,
+
     @SerializedName("name")
-    val name: String?,
+    var name: String?,
+
+    @TypeConverters(ResearchesCompactConverter::class)
     @SerializedName("researches")
-    val researches: List<ResearchCompact>?,
+    var researches: List<ResearchCompact>?,
+
     @SerializedName("utime")
-    val utime: Int?
+    var utime: Int?
 )

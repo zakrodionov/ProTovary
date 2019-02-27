@@ -12,8 +12,10 @@ import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.data.model.ResearchesFragmentModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
+import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.view_research.*
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class ResearchesFragment : BaseFragment() {
@@ -54,13 +56,13 @@ class ResearchesFragment : BaseFragment() {
     }
 
     private fun setResearches() {
-        val researches = (arguments?.getSerializable("model") as ResearchesFragmentModel).researches ?: listOf()
-        researchesViewModel.setResearches(researches)
+        val id = arguments?.getLong("id") ?: 0
+        researchesViewModel.loadResearchesCategory(id)
     }
 
-    private fun renderResearchesList(researches: List<ResearchCompact>?) {
+    private fun renderResearchesList(researches: ResearchesCategory?) {
         failureHolder?.gone()
-        Log.d("researches", researches.toString())
+        println(researches.toString())
     }
 
     private fun handleFailure(failure: Failure?) {

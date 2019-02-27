@@ -55,7 +55,7 @@ class ResearchesCategoryFragment : BaseFragment() {
     }
 
     private fun itemClickListener(research: ResearchesCategory) {
-        val bundle = Bundle().apply { putSerializable("model", ResearchesFragmentModel(research.researches)) }
+        val bundle = Bundle().apply { putLong("id", research.id) }
         navController.navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
     }
 

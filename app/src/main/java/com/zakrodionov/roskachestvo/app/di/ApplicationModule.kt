@@ -8,8 +8,8 @@ import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.platform.ErrorHandler
 import com.zakrodionov.roskachestvo.app.platform.NetworkHandler
-import com.zakrodionov.roskachestvo.data.db.ProductDao
-import com.zakrodionov.roskachestvo.data.db.ProductDatabase
+import com.zakrodionov.roskachestvo.data.db.ResearchDao
+import com.zakrodionov.roskachestvo.data.db.ResearchDatabase
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.data.repository.ProductRepositoryImpl
 import com.zakrodionov.roskachestvo.data.repository.ResearchesRepositoryImpl
@@ -59,28 +59,28 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepository =
-        ProductRepositoryImpl(api, productDao, errorHandler)
+    fun provideProductRepository(api: Api, researchDao: ResearchDao, errorHandler: ErrorHandler): ProductRepository =
+        ProductRepositoryImpl(api, researchDao, errorHandler)
 
     @Provides
     @Singleton
     fun provideResearchesRepository(
         api: Api,
-        productDao: ProductDao,
+        researchDao: ResearchDao,
         errorHandler: ErrorHandler
     ): ResearchesRepository =
-        ResearchesRepositoryImpl(api, productDao, errorHandler)
+        ResearchesRepositoryImpl(api, researchDao, errorHandler)
 
     @Provides
     @Singleton
-    fun provideDb(app: Context): ProductDatabase =
-        Room.databaseBuilder(app, ProductDatabase::class.java, "main.db")
+    fun provideDb(app: Context): ResearchDatabase =
+        Room.databaseBuilder(app, ResearchDatabase::class.java, "research.db")
             .fallbackToDestructiveMigration()
             .build()
 
     @Provides
     @Singleton
-    fun provideMovieDao(db: ProductDatabase): ProductDao = db.productDao
+    fun provideResearchDao(db: ResearchDatabase): ResearchDao = db.researchDao
 
     @Provides
     @Singleton

@@ -3,13 +3,13 @@ package com.zakrodionov.roskachestvo.domain.entity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Image(
+data class Image (
     @SerializedName("height")
-    val height: Int?,
+    var height: Int?,
     @SerializedName("size")
-    val size: Int?,
+    var size: Int?,
     @SerializedName("src")
-    val src: String?,
+    var src: String?,
     @SerializedName("width")
-    val width: Int?
+    var width: Int?
 ) : Serializable

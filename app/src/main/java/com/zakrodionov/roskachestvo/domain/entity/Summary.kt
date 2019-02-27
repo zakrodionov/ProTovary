@@ -5,11 +5,11 @@ import java.io.Serializable
 
 data class Summary(
     @SerializedName("highquality")
-    val highquality: String?,
+    var highquality: String?,
     @SerializedName("quality")
-    val quality: String?,
+    var quality: String?,
     @SerializedName("withsign")
-    val withsign: String?,
+    var withsign: String?,
     @SerializedName("withviolation")
-    val withviolation: String?
+    var withviolation: String?
 ) : Serializable

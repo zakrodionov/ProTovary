@@ -4,7 +4,7 @@ import com.zakrodionov.roskachestvo.app.functional.Either
 import com.zakrodionov.roskachestvo.app.functional.Either.Right
 import com.zakrodionov.roskachestvo.app.platform.ErrorHandler
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.data.db.ProductDao
+import com.zakrodionov.roskachestvo.data.db.ResearchDao
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.domain.entity.Product
 import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
     private val api: Api,
-    private val productDao: ProductDao,
+    private val researchDao: ResearchDao,
     private val errorHandler: ErrorHandler
 ) : ProductRepository {
 

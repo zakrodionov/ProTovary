@@ -1,21 +1,34 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity
 data class ResearchCompact(
-    @SerializedName("category")
-    val category: Int?,
+    @PrimaryKey
     @SerializedName("id")
-    val id: Long,
+    var id: Long,
+
+    @SerializedName("category")
+    var category: Int?,
+
+    @Embedded
     @SerializedName("image")
-    val image: Image?,
+    var image: Image?,
+
     @SerializedName("name")
-    val name: String?,
+    var name: String?,
+
+    @Embedded
     @SerializedName("summary")
-    val summary: Summary?,
+    var summary: Summary?,
+
     @SerializedName("url")
-    val url: String?,
+    var url: String?,
+
     @SerializedName("utime")
-    val utime: Int?
+    var utime: Int?
 ) : Serializable
