@@ -1,6 +1,7 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Image(
     @SerializedName("height")
@@ -11,4 +12,4 @@ data class Image(
     val src: String?,
     @SerializedName("width")
     val width: Int?
-)
+) : Serializable

@@ -17,15 +17,6 @@
                             <option name="y" value="-68" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_barcodeFragment_to_splashFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -38,19 +29,22 @@
                             <option name="y" value="621" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_favoritesFragment_to_splashFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
                   <entry key="researchFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="researchesFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -61,7 +55,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_researchFragment_to_splashFragment">
+                            <entry key="action_researchesFragment_to_researchFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -80,15 +74,6 @@
                             <option name="y" value="261" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_searchFragment_to_splashFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -103,7 +88,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_splashFragment_to_homeFragment">
+                            <entry key="action_splashFragment_to_researchesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

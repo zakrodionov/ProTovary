@@ -64,7 +64,11 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideResearchesRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ResearchesRepository =
+    fun provideResearchesRepository(
+        api: Api,
+        productDao: ProductDao,
+        errorHandler: ErrorHandler
+    ): ResearchesRepository =
         ResearchesRepositoryImpl(api, productDao, errorHandler)
 
     @Provides

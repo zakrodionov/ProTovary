@@ -3,7 +3,10 @@ package com.zakrodionov.roskachestvo.app.ui.splash
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.navigateTo
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashFragment : BaseFragment() {
 
@@ -18,7 +21,10 @@ class SplashFragment : BaseFragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000L)
-            navController.navigateTo(R.id.action_splashFragment_to_researchFragment, R.id.researchFragment)
+            navController.navigateTo(
+                R.id.action_splashFragment_to_researchesCategoryFragment,
+                R.id.researchesCategoryFragment
+            )
         }
     }
 

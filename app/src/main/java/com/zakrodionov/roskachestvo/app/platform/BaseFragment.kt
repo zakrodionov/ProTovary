@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.app.platform
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +47,8 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
-    internal fun loadingStatus(flag: Boolean?) = if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)
+    internal fun loadingStatus(flag: Boolean?) =
+        if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)
 
     private fun progressStatus(viewStatus: Int) =
         with(activity) { if (this is BaseActivity) this.progressLayout?.visibility = viewStatus }
@@ -59,9 +59,12 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    internal fun notifyWithAction(@StringRes message: Int, @StringRes actionText: Int, action: () -> Any) {
+    internal fun notifyWithAction(
+        @StringRes message: Int, @StringRes actionText: Int, action: () -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
         snackHolder()?.let {
-            val snackBar = Snackbar.make(it, message, Snackbar.LENGTH_INDEFINITE)
+            val snackBar = Snackbar.make(it, message, length)
             snackBar.setAction(actionText) { _ -> action.invoke() }
             snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
             snackBar.show()
@@ -69,6 +72,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     }
 
-    fun snackHolder() = activity!!.findViewById<CoordinatorLayout>(failureHolderId())
+    fun snackHolder() = activity?.findViewById<CoordinatorLayout>(failureHolderId())
 
 }

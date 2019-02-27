@@ -3,7 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/researchFragment"
+            android:id="@+id/researchesCategoryFragment"
             android:icon="@drawable/research"
             android:title="@string/research"
             app:showAsAction="always"/>

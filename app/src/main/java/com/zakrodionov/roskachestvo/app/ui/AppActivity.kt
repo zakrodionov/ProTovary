@@ -6,7 +6,6 @@ import androidx.navigation.ui.NavigationUI
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.failure_holder.*
 
 class AppActivity : BaseActivity() {
 
@@ -24,7 +23,7 @@ class AppActivity : BaseActivity() {
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
 
-        bottomNavigation.setOnNavigationItemSelectedListener{
+        bottomNavigation.setOnNavigationItemSelectedListener {
             navController.popBackStack()
             NavigationUI.onNavDestinationSelected(it, navController)
         }
@@ -33,7 +32,7 @@ class AppActivity : BaseActivity() {
             when (destination.id) {
                 R.id.barcodeFragment -> showBottomNavBar()
                 R.id.favoritesFragment -> showBottomNavBar()
-                R.id.researchFragment -> showBottomNavBar()
+                R.id.researchesCategoryFragment -> showBottomNavBar()
                 R.id.searchFragment -> showBottomNavBar()
                 else -> hideBottomNavBar()
             }

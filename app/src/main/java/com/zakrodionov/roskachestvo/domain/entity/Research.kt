@@ -3,18 +3,20 @@ package com.zakrodionov.roskachestvo.domain.entity
 import com.google.gson.annotations.SerializedName
 
 data class Research(
+    @SerializedName("anons")
+    val anons: String?,
     @SerializedName("category")
-    val category: String?,
-    @SerializedName("id")
-    val id: String?,
+    val category: Int?,
     @SerializedName("image")
     val image: Image?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("summary")
-    val summary: Summary?,
+    @SerializedName("products")
+    val products: List<String>?,
+    @SerializedName("products_info")
+    val productsInfo: List<ProductsInfo>?,
+    @SerializedName("statistics")
+    val statistics: Any?,
     @SerializedName("url")
-    val url: String?,
-    @SerializedName("utime")
-    val utime: Int?
+    val url: String?
 )

@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.app.platform
 
-import android.app.Activity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController

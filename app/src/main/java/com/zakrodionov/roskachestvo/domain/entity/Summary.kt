@@ -1,6 +1,7 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Summary(
     @SerializedName("highquality")
@@ -11,4 +12,4 @@ data class Summary(
     val withsign: String?,
     @SerializedName("withviolation")
     val withviolation: String?
-)
+) : Serializable
