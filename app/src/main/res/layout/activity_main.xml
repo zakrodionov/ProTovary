@@ -36,6 +36,8 @@
             android:layout_height="wrap_content"
             app:itemBackground="?attr/selectableItemBackgroundBorderless"
             android:background="@android:color/white"
+            app:itemIconTint="@drawable/bottom_button_selector"
+            app:itemTextColor="@drawable/bottom_button_selector"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

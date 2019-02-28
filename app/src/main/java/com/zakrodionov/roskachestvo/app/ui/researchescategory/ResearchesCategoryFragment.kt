@@ -10,10 +10,9 @@ import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.roskachestvo.data.model.ResearchesFragmentModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
-import kotlinx.android.synthetic.main.view_research.*
+import kotlinx.android.synthetic.main.view_researches_category.*
 import javax.inject.Inject
 
 class ResearchesCategoryFragment : BaseFragment() {
@@ -21,7 +20,7 @@ class ResearchesCategoryFragment : BaseFragment() {
     @Inject
     lateinit var researchesCategoryAdapter: ResearchesCategoryAdapter
 
-    override fun layoutId() = R.layout.view_research
+    override fun layoutId() = R.layout.view_researches_category
     override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 

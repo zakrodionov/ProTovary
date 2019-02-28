@@ -1,8 +1,10 @@
 package com.zakrodionov.roskachestvo.app.ui.researches
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.roskachestvo.R
@@ -10,20 +12,20 @@ import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.roskachestvo.data.model.ResearchesFragmentModel
-import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
-import kotlinx.android.synthetic.main.view_research.*
-import org.jetbrains.anko.support.v4.toast
+import kotlinx.android.synthetic.main.toolbar_search.*
+import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
+import android.widget.ImageView
+
 
 class ResearchesFragment : BaseFragment() {
 
     @Inject
     lateinit var researchesAdapter: ResearchesAdapter
 
-    override fun layoutId() = R.layout.view_research
+    override fun layoutId() = R.layout.view_researches
     override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
@@ -46,6 +48,7 @@ class ResearchesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
+        setupToolbar()
     }
 
 
@@ -60,10 +63,42 @@ class ResearchesFragment : BaseFragment() {
         researchesViewModel.loadResearchesCategory(id)
     }
 
-    private fun renderResearchesList(researches: ResearchesCategory?) {
+    private fun renderResearchesList(researchesCategory: ResearchesCategory?) {
+        researchesAdapter.collection = researchesCategory?.researches ?: listOf()
         failureHolder?.gone()
-        println(researches.toString())
     }
+
+    private fun setupToolbar() {
+
+        actionBack.setOnClickListener { navController.popBackStack() }
+
+        val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
+        editText.setTextColor(Color.WHITE)
+
+        val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
+        searchClose.setImageResource(R.drawable.ic_close_white)
+
+        actionSearch.setOnCloseListener {
+            tvTitle.visible()
+             false
+        }
+
+        actionSearch.setOnSearchClickListener {
+            tvTitle.gone()
+        }
+
+        actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                actionSearch.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+    }
+
 
     private fun handleFailure(failure: Failure?) {
         failureHolder?.visible()

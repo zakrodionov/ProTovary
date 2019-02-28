@@ -8,21 +8,21 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.inflate
 import com.zakrodionov.roskachestvo.app.ext.loadFromUrl
 import com.zakrodionov.roskachestvo.app.ui.view.BaseViewHolder
-import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
+import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.item_researches.view.*
 import javax.inject.Inject
 
 class ResearchesAdapter
 @Inject constructor() : Adapter<ResearchesAdapter.ViewHolder>() {
 
-    var collection: List<ResearchesCategory> = listOf()
+    var collection: List<ResearchCompact> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
 
-    internal var clickListener: (ResearchesCategory) -> Unit = {}
+    internal var clickListener: (ResearchCompact) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(parent.inflate(R.layout.item_researches))
@@ -33,13 +33,13 @@ class ResearchesAdapter
     override fun getItemCount() = collection.size
 
 
-    inner class ViewHolder(itemView: View) : BaseViewHolder<ResearchesCategory>(itemView) {
+    inner class ViewHolder(itemView: View) : BaseViewHolder<ResearchCompact>(itemView) {
 
         init {
             itemView.setOnClickListener { clickListener(item) }
         }
 
-        override fun bind(item: ResearchesCategory) {
+        override fun bind(item: ResearchCompact) {
             super.bind(item)
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
