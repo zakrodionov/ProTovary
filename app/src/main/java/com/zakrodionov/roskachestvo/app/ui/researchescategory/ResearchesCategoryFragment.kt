@@ -71,15 +71,8 @@ class ResearchesCategoryFragment : BaseFragment() {
         failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.NetworkConnection -> notifyWithAction(
-                R.string.failure_network_connection,
-                R.string.action_refresh,
-                ::loadResearchList
-            )
-            is Failure.CacheFailure<*> -> notifyWithAction(
-                R.string.failure_cache_date,
-                R.string.action_refresh,
-                ::loadResearchList,
+            is Failure.NetworkConnection -> notifyWithAction(R.string.failure_network_connection, R.string.action_refresh, ::loadResearchList)
+            is Failure.CacheFailure<*> -> notifyWithAction(R.string.failure_cache_date, R.string.action_refresh, ::loadResearchList,
                 Snackbar.LENGTH_SHORT
             )
         }

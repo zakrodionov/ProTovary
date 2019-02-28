@@ -7,6 +7,7 @@
     <string name="favorites">Избранное</string>
     <string name="failure_network_connection">Отсутствует подключение к интернету</string>
     <string name="failure_server_error">Ошибка при работе с сервером</string>
+    <string name="failure_unknown_error">Неопознанная ошибка</string>
     <string name="action_refresh">Обновить</string>
     <string name="failure_cache_date">Похоже отсутствует подключение к интернету. Достаем данные из кеша.</string>
 

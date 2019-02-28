@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
 import android.widget.ImageView
+import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 
 
 class ResearchesFragment : BaseFragment() {
@@ -36,7 +37,7 @@ class ResearchesFragment : BaseFragment() {
         appComponent.inject(this)
 
         researchesViewModel = viewModel(viewModelFactory) {
-            observe(researches, ::renderResearchesList)
+            observe(filteredResearches, ::renderResearchesList)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -63,8 +64,8 @@ class ResearchesFragment : BaseFragment() {
         researchesViewModel.loadResearchesCategory(id)
     }
 
-    private fun renderResearchesList(researchesCategory: ResearchesCategory?) {
-        researchesAdapter.collection = researchesCategory?.researches ?: listOf()
+    private fun renderResearchesList(researches: List<ResearchCompact>?) {
+        researchesAdapter.collection = researches ?: listOf()
         failureHolder?.gone()
     }
 
@@ -94,6 +95,7 @@ class ResearchesFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                researchesViewModel.queryTextChange(newText)
                 return false
             }
         })
@@ -104,8 +106,7 @@ class ResearchesFragment : BaseFragment() {
         failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
-            // is Failure.NetworkConnection -> notifyWithAction(R.string.failure_network_connection, R.string.action_refresh, { loadResearch(researchId) })
-            //is Failure.CacheFailure<*> ->  notifyWithAction(R.string.failure_cache_date, R.string.action_refresh, { loadResearch(researchId) }, Snackbar.LENGTH_SHORT)
+            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
         }
     }
 }
