@@ -1,79 +1,46 @@
-package com.zakrodionov.roskachestvo.app.ui.researches
+package com.zakrodionov.roskachestvo.app.ui.research
 
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
-import kotlinx.android.synthetic.main.view_researches.*
-import javax.inject.Inject
 import android.widget.ImageView
-import com.zakrodionov.roskachestvo.data.db.converter.ResearchesCompactConverter
-import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
+import kotlinx.android.synthetic.main.view_research.*
+import org.jetbrains.anko.support.v4.toast
 
 
-class ResearchesFragment : BaseFragment() {
+class ResearchFragment : BaseFragment() {
 
-    @Inject
-    lateinit var researchesAdapter: ResearchesAdapter
 
-    override fun layoutId() = R.layout.view_researches
+    override fun layoutId() = R.layout.view_research
     override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
-    private lateinit var researchesViewModel: ResearchesViewModel
+    private lateinit var researchViewModel: ResearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        researchesViewModel = viewModel(viewModelFactory) {
-            observe(filteredResearches, ::renderResearchesList)
+        researchViewModel = viewModel(viewModelFactory) {
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
 
-        setResearches()
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeView()
         setupToolbar()
-    }
-
-
-    private fun initializeView() {
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
-        rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        rvResearches.adapter = researchesAdapter
-    }
-
-    private fun setResearches() {
-        val id = arguments?.getLong("id") ?: 0
-        researchesViewModel.loadResearchesCategory(id)
-    }
-
-    private fun renderResearchesList(researches: List<ResearchCompact>?) {
-        researchesAdapter.collection = researches ?: listOf()
-        researchesAdapter.clickListener = ::itemClickListener
-        failureHolder?.gone()
-    }
-
-    private fun itemClickListener(research: ResearchCompact) {
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        setupChips()
     }
 
     private fun setupToolbar() {
@@ -102,12 +69,18 @@ class ResearchesFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                researchesViewModel.queryTextChange(newText)
+                researchViewModel.queryTextChange(newText)
                 return false
             }
         })
     }
 
+    private fun setupChips() {
+        chipQuality.setTextAppearanceResource(R.style.textChipStyle)
+        chipPoor.setTextAppearanceResource(R.style.textChipStyle)
+        chipGroup.isSingleSelection = true
+        chipGroup.setOnCheckedChangeListener { group, checkedId -> toast(checkedId.toString()) }
+    }
 
     private fun handleFailure(failure: Failure?) {
         failureHolder?.visible()

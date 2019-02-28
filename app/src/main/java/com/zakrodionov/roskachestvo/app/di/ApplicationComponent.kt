@@ -4,6 +4,7 @@ import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.di.viewmodel.ViewModelModule
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment
+import com.zakrodionov.roskachestvo.app.ui.research.ResearchFragment
 import com.zakrodionov.roskachestvo.app.ui.researches.ResearchesFragment
 import com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryFragment
 import com.zakrodionov.roskachestvo.app.ui.search.SearchFragment
@@ -22,6 +23,7 @@ interface ApplicationComponent {
     fun inject(fragment: SearchFragment)
 
     fun inject(fragment: ResearchesFragment)
+    fun inject(fragment: ResearchFragment)
 
 
 }

@@ -47,7 +47,12 @@
     <fragment android:id="@+id/researchesFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.researches.ResearchesFragment"
               android:label="ResearchesFragment">
+        <action android:id="@+id/action_researchesFragment_to_researchFragment"
+                app:destination="@id/researchFragment"/>
     </fragment>
+    <fragment android:id="@+id/researchFragment"
+              android:name="com.zakrodionov.roskachestvo.app.ui.research.ResearchFragment"
+              android:label="ResearchFragment"/>
 
 
 </navigation>

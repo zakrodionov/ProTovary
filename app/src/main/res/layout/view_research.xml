@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            layout="@layout/toolbar_search"/>
+
+    <include
+            layout="@layout/failure_holder"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+    />
+
+    <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+    >
+
+        <com.google.android.material.chip.Chip
+                android:id="@+id/chipQuality"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                android:checkable="true"
+                app:chipCornerRadius="15dp"
+                app:chipStrokeWidth="1dp"
+                app:chipStrokeColor="@color/blue_light"
+                android:text="Знак Качества"
+
+        />
+
+        <com.google.android.material.chip.Chip
+                android:id="@+id/chipPoor"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                app:chipCornerRadius="15dp"
+                app:chipStrokeColor="@color/blue_light"
+                app:chipStrokeWidth="1dp"
+                android:text="Отстой"
+
+        />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvResearches"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
+
+</LinearLayout>

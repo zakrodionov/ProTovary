@@ -1,8 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -26,8 +25,19 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorAccent">@android:color/white</item>
-        <!--<item name="fontFamily">@font/roboto_medium</item>-->
     </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Gets rid of the search icon -->
+        <item name="searchIcon">@drawable/ic_search_white</item>
+        <!-- Gets rid of the "underline" in the text -->
+        <item name="queryBackground">@android:color/transparent</item>
+        <!-- Gets rid of the search icon when the SearchView is expanded -->
+        <item name="searchHintIcon">@drawable/ic_search_white_hint</item>
+        <!-- The hint text that appears when the user has not typed anything -->
+        <!--<item name="queryHint">@string/search_hint</item>-->
+    </style>
+
 
     <style name="mainTextStyle"  parent="TextAppearance.AppCompat">
         <item name="android:textColor">@android:color/black</item>
@@ -39,16 +49,9 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-
-    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <!-- Gets rid of the search icon -->
-        <item name="searchIcon">@drawable/ic_search_white</item>
-        <!-- Gets rid of the "underline" in the text -->
-        <item name="queryBackground">@android:color/transparent</item>
-        <!-- Gets rid of the search icon when the SearchView is expanded -->
-        <item name="searchHintIcon">@drawable/ic_search_white_hint</item>
-        <!-- The hint text that appears when the user has not typed anything -->
-        <!--<item name="queryHint">@string/search_hint</item>-->
+    <style name="textChipStyle"  parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/chip_selector</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

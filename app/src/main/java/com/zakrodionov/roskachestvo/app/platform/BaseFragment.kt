@@ -1,9 +1,11 @@
 package com.zakrodionov.roskachestvo.app.platform
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -72,6 +74,23 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     }
 
-    fun snackHolder() = activity?.findViewById<CoordinatorLayout>(failureHolderId())
+    override fun onStop() {
+        super.onStop()
+        hideSoftKeyboard()
+    }
 
+    private fun snackHolder() = activity?.findViewById<CoordinatorLayout>(failureHolderId())
+
+    private fun showSoftKeyboard() {
+        view?.let {
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.showSoftInput(it, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+    private fun hideSoftKeyboard() {
+        view?.let {
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+    }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeViewModel
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
+import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.researches.ResearchesViewModel
 import com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryViewModel
 import com.zakrodionov.roskachestvo.app.ui.search.SearchViewModel
@@ -29,7 +30,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ResearchesCategoryViewModel::class)
-    abstract fun bindsResearchesViewModel(researchesCategoryViewModel: ResearchesCategoryViewModel): ViewModel
+    abstract fun bindsResearchesCategoryViewModel(researchesCategoryViewModel: ResearchesCategoryViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -39,6 +40,11 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ResearchesViewModel::class)
-    abstract fun bindsResearchViewModel(researchesViewModel: ResearchesViewModel): ViewModel
+    abstract fun bindsResearchesViewModel(researchesViewModel: ResearchesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResearchViewModel::class)
+    abstract fun bindsResearchViewModel(researchViewModel: ResearchViewModel): ViewModel
 
 }
