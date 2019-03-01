@@ -13,6 +13,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetRese
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches =  MutableLiveData<List<ResearchCompact>>()
 
+
     fun loadResearchesCategory(id: Long) {
         loading.value = true
         getResearchesCategory.invoke(Params(id)){ it.either(::handleFailure, ::handleResearch) }

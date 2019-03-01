@@ -10,6 +10,7 @@
     <string name="failure_unknown_error">Неопознанная ошибка</string>
     <string name="action_refresh">Обновить</string>
     <string name="failure_cache_date">Похоже отсутствует подключение к интернету. Достаем данные из кеша.</string>
+    <string name="sort">Сортировать…</string>
 
 
 </resources>

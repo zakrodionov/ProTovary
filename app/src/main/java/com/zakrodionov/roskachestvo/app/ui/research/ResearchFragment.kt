@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.toolbar_search.*
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.view_research.*
 import org.jetbrains.anko.support.v4.toast
+import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment
+import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
 
 
 class ResearchFragment : BaseFragment() {
@@ -30,6 +32,7 @@ class ResearchFragment : BaseFragment() {
         appComponent.inject(this)
 
         researchViewModel = viewModel(viewModelFactory) {
+            observe(changesListener) { researchViewModel.applyChanges() }
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -78,8 +81,15 @@ class ResearchFragment : BaseFragment() {
     private fun setupChips() {
         chipQuality.setTextAppearanceResource(R.style.textChipStyle)
         chipPoor.setTextAppearanceResource(R.style.textChipStyle)
+
         chipGroup.isSingleSelection = true
-        chipGroup.setOnCheckedChangeListener { group, checkedId -> toast(checkedId.toString()) }
+
+        chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            toast(checkedId.toString())
+            val bottomSheetDialog = BottomDialogFragment.newInstance(researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE)
+            bottomSheetDialog.setTargetFragment(this, RC_SORT)
+            bottomSheetDialog.show(childFragmentManager, "Custom Bottom Sheet")
+        }
     }
 
     private fun handleFailure(failure: Failure?) {
@@ -88,5 +98,9 @@ class ResearchFragment : BaseFragment() {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)
         }
+    }
+
+    companion object {
+       const val RC_SORT = 1122
     }
 }

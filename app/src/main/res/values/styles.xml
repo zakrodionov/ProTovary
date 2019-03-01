@@ -44,6 +44,12 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="mainTextStyleBold"  parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="textWhiteStyle"  parent="TextAppearance.AppCompat">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
