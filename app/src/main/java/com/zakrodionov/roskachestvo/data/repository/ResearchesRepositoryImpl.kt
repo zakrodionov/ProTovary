@@ -23,18 +23,17 @@ class ResearchesRepositoryImpl @Inject constructor(
             researchDao.insertResearchesCategory(data)
             Either.Right(data)
         } catch (exception: Throwable) {
-            errorHandler.proceedException(exception) //тут функция апдеета из дб
+            errorHandler.proceedException(exception)
         }
     }
 
     override suspend fun getResearch(id: Long): Either<Failure, Research> {
         return try {
             val result = api.getResearch(id).await()
-            val data = result //тут мап
-            //тут вставляем в дб
+            val data = result
             Either.Right(data)
         } catch (exception: Throwable) {
-            errorHandler.proceedException(exception) //тут функция апдеета из дб
+            errorHandler.proceedException(exception)
         }
     }
 

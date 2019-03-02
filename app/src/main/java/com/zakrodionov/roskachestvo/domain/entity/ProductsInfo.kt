@@ -14,11 +14,11 @@ data class ProductsInfo(
     @SerializedName("name")
     val name: String?,
     @SerializedName("points")
-    val points: String?,
+    val points: Double?,
+    @SerializedName("status")
+    val status: String?,
     @SerializedName("producer")
     val producer: Boolean?,
-    @SerializedName("status")
-    val status: Any?,
     @SerializedName("trademark")
     val trademark: String?,
     @SerializedName("url")

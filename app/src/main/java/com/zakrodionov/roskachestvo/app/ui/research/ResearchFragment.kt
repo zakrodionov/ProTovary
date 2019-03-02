@@ -10,16 +10,28 @@ import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import kotlinx.android.synthetic.main.failure_holder.*
-import kotlinx.android.synthetic.main.toolbar_search.*
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.view_research.*
-import org.jetbrains.anko.support.v4.toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment
+import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment.BottomDialogSortListener
+import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
+import kotlinx.android.synthetic.main.view_research.*
+import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType
+import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
+import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType.*
+import com.zakrodionov.roskachestvo.domain.entity.ProductsInfo
+import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
+import kotlinx.android.synthetic.main.view_research.view.*
+import kotlinx.android.synthetic.main.view_researches.*
+import javax.inject.Inject
 
 
-class ResearchFragment : BaseFragment() {
+class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
+    @Inject
+    lateinit var researchAdapter: ResearchAdapter
 
     override fun layoutId() = R.layout.view_research
     override fun failureHolderId() = R.id.failureHolder
@@ -33,6 +45,7 @@ class ResearchFragment : BaseFragment() {
 
         researchViewModel = viewModel(viewModelFactory) {
             observe(changesListener) { researchViewModel.applyChanges() }
+            observe(filteredResearch, ::renderResearchList)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -42,13 +55,18 @@ class ResearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        researchViewModel.loadResearch(arguments?.getLong("id", 0L) ?: 0L)
         setupToolbar()
         setupChips()
+        initializeRecycler()
+
     }
 
     private fun setupToolbar() {
 
         actionBack.setOnClickListener { navController.popBackStack() }
+        actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
         editText.setTextColor(Color.WHITE)
@@ -79,17 +97,40 @@ class ResearchFragment : BaseFragment() {
     }
 
     private fun setupChips() {
-        chipQuality.setTextAppearanceResource(R.style.textChipStyle)
-        chipPoor.setTextAppearanceResource(R.style.textChipStyle)
+        chipQualityMark.setTextAppearanceResource(R.style.textChipStyle)
+        chipProductViolation.setTextAppearanceResource(R.style.textChipStyle)
 
         chipGroup.isSingleSelection = true
 
-        chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            toast(checkedId.toString())
-            val bottomSheetDialog = BottomDialogFragment.newInstance(researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE)
-            bottomSheetDialog.setTargetFragment(this, RC_SORT)
-            bottomSheetDialog.show(childFragmentManager, "Custom Bottom Sheet")
+        chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId){
+                R.id.chipQualityMark -> researchViewModel.setFilterType(QUALITY_MARK)
+                R.id.chipProductViolation -> researchViewModel.setFilterType(PRODUCT_WITH_VIOLATION)
+                else -> researchViewModel.setFilterType(BY_DEFAULT)
+            }
         }
+    }
+
+    private fun initializeRecycler() {
+        rvResearch.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        rvResearch.adapter = researchAdapter
+    }
+
+    private fun renderResearchList(research: List<ProductsInfo>?) {
+        researchAdapter.collection = research ?: listOf()
+        //researchAdapter.clickListener = ::itemClickListener
+        failureHolder?.gone()
+    }
+
+    private fun showBottomDialog(){
+        val bottomSheetDialog = BottomDialogFragment.newInstance(researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE)
+        bottomSheetDialog.setTargetFragment(this, RC_SORT)
+        bottomSheetDialog.show(fragmentManager!!, "Dialog Sort")
+    }
+
+    override fun onSortTypeSelected(sortType: ResearchSortType) {
+        researchViewModel.setSortType(sortType)
     }
 
     private fun handleFailure(failure: Failure?) {

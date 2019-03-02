@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:paddingBottom="10dp"
+>
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -17,39 +19,47 @@
           android:background="@color/gray1"
     />
 
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout
+                    android:id="@+id/rlRatingDecrease"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/item_sort_bg"
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="По убыванию рейтинга"
-                  android:textAppearance="@style/mainTextStyle"
-                  android:layout_marginTop="10dp"
-                  android:layout_marginBottom="10dp"
+                  android:text="по убыванию рейтинга"
+                  android:textAppearance="@style/mainTextStyleWhiteSelector"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="15dp"
                   android:layout_marginStart="20dp"
                   android:layout_alignParentStart="true"
                   android:layout_centerVertical="true"
+                  android:duplicateParentState="true"
         />
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/ic_done"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
         />
 
     </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout
+                    android:id="@+id/rlRatingIncrease"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/item_sort_bg"
+
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="По возрастанию рейтинга"
-                  android:textAppearance="@style/mainTextStyle"
-
-                  android:layout_marginTop="10dp"
-                  android:layout_marginBottom="10dp"
+                  android:text="по возрастанию рейтинга"
+                  android:textAppearance="@style/mainTextStyleWhiteSelector"
+                  android:duplicateParentState="true"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="15dp"
                   android:layout_marginStart="20dp"
                   android:layout_alignParentStart="true"
                   android:layout_centerVertical="true"
@@ -58,22 +68,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/ic_done"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
         />
 
     </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout android:id="@+id/rlTradeMark"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/item_sort_bg"
+
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="По производителю"
-                  android:textAppearance="@style/mainTextStyle"
-
-                  android:layout_marginTop="10dp"
-                  android:layout_marginBottom="10dp"
+                  android:text="по производителю"
+                  android:textAppearance="@style/mainTextStyleWhiteSelector"
+                  android:duplicateParentState="true"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="15dp"
                   android:layout_marginStart="20dp"
                   android:layout_alignParentStart="true"
                   android:layout_centerVertical="true"
@@ -82,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/ic_done"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
         />

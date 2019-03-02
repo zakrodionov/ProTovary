@@ -8,7 +8,7 @@
     <include
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            layout="@layout/toolbar_search"/>
+            layout="@layout/toolbar_search_and_filter"/>
 
     <include
             layout="@layout/failure_holder"
@@ -25,7 +25,7 @@
     >
 
         <com.google.android.material.chip.Chip
-                android:id="@+id/chipQuality"
+                android:id="@+id/chipQualityMark"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         />
 
         <com.google.android.material.chip.Chip
-                android:id="@+id/chipPoor"
+                android:id="@+id/chipProductViolation"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvResearches"
+            android:id="@+id/rvResearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
     />

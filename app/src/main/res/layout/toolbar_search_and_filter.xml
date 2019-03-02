@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="?attr/actionBarSize"
+                                   android:background="@color/blue_dark"
+                                   app:contentInsetEnd="0dp"
+                                   app:contentInsetLeft="0dp"
+                                   app:contentInsetRight="0dp"
+                                   app:contentInsetStart="0dp"
+                                   >
+
+
+
+        <ImageView android:id="@+id/actionBack"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_arrow_back_white"
+                   android:layout_gravity="start"
+                   android:layout_marginStart="20dp"
+                   android:gravity="center_vertical"
+        />
+
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Исследования"
+                android:layout_gravity="center"
+                android:textAppearance="@style/textWhiteStyle"
+        />
+
+        <ImageView android:id="@+id/actionSort"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_sort"
+                   android:layout_gravity="end"
+                   android:layout_marginEnd="20dp"
+                   android:gravity="center_vertical"
+        />
+        <androidx.appcompat.widget.SearchView
+                android:id="@+id/actionSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="5dp"
+                style="@style/SearchViewStyle"
+        />
+
+
+
+</androidx.appcompat.widget.Toolbar>
