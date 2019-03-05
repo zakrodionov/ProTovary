@@ -17,18 +17,19 @@ class ListPaddingDecoration(@NonNull context: Context) : RecyclerView.ItemDecora
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val itemPosition = parent.getChildAdapterPosition(view)
+
         if (itemPosition == RecyclerView.NO_POSITION) {
             return
         }
 
-        val adapter = parent.adapter
-        if (adapter != null && itemPosition < adapter.itemCount - 1) {
+
+        if (itemPosition < state.itemCount - 1) {
             outRect.top = mPadding
             outRect.left = mPadding
             outRect.right = mPadding
         }
 
-        if (adapter != null && itemPosition == adapter.itemCount - 1) {
+        if (itemPosition == state.itemCount - 1) {
             outRect.top = mPadding
             outRect.bottom = mPadding
             outRect.left = mPadding
