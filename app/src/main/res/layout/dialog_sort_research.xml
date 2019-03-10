@@ -27,7 +27,7 @@
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="по убыванию рейтинга"
+                  android:text="@string/by_decrease_rating"
                   android:textAppearance="@style/mainTextStyleWhiteSelector"
                   android:layout_marginTop="15dp"
                   android:layout_marginBottom="15dp"
@@ -55,7 +55,7 @@
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="по возрастанию рейтинга"
+                  android:text="@string/by_increase_rating"
                   android:textAppearance="@style/mainTextStyleWhiteSelector"
                   android:duplicateParentState="true"
                   android:layout_marginTop="15dp"
@@ -82,7 +82,7 @@
     >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="по производителю"
+                  android:text="@string/by_trademark"
                   android:textAppearance="@style/mainTextStyleWhiteSelector"
                   android:duplicateParentState="true"
                   android:layout_marginTop="15dp"

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import com.zakrodionov.roskachestvo.domain.interactor.UseCase
-import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearches
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearches
 import javax.inject.Inject
 
 class ResearchesCategoryViewModel @Inject constructor(val getResearches: GetResearches) : BaseViewModel() {

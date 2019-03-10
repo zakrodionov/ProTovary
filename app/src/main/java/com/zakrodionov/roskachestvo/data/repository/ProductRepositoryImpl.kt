@@ -7,7 +7,7 @@ import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.data.db.ResearchDao
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.domain.entity.Product
-import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
+import com.zakrodionov.roskachestvo.domain.entity.ProductCompact
 import com.zakrodionov.roskachestvo.domain.entity.Products
 import com.zakrodionov.roskachestvo.domain.repository.ProductRepository
 import javax.inject.Inject
@@ -18,22 +18,25 @@ class ProductRepositoryImpl @Inject constructor(
     private val errorHandler: ErrorHandler
 ) : ProductRepository {
 
-    override suspend fun getProduct(id: String): Either<Failure, List<Product>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getProduct(id: String): Either<Failure, Product> {
+        return try {
+            val result = api.getProduct(id).await()
+            Right(result)
+        } catch (exception: Throwable) {
+            errorHandler.proceedException(exception)
+        }
     }
 
-    override suspend fun getProductInfo(id: String): Either<Failure, List<ProductInfo>> {
+    override suspend fun getProductInfo(id: String): Either<Failure, ProductCompact> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun getProducts(): Either<Failure, List<Products>> {
         return try {
             val result = api.getProducts().await()
-            val data = result //тут мап
-            //тут вставляем в дб
-            Right(data)
+            Right(result)
         } catch (exception: Throwable) {
-            errorHandler.proceedException(exception) //тут функция апдеета из дб
+            errorHandler.proceedException(exception)
         }
     }
 }

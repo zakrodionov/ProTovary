@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.product.GetResearchesCategory.*
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategory
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategory.*
 import javax.inject.Inject
 
 class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetResearchesCategory) : BaseViewModel() {
@@ -26,7 +26,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetRese
     }
 
 
-    fun queryTextChange(text: String){
+    fun setQueryText(text: String){
         filteredResearches.value = sourceResearches.filter { it.name?.toLowerCase()?.contains(text.toLowerCase()) ?: false}
     }
 }

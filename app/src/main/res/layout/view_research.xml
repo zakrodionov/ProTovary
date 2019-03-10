@@ -34,7 +34,7 @@
                 app:chipCornerRadius="15dp"
                 app:chipStrokeWidth="1dp"
                 app:chipStrokeColor="@color/blue_light"
-                android:text="Знак Качества"
+                android:text="@string/quality_sign"
 
         />
 
@@ -48,7 +48,7 @@
                 app:chipCornerRadius="15dp"
                 app:chipStrokeColor="@color/blue_light"
                 app:chipStrokeWidth="1dp"
-                android:text="Отстой"
+                android:text="@string/product_with_violent"
 
         />
 

@@ -9,9 +9,9 @@ import com.zakrodionov.roskachestvo.domain.repository.ProductRepository
 import javax.inject.Inject
 
 class GetProduct
-@Inject constructor(private val productRepository: ProductRepository) : UseCase<List<Product>, Params>() {
+@Inject constructor(private val productRepository: ProductRepository) : UseCase<Product, Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, List<Product>> = productRepository.getProduct(params.id)
+    override suspend fun run(params: Params): Either<Failure, Product> = productRepository.getProduct(params.id)
 
-    data class Params(val id: String)
+    data class Params(val id: Long)
 }

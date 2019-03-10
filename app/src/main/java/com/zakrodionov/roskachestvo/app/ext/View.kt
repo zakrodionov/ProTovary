@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BaseTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
@@ -37,6 +38,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
 fun ImageView.loadFromUrl(url: String?) =
     Glide.with(this.context.applicationContext)
         .load(url)
+        .apply(RequestOptions().override(900, 600))
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)!!
 

@@ -11,6 +11,11 @@
     <string name="action_refresh">Обновить</string>
     <string name="failure_cache_date">Похоже отсутствует подключение к интернету. Достаем данные из кеша.</string>
     <string name="sort">Сортировать…</string>
+    <string name="product_with_violent">Товар с нарушениями</string>
+    <string name="quality_sign">Знак Качества</string>
+    <string name="by_trademark">по производителю</string>
+    <string name="by_increase_rating">по возрастанию рейтинга</string>
+    <string name="by_decrease_rating">по убыванию рейтинга</string>
 
 
 </resources>

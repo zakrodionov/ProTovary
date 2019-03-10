@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.domain.interactor.product
+package com.zakrodionov.roskachestvo.domain.interactor.research
 
 import com.zakrodionov.roskachestvo.app.functional.Either
 import com.zakrodionov.roskachestvo.app.platform.Failure

@@ -1,7 +1,5 @@
-package com.zakrodionov.roskachestvo.domain.interactor.product
+package com.zakrodionov.roskachestvo.domain.interactor.research
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.functional.Either
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory

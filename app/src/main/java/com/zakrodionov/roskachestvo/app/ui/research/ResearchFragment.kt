@@ -17,14 +17,10 @@ import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment
 import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment.BottomDialogSortListener
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import kotlinx.android.synthetic.main.view_research.*
-import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
-import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType.*
 import com.zakrodionov.roskachestvo.domain.entity.ProductsInfo
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
-import kotlinx.android.synthetic.main.view_research.view.*
-import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
 
 
@@ -79,10 +75,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
              false
         }
 
-        actionSearch.setOnSearchClickListener {
-            tvTitle.gone()
-        }
-
         actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 actionSearch.clearFocus()
@@ -90,10 +82,13 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                researchViewModel.queryTextChange(newText)
+                researchViewModel.queryText.value = newText
                 return false
             }
         })
+
+        editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
+
     }
 
     private fun setupChips() {
@@ -104,9 +99,9 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId){
-                R.id.chipQualityMark -> researchViewModel.setFilterType(QUALITY_MARK)
-                R.id.chipProductViolation -> researchViewModel.setFilterType(PRODUCT_WITH_VIOLATION)
-                else -> researchViewModel.setFilterType(BY_DEFAULT)
+                R.id.chipQualityMark -> researchViewModel.filterType.value = QUALITY_MARK
+                R.id.chipProductViolation -> researchViewModel.filterType.value = PRODUCT_WITH_VIOLATION
+                else -> researchViewModel.filterType.value = BY_DEFAULT
             }
         }
     }
@@ -130,7 +125,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
-        researchViewModel.setSortType(sortType)
+        researchViewModel.sortType.value = sortType
     }
 
     private fun handleFailure(failure: Failure?) {

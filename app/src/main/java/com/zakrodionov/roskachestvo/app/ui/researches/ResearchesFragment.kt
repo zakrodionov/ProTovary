@@ -12,13 +12,11 @@ import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
 import android.widget.ImageView
-import com.zakrodionov.roskachestvo.data.db.converter.ResearchesCompactConverter
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 
 
@@ -91,10 +89,6 @@ class ResearchesFragment : BaseFragment() {
              false
         }
 
-        actionSearch.setOnSearchClickListener {
-            tvTitle.gone()
-        }
-
         actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 actionSearch.clearFocus()
@@ -102,10 +96,12 @@ class ResearchesFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                researchesViewModel.queryTextChange(newText)
+                researchesViewModel.setQueryText(newText)
                 return false
             }
         })
+
+        editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
 

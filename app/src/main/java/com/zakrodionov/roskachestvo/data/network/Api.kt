@@ -8,10 +8,10 @@ import retrofit2.http.Path
 interface Api {
 
     @GET("getproduct/{id}")
-    fun getProductByBarcode(@Path("id") id: String): Deferred<List<Product>>
+    fun getProductByBarcode(@Path("id") id: String): Deferred<ProductCompact>
 
     @GET("product/{id}")
-    fun getProductInfo(@Path("id") id: String): Deferred<ProductInfo>
+    fun getProduct(@Path("id") id: Long): Deferred<Product>
 
     @GET("getproducts")
     fun getProducts(): Deferred<List<Products>>
