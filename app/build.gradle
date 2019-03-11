@@ -80,9 +80,9 @@ dependencies {
     def anko_version = "0.10.8"
     def ktx_version = "1.0.1"
     def coroutines_version = "1.1.1"
-    def lifecycle_version = "2.0.0"
+    def lifecycle_version = "2.1.0-alpha02"
     def koin_version = '1.0.2'
-    def nav_version = "1.0.0-rc01"
+    def nav_version = "1.0.0-rc02"
     def dagger_version = "2.21"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -93,7 +93,7 @@ dependencies {
 
     //Support Libraries
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
-    implementation 'com.google.android.material:material:1.1.0-alpha03'
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.media:media:1.1.0-alpha01'
@@ -143,8 +143,8 @@ dependencies {
     implementation 'com.github.orhanobut:hawk:2.0.1'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 
     //Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
