@@ -123,6 +123,7 @@ class DescriptionFragment : Fragment() {
 
         text.append(pros)
             .append(cons)
+            .append("\n")
             .append(Html.fromHtml(model.product.researchResults))
 
         return text
