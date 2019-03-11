@@ -9,7 +9,6 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType.*
 import kotlinx.android.synthetic.main.dialog_sort_research.view.*
-import kotlinx.android.synthetic.main.view_research.*
 
 class BottomDialogFragment : BottomSheetDialogFragment() {
 
@@ -17,7 +16,7 @@ class BottomDialogFragment : BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.dialog_sort_research, container, false)
         val type = arguments?.getSerializable("type") ?: BY_RATING_DECREASE
 
-        when (type){
+        when (type) {
             BY_RATING_DECREASE -> view.rlRatingDecrease.isSelected = true
             BY_RATING_INCREASE -> view.rlRatingIncrease.isSelected = true
             BY_TRADEMARK -> view.rlTradeMark.isSelected = true
@@ -41,7 +40,7 @@ class BottomDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    interface BottomDialogSortListener{
+    interface BottomDialogSortListener {
         fun onSortTypeSelected(sortType: ResearchSortType)
     }
 }

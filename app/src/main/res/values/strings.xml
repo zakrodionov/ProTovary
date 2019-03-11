@@ -16,6 +16,10 @@
     <string name="by_trademark">по производителю</string>
     <string name="by_increase_rating">по возрастанию рейтинга</string>
     <string name="by_decrease_rating">по убыванию рейтинга</string>
+    <string name="description">Описание</string>
+    <string name="properties">Свойства</string>
+    <string name="indicators">Показатели</string>
+    <string name="manufacturer">Производитель</string>
 
 
 </resources>

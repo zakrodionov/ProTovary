@@ -14,7 +14,7 @@ data class Research(
     @SerializedName("products")
     val products: List<String>?,
     @SerializedName("products_info")
-    val productsInfo: List<ProductsInfo>?,
+    val productInfo: List<ProductInfo>?,
     @SerializedName("statistics")
     val statistics: Any?,
     @SerializedName("url")

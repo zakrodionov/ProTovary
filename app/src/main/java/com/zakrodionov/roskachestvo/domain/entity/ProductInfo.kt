@@ -2,13 +2,13 @@ package com.zakrodionov.roskachestvo.domain.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductsInfo(
+data class ProductInfo(
     @SerializedName("barcode")
     val barcode: Any?,
     @SerializedName("category")
     val category: Int?,
     @SerializedName("id")
-    val id: Int?,
+    val id: Long,
     @SerializedName("image")
     val image: Image?,
     @SerializedName("name")

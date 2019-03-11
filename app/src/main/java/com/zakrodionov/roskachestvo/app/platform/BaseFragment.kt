@@ -87,6 +87,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
             imm?.showSoftInput(it, InputMethodManager.SHOW_IMPLICIT)
         }
     }
+
     private fun hideSoftKeyboard() {
         view?.let {
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?

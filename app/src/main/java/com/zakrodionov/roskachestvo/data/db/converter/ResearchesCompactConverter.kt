@@ -5,8 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 
-import java.lang.reflect.Type
-
 class ResearchesCompactConverter {
 
     @TypeConverter

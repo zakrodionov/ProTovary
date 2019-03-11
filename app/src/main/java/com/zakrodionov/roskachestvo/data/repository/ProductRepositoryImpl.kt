@@ -18,7 +18,7 @@ class ProductRepositoryImpl @Inject constructor(
     private val errorHandler: ErrorHandler
 ) : ProductRepository {
 
-    override suspend fun getProduct(id: String): Either<Failure, Product> {
+    override suspend fun getProduct(id: Long): Either<Failure, Product> {
         return try {
             val result = api.getProduct(id).await()
             Right(result)

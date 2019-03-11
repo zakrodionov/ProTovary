@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,12 +13,11 @@ import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
+import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
-import android.widget.ImageView
-import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 
 
 class ResearchesFragment : BaseFragment() {
@@ -86,7 +86,7 @@ class ResearchesFragment : BaseFragment() {
 
         actionSearch.setOnCloseListener {
             tvTitle.visible()
-             false
+            false
         }
 
         actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

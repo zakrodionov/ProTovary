@@ -3,7 +3,7 @@ package com.zakrodionov.roskachestvo.domain.entity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Image (
+data class Image(
     @SerializedName("height")
     var height: Int?,
     @SerializedName("size")

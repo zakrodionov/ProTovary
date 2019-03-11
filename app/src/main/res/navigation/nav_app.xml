@@ -16,6 +16,7 @@
                 app:popExitAnim="@android:anim/fade_out"
                 app:popUpTo="@id/splashFragment"
                 app:popUpToInclusive="true"
+                app:launchSingleTop="true"
         />
     </fragment>
 
@@ -52,7 +53,13 @@
     </fragment>
     <fragment android:id="@+id/researchFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.research.ResearchFragment"
-              android:label="ResearchFragment"/>
+              android:label="ResearchFragment">
+        <action android:id="@+id/action_researchFragment_to_productFragment" app:destination="@id/productFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/productFragment"
+              android:name="com.zakrodionov.roskachestvo.app.ui.product.ProductFragment"
+              android:label="ProductFragment"/>
 
 
 </navigation>

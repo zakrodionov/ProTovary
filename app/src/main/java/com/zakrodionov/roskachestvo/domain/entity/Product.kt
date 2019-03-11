@@ -1,12 +1,13 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Product(
     @SerializedName("+")
-    val pros: List<Any?>?,
+    val pros: List<String>?,
     @SerializedName("-")
-    val cons: List<String?>?,
+    val cons: List<String>?,
     @SerializedName("image")
     val image: Image?,
     @SerializedName("indicators")
@@ -29,11 +30,11 @@ data class Product(
     val url: String?,
     @SerializedName("violations")
     val violations: String?
-) {
+) : Serializable {
     data class Indicator(
         @SerializedName("name")
         val name: String?,
         @SerializedName("value")
         val value: String?
-    )
+    ) : Serializable
 }

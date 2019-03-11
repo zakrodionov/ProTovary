@@ -1,31 +1,19 @@
 package com.zakrodionov.roskachestvo.app.ui.product
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import androidx.appcompat.widget.SearchView
+import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import kotlinx.android.synthetic.main.failure_holder.*
-import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment
-import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment.BottomDialogSortListener
-import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
-import kotlinx.android.synthetic.main.view_research.*
-import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
-import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
+import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.roskachestvo.domain.entity.Product
-import com.zakrodionov.roskachestvo.domain.entity.ProductsInfo
-import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.failure_holder.*
+import kotlinx.android.synthetic.main.view_product.*
 
 
-class ProductFragment : BaseFragment(){
+class ProductFragment : BaseFragment() {
 
 
     override fun layoutId() = R.layout.view_product
@@ -51,14 +39,25 @@ class ProductFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         productViewModel.loadProduct(arguments?.getLong("id", 0L) ?: 0L)
-
     }
 
 
-
-
-
     private fun renderProduct(product: Product?) {
+        collapsing_toolbar_image_view.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
+        //collapsing_toolbar.visible()
+
+        product?.let {
+            val pagerAdapter = DescriptionPagerAdapter(
+                activity!!,
+                product,
+                childFragmentManager
+            )
+
+            viewpager.adapter = pagerAdapter
+            viewpager.offscreenPageLimit = 4
+            tabs.setupWithViewPager(viewpager)
+        }
+
         failureHolder?.gone()
     }
 

@@ -1,6 +1,9 @@
 package com.zakrodionov.roskachestvo.domain.entity
 
-import androidx.room.*
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.zakrodionov.roskachestvo.data.db.converter.ResearchesCompactConverter
 

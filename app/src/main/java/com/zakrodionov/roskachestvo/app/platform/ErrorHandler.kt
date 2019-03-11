@@ -1,7 +1,7 @@
 package com.zakrodionov.roskachestvo.app.platform
 
 import com.zakrodionov.roskachestvo.app.functional.Either
-import com.zakrodionov.roskachestvo.app.functional.Either.*
+import com.zakrodionov.roskachestvo.app.functional.Either.Left
 import com.zakrodionov.roskachestvo.app.platform.Failure.*
 import retrofit2.HttpException
 import javax.inject.Inject

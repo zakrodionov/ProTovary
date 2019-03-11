@@ -8,9 +8,11 @@ import com.zakrodionov.roskachestvo.domain.repository.ResearchesRepository
 import javax.inject.Inject
 
 class GetResearchesCategory
-@Inject constructor(private val researchesRepository: ResearchesRepository) : UseCase<ResearchesCategory, GetResearchesCategory.Params>() {
+@Inject constructor(private val researchesRepository: ResearchesRepository) :
+    UseCase<ResearchesCategory, GetResearchesCategory.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, ResearchesCategory> = researchesRepository.getResearchesCategory(params.id)
+    override suspend fun run(params: Params): Either<Failure, ResearchesCategory> =
+        researchesRepository.getResearchesCategory(params.id)
 
     data class Params(val id: Long)
 }
