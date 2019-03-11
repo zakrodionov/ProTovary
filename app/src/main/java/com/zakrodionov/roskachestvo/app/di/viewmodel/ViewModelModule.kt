@@ -8,7 +8,7 @@ import com.zakrodionov.roskachestvo.app.ui.product.ProductViewModel
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.researches.ResearchesViewModel
 import com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryViewModel
-import com.zakrodionov.roskachestvo.app.ui.search.SearchViewModel
+import com.zakrodionov.roskachestvo.app.ui.more.MoreViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -35,8 +35,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchViewModel::class)
-    abstract fun bindsSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+    @ViewModelKey(MoreViewModel::class)
+    abstract fun bindsMoreViewModel(moreViewModel: MoreViewModel): ViewModel
 
     @Binds
     @IntoMap

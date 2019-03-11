@@ -33,7 +33,7 @@ class AppActivity : BaseActivity() {
                 R.id.barcodeFragment -> showBottomNavBar()
                 R.id.favoritesFragment -> showBottomNavBar()
                 R.id.researchesCategoryFragment -> showBottomNavBar()
-                R.id.searchFragment -> showBottomNavBar()
+                R.id.moreFragment -> showBottomNavBar()
                 else -> hideBottomNavBar()
             }
         }

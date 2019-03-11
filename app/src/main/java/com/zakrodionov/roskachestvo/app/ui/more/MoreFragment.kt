@@ -1,23 +1,23 @@
-package com.zakrodionov.roskachestvo.app.ui.search
+package com.zakrodionov.roskachestvo.app.ui.more
 
 import android.os.Bundle
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 
-class SearchFragment : BaseFragment() {
+class MoreFragment : BaseFragment() {
 
-    override fun layoutId() = R.layout.view_search
+    override fun layoutId() = R.layout.view_more
     override fun navigationLayoutId() = R.id.hostFragment
     override fun failureHolderId() = R.id.failureHolder
 
-    private lateinit var searchViewModel: SearchViewModel
+    private lateinit var moreViewModel: MoreViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        searchViewModel = viewModel(viewModelFactory) {
+        moreViewModel = viewModel(viewModelFactory) {
 
         }
     }

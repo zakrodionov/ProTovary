@@ -27,6 +27,9 @@ android {
         versionName "0.01"
         setProperty("archivesBaseName", "roskachestvo-$versionName($versionCode)")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+
     }
 
     signingConfigs {

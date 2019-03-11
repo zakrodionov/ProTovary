@@ -40,9 +40,9 @@
                 app:destination="@id/researchesFragment"/>
     </fragment>
 
-    <fragment android:id="@+id/searchFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.search.SearchFragment"
-              android:label="SearchFragment">
+    <fragment android:id="@+id/moreFragment"
+              android:name="com.zakrodionov.roskachestvo.app.ui.more.MoreFragment"
+              android:label="MoreFragment">
     </fragment>
 
     <fragment android:id="@+id/researchesFragment"
