@@ -12,6 +12,7 @@ abstract class BaseViewModel : ViewModel() {
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     var failure: MutableLiveData<Failure> = SingleLiveEvent()
+    var message: MutableLiveData<String> = SingleLiveEvent()
 
     protected fun handleFailure(failure: Failure) {
         loading.value = false

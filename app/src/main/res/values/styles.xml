@@ -87,4 +87,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="CustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackgroundBorderless</item>
+        <item name="colorControlHighlight">@color/gray1</item>
+
+    </style>
+
 </resources>

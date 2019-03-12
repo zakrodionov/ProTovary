@@ -9,7 +9,8 @@ import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.platform.ErrorHandler
 import com.zakrodionov.roskachestvo.app.platform.NetworkHandler
 import com.zakrodionov.roskachestvo.data.db.ResearchDao
-import com.zakrodionov.roskachestvo.data.db.ResearchDatabase
+import com.zakrodionov.roskachestvo.data.db.AppDatabase
+import com.zakrodionov.roskachestvo.data.db.ProductDao
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.data.repository.ProductRepositoryImpl
 import com.zakrodionov.roskachestvo.data.repository.ResearchesRepositoryImpl
@@ -73,14 +74,18 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideDb(app: Context): ResearchDatabase =
-        Room.databaseBuilder(app, ResearchDatabase::class.java, "research.db")
+    fun provideDb(app: Context): AppDatabase =
+        Room.databaseBuilder(app, AppDatabase::class.java, "roskachestvo.db")
             .fallbackToDestructiveMigration()
             .build()
 
     @Provides
     @Singleton
-    fun provideResearchDao(db: ResearchDatabase): ResearchDao = db.researchDao
+    fun provideResearchDao(db: AppDatabase): ResearchDao = db.researchDao
+
+    @Provides
+    @Singleton
+    fun provideProductDao(db: AppDatabase): ProductDao = db.productDao
 
     @Provides
     @Singleton

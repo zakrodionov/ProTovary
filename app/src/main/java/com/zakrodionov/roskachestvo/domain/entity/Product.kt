@@ -15,7 +15,7 @@ data class Product(
     @SerializedName("name")
     val name: String?,
     @SerializedName("points")
-    val points: String?,
+    val points: Double?,
     @SerializedName("producer")
     val producer: String?,
     @SerializedName("properties")

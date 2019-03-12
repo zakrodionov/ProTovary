@@ -10,15 +10,18 @@ import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.roskachestvo.domain.entity.Product
 import kotlinx.android.synthetic.main.failure_holder.*
+import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
+import org.jetbrains.anko.support.v4.toast
 
 
 class ProductFragment : BaseFragment() {
 
-
     override fun layoutId() = R.layout.view_product
     override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
+
+    private val productId: Long by argument("id", 0L)
 
     private lateinit var productViewModel: ProductViewModel
 
@@ -29,6 +32,8 @@ class ProductFragment : BaseFragment() {
         productViewModel = viewModel(viewModelFactory) {
             observe(product, ::renderProduct)
             observe(loading, ::loadingStatus)
+            observe(isFavoriteMediator, ::renderFavorite)
+            observe(message, ::renderMessage)
             failure(failure, ::handleFailure)
         }
 
@@ -38,13 +43,29 @@ class ProductFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productViewModel.loadProduct(arguments?.getLong("id", 0L) ?: 0L)
+        productViewModel.loadProduct(productId)
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
+    }
+
+    private fun renderFavorite(isFavorite: Boolean?) {
+        if (isFavorite == true)
+            actionFavorite.setImageResource(R.drawable.ic_favorite)
+        else
+            actionFavorite.setImageResource(R.drawable.ic_favorite_border)
+
+    }
+
+    private fun renderMessage(message: String?) {
+      message?.let { toast(it) }
     }
 
 
     private fun renderProduct(product: Product?) {
         collapsing_toolbar_image_view.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
-        //collapsing_toolbar.visible()
 
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
