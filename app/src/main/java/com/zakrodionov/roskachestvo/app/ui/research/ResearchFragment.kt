@@ -115,6 +115,9 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     private fun renderProductsList(products: List<ProductInfo>?) {
         productsAdapter.collection = products ?: listOf()
         productsAdapter.clickListener = ::itemClickListener
+
+        tvEmpty?.toggleVisibility(products.isNullOrEmpty())
+        rvResearch?.toggleVisibility(!products.isNullOrEmpty())
         failureHolder?.gone()
     }
 

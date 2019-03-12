@@ -23,6 +23,9 @@
     <string name="more">Ещё</string>
     <string name="added_to_favorites">Продукт добавлен в избранное</string>
     <string name="removed_from_favorites">Продукт удален из избранного</string>
+    <string name="empty_favorites">У вас пока нет продуктов в «Избранном»</string>
+    <string name="empty_products">Продукты отсутствуют</string>
+    <string name="empty_researches">Исследования отсутствуют</string>
 
 
 </resources>

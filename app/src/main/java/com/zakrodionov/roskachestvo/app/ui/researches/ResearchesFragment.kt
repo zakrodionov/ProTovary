@@ -66,6 +66,9 @@ class ResearchesFragment : BaseFragment() {
     private fun renderResearchesList(researches: List<ResearchCompact>?) {
         researchesAdapter.collection = researches ?: listOf()
         researchesAdapter.clickListener = ::itemClickListener
+
+        tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
+        rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
         failureHolder?.gone()
     }
 
