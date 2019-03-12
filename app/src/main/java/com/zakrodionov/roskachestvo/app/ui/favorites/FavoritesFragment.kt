@@ -2,15 +2,29 @@ package com.zakrodionov.roskachestvo.app.ui.favorites
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.roskachestvo.R
-import com.zakrodionov.roskachestvo.app.ext.viewModel
+import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
+import com.zakrodionov.roskachestvo.app.platform.Failure
+import com.zakrodionov.roskachestvo.app.ui.research.ProductsAdapter
+import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
+import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
+import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
+import kotlinx.android.synthetic.main.failure_holder.*
+import kotlinx.android.synthetic.main.view_favorites.*
+import kotlinx.android.synthetic.main.view_researches.*
+import javax.inject.Inject
 
 class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
     override fun navigationLayoutId() = R.id.hostFragment
     override fun failureHolderId() = R.id.failureHolder
+
+    @Inject
+    lateinit var productsFavoriteAdapter: ProductsFavoriteAdapter
 
     private lateinit var favoritesViewModel: FavoritesViewModel
 
@@ -20,12 +34,44 @@ class FavoritesFragment : BaseFragment() {
         appComponent.inject(this)
 
         favoritesViewModel = viewModel(viewModelFactory) {
-
+            observe(favoriteProducts, ::renderFavoriteProductsList)
+            failure(failure, ::handleFailure)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initializeView()
+    }
+
+    private fun renderFavoriteProductsList(products: List<FavoriteProduct>?) {
+        productsFavoriteAdapter.collection = products ?: listOf()
+        productsFavoriteAdapter.clickListener = ::itemClickListener
+        productsFavoriteAdapter.actionFavoriteListener = ::actionFavoriteListener
+        failureHolder?.gone()
+    }
+
+    private fun itemClickListener(research: FavoriteProduct) {
+        val bundle = Bundle().apply { putLong("id", research.id) }
+        navController.navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
+    }
+
+    private fun actionFavoriteListener(research: FavoriteProduct) {
+        favoritesViewModel.deleteFromStore(research.id)
+    }
+
+    private fun initializeView() {
+        rvProductsFavorite.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvProductsFavorite.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        rvProductsFavorite.adapter = productsFavoriteAdapter
+    }
+
+    private fun handleFailure(failure: Failure?) {
+        failureHolder?.visible()
+        when (failure) {
+            is Failure.ServerError -> notify(R.string.failure_server_error)
+            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+        }
     }
 }

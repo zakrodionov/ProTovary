@@ -31,6 +31,7 @@
               android:name="com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment"
               android:label="FavoritesFragment">
 
+        <action android:id="@+id/action_favoritesFragment_to_productFragment" app:destination="@id/productFragment"/>
     </fragment>
 
     <fragment android:id="@+id/researchesCategoryFragment"

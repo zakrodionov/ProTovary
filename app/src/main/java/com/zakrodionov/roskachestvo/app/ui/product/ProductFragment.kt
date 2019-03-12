@@ -48,7 +48,9 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
+        actionBack.setOnClickListener { navController.popBackStack() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
+        actionShare.setOnClickListener {  }
     }
 
     private fun renderFavorite(isFavorite: Boolean?) {
@@ -60,12 +62,13 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun renderMessage(message: String?) {
-      message?.let { toast(it) }
+        message?.let { toast(it) }
     }
 
 
     private fun renderProduct(product: Product?) {
-        collapsing_toolbar_image_view.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
+        ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
+        tvTitle.text = product?.name
 
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
