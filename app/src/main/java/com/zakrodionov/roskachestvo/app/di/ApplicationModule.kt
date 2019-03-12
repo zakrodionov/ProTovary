@@ -60,8 +60,8 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideProductRepository(api: Api, researchDao: ResearchDao, errorHandler: ErrorHandler): ProductRepository =
-        ProductRepositoryImpl(api, researchDao, errorHandler)
+    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepository =
+        ProductRepositoryImpl(api, productDao, errorHandler)
 
     @Provides
     @Singleton

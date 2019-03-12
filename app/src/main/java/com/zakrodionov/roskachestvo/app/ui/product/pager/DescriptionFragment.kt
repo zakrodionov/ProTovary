@@ -36,6 +36,7 @@ class DescriptionFragment : Fragment() {
         return view
     }
 
+    //region Конструткторы текстовки
     private fun getManufacturer(model: Model) = model.product.producer
 
     private fun getIndicators(model: Model): SpannableStringBuilder {
@@ -74,11 +75,11 @@ class DescriptionFragment : Fragment() {
             val pros_ = StringBuilder("")
 
             pros_.append("Достоинства")
-                .append("\n")
+                 .append("\n")
 
             model.product.pros.forEach {
                 pros_.append("\u25CF $it")
-                    .append("\n")
+                     .append("\n")
             }
 
             pros.append("\n")
@@ -100,11 +101,11 @@ class DescriptionFragment : Fragment() {
             val cons_ = StringBuilder("")
 
             cons_.append("Недостатки")
-                .append("\n")
+                 .append("\n")
 
             model.product.cons.forEach {
                 cons_.append("\u25CF $it ")
-                    .append("\n")
+                     .append("\n")
             }
 
             cons = SpannableStringBuilder(cons_).apply {
@@ -128,6 +129,8 @@ class DescriptionFragment : Fragment() {
 
         return text
     }
+
+    //endregion
 
     data class Model(val product: Product, val type: DescriptionType) : Serializable
 

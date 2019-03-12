@@ -3,13 +3,13 @@ package com.zakrodionov.roskachestvo.domain.interactor.research
 import com.zakrodionov.roskachestvo.app.functional.Either
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.UseCase
+import com.zakrodionov.roskachestvo.domain.interactor.UseCaseRemote
 import com.zakrodionov.roskachestvo.domain.repository.ResearchesRepository
 import javax.inject.Inject
 
-class GetResearchesCategory
+class GetResearchesCategoryUseCase
 @Inject constructor(private val researchesRepository: ResearchesRepository) :
-    UseCase<ResearchesCategory, GetResearchesCategory.Params>() {
+    UseCaseRemote<ResearchesCategory, GetResearchesCategoryUseCase.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, ResearchesCategory> =
         researchesRepository.getResearchesCategory(params.id)
