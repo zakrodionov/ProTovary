@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.app.ui.research
 
-import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter

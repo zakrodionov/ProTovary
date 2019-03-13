@@ -48,9 +48,14 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
         val list = sourceProducts.toMutableList()
 
         when (filterType.value) {
-            BY_DEFAULT -> { }
-            BY_QUALITY_MARK -> { list.retainAll { it.status == "withsign" } }
-            BY_PRODUCT_WITH_VIOLATION -> { list.retainAll { it.status == "withviolation" } }
+            BY_DEFAULT -> {
+            }
+            BY_QUALITY_MARK -> {
+                list.retainAll { it.status == "withsign" }
+            }
+            BY_PRODUCT_WITH_VIOLATION -> {
+                list.retainAll { it.status == "withviolation" }
+            }
         }
 
         list.retainAll {

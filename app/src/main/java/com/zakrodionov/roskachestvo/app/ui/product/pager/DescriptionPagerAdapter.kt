@@ -10,7 +10,8 @@ import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionFragment.Des
 import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionFragment.Model
 import com.zakrodionov.roskachestvo.domain.entity.Product
 
-class DescriptionPagerAdapter(val context: Context, val product: Product, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class DescriptionPagerAdapter(val context: Context, val product: Product, fm: FragmentManager) :
+    FragmentPagerAdapter(fm) {
     override fun getCount(): Int = 4
 
     override fun getItem(position: Int): Fragment = when (position) {

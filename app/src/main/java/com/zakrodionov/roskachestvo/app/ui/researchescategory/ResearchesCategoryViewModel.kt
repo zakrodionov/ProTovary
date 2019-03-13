@@ -7,7 +7,8 @@ import com.zakrodionov.roskachestvo.domain.interactor.UseCase
 import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesUseCase
 import javax.inject.Inject
 
-class ResearchesCategoryViewModel @Inject constructor(val getResearchesUseCase: GetResearchesUseCase) : BaseViewModel() {
+class ResearchesCategoryViewModel @Inject constructor(val getResearchesUseCase: GetResearchesUseCase) :
+    BaseViewModel() {
 
     val researches = MutableLiveData<List<ResearchesCategory>>()
 

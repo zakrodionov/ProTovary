@@ -1,6 +1,5 @@
 package com.zakrodionov.roskachestvo.app.ui.favorites
 
-import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -12,7 +11,6 @@ import com.zakrodionov.roskachestvo.app.ext.loadFromUrl
 import com.zakrodionov.roskachestvo.app.ext.parseHtml
 import com.zakrodionov.roskachestvo.app.ui.view.BaseViewHolder
 import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
-import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
 import kotlinx.android.synthetic.main.item_product_favorite.view.*
 import javax.inject.Inject
 

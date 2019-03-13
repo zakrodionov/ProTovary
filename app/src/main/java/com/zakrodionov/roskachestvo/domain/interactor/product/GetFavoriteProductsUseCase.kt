@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetFavoriteProductsUseCase
 @Inject constructor(private val productRepository: ProductRepository) {
 
-     fun execute(): LiveData<List<FavoriteProduct>> = productRepository.getFavoriteProducts()
+    fun execute(): LiveData<List<FavoriteProduct>> = productRepository.getFavoriteProducts()
 }

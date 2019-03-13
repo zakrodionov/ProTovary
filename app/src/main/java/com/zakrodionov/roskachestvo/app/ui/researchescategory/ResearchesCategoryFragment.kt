@@ -12,6 +12,7 @@ import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
+import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_researches_category.*
 import javax.inject.Inject
 
@@ -46,6 +47,8 @@ class ResearchesCategoryFragment : BaseFragment() {
 
 
     private fun initializeView() {
+        tvToolbarTitle.text = getString(R.string.research)
+
         rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesCategoryAdapter

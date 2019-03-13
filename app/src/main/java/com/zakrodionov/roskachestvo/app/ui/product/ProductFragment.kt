@@ -50,7 +50,7 @@ class ProductFragment : BaseFragment() {
     private fun setupToolbar() {
         actionBack.setOnClickListener { navController.popBackStack() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
-        actionShare.setOnClickListener {  }
+        actionShare.setOnClickListener { }
     }
 
     private fun renderFavorite(isFavorite: Boolean?) {

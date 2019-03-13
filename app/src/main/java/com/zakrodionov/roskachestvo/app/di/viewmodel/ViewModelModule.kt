@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeViewModel
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
+import com.zakrodionov.roskachestvo.app.ui.more.MoreViewModel
 import com.zakrodionov.roskachestvo.app.ui.product.ProductViewModel
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.researches.ResearchesViewModel
 import com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryViewModel
-import com.zakrodionov.roskachestvo.app.ui.more.MoreViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

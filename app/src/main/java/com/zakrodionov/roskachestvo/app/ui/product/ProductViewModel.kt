@@ -29,7 +29,9 @@ class ProductViewModel @Inject constructor(
     fun loadProduct(id: Long) {
         loading.value = true
 
-        isFavoriteMediator.addSource(productIsFavoriteUseCase.execute(ProductIsFavoriteUseCase.Params(id))) { isFavoriteMediator.value = it > 0 }
+        isFavoriteMediator.addSource(productIsFavoriteUseCase.execute(ProductIsFavoriteUseCase.Params(id))) {
+            isFavoriteMediator.value = it > 0
+        }
         getProductUseCase.invoke(GetProductUseCase.Params(id)) { it.either(::handleFailure, ::handleProduct) }
     }
 

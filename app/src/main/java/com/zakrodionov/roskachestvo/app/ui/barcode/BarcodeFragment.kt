@@ -5,6 +5,7 @@ import android.view.View
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
+import kotlinx.android.synthetic.main.toolbar_main.*
 
 class BarcodeFragment : BaseFragment() {
 
@@ -27,6 +28,11 @@ class BarcodeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeView()
+    }
+
+    private fun initializeView() {
+        tvToolbarTitle.text = getString(R.string.barcode)
 
     }
 }

@@ -3,8 +3,6 @@ package com.zakrodionov.roskachestvo.data.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
-import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
-import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 
 @Dao
 interface ProductDao {
@@ -28,7 +26,7 @@ interface ProductDao {
     fun actionFavorite(favoriteProduct: FavoriteProduct): Boolean {
         val isFavorite = productIsFavorite(favoriteProduct.id) > 0
 
-        if (isFavorite){
+        if (isFavorite) {
             deleteById(favoriteProduct.id)
             return false
         } else {

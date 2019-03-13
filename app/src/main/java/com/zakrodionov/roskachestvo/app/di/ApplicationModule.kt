@@ -8,9 +8,9 @@ import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.platform.ErrorHandler
 import com.zakrodionov.roskachestvo.app.platform.NetworkHandler
-import com.zakrodionov.roskachestvo.data.db.ResearchDao
 import com.zakrodionov.roskachestvo.data.db.AppDatabase
 import com.zakrodionov.roskachestvo.data.db.ProductDao
+import com.zakrodionov.roskachestvo.data.db.ResearchDao
 import com.zakrodionov.roskachestvo.data.network.Api
 import com.zakrodionov.roskachestvo.data.repository.ProductRepositoryImpl
 import com.zakrodionov.roskachestvo.data.repository.ResearchesRepositoryImpl
@@ -65,7 +65,11 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideResearchesRepository(api: Api, researchDao: ResearchDao, errorHandler: ErrorHandler): ResearchesRepository =
+    fun provideResearchesRepository(
+        api: Api,
+        researchDao: ResearchDao,
+        errorHandler: ErrorHandler
+    ): ResearchesRepository =
         ResearchesRepositoryImpl(api, researchDao, errorHandler)
 
     @Provides

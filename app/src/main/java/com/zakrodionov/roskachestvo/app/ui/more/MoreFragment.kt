@@ -1,9 +1,11 @@
 package com.zakrodionov.roskachestvo.app.ui.more
 
 import android.os.Bundle
+import android.view.View
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
+import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MoreFragment : BaseFragment() {
 
@@ -20,5 +22,16 @@ class MoreFragment : BaseFragment() {
         moreViewModel = viewModel(viewModelFactory) {
 
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initializeView()
+    }
+
+    private fun initializeView() {
+        tvToolbarTitle.text = getString(R.string.more)
+
     }
 }

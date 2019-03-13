@@ -8,7 +8,8 @@ import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCate
 import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategoryUseCase.Params
 import javax.inject.Inject
 
-class ResearchesViewModel @Inject constructor(val getResearchesCategoryUseCase: GetResearchesCategoryUseCase) : BaseViewModel() {
+class ResearchesViewModel @Inject constructor(val getResearchesCategoryUseCase: GetResearchesCategoryUseCase) :
+    BaseViewModel() {
 
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()

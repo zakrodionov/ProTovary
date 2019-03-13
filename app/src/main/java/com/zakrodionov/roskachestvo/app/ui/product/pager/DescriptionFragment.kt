@@ -1,7 +1,6 @@
 package com.zakrodionov.roskachestvo.app.ui.product.pager
 
 import android.os.Bundle
-import android.text.Html
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -76,11 +75,11 @@ class DescriptionFragment : Fragment() {
             val pros_ = StringBuilder("")
 
             pros_.append("Достоинства")
-                 .append("\n")
+                .append("\n")
 
             model.product.pros.forEach {
                 pros_.append("\u25CF $it")
-                     .append("\n")
+                    .append("\n")
             }
 
             pros.append("\n")
@@ -102,11 +101,11 @@ class DescriptionFragment : Fragment() {
             val cons_ = StringBuilder("")
 
             cons_.append("Недостатки")
-                 .append("\n")
+                .append("\n")
 
             model.product.cons.forEach {
                 cons_.append("\u25CF $it ")
-                     .append("\n")
+                    .append("\n")
             }
 
             cons = SpannableStringBuilder(cons_).apply {

@@ -8,11 +8,10 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.app.ui.research.ProductsAdapter
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
-import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.failure_holder.*
+import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_favorites.*
 import javax.inject.Inject
 
@@ -65,6 +64,8 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun initializeView() {
+        tvToolbarTitle.text = getString(R.string.favorites)
+
         rvProductsFavorite.addItemDecoration(ListPaddingDecoration(activity!!))
         rvProductsFavorite.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvProductsFavorite.adapter = productsFavoriteAdapter

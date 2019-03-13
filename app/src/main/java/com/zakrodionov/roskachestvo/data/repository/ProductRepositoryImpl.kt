@@ -46,7 +46,7 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun deleteFromStore(id: Long) =
         productDao.deleteById(id)
 
-    override fun getFavoriteProducts():LiveData<List<FavoriteProduct>>  =
+    override fun getFavoriteProducts(): LiveData<List<FavoriteProduct>> =
         productDao.getFavoriteProducts()
 
     override fun productIsFavorite(id: Long): LiveData<Int> =
