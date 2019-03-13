@@ -63,8 +63,12 @@ class ResearchesCategoryFragment : BaseFragment() {
     }
 
     private fun renderResearchesList(researches: List<ResearchesCategory>?) {
-        failureHolder?.gone()
         researchesCategoryAdapter.collection = researches.orEmpty()
+
+        tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
+        rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
+        failureHolder?.gone()
+
     }
 
     private fun handleFailure(failure: Failure?) {

@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategory.Params
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategoryUseCase
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesCategoryUseCase.Params
 import javax.inject.Inject
 
-class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetResearchesCategory) : BaseViewModel() {
+class ResearchesViewModel @Inject constructor(val getResearchesCategoryUseCase: GetResearchesCategoryUseCase) : BaseViewModel() {
 
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()
@@ -16,7 +16,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesCategory: GetRese
 
     fun loadResearchesCategory(id: Long) {
         loading.value = true
-        getResearchesCategory.invoke(Params(id)) { it.either(::handleFailure, ::handleResearch) }
+        getResearchesCategoryUseCase.invoke(Params(id)) { it.either(::handleFailure, ::handleResearch) }
     }
 
     private fun handleResearch(researchesCategory: ResearchesCategory) {

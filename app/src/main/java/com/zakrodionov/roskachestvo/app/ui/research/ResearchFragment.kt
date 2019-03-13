@@ -99,8 +99,8 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.chipQualityMark -> researchViewModel.filterType.value = QUALITY_MARK
-                R.id.chipProductViolation -> researchViewModel.filterType.value = PRODUCT_WITH_VIOLATION
+                R.id.chipQualityMark -> researchViewModel.filterType.value = BY_QUALITY_MARK
+                R.id.chipProductViolation -> researchViewModel.filterType.value = BY_PRODUCT_WITH_VIOLATION
                 else -> researchViewModel.filterType.value = BY_DEFAULT
             }
         }
@@ -115,6 +115,9 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     private fun renderProductsList(products: List<ProductInfo>?) {
         productsAdapter.collection = products ?: listOf()
         productsAdapter.clickListener = ::itemClickListener
+
+        tvEmpty?.toggleVisibility(products.isNullOrEmpty())
+        rvResearch?.toggleVisibility(!products.isNullOrEmpty())
         failureHolder?.gone()
     }
 

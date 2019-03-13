@@ -14,7 +14,6 @@ import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.view_favorites.*
-import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
 
 class FavoritesFragment : BaseFragment() {
@@ -49,7 +48,11 @@ class FavoritesFragment : BaseFragment() {
         productsFavoriteAdapter.collection = products ?: listOf()
         productsFavoriteAdapter.clickListener = ::itemClickListener
         productsFavoriteAdapter.actionFavoriteListener = ::actionFavoriteListener
+
+        tvEmpty?.toggleVisibility(products.isNullOrEmpty())
+        rvProductsFavorite?.toggleVisibility(!products.isNullOrEmpty())
         failureHolder?.gone()
+
     }
 
     private fun itemClickListener(research: FavoriteProduct) {

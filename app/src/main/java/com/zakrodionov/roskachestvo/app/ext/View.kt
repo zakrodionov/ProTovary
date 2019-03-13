@@ -32,6 +32,8 @@ fun View.visible() = run { visibility = View.VISIBLE }
 
 fun View.gone() = run { visibility = View.GONE }
 
+fun View.toggleVisibility(visible: Boolean, visibilityWhenFalse: Int = View.GONE) = run { visibility = if (visible) View.VISIBLE else visibilityWhenFalse }
+
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 

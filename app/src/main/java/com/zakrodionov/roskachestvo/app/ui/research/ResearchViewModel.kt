@@ -9,10 +9,11 @@ import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType.*
 import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
 import com.zakrodionov.roskachestvo.domain.entity.Research
-import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearch
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCase
+import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCase.Params
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getResearch: GetResearch) : BaseViewModel() {
+class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase) : BaseViewModel() {
 
     var sourceProducts: List<ProductInfo> = listOf()
     var filteredProducts = MutableLiveData<List<ProductInfo>>()
@@ -34,7 +35,7 @@ class ResearchViewModel @Inject constructor(val getResearch: GetResearch) : Base
 
     fun loadResearch(id: Long) {
         loading.value = true
-        getResearch.invoke(GetResearch.Params(id)) { it.either(::handleFailure, ::handleResearch) }
+        getResearchUseCase.invoke(Params(id)) { it.either(::handleFailure, ::handleResearch) }
     }
 
     private fun handleResearch(research: Research) {
@@ -48,8 +49,8 @@ class ResearchViewModel @Inject constructor(val getResearch: GetResearch) : Base
 
         when (filterType.value) {
             BY_DEFAULT -> { }
-            QUALITY_MARK -> { list.retainAll { it.status == "withsign" } }
-            PRODUCT_WITH_VIOLATION -> { list.retainAll { it.status == "withviolation" } }
+            BY_QUALITY_MARK -> { list.retainAll { it.status == "withsign" } }
+            BY_PRODUCT_WITH_VIOLATION -> { list.retainAll { it.status == "withviolation" } }
         }
 
         list.retainAll {

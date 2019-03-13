@@ -7,10 +7,12 @@ import com.zakrodionov.roskachestvo.domain.interactor.UseCase
 import com.zakrodionov.roskachestvo.domain.repository.ResearchesRepository
 import javax.inject.Inject
 
-class GetResearches
+class GetResearchesCategoryUseCase
 @Inject constructor(private val researchesRepository: ResearchesRepository) :
-    UseCase<List<ResearchesCategory>, UseCase.None>() {
+    UseCase<ResearchesCategory, GetResearchesCategoryUseCase.Params>() {
 
-    override suspend fun run(params: None): Either<Failure, List<ResearchesCategory>> =
-        researchesRepository.getResearches()
+    override suspend fun run(params: Params): Either<Failure, ResearchesCategory> =
+        researchesRepository.getResearchesCategory(params.id)
+
+    data class Params(val id: Long)
 }

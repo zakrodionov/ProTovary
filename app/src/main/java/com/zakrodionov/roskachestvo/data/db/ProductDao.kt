@@ -26,9 +26,9 @@ interface ProductDao {
 
     @Transaction
     fun actionFavorite(favoriteProduct: FavoriteProduct): Boolean {
-        val isInserted = productIsFavorite(favoriteProduct.id) > 0
+        val isFavorite = productIsFavorite(favoriteProduct.id) > 0
 
-        if (isInserted){
+        if (isFavorite){
             deleteById(favoriteProduct.id)
             return false
         } else {
