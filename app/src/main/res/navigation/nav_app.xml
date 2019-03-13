@@ -6,13 +6,19 @@
 
     <fragment android:id="@+id/barcodeFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment"
-              android:label="BarcodeFragment">
+              android:label="BarcodeFragment"
+              app:popUpToInclusive="true"
+              app:launchSingleTop="true"
+    >
 
     </fragment>
 
     <fragment android:id="@+id/favoritesFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment"
-              android:label="FavoritesFragment">
+              android:label="FavoritesFragment"
+              app:popUpToInclusive="true"
+              app:launchSingleTop="true"
+    >
 
         <action android:id="@+id/action_favoritesFragment_to_productFragment" app:destination="@id/productFragment"/>
     </fragment>
@@ -29,7 +35,10 @@
 
     <fragment android:id="@+id/moreFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.more.MoreFragment"
-              android:label="MoreFragment">
+              android:label="MoreFragment"
+              app:popUpToInclusive="true"
+              app:launchSingleTop="true"
+    >
     </fragment>
 
     <fragment android:id="@+id/researchesFragment"

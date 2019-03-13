@@ -24,11 +24,6 @@ class AppActivity : BaseActivity() {
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
 
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            navController.popBackStack()
-            NavigationUI.onNavDestinationSelected(it, navController)
-        }
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.barcodeFragment -> showBottomNavBar()
