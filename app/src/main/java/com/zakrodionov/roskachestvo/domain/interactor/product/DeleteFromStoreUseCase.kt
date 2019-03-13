@@ -1,8 +1,5 @@
 package com.zakrodionov.roskachestvo.domain.interactor.product
 
-import com.zakrodionov.roskachestvo.app.functional.Either
-import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.domain.interactor.UseCaseRemote
 import com.zakrodionov.roskachestvo.domain.repository.ProductRepository
 import javax.inject.Inject
 

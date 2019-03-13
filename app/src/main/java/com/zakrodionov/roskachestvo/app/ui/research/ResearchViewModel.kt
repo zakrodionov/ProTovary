@@ -49,8 +49,8 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
 
         when (filterType.value) {
             BY_DEFAULT -> { }
-            QUALITY_MARK -> { list.retainAll { it.status == "withsign" } }
-            PRODUCT_WITH_VIOLATION -> { list.retainAll { it.status == "withviolation" } }
+            BY_QUALITY_MARK -> { list.retainAll { it.status == "withsign" } }
+            BY_PRODUCT_WITH_VIOLATION -> { list.retainAll { it.status == "withviolation" } }
         }
 
         list.retainAll {

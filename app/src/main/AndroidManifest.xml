@@ -6,19 +6,24 @@
     <application
             android:name=".app.AndroidApplication"
             android:allowBackup="true"
-            android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.zakrodionov.roskachestvo.app.ui.AppActivity">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".app.ui.AppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="${enableCrashReporting}"/>
+
+        <meta-data
+                android:name="firebase_crashlytics_collection_enabled"
+                android:value="${enableCrashReporting}"/>
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@ package com.zakrodionov.roskachestvo.app.ui.researchescategory
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
-import com.zakrodionov.roskachestvo.domain.interactor.UseCaseRemote
+import com.zakrodionov.roskachestvo.domain.interactor.UseCase
 import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchesUseCase
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ class ResearchesCategoryViewModel @Inject constructor(val getResearchesUseCase: 
 
     fun loadResearches() {
         loading.value = true
-        getResearchesUseCase.invoke(UseCaseRemote.None()) { it.either(::handleFailure, ::handleResearches) }
+        getResearchesUseCase.invoke(UseCase.None()) { it.either(::handleFailure, ::handleResearches) }
     }
 
     private fun handleResearches(list: List<ResearchesCategory>) {

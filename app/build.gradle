@@ -137,7 +137,7 @@ dependencies {
 
     //Stetho
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    
+
     //animation
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'

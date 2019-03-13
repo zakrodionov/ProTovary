@@ -99,8 +99,8 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.chipQualityMark -> researchViewModel.filterType.value = QUALITY_MARK
-                R.id.chipProductViolation -> researchViewModel.filterType.value = PRODUCT_WITH_VIOLATION
+                R.id.chipQualityMark -> researchViewModel.filterType.value = BY_QUALITY_MARK
+                R.id.chipProductViolation -> researchViewModel.filterType.value = BY_PRODUCT_WITH_VIOLATION
                 else -> researchViewModel.filterType.value = BY_DEFAULT
             }
         }
