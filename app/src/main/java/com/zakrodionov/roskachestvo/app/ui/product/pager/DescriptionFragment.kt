@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.argument
 import com.zakrodionov.roskachestvo.app.ext.instanceOf
+import com.zakrodionov.roskachestvo.app.ext.parseHtml
 import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionFragment.DescriptionType.*
 import com.zakrodionov.roskachestvo.domain.entity.Product
 import kotlinx.android.synthetic.main.view_description.view.*
@@ -125,7 +126,7 @@ class DescriptionFragment : Fragment() {
         text.append(pros)
             .append(cons)
             .append("\n")
-            .append(Html.fromHtml(model.product.researchResults))
+            .append(model.product.researchResults?.parseHtml())
 
         return text
     }

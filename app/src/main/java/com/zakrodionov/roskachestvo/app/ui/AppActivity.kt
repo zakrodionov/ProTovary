@@ -46,6 +46,7 @@ class AppActivity : BaseActivity() {
 
     fun showBottomNavBar() {
         bottomNavigation.visibility = View.VISIBLE
+        bottomNavigation.requestApplyInsets()
     }
 
 }
