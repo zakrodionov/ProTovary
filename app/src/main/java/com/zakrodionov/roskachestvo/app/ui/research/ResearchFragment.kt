@@ -66,6 +66,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
         editText.setTextColor(Color.WHITE)
+        editText.setHintTextColor(Color.WHITE)
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
         searchClose.setImageResource(R.drawable.ic_close_white)

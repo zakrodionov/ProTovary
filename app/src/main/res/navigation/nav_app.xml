@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:startDestination="@id/splashFragment"
+            app:startDestination="@id/researchesCategoryFragment"
 >
-
-    <fragment android:id="@+id/splashFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.splash.SplashFragment"
-              android:label="SplashFragment">
-
-        <action android:id="@+id/action_splashFragment_to_researchesCategoryFragment"
-                app:destination="@id/researchesCategoryFragment"
-                app:popUpTo="@id/splashFragment"
-                app:popUpToInclusive="true"
-                app:launchSingleTop="true"
-        />
-    </fragment>
-
 
     <fragment android:id="@+id/barcodeFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment"
@@ -32,7 +19,10 @@
 
     <fragment android:id="@+id/researchesCategoryFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryFragment"
-              android:label="ResearchesFragment">
+              android:label="ResearchesFragment"
+              app:popUpToInclusive="true"
+              app:launchSingleTop="true"
+    >
         <action android:id="@+id/action_researchesCategoryFragment_to_researchesFragment"
                 app:destination="@id/researchesFragment"/>
     </fragment>
