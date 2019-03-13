@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavoritesViewModel @Inject constructor(
-    getFavoriteProductsUseCase: GetFavoriteProductsUseCase,
+    val getFavoriteProductsUseCase: GetFavoriteProductsUseCase,
     val deleteFromStoresUseCase: DeleteFromStoreUseCase
 ) : BaseViewModel() {
 
