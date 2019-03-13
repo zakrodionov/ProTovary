@@ -33,6 +33,8 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
+    private val idResearch: Long by argument("id", 0L)
+
     private lateinit var researchViewModel: ResearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        researchViewModel.loadResearch(arguments?.getLong("id", 0L) ?: 0L)
+        researchViewModel.loadResearch(idResearch)
         setupToolbar()
         setupChips()
         initializeRecycler()
@@ -143,6 +145,11 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+            is Failure.NetworkConnection -> notifyWithAction(
+                R.string.failure_network_connection,
+                R.string.action_refresh,
+                { researchViewModel.loadResearch(idResearch) }
+            )
         }
     }
 
