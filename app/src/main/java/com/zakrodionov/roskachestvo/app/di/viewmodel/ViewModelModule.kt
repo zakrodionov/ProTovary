@@ -2,6 +2,7 @@ package com.zakrodionov.roskachestvo.app.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.zakrodionov.roskachestvo.app.ui.about.AboutViewModel
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeViewModel
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesViewModel
 import com.zakrodionov.roskachestvo.app.ui.more.MoreViewModel
@@ -53,5 +54,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProductViewModel::class)
     abstract fun bindsProductViewModel(productViewModel: ProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AboutViewModel::class)
+    abstract fun bindsAboutViewModel(aboutViewModel: AboutViewModel): ViewModel
 
 }

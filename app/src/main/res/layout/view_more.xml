@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+<LinearLayout
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
@@ -12,11 +17,11 @@
     />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clActionRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-
             android:focusable="true">
 
         <ImageView
@@ -69,11 +74,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clActionSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-
             android:focusable="true">
 
         <ImageView
@@ -125,6 +130,7 @@
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAboutApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -177,7 +183,18 @@
             android:background="@color/gray1"
     />
 
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:text="Связаться с автором: "-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginStart="14dp"-->
+            <!--android:textAppearance="@style/mainTextStyle"-->
+    <!--/>-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clActionTelegram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -211,3 +228,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

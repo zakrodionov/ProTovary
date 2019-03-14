@@ -39,6 +39,7 @@
               app:popUpToInclusive="true"
               app:launchSingleTop="true"
     >
+        <action android:id="@+id/action_moreFragment_to_aboutFragment" app:destination="@id/aboutFragment"/>
     </fragment>
 
     <fragment android:id="@+id/researchesFragment"
@@ -56,6 +57,9 @@
     <fragment android:id="@+id/productFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.product.ProductFragment"
               android:label="ProductFragment"/>
+    <fragment android:id="@+id/aboutFragment"
+              android:name="com.zakrodionov.roskachestvo.app.ui.about.AboutFragment"
+              android:label="AboutFragment"/>
 
 
 </navigation>

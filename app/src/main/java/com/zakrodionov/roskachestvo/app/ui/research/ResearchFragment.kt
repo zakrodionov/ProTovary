@@ -30,7 +30,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     lateinit var productsAdapter: ProductsAdapter
 
     override fun layoutId() = R.layout.view_research
-    override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
     private val idResearch: Long by argument("id", 0L)

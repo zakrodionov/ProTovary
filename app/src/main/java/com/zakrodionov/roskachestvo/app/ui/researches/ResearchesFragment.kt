@@ -12,6 +12,7 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
+import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
@@ -25,7 +26,6 @@ class ResearchesFragment : BaseFragment() {
     lateinit var researchesAdapter: ResearchesAdapter
 
     override fun layoutId() = R.layout.view_researches
-    override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var researchesViewModel: ResearchesViewModel
@@ -52,7 +52,7 @@ class ResearchesFragment : BaseFragment() {
 
 
     private fun initializeView() {
-        //rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
     }

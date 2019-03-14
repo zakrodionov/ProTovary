@@ -2,6 +2,7 @@ package com.zakrodionov.roskachestvo.app.di
 
 import com.zakrodionov.roskachestvo.app.AndroidApplication
 import com.zakrodionov.roskachestvo.app.di.viewmodel.ViewModelModule
+import com.zakrodionov.roskachestvo.app.ui.about.AboutFragment
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment
 import com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment
 import com.zakrodionov.roskachestvo.app.ui.more.MoreFragment
@@ -26,6 +27,7 @@ interface ApplicationComponent {
     fun inject(fragment: ResearchesFragment)
     fun inject(fragment: ResearchFragment)
     fun inject(fragment: ProductFragment)
+    fun inject(fragment: AboutFragment)
 
 
 }

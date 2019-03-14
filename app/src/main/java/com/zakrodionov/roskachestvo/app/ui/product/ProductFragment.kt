@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
+import android.content.Intent
 
 
 class ProductFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_product
-    override fun failureHolderId() = R.id.failureHolder
     override fun navigationLayoutId() = R.id.hostFragment
 
     private val productId: Long by argument("id", 0L)
@@ -44,13 +44,14 @@ class ProductFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         productViewModel.loadProduct(productId)
+
         setupToolbar()
     }
 
     private fun setupToolbar() {
         actionBack.setOnClickListener { navController.popBackStack() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
-        actionShare.setOnClickListener { }
+        actionShare.setOnClickListener { productViewModel.product.value?.url?.let { shareProduct("${getString(R.string.base_url)}$it") } }
     }
 
     private fun renderFavorite(isFavorite: Boolean?) {
@@ -69,6 +70,7 @@ class ProductFragment : BaseFragment() {
     private fun renderProduct(product: Product?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
         tvTitle.text = product?.name
+        ivSignQuality.toggleVisibility(product?.points == 5.0)
 
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
@@ -85,6 +87,12 @@ class ProductFragment : BaseFragment() {
         failureHolder?.gone()
     }
 
+    private fun shareProduct(text: String){
+        val intent = Intent(android.content.Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, text)
+        startActivity(Intent.createChooser(intent, ""))
+    }
 
     private fun handleFailure(failure: Failure?) {
         failureHolder?.visible()

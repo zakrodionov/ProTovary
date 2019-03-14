@@ -29,7 +29,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     abstract fun layoutId(): Int
     abstract fun navigationLayoutId(): Int
-    abstract fun failureHolderId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (activity?.application as AndroidApplication).appComponent
@@ -56,7 +55,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         with(activity) { if (this is BaseActivity) this.progressLayout?.visibility = viewStatus }
 
     internal fun notify(@StringRes message: Int) {
-        snackHolder()?.let {
+        view?.let {
             Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show()
         }
     }
@@ -65,7 +64,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         @StringRes message: Int, @StringRes actionText: Int, action: () -> Unit,
         length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
-        snackHolder()?.let {
+        view?.let {
             val snackBar = Snackbar.make(it, message, length)
             snackBar.setAction(actionText) { action.invoke() }
             snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
@@ -79,7 +78,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         hideSoftKeyboard()
     }
 
-    private fun snackHolder() = activity?.findViewById<CoordinatorLayout>(failureHolderId())
 
     private fun showSoftKeyboard() {
         view?.let {

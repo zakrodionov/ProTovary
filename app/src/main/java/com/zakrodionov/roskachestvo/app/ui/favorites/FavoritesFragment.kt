@@ -19,7 +19,6 @@ class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
     override fun navigationLayoutId() = R.id.hostFragment
-    override fun failureHolderId() = R.id.failureHolder
 
     @Inject
     lateinit var productsFavoriteAdapter: ProductsFavoriteAdapter
