@@ -9,7 +9,6 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.roskachestvo.domain.entity.Product
-import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast

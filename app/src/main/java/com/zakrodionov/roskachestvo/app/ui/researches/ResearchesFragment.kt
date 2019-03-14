@@ -14,7 +14,6 @@ import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
-import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject

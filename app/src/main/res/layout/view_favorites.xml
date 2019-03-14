@@ -4,37 +4,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <include
-            layout="@layout/toolbar_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-    />
-    <include
-            layout="@layout/failure_holder"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-    />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+        <include
+                layout="@layout/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        />
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProductsFavorite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-    />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProductsFavorite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        />
 
 
-    <TextView
-            android:id="@+id/tvEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:visibility="gone"
-            android:text="@string/empty_favorites"
-    />
+        <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/empty_favorites"
+        />
 
-</LinearLayout>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

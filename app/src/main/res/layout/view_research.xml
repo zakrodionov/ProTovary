@@ -15,11 +15,6 @@
             android:layout_height="?attr/actionBarSize"
             layout="@layout/toolbar_search_and_filter"/>
 
-    <include
-            layout="@layout/failure_holder"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-    />
 
     <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"

@@ -14,12 +14,6 @@
                 android:layout_height="wrap_content"
         />
 
-        <include
-                layout="@layout/failure_holder"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-        />
-
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvResearches"
                 android:layout_width="match_parent"

@@ -18,7 +18,6 @@ import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
 import com.zakrodionov.roskachestvo.domain.entity.ProductInfo
-import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import kotlinx.android.synthetic.main.view_research.*
 import javax.inject.Inject
