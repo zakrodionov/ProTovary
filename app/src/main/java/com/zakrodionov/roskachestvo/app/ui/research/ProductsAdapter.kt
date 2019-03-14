@@ -53,7 +53,11 @@ class ProductsAdapter
             itemView.tvPoints.text = item.points?.toString()
             itemView.tvTrademark.text = item.trademark
 
-            itemView.ivSignQuality.toggleVisibility(item.status == "withsign")
+            when (item.status){
+                itemView.context.getString(R.string.status_sign) -> itemView.ivStatus.setImageResource(R.drawable.quality_sign)
+                itemView.context.getString(R.string.status_violation) -> itemView.ivStatus.setImageResource(R.drawable.with_violation)
+                else -> itemView.ivStatus.setImageResource(0)
+            }
 
             if (item.trademark == item.name) {
                 itemView.tvTrademark.gone()

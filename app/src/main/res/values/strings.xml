@@ -47,9 +47,8 @@
     <string name="base_url">https://rskrf.ru</string>
     <string name="text_about">Приложение "ПроТовары" - не официальное приложение, основаное на  открытом api с портала <a href="https://rskrf.ru">https://rskrf.ru</a>.\n\nПредоставляется как есть, не использует персональные данные и не содержит рекламы.
     </string>
-
-
-
+    <string name="status_sign">withsign</string>
+    <string name="status_violation">withviolation</string>
 
 
 </resources>

@@ -36,14 +36,12 @@
             />
 
             <ImageView
-                    android:id="@+id/ivSignQuality"
+                    android:id="@+id/ivStatus"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginBottom="?attr/actionBarSize"
                     android:layout_marginStart="20dp"
-                    app:srcCompat="@drawable/quality_sign"
                     android:layout_gravity="start|bottom"
-                    android:visibility="invisible"
                     android:padding="5dp"/>
 
 

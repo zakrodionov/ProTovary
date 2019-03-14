@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
 import android.content.Intent
+import kotlinx.android.synthetic.main.item_product.view.*
 
 
 class ProductFragment : BaseFragment() {
@@ -69,8 +70,12 @@ class ProductFragment : BaseFragment() {
     private fun renderProduct(product: Product?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
         tvTitle.text = product?.name
-        ivSignQuality.toggleVisibility(product?.status == "withsign")
 
+        when (product?.status){
+            getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)
+            getString(R.string.status_violation) -> ivStatus.setImageResource(R.drawable.with_violation)
+            else -> ivStatus.setImageResource(0)
+        }
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
                 activity!!,

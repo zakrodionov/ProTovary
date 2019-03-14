@@ -1,7 +1,9 @@
 package com.zakrodionov.roskachestvo.app.ui.research
 
+import android.content.Context
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.platform.BaseViewModel
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
@@ -13,7 +15,7 @@ import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCas
 import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCase.Params
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase) : BaseViewModel() {
+class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase, val context: Context) : BaseViewModel() {
 
     var sourceProducts: List<ProductInfo> = listOf()
     var filteredProducts = MutableLiveData<List<ProductInfo>>()
@@ -51,10 +53,10 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
             BY_DEFAULT -> {
             }
             BY_QUALITY_MARK -> {
-                list.retainAll { it.status == "withsign" }
+                list.retainAll { it.status == context.getString(R.string.status_sign) }
             }
             BY_PRODUCT_WITH_VIOLATION -> {
-                list.retainAll { it.status == "withviolation" }
+                list.retainAll { it.status == context.getString(R.string.status_violation) }
             }
         }
 
