@@ -58,6 +58,7 @@
                 android:id="@+id/ivSignQuality"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:visibility="invisible"
                 android:padding="5dp"/>
         <RatingBar
                 android:layout_width="wrap_content"

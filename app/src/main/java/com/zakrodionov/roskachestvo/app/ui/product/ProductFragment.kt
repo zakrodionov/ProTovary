@@ -70,7 +70,7 @@ class ProductFragment : BaseFragment() {
     private fun renderProduct(product: Product?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
         tvTitle.text = product?.name
-        ivSignQuality.toggleVisibility(product?.points == 5.0)
+        ivSignQuality.toggleVisibility(product?.status == "withsign")
 
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(

@@ -53,7 +53,7 @@ class ProductsAdapter
             itemView.tvPoints.text = item.points?.toString()
             itemView.tvTrademark.text = item.trademark
 
-            itemView.ivSignQuality.toggleVisibility(item.points == 5.0)
+            itemView.ivSignQuality.toggleVisibility(item.status == "withsign")
 
             if (item.trademark == item.name) {
                 itemView.tvTrademark.gone()

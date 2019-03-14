@@ -7,10 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.R
-import com.zakrodionov.roskachestvo.app.ext.gone
-import com.zakrodionov.roskachestvo.app.ext.inflate
-import com.zakrodionov.roskachestvo.app.ext.loadFromUrl
-import com.zakrodionov.roskachestvo.app.ext.parseHtml
+import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.ui.view.BaseViewHolder
 import com.zakrodionov.roskachestvo.data.db.entity.FavoriteProduct
 import kotlinx.android.synthetic.main.item_product_favorite.view.*
@@ -57,6 +54,8 @@ class ProductsFavoriteAdapter
             itemView.ratingBar.rating = item.points.toFloat()
             itemView.tvPoints.text = item.points.toString()
             itemView.tvTrademark.text = item.trademark
+
+            itemView.ivSignQuality.toggleVisibility(item.status == "withsign")
 
             if (item.trademark == item.name) {
                 itemView.tvTrademark.gone()

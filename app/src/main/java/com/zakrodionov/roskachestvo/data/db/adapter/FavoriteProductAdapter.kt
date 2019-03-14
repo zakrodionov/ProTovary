@@ -11,6 +11,7 @@ object FavoriteProductAdapter {
             name = product.name ?: "",
             urlImage = product.image?.src ?: "",
             trademark = product.trademark ?: "",
+            status = product.status ?: "",
             points = product.points ?: 0.00
         )
 }

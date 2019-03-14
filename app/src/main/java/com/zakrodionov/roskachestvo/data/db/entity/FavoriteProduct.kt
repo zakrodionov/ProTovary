@@ -10,5 +10,6 @@ data class FavoriteProduct(
     val name: String,
     val urlImage: String,
     val trademark: String,
+    val status: String,
     val points: Double
 )

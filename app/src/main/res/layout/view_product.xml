@@ -43,6 +43,7 @@
                     android:layout_marginStart="20dp"
                     app:srcCompat="@drawable/quality_sign"
                     android:layout_gravity="start|bottom"
+                    android:visibility="invisible"
                     android:padding="5dp"/>
 
 
