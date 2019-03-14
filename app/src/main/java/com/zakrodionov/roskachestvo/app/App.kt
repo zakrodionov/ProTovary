@@ -8,7 +8,7 @@ import com.zakrodionov.roskachestvo.app.di.ApplicationModule
 import com.zakrodionov.roskachestvo.app.di.DaggerApplicationComponent
 
 
-class AndroidApplication : Application() {
+class App : Application() {
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent

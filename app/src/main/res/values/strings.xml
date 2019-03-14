@@ -2,7 +2,7 @@
     <string name="app_name">ПроТовары</string>
 
     <string name="research">Исследования</string>
-    <string name="barcode">Штрихкод</string>
+    <string name="barcode">Сканировать штрихкод</string>
     <string name="favorites">Избранное</string>
     <string name="more">Ещё</string>
 

@@ -1,4 +1,4 @@
-package com.zakrodionov.roskachestvo.app.ui
+package com.zakrodionov.roskachestvo.app
 
 import android.os.Bundle
 import android.view.View

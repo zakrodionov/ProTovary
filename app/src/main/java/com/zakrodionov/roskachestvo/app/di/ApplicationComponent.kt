@@ -1,6 +1,6 @@
 package com.zakrodionov.roskachestvo.app.di
 
-import com.zakrodionov.roskachestvo.app.AndroidApplication
+import com.zakrodionov.roskachestvo.app.App
 import com.zakrodionov.roskachestvo.app.di.viewmodel.ViewModelModule
 import com.zakrodionov.roskachestvo.app.ui.about.AboutFragment
 import com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApplicationModule::class, ViewModelModule::class])
 interface ApplicationComponent {
-    fun inject(application: AndroidApplication)
+    fun inject(application: App)
 
     fun inject(fragment: BarcodeFragment)
     fun inject(fragment: FavoritesFragment)

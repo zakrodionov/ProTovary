@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.roskachestvo.R
-import com.zakrodionov.roskachestvo.app.AndroidApplication
+import com.zakrodionov.roskachestvo.app.App
 import com.zakrodionov.roskachestvo.app.di.ApplicationComponent
 import com.zakrodionov.roskachestvo.app.ext.appContext
 import kotlinx.android.synthetic.main.progress_layout.*
@@ -31,7 +30,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     abstract fun navigationLayoutId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        (activity?.application as AndroidApplication).appComponent
+        (activity?.application as App).appComponent
     }
 
     protected val navController: NavController by lazy {
@@ -61,7 +60,9 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     }
 
     internal fun notifyWithAction(
-        @StringRes message: Int, @StringRes actionText: Int, action: () -> Unit,
+        @StringRes message: Int,
+        @StringRes actionText: Int,
+        action: () -> Unit,
         length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
         view?.let {

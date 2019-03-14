@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.zakrodionov.roskachestvo.BuildConfig
-import com.zakrodionov.roskachestvo.app.AndroidApplication
+import com.zakrodionov.roskachestvo.app.App
 import com.zakrodionov.roskachestvo.app.platform.ErrorHandler
 import com.zakrodionov.roskachestvo.app.platform.NetworkHandler
 import com.zakrodionov.roskachestvo.data.db.AppDatabase
@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: AndroidApplication) {
+class ApplicationModule(private val application: App) {
 
     @Provides
     @Singleton
