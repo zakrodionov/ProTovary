@@ -68,7 +68,6 @@ class ResearchesFragment : BaseFragment() {
 
         tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
         rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
-        failureHolder?.gone()
     }
 
     private fun itemClickListener(research: ResearchCompact) {
@@ -109,7 +108,6 @@ class ResearchesFragment : BaseFragment() {
 
 
     private fun handleFailure(failure: Failure?) {
-        failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)

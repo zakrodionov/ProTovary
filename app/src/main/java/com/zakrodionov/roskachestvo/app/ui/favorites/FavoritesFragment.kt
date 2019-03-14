@@ -49,7 +49,6 @@ class FavoritesFragment : BaseFragment() {
 
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvProductsFavorite?.toggleVisibility(!products.isNullOrEmpty())
-        failureHolder?.gone()
 
     }
 
@@ -71,7 +70,6 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun handleFailure(failure: Failure?) {
-        failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)

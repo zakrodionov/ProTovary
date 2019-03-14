@@ -84,7 +84,6 @@ class ProductFragment : BaseFragment() {
             tabs.setupWithViewPager(viewpager)
         }
 
-        failureHolder?.gone()
     }
 
     private fun shareProduct(text: String){
@@ -95,7 +94,6 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun handleFailure(failure: Failure?) {
-        failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)

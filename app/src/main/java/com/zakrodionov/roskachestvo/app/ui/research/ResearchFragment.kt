@@ -120,7 +120,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-        failureHolder?.gone()
     }
 
     private fun itemClickListener(productInfo: ProductInfo) {
@@ -140,7 +139,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     }
 
     private fun handleFailure(failure: Failure?) {
-        failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)

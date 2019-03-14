@@ -69,12 +69,9 @@ class ResearchesCategoryFragment : BaseFragment() {
 
         tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
         rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
-        failureHolder?.gone()
-
     }
 
     private fun handleFailure(failure: Failure?) {
-        failureHolder?.visible()
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.ServerError -> notify(R.string.failure_unknown_error)
