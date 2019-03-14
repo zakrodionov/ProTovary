@@ -67,7 +67,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     ) {
         snackHolder()?.let {
             val snackBar = Snackbar.make(it, message, length)
-            snackBar.setAction(actionText) { _ -> action.invoke() }
+            snackBar.setAction(actionText) { action.invoke() }
             snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
             snackBar.show()
         }

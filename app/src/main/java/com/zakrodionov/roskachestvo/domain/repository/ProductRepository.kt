@@ -16,7 +16,7 @@ interface ProductRepository {
 
     suspend fun getProducts(): Either<Failure, List<Products>>
 
-    suspend fun deleteFromStore(id: Long): Unit
+    suspend fun deleteFromStore(id: Long)
 
     suspend fun actionFavorite(product: Product, id: Long): Boolean
 

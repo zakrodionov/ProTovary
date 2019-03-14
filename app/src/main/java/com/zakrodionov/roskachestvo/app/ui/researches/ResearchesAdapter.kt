@@ -3,10 +3,11 @@ package com.zakrodionov.roskachestvo.app.ui.researches
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.inflate
-import com.zakrodionov.roskachestvo.app.ext.loadFromUrl
 import com.zakrodionov.roskachestvo.app.ui.view.BaseViewHolder
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.item_researches.view.*
@@ -43,7 +44,10 @@ class ResearchesAdapter
             super.bind(item)
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
-            itemView.ivImage.loadFromUrl(url)
+
+            Glide.with(itemView.context).load(url)
+                .apply(RequestOptions().override(750, 500)).optionalCenterCrop().into(itemView.ivImage)
+
             itemView.tvName.text = item.name
         }
     }

@@ -9,7 +9,6 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.ResearchesCategory
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -49,7 +48,7 @@ class ResearchesCategoryFragment : BaseFragment() {
     private fun initializeView() {
         tvToolbarTitle.text = getString(R.string.research)
 
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
+        //rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesCategoryAdapter
 

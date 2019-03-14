@@ -1,10 +1,10 @@
 <androidx.appcompat.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar_top"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="@color/blue_dark"
         android:minHeight="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="5dp"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:layout_gravity="left|center_vertical"
-            android:textAppearance="@style/textWhiteStyle"
+            android:textAppearance="@style/mainTextStyle"
             android:id="@+id/tvToolbarTitle"/>
 
 

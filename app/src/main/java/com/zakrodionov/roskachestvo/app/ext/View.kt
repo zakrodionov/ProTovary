@@ -43,7 +43,7 @@ fun ImageView.loadFromUrl(url: String?) =
         .load(url)
         .apply(RequestOptions().override(900, 600))
         .transition(DrawableTransitionOptions.withCrossFade())
-        .into(this)!!
+        .into(this)
 
 fun ImageView.loadUrlAndPostponeEnterTransition(url: String, activity: androidx.fragment.app.FragmentActivity) {
     val target: Target<Drawable> = ImageViewBaseTarget(this, activity)

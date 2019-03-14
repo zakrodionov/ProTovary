@@ -12,7 +12,6 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.domain.entity.ResearchCompact
 import kotlinx.android.synthetic.main.failure_holder.*
 import kotlinx.android.synthetic.main.toolbar_search.*
@@ -53,7 +52,7 @@ class ResearchesFragment : BaseFragment() {
 
 
     private fun initializeView() {
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
+        //rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
     }
@@ -82,11 +81,11 @@ class ResearchesFragment : BaseFragment() {
         actionBack.setOnClickListener { navController.popBackStack() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
-        editText.setTextColor(Color.WHITE)
-        editText.setHintTextColor(Color.WHITE)
+        editText.setTextColor(Color.BLACK)
+        editText.setHintTextColor(Color.BLACK)
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
-        searchClose.setImageResource(R.drawable.ic_close_white)
+        searchClose.setImageResource(R.drawable.ic_close)
 
         actionSearch.setOnCloseListener {
             tvTitle.visible()

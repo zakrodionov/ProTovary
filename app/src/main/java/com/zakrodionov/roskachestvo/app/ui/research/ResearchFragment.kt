@@ -67,11 +67,11 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
-        editText.setTextColor(Color.WHITE)
-        editText.setHintTextColor(Color.WHITE)
+        editText.setTextColor(Color.BLACK)
+        editText.setHintTextColor(Color.BLACK)
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
-        searchClose.setImageResource(R.drawable.ic_close_white)
+        searchClose.setImageResource(R.drawable.ic_close)
 
         actionSearch.setOnCloseListener {
             tvTitle.visible()

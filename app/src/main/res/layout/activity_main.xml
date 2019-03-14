@@ -6,7 +6,6 @@
         android:id="@+id/flFragmentContainer"
 >
 
-
     <fragment
             android:id="@+id/hostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -38,7 +37,7 @@
             android:background="@android:color/white"
             app:itemIconTint="@drawable/bottom_button_selector"
             app:itemTextColor="@drawable/bottom_button_selector"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
