@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/mainTextStyle"
+                  android:layout_margin="10dp"
+                  android:gravity="center"
+                  android:text="Товар не найден"
+        />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Введите штрихкод"
+                app:boxStrokeColor="@color/red_dark"
+                app:hintTextColor="@color/red_dark"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/blue_light"
+                    android:textColorHint="@color/red_dark"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_ripple"
+                android:textAppearance="@style/buttonTextWhiteStyle"
+                android:text="Поиск"
+        />
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_ripple"
+                android:textAppearance="@style/buttonTextWhiteStyle"
+                android:text="Поиск на сайте"
+        />
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/actionScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_ripple"
+                android:textAppearance="@style/buttonTextWhiteStyle"
+                android:text="Сканировать"
+        />
+    </LinearLayout>
+</RelativeLayout>

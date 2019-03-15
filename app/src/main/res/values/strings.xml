@@ -2,7 +2,7 @@
     <string name="app_name">ПроТовары</string>
 
     <string name="research">Исследования</string>
-    <string name="barcode">Сканировать штрихкод</string>
+    <string name="barcode">Штрихкод</string>
     <string name="favorites">Избранное</string>
     <string name="more">Ещё</string>
 
@@ -49,6 +49,12 @@
     </string>
     <string name="status_sign">withsign</string>
     <string name="status_violation">withviolation</string>
+
+
+    <string name="message_ask_never_barcode">Для работы сканера нужен доступ к камере. Необходимо включить разрешение в настройках.</string>
+    <string name="message_denied_barcode">Для работы сканера необходим доступ к камере.</string>
+    <string name="text_positive">Ок</string>
+    <string name="text_negative">Отмена</string>
 
 
 </resources>

@@ -39,8 +39,13 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProductInfo(id: String): Either<Failure, ProductCompact> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getProductByBarcode(id: String): Either<Failure, ProductCompact> {
+        return try {
+            val result = api.getProductByBarcode(id).await()
+            Right(result)
+        } catch (exception: Throwable) {
+            errorHandler.proceedException(exception)
+        }
     }
 
     override suspend fun deleteFromStore(id: Long) =

@@ -10,6 +10,7 @@ import com.zakrodionov.roskachestvo.app.ui.product.ProductViewModel
 import com.zakrodionov.roskachestvo.app.ui.research.ResearchViewModel
 import com.zakrodionov.roskachestvo.app.ui.researches.ResearchesViewModel
 import com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryViewModel
+import com.zakrodionov.roskachestvo.app.ui.scanner.ScannerViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -59,5 +60,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AboutViewModel::class)
     abstract fun bindsAboutViewModel(aboutViewModel: AboutViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ScannerViewModel::class)
+    abstract fun bindsScannerViewModel(scannerViewModel: ScannerViewModel): ViewModel
 
 }

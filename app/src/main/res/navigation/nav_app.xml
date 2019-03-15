@@ -11,6 +11,7 @@
               app:launchSingleTop="true"
     >
 
+        <action android:id="@+id/action_barcodeFragment_to_scannerFragment" app:destination="@id/scannerFragment"/>
     </fragment>
 
     <fragment android:id="@+id/favoritesFragment"
@@ -60,6 +61,11 @@
     <fragment android:id="@+id/aboutFragment"
               android:name="com.zakrodionov.roskachestvo.app.ui.about.AboutFragment"
               android:label="AboutFragment"/>
+    <fragment android:id="@+id/scannerFragment"
+              android:name="com.zakrodionov.roskachestvo.app.ui.scanner.ScannerFragment"
+              android:label="ScannerFragment">
+        <action android:id="@+id/action_scannerFragment_to_productFragment" app:destination="@id/productFragment"/>
+    </fragment>
 
 
 </navigation>

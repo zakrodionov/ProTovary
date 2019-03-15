@@ -85,8 +85,9 @@ dependencies {
     def coroutines_version = "1.1.1"
     def lifecycle_version = "2.1.0-alpha02"
     def koin_version = '1.0.2'
-    def nav_version = "1.0.0-rc02"
+    def nav_version = "2.0.0"
     def dagger_version = "2.21"
+    def permissions_dispatcher_version = "4.3.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -99,7 +100,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.media:media:1.1.0-alpha01'
+    implementation 'androidx.media:media:1.1.0-alpha02'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Room
@@ -155,8 +156,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     //Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    // Kotlin KTX
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -165,6 +167,13 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     //endregion
+
+    //permission
+    implementation "org.permissionsdispatcher:permissionsdispatcher:$permissions_dispatcher_version"
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:$permissions_dispatcher_version"
+
+    //barcode
+    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 
 }
 

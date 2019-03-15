@@ -8,12 +8,13 @@
     <color name="silver">#6A8398</color>
 
 
-    <color name="blue_light">#5983f0</color>
+    <color name="blue_light">#4293F5</color>
+    <color name="blue_dark">#5983f0</color>
+
     <color name="red_light">#f45057</color>
     <color name="red_dark">#f0424b</color>
 
     <color name="gray">#9398a0</color>
     <color name="gray1">#E0E0E0</color>
-    <color name="blue_1111">#4293F5</color>
 
 </resources>

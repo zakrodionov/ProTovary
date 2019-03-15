@@ -12,7 +12,7 @@ interface ProductRepository {
 
     suspend fun getProduct(id: Long): Either<Failure, Product>
 
-    suspend fun getProductInfo(id: String): Either<Failure, ProductCompact>
+    suspend fun getProductByBarcode(id: String): Either<Failure, ProductCompact>
 
     suspend fun getProducts(): Either<Failure, List<Products>>
 
