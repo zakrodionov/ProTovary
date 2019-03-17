@@ -16,7 +16,7 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.App
 import com.zakrodionov.roskachestvo.app.di.ApplicationComponent
 import com.zakrodionov.roskachestvo.app.ext.appContext
-import kotlinx.android.synthetic.main.progress_layout.*
+import kotlinx.android.synthetic.main.progress_layout.view.*
 import javax.inject.Inject
 
 /**
@@ -47,11 +47,12 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
-    internal fun loadingStatus(flag: Boolean?) =
+    internal fun loadingStatus(flag: Boolean?) {
         if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)
+    }
 
     private fun progressStatus(viewStatus: Int) =
-        with(activity) { if (this is BaseActivity) this.progressLayout?.visibility = viewStatus }
+        view?.let { it.progressLayout?.visibility = viewStatus }
 
     internal fun notify(@StringRes message: Int) {
         view?.let {

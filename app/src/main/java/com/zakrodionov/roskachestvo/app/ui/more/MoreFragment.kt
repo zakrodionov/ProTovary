@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.View
 import com.zakrodionov.roskachestvo.BuildConfig
 import com.zakrodionov.roskachestvo.R
+import com.zakrodionov.roskachestvo.app.ext.tryOpenLink
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_more.*
-import com.zakrodionov.roskachestvo.app.ext.tryOpenLink
 import org.jetbrains.anko.toast
 
 
@@ -46,13 +46,13 @@ class MoreFragment : BaseFragment() {
 
     }
 
-    private fun openPlayMarket(){
+    private fun openPlayMarket() {
         val uri = Uri.parse(getString(R.string.pm_package) + BuildConfig.APPLICATION_ID)
         var intent = Intent(Intent.ACTION_VIEW, uri)
         intent.addFlags(
             Intent.FLAG_ACTIVITY_NO_HISTORY or
-            Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-            Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         )
 
         if (intent.resolveActivity(activity!!.packageManager) != null) {
@@ -70,7 +70,7 @@ class MoreFragment : BaseFragment() {
         }
     }
 
-   private fun openTelegram(){
+    private fun openTelegram() {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.tg_my_url)))
             intent.setPackage(getString(R.string.tg_package))

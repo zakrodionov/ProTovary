@@ -21,50 +21,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="Введите штрихкод"
-                app:boxStrokeColor="@color/red_dark"
-                app:hintTextColor="@color/red_dark"
+                android:hint="@string/input_barcode"
+                app:boxStrokeColor="@android:color/black"
+                app:hintTextColor="@android:color/black"
+                app:helperText="От 8 до 13 символов"
+                app:helperTextEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
 
             <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBarcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHighlight="@color/blue_light"
-                    android:textColorHint="@color/red_dark"
+                    android:textColorHighlight="@android:color/black"
+                    android:textColorHint="@android:color/black"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/cursor_drawable"
+                    android:maxLines="1"
+                    android:maxLength="13"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
             />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/actionSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
                 android:background="@drawable/button_ripple"
                 android:textAppearance="@style/buttonTextWhiteStyle"
-                android:text="Поиск"
+                android:text="@string/search"
         />
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
+                android:id="@+id/actionSearchOnSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/button_ripple"
-                android:textAppearance="@style/buttonTextWhiteStyle"
-                android:text="Поиск на сайте"
+                android:layout_marginBottom="20dp"
+                android:textAppearance="@style/textLinkStyle"
+                android:text="@string/search_on_site"
+                android:gravity="center"
         />
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/actionScan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/button_ripple"
-                android:textAppearance="@style/buttonTextWhiteStyle"
-                android:text="Сканировать"
-        />
+
     </LinearLayout>
 </RelativeLayout>

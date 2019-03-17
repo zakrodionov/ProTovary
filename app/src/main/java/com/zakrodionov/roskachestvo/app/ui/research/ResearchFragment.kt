@@ -12,8 +12,8 @@ import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.*
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
-import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment
-import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogFragment.BottomDialogSortListener
+import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogSortFragment
+import com.zakrodionov.roskachestvo.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
@@ -128,7 +128,9 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     private fun showBottomDialog() {
         val bottomSheetDialog =
-            BottomDialogFragment.newInstance(researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE)
+            BottomDialogSortFragment.newInstance(
+                researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
+            )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
         bottomSheetDialog.show(fragmentManager!!, "Dialog Sort")
     }

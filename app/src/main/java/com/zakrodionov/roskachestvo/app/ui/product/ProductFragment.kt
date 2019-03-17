@@ -1,5 +1,6 @@
 package com.zakrodionov.roskachestvo.app.ui.product
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.zakrodionov.roskachestvo.BuildConfig
@@ -12,8 +13,6 @@ import com.zakrodionov.roskachestvo.domain.entity.Product
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
-import android.content.Intent
-import kotlinx.android.synthetic.main.item_product.view.*
 
 
 class ProductFragment : BaseFragment() {
@@ -71,7 +70,7 @@ class ProductFragment : BaseFragment() {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
         tvTitle.text = product?.name
 
-        when (product?.status){
+        when (product?.status) {
             getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)
             getString(R.string.status_violation) -> ivStatus.setImageResource(R.drawable.with_violation)
             else -> ivStatus.setImageResource(0)
@@ -90,11 +89,11 @@ class ProductFragment : BaseFragment() {
 
     }
 
-    private fun shareProduct(text: String){
+    private fun shareProduct(text: String) {
         val intent = Intent(android.content.Intent.ACTION_SEND)
         intent.type = "text/plain"
         intent.putExtra(android.content.Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(intent, ""))
+        startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
     }
 
     private fun handleFailure(failure: Failure?) {

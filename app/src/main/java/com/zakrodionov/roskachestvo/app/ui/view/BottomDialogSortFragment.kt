@@ -10,7 +10,7 @@ import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType
 import com.zakrodionov.roskachestvo.app.util.enums.ResearchSortType.*
 import kotlinx.android.synthetic.main.dialog_sort_research.view.*
 
-class BottomDialogFragment : BottomSheetDialogFragment() {
+class BottomDialogSortFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_sort_research, container, false)
@@ -32,8 +32,8 @@ class BottomDialogFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(selectedResearchType: ResearchSortType): BottomDialogFragment {
-            val dialog = BottomDialogFragment()
+        fun newInstance(selectedResearchType: ResearchSortType): BottomDialogSortFragment {
+            val dialog = BottomDialogSortFragment()
             val bundle = Bundle().apply { putSerializable("type", selectedResearchType) }
             dialog.arguments = bundle
             return dialog

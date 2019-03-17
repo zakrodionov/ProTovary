@@ -11,7 +11,6 @@ import com.zakrodionov.roskachestvo.app.ui.view.DeniedDialogFragment
 import com.zakrodionov.roskachestvo.app.ui.view.NeverAskDialogFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_barcode.*
-import org.jetbrains.anko.support.v4.toast
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied

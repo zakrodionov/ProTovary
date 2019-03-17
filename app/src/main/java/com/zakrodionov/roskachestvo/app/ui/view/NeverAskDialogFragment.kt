@@ -1,7 +1,6 @@
 package com.zakrodionov.roskachestvo.app.ui.view
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,8 +22,9 @@ class NeverAskDialogFragment : DialogFragment() {
     }
 
 
-    private fun openSettings(){
-        val appSettingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${activity!!.packageName}"))
+    private fun openSettings() {
+        val appSettingsIntent =
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${activity!!.packageName}"))
         startActivityForResult(appSettingsIntent, 0)
     }
 }

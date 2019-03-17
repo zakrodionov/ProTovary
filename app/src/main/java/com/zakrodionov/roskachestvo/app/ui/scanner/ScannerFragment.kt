@@ -1,12 +1,11 @@
 package com.zakrodionov.roskachestvo.app.ui.scanner
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
-import android.widget.PopupMenu
 import com.zakrodionov.roskachestvo.R
 import com.zakrodionov.roskachestvo.app.ext.failure
 import com.zakrodionov.roskachestvo.app.ext.observe
+import com.zakrodionov.roskachestvo.app.ext.tryOpenLink
 import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
@@ -14,17 +13,16 @@ import com.zakrodionov.roskachestvo.app.ui.view.ScannerDialogFragment
 import com.zakrodionov.roskachestvo.app.ui.view.SimpleScannerFragment
 import com.zakrodionov.roskachestvo.domain.entity.ProductCompact
 import kotlinx.android.synthetic.main.toolbar_back_title.*
-import org.jetbrains.anko.support.v4.toast
 
 
-class ScannerFragment : BaseFragment() {
+class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListener {
 
     override fun layoutId() = R.layout.view_scanner
     override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var scannerViewModel: ScannerViewModel
 
-    var scannerFragment: SimpleScannerFragment ? = null
+    var scannerFragment: SimpleScannerFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,16 +72,35 @@ class ScannerFragment : BaseFragment() {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.NetworkConnection -> notify(R.string.failure_network_connection)
-            is Failure.UnknownError -> { showDialog() }
+            is Failure.UnknownError -> {
+                showDialog()
+            }
 
         }
     }
 
-    private fun showDialog(){
+    private fun showDialog() {
         scannerFragment?.onPause()
 
-        val dialog =  ScannerDialogFragment()
+        val dialog = ScannerDialogFragment()
+        dialog.setTargetFragment(this, RC_DIALOG)
         dialog.show(fragmentManager!!, "tag")
 
+    }
+
+    override fun actionSearch(text: String) {
+        scannerViewModel.loadProduct(text)
+    }
+
+    override fun actionSearchOnSite() {
+        tryOpenLink(getString(R.string.url_search))
+    }
+
+    override fun actionClose() {
+        scannerFragment?.onResume()
+    }
+
+    companion object {
+        const val RC_DIALOG = 33226
     }
 }

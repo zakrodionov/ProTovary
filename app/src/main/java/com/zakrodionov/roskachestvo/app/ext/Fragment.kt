@@ -43,7 +43,8 @@ fun Fragment.tryOpenLink(link: String?, basePath: String? = "https://google.com/
                     Intent.ACTION_VIEW, when {
                         URLUtil.isValidUrl(link) -> Uri.parse(link)
                         else -> Uri.parse(basePath + link)
-                    })
+                    }
+                )
             )
         } catch (e: Exception) {
             Log.e("error Url", "tryOpenLink error: $e")

@@ -19,14 +19,6 @@
             app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
     />
 
-    <include
-            layout="@layout/progress_layout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"

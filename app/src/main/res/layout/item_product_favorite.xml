@@ -9,8 +9,8 @@
                                    android:foreground="?android:attr/selectableItemBackground"
                                    android:clickable="true">
     <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <ImageView
                 android:layout_height="match_parent"
                 android:id="@+id/ivImage"

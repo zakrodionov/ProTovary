@@ -15,7 +15,8 @@ import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCas
 import com.zakrodionov.roskachestvo.domain.interactor.research.GetResearchUseCase.Params
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase, val context: Context) : BaseViewModel() {
+class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase, val context: Context) :
+    BaseViewModel() {
 
     var sourceProducts: List<ProductInfo> = listOf()
     var filteredProducts = MutableLiveData<List<ProductInfo>>()

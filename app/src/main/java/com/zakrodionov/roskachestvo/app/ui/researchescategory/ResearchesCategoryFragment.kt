@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.roskachestvo.R
-import com.zakrodionov.roskachestvo.app.ext.*
+import com.zakrodionov.roskachestvo.app.ext.failure
+import com.zakrodionov.roskachestvo.app.ext.observe
+import com.zakrodionov.roskachestvo.app.ext.toggleVisibility
+import com.zakrodionov.roskachestvo.app.ext.viewModel
 import com.zakrodionov.roskachestvo.app.platform.BaseFragment
 import com.zakrodionov.roskachestvo.app.platform.Failure
 import com.zakrodionov.roskachestvo.app.ui.view.ListPaddingDecoration
