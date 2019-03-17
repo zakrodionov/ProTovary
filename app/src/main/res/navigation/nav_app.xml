@@ -5,7 +5,7 @@
 >
 
     <fragment android:id="@+id/barcodeFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.barcode.BarcodeFragment"
+              android:name="com.zakrodionov.protovary.app.ui.barcode.BarcodeFragment"
               android:label="BarcodeFragment"
               app:popUpToInclusive="true"
               app:launchSingleTop="true"
@@ -15,7 +15,7 @@
     </fragment>
 
     <fragment android:id="@+id/favoritesFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.favorites.FavoritesFragment"
+              android:name="com.zakrodionov.protovary.app.ui.favorites.FavoritesFragment"
               android:label="FavoritesFragment"
               app:popUpToInclusive="true"
               app:launchSingleTop="true"
@@ -25,7 +25,7 @@
     </fragment>
 
     <fragment android:id="@+id/researchesCategoryFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.researchescategory.ResearchesCategoryFragment"
+              android:name="com.zakrodionov.protovary.app.ui.researchescategory.ResearchesCategoryFragment"
               android:label="ResearchesFragment"
               app:popUpToInclusive="true"
               app:launchSingleTop="true"
@@ -35,7 +35,7 @@
     </fragment>
 
     <fragment android:id="@+id/moreFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.more.MoreFragment"
+              android:name="com.zakrodionov.protovary.app.ui.more.MoreFragment"
               android:label="MoreFragment"
               app:popUpToInclusive="true"
               app:launchSingleTop="true"
@@ -44,25 +44,25 @@
     </fragment>
 
     <fragment android:id="@+id/researchesFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.researches.ResearchesFragment"
+              android:name="com.zakrodionov.protovary.app.ui.researches.ResearchesFragment"
               android:label="ResearchesFragment">
         <action android:id="@+id/action_researchesFragment_to_researchFragment"
                 app:destination="@id/researchFragment"/>
     </fragment>
     <fragment android:id="@+id/researchFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.research.ResearchFragment"
+              android:name="com.zakrodionov.protovary.app.ui.research.ResearchFragment"
               android:label="ResearchFragment">
         <action android:id="@+id/action_researchFragment_to_productFragment" app:destination="@id/productFragment"/>
     </fragment>
 
     <fragment android:id="@+id/productFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.product.ProductFragment"
+              android:name="com.zakrodionov.protovary.app.ui.product.ProductFragment"
               android:label="ProductFragment"/>
     <fragment android:id="@+id/aboutFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.about.AboutFragment"
+              android:name="com.zakrodionov.protovary.app.ui.about.AboutFragment"
               android:label="AboutFragment"/>
     <fragment android:id="@+id/scannerFragment"
-              android:name="com.zakrodionov.roskachestvo.app.ui.scanner.ScannerFragment"
+              android:name="com.zakrodionov.protovary.app.ui.scanner.ScannerFragment"
               android:label="ScannerFragment">
         <action android:id="@+id/action_scannerFragment_to_productFragment" app:destination="@id/productFragment"/>
     </fragment>

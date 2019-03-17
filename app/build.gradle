@@ -20,12 +20,12 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.zakrodionov.roskachestvo"
+        applicationId "com.zakrodionov.protovary"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.01"
-        setProperty("archivesBaseName", "roskachestvo-$versionName($versionCode)")
+        versionName "1.01"
+        setProperty("archivesBaseName", "protovary-$versionName($versionCode)")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
@@ -46,6 +46,7 @@ android {
         release {
             debuggable false
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", API_ENDPOINT, '"https://rskrf.ru/api/"'
             manifestPlaceholders = [enableCrashReporting: "true"]
