@@ -37,7 +37,7 @@ class DescriptionFragment : Fragment() {
     }
 
     //region Конструткторы текстовки
-    private fun getManufacturer(model: Model) = model.product.producer
+    private fun getManufacturer(model: Model) = model.product.producer?.parseHtml()
 
     private fun getIndicators(model: Model): SpannableStringBuilder {
         val text = SpannableStringBuilder()
@@ -59,7 +59,7 @@ class DescriptionFragment : Fragment() {
         model.product.properties?.forEach {
             text.bold { append(it?.name ?: "н/д") }
                 .append("\n")
-                .append(it?.value ?: "н/д")
+                .append(it?.value?.parseHtml() ?: "н/д")
                 .append("\n")
                 .append("\n")
         }

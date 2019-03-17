@@ -18,13 +18,12 @@
 
         <ImageView
                 android:id="@+id/ivActionBarcode"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:layout_above="@id/actionScan"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="80dp"
-        />
+                android:src="@drawable/ic_barcode"
+                android:layout_centerVertical="true" android:layout_centerInParent="true"/>
 
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/actionScan"
@@ -37,7 +36,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/button_ripple"
                 android:textAppearance="@style/buttonTextWhiteStyle"
-                android:text="Сканировать"
+                android:text="@string/scan_button"
         />
 
         <include

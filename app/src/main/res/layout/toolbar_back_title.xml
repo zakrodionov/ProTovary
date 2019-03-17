@@ -1,8 +1,7 @@
 <androidx.appcompat.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
         android:background="@android:color/white"
         android:elevation="5dp"
         app:contentInsetEnd="0dp"
@@ -28,7 +27,6 @@
             android:layout_height="wrap_content"
             android:text="@string/researches"
             android:layout_gravity="center"
-            android:textAppearance="@style/mainTextStyle"
-    />
+            android:textAppearance="@style/textTitleStyle"/>
 
 </androidx.appcompat.widget.Toolbar>

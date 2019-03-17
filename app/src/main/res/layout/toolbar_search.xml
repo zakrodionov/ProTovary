@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/researches"
             android:layout_gravity="center"
-            android:textAppearance="@style/mainTextStyle"
+            android:textAppearance="@style/textTitleStyle"
     />
     <androidx.appcompat.widget.SearchView
             android:id="@+id/actionSearch"
@@ -38,7 +38,7 @@
             android:layout_gravity="end"
             android:gravity="center_vertical"
             android:layout_marginEnd="20dp"
-            app:defaultQueryHint="Поиск"
+            app:defaultQueryHint=" "
             style="@style/SearchViewStyle"
     >
 
