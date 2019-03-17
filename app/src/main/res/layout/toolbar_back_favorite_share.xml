@@ -36,7 +36,7 @@
                 android:maxLines="1"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:textAppearance="@style/mainTextStyle"
+                android:textAppearance="@style/textTitleStyle"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/actionFavorite"
                 app:layout_constraintStart_toEndOf="@id/actionBack"
