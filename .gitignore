@@ -3,8 +3,11 @@
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
+/.idea/codeStyles
 /.idea/modules.xml
 /.idea/workspace.xml
+/.idea/vcs.xml
+/.idea
 .DS_Store
 /build
 /captures
