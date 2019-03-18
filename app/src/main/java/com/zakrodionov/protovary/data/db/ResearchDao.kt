@@ -5,13 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.zakrodionov.protovary.domain.entity.ResearchCompact
-import com.zakrodionov.protovary.domain.entity.ResearchesCategory
+import com.zakrodionov.protovary.domain.entity.Researches
 
 @Dao
 interface ResearchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertResearchesCategory(researchesCategory: List<ResearchesCategory>)
+    suspend fun insertResearchesCategory(researches: List<Researches>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertResearchesCompact(researches: List<ResearchCompact>)
@@ -19,6 +19,6 @@ interface ResearchDao {
     @Query("SELECT * FROM researchcompact")
     suspend fun getResearchesCompact(): List<ResearchCompact>
 
-    @Query("SELECT * FROM researchescategory WHERE id = :id")
-    suspend fun getResearchCategoryById(id: Long): ResearchesCategory
+    @Query("SELECT * FROM researches WHERE id = :id")
+    suspend fun getResearchCategoryById(id: Long): Researches
 }

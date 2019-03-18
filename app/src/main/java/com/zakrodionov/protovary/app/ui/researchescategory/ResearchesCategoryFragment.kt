@@ -13,7 +13,7 @@ import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.protovary.domain.entity.ResearchesCategory
+import com.zakrodionov.protovary.domain.entity.Researches
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_researches_category.*
 import javax.inject.Inject
@@ -57,7 +57,7 @@ class ResearchesCategoryFragment : BaseFragment() {
         researchesCategoryAdapter.clickListener = ::itemClickListener
     }
 
-    private fun itemClickListener(research: ResearchesCategory) {
+    private fun itemClickListener(research: Researches) {
         val bundle = Bundle().apply { putLong("id", research.id) }
         navController.navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
     }
@@ -66,11 +66,11 @@ class ResearchesCategoryFragment : BaseFragment() {
         researchesCategoryViewModel.loadResearches()
     }
 
-    private fun renderResearchesList(researches: List<ResearchesCategory>?) {
-        researchesCategoryAdapter.collection = researches.orEmpty()
+    private fun renderResearchesList(research: List<Researches>?) {
+        researchesCategoryAdapter.collection = research.orEmpty()
 
-        tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
-        rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
+        tvEmpty?.toggleVisibility(research.isNullOrEmpty())
+        rvResearches?.toggleVisibility(!research.isNullOrEmpty())
     }
 
     private fun handleFailure(failure: Failure?) {

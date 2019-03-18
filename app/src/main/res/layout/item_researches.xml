@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:ellipsize="end"
-                android:textAppearance="@style/bigMainTextStyle"
+                android:textAppearance="@style/textTitleCategoriesItemStyle"
                 android:layout_toEndOf="@+id/ivImage"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
