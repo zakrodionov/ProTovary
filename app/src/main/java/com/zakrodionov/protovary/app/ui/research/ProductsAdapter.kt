@@ -12,7 +12,7 @@ import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.domain.entity.ProductInfo
-import kotlinx.android.synthetic.main.item_product.view.*
+import kotlinx.android.synthetic.main.item_product_favorite.view.*
 import javax.inject.Inject
 
 class ProductsAdapter
@@ -26,9 +26,10 @@ class ProductsAdapter
 
 
     internal var clickListener: (ProductInfo) -> Unit = {}
+    internal var clickFavoriteListener: (ProductInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(parent.inflate(R.layout.item_product))
+        ViewHolder(parent.inflate(R.layout.item_product_favorite))
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
         viewHolder.bind(collection[position])
@@ -40,6 +41,7 @@ class ProductsAdapter
 
         init {
             itemView.setOnClickListener { clickListener(item) }
+            itemView.ivActionFavorite.setOnClickListener { clickFavoriteListener(item) }
         }
 
         override fun bind(item: ProductInfo) {
@@ -59,6 +61,11 @@ class ProductsAdapter
                 itemView.context.getString(R.string.status_sign) -> itemView.ivStatus.setImageResource(R.drawable.quality_sign)
                 itemView.context.getString(R.string.status_violation) -> itemView.ivStatus.setImageResource(R.drawable.with_violation)
                 else -> itemView.ivStatus.setImageResource(0)
+            }
+
+            when (item.isFavorite) {
+                true -> itemView.ivActionFavorite.setImageResource(R.drawable.ic_favorite)
+                false, null -> itemView.ivActionFavorite.setImageResource(R.drawable.ic_favorite_border)
             }
 
             if (item.trademark == item.name) {

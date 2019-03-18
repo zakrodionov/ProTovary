@@ -5,6 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseViewModel
+import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.domain.entity.Product
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
 import com.zakrodionov.protovary.domain.interactor.product.GetProductUseCase
@@ -44,7 +45,7 @@ class ProductViewModel @Inject constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             if (product.value != null) {
-                val flag = actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(product.value!!, id))
+                val flag = actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product.value!!, id)))
 
                 withContext(Main) {
                     if (flag)

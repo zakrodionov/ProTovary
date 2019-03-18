@@ -42,6 +42,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         researchViewModel = viewModel(viewModelFactory) {
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
+            observe(productsMediator) { }
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -116,6 +117,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     private fun renderProductsList(products: List<ProductInfo>?) {
         productsAdapter.collection = products ?: listOf()
         productsAdapter.clickListener = ::itemClickListener
+        productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
 
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
@@ -124,6 +126,10 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     private fun itemClickListener(productInfo: ProductInfo) {
         val bundle = Bundle().apply { putLong("id", productInfo.id) }
         navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
+    }
+
+    private fun itemClickFavoriteListener(productInfo: ProductInfo) {
+        researchViewModel.actionFavorite(productInfo)
     }
 
     private fun showBottomDialog() {

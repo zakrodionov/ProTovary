@@ -11,6 +11,7 @@ import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.domain.entity.Product
 import com.zakrodionov.protovary.domain.entity.ProductCompact
+import com.zakrodionov.protovary.domain.entity.ProductInfo
 import com.zakrodionov.protovary.domain.entity.Products
 import com.zakrodionov.protovary.domain.repository.ProductRepository
 import javax.inject.Inject
@@ -57,8 +58,18 @@ class ProductRepositoryImpl @Inject constructor(
     override fun productIsFavorite(id: Long): LiveData<Int> =
         productDao.productIsFavoriteLive(id)
 
-    override suspend fun actionFavorite(product: Product, id: Long): Boolean =
-        productDao.actionFavorite(FavoriteProductAdapter.productToStore(product, id))
+    override suspend fun actionFavorite(product: FavoriteProduct): Boolean =
+        productDao.actionFavorite(product)
 
 
+    override suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>> {
+        return try {
+            val result = api.getResearch(id).await()
+            productDao.refreshProducts(result.productInfo ?: listOf())
+            Right(productDao.getProducts())
+
+        } catch (exception: Throwable) {
+            errorHandler.proceedException(exception)
+        }
+    }
 }

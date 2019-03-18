@@ -6,6 +6,7 @@ import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.domain.entity.Product
 import com.zakrodionov.protovary.domain.entity.ProductCompact
+import com.zakrodionov.protovary.domain.entity.ProductInfo
 import com.zakrodionov.protovary.domain.entity.Products
 
 interface ProductRepository {
@@ -16,9 +17,11 @@ interface ProductRepository {
 
     suspend fun getProducts(): Either<Failure, List<Products>>
 
+    suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>>
+
     suspend fun deleteFromStore(id: Long)
 
-    suspend fun actionFavorite(product: Product, id: Long): Boolean
+    suspend fun actionFavorite(product: FavoriteProduct): Boolean
 
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
 
