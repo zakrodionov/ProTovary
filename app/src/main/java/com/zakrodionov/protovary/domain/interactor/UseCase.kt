@@ -2,6 +2,7 @@ package com.zakrodionov.protovary.domain.interactor
 
 import com.zakrodionov.protovary.app.functional.Either
 import com.zakrodionov.protovary.app.platform.Failure
+import com.zakrodionov.protovary.domain.interactor.research.GetResearchUseCase
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

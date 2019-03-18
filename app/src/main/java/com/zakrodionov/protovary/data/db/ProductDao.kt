@@ -3,6 +3,7 @@ package com.zakrodionov.protovary.data.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
+import com.zakrodionov.protovary.domain.entity.ProductInfo
 
 @Dao
 interface ProductDao {
@@ -22,16 +23,36 @@ interface ProductDao {
     @Query("SELECT * FROM favoriteproduct ")
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
 
+    @Query("SELECT * FROM productinfo ")
+    fun getProducts(): LiveData<List<ProductInfo>>
+
+
+    @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
+    fun updateProducts()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProducts(list: List<ProductInfo>)
+
+    @Query("DELETE FROM productinfo")
+    fun deleteProducts()
+
     @Transaction
-    fun actionFavorite(favoriteProduct: FavoriteProduct): Boolean {
+    fun refreshProducts(list: List<ProductInfo>){
+        deleteProducts()
+        insertProducts(list)
+        updateProducts()
+    }
+
+    @Transaction
+    fun actionFavorite(favoriteProduct: FavoriteProduct) {
         val isFavorite = productIsFavorite(favoriteProduct.id) > 0
 
         if (isFavorite) {
             deleteById(favoriteProduct.id)
-            return false
         } else {
             insertFavoriteProduct(favoriteProduct)
-            return true
         }
+
+        updateProducts()
     }
 }

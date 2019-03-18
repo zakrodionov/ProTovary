@@ -1,6 +1,7 @@
 package com.zakrodionov.protovary.app.ui.research
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.R
@@ -9,13 +10,21 @@ import com.zakrodionov.protovary.app.util.enums.ResearchFilterType
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
+import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.domain.entity.ProductInfo
 import com.zakrodionov.protovary.domain.entity.Research
+import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
+import com.zakrodionov.protovary.domain.interactor.product.GetProductsInfoUseCase
 import com.zakrodionov.protovary.domain.interactor.research.GetResearchUseCase
-import com.zakrodionov.protovary.domain.interactor.research.GetResearchUseCase.Params
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase, val context: Context) :
+class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase,
+                                            val getProductsInfoUseCase: GetProductsInfoUseCase,
+                                            val actionFavoriteUseCase: ActionFavoriteUseCase,
+                                            val context: Context) :
     BaseViewModel() {
 
     var sourceProducts: List<ProductInfo> = listOf()
@@ -26,6 +35,7 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
     var queryText = MutableLiveData<String>()
 
     val changesListener = MediatorLiveData<Unit>()
+    val productsMediator = MediatorLiveData<Unit>()
 
     init {
         sortType.value = BY_RATING_DECREASE
@@ -38,13 +48,18 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
 
     fun loadResearch(id: Long) {
         loading.value = true
-        getResearchUseCase.invoke(Params(id)) { it.either(::handleFailure, ::handleResearch) }
+        getProductsInfoUseCase.invoke(GetProductsInfoUseCase.Params(id)) { it.either(::handleFailure, ::handleProducts) }
     }
 
-    private fun handleResearch(research: Research) {
+    private fun handleProducts(research: LiveData<List<ProductInfo>>) {
         loading.value = false
-        this.sourceProducts = research.productInfo ?: listOf()
-        applyChanges()
+
+        productsMediator.removeSource(research)
+        productsMediator.addSource(research){
+            sourceProducts = it
+            applyChanges()
+        }
+
     }
 
     fun applyChanges() {
@@ -74,4 +89,11 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
 
         filteredProducts.value = list
     }
+
+    fun actionFavorite(product: ProductInfo){
+        CoroutineScope(Dispatchers.IO).launch {
+            actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product)))
+        }
+    }
 }
+
