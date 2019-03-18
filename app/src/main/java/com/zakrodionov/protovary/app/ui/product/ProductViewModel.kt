@@ -45,14 +45,7 @@ class ProductViewModel @Inject constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             if (product.value != null) {
-                val flag = actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product.value!!, id)))
-
-                withContext(Main) {
-                    if (flag)
-                        message.value = context.getString(R.string.added_to_favorites)
-                    else
-                        message.value = context.getString(R.string.removed_from_favorites)
-                }
+                actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product.value!!, id)))
             }
 
         }

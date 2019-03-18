@@ -21,7 +21,7 @@ interface ProductRepository {
 
     suspend fun deleteFromStore(id: Long)
 
-    suspend fun actionFavorite(product: FavoriteProduct): Boolean
+    suspend fun actionFavorite(product: FavoriteProduct)
 
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
 

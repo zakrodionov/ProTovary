@@ -9,10 +9,8 @@ import javax.inject.Inject
 
 class GetResearchesCategoryUseCase
 @Inject constructor(private val researchesRepository: ResearchesRepository) :
-    UseCase<ResearchesCategory, GetResearchesCategoryUseCase.Params>() {
+    UseCase<List<ResearchesCategory>, UseCase.None>() {
 
-    override suspend fun run(params: Params): Either<Failure, ResearchesCategory> =
-        researchesRepository.getResearchesCategory(params.id)
-
-    data class Params(val id: Long)
+    override suspend fun run(params: None): Either<Failure, List<ResearchesCategory>> =
+        researchesRepository.getResearches()
 }

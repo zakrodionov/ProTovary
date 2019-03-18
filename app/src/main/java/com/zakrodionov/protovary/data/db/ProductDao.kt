@@ -44,20 +44,15 @@ interface ProductDao {
     }
 
     @Transaction
-    fun actionFavorite(favoriteProduct: FavoriteProduct): Boolean {
+    fun actionFavorite(favoriteProduct: FavoriteProduct) {
         val isFavorite = productIsFavorite(favoriteProduct.id) > 0
-        val flag: Boolean
 
         if (isFavorite) {
             deleteById(favoriteProduct.id)
-            flag = false
         } else {
             insertFavoriteProduct(favoriteProduct)
-            flag = true
         }
 
         updateProducts()
-
-        return flag
     }
 }

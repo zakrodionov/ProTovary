@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ActionFavoriteUseCase
 @Inject constructor(private val productRepository: ProductRepository) {
 
-    suspend fun execute(params: Params): Boolean = productRepository.actionFavorite(params.product)
+    suspend fun execute(params: Params) = productRepository.actionFavorite(params.product)
 
     data class Params(val product: FavoriteProduct)
 }

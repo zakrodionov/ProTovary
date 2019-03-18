@@ -58,7 +58,7 @@ class ProductRepositoryImpl @Inject constructor(
     override fun productIsFavorite(id: Long): LiveData<Int> =
         productDao.productIsFavoriteLive(id)
 
-    override suspend fun actionFavorite(product: FavoriteProduct): Boolean =
+    override suspend fun actionFavorite(product: FavoriteProduct) =
         productDao.actionFavorite(product)
 
 
