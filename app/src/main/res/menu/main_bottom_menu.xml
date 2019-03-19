@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/researchesCategoryFragment"
+            android:icon="@drawable/researches"
+            android:title="@string/researches"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/barcodeFragment"
+            android:icon="@drawable/barcode"
+            android:title="@string/barcode"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/favoritesFragment"
+            android:icon="@drawable/favorite"
+            android:title="@string/favorites"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/moreFragment"
+            android:icon="@drawable/ic_more"
+            android:title="@string/more"
+            app:showAsAction="ifRoom"/>
+
+
+</menu>
