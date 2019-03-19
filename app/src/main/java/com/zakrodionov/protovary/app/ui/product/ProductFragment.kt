@@ -68,7 +68,7 @@ class ProductFragment : BaseFragment() {
 
     private fun renderProduct(product: Product?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
-        tvTitle.text = product?.name
+        tvTitle.text = product?.name?.parseHtml()
 
         when (product?.status) {
             getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)

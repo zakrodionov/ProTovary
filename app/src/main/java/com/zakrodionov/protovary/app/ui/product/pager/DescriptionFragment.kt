@@ -3,6 +3,7 @@ package com.zakrodionov.protovary.app.ui.product.pager
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -37,27 +38,42 @@ class DescriptionFragment : Fragment() {
     }
 
     //region Конструткторы текстовки
-    private fun getManufacturer(model: Model) = model.product.producer?.parseHtml()
+    private fun getManufacturer(model: Model): Spanned? {
+
+        if (model.product.producer.isNullOrEmpty() || model.product.producer == "false"){
+            return SpannableStringBuilder("н/д")
+        }
+
+        return model.product.producer?.parseHtml()
+    }
 
     private fun getIndicators(model: Model): SpannableStringBuilder {
         val text = SpannableStringBuilder()
 
-        model.product.indicators?.forEach {
-            text.bold { append(it?.name ?: "н/д") }
+        if (model.product.indicators.isNullOrEmpty()){
+            return SpannableStringBuilder("н/д")
+        }
+
+        model.product.indicators.forEach {
+            text.bold { append(it?.name?.parseHtml() ?: "н/д") }
                 .append("\n")
-                .append(it?.value ?: "н/д")
+                .append(it?.value?.parseHtml() ?: "н/д")
                 .append("\n")
                 .append("\n")
         }
 
-        return text
+       return text
     }
 
     private fun getProperties(model: Model): SpannableStringBuilder {
         val text = SpannableStringBuilder()
 
-        model.product.properties?.forEach {
-            text.bold { append(it?.name ?: "н/д") }
+        if (model.product.properties.isNullOrEmpty()){
+            return SpannableStringBuilder("н/д")
+        }
+
+        model.product.properties.forEach {
+            text.bold { append(it?.name?.parseHtml() ?: "н/д") }
                 .append("\n")
                 .append(it?.value?.parseHtml() ?: "н/д")
                 .append("\n")
@@ -72,23 +88,23 @@ class DescriptionFragment : Fragment() {
         var pros = SpannableStringBuilder()
 
         if (!model.product.pros.isNullOrEmpty()) {
-            val pros_ = StringBuilder("")
+            val _pros = StringBuilder("")
 
-            pros_.append("Достоинства")
+            _pros.append("Достоинства")
                 .append("\n")
 
             model.product.pros.forEach {
-                pros_.append("\u25CF $it")
+                _pros.append("\u25CF $it")
                     .append("\n")
             }
 
             pros.append("\n")
 
-            pros = SpannableStringBuilder(pros_).apply {
+            pros = SpannableStringBuilder(_pros).apply {
                 setSpan(
                     ForegroundColorSpan(resources.getColor(R.color.blue_light)),
                     0,
-                    pros_.length,
+                    _pros.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
@@ -98,21 +114,21 @@ class DescriptionFragment : Fragment() {
         var cons = SpannableStringBuilder()
 
         if (!model.product.cons.isNullOrEmpty()) {
-            val cons_ = StringBuilder("")
+            val _cons = StringBuilder("")
 
-            cons_.append("Недостатки")
+            _cons.append("Недостатки")
                 .append("\n")
 
             model.product.cons.forEach {
-                cons_.append("\u25CF $it ")
+                _cons.append("\u25CF $it ")
                     .append("\n")
             }
 
-            cons = SpannableStringBuilder(cons_).apply {
+            cons = SpannableStringBuilder(_cons).apply {
                 setSpan(
                     ForegroundColorSpan(resources.getColor(R.color.red_light)),
                     0,
-                    cons_.length,
+                    _cons.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }

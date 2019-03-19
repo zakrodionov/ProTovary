@@ -23,10 +23,9 @@ import javax.inject.Inject
 
 class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProductsInfoUseCase,
                                             val actionFavoriteUseCase: ActionFavoriteUseCase,
-                                            val context: Context) :
-    BaseViewModel() {
+                                            val context: Context) : BaseViewModel() {
 
-    var sourceProducts: List<ProductInfo> = listOf()
+    var sourceProducts: List<ProductInfo>? = null
     var filteredProducts = MutableLiveData<List<ProductInfo>>()
 
     var sortType = MutableLiveData<ResearchSortType>()
@@ -62,7 +61,11 @@ class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProdu
     }
 
     fun applyChanges() {
-        val list = sourceProducts.toMutableList()
+        if (sourceProducts == null){
+            return
+        }
+
+        val list = sourceProducts!!.toMutableList()
 
         when (filterType.value) {
             BY_DEFAULT -> {}
