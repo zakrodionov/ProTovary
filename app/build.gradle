@@ -115,11 +115,6 @@ dependencies {
     implementation 'androidx.media:media:1.1.0-alpha02'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //Room
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
-
     //Retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -167,6 +162,8 @@ dependencies {
     //region AAC
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //Navigation
     // Kotlin KTX
