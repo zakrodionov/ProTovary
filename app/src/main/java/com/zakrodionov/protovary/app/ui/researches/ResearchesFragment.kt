@@ -77,7 +77,6 @@ class ResearchesFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
-
         actionBack.setOnClickListener { navController.popBackStack() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
