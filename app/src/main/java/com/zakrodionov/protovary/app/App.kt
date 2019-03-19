@@ -25,9 +25,12 @@ class App : Application() {
         this.injectMembers()
 
         Hawk.init(this).build()
-        Stetho.initializeWithDefaults(this)
 
-        if (!BuildConfig.DEBUG) Fabric.with(this, Crashlytics())
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        } else {
+            Fabric.with(this, Crashlytics())
+        }
     }
 
     private fun injectMembers() = appComponent.inject(this)

@@ -48,7 +48,7 @@ class ResearchesCategoryAdapter
             Glide.with(itemView.context).load(url)
                 .apply(RequestOptions().override(750, 500)).optionalCenterCrop().into(itemView.ivImage)
 
-            itemView.tvName.text = item.name
+            itemView.tvName.text = item.name?.trim()
         }
     }
 

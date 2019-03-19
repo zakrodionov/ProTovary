@@ -52,10 +52,10 @@ class ProductsAdapter
             Glide.with(itemView.context).load(url)
                 .apply(RequestOptions().override(500, 450)).optionalCenterCrop().into(itemView.ivImage)
 
-            itemView.tvName.text = item.name?.parseHtml()
+            itemView.tvName.text = item.name?.parseHtml()?.trim()
             itemView.ratingBar.rating = item.points?.toFloat() ?: 0F
             itemView.tvPoints.text = item.points?.toString()
-            itemView.tvTrademark.text = item.trademark
+            itemView.tvTrademark.text = item.trademark?.trim()
 
             when (item.status) {
                 itemView.context.getString(R.string.status_sign) -> itemView.ivStatus.setImageResource(R.drawable.quality_sign)
