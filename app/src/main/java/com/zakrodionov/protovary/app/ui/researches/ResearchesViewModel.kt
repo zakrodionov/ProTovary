@@ -15,6 +15,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesUseCase: GetResea
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()
     var title = MutableLiveData<String>()
+    var queryText = MutableLiveData<String>()
 
 
     fun loadResearchesCategory(id: Long) {
@@ -26,17 +27,14 @@ class ResearchesViewModel @Inject constructor(val getResearchesUseCase: GetResea
         loading.value = false
         this.title.value = researches.name
         this.sourceResearches = researches.researches ?: listOf()
-        this.filteredResearches.value = researches.researches
+        applyQueryText()
     }
 
 
-    fun setQueryText(text: String) {
+    fun applyQueryText() {
+        val text = queryText.value?.toLowerCase() ?: ""
         filteredResearches.value =
-            sourceResearches.filter { it.name?.toLowerCase()?.contains(text.toLowerCase()) ?: false }
+            sourceResearches.filter { it.name?.toLowerCase()?.contains(text) ?: false }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("dfdsf", "clear")
-    }
 }

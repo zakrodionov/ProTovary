@@ -126,6 +126,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     }
 
     private fun itemClickListener(productInfo: ProductInfo) {
+        actionSearch.onActionViewCollapsed()
         val bundle = Bundle().apply { putLong("id", productInfo.id) }
         navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
