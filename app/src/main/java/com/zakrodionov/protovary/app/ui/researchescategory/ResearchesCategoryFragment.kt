@@ -48,7 +48,7 @@ class ResearchesCategoryFragment : BaseFragment() {
 
 
     private fun initializeView() {
-        tvToolbarTitle.text = getString(R.string.research)
+        tvToolbarTitle.text = getString(R.string.researches)
 
         rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)

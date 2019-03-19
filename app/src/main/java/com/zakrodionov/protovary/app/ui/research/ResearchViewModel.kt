@@ -21,8 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchUseCase,
-                                            val getProductsInfoUseCase: GetProductsInfoUseCase,
+class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProductsInfoUseCase,
                                             val actionFavoriteUseCase: ActionFavoriteUseCase,
                                             val context: Context) :
     BaseViewModel() {
@@ -66,8 +65,7 @@ class ResearchViewModel @Inject constructor(val getResearchUseCase: GetResearchU
         val list = sourceProducts.toMutableList()
 
         when (filterType.value) {
-            BY_DEFAULT -> {
-            }
+            BY_DEFAULT -> {}
             BY_QUALITY_MARK -> {
                 list.retainAll { it.status == context.getString(R.string.status_sign) }
             }

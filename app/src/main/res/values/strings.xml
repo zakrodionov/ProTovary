@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ПроТовары</string>
 
-    <string name="research">Исследования</string>
+    <string name="researches">Исследования</string>
+    <string name="research">Исследование</string>
     <string name="barcode">Штрихкод</string>
     <string name="favorites">Избранное</string>
     <string name="more">Ещё</string>

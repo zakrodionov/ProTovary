@@ -14,6 +14,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesUseCase: GetResea
 
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()
+    var title = MutableLiveData<String>()
 
 
     fun loadResearchesCategory(id: Long) {
@@ -23,6 +24,7 @@ class ResearchesViewModel @Inject constructor(val getResearchesUseCase: GetResea
 
     private fun handleResearch(researches: Researches) {
         loading.value = false
+        this.title.value = researches.name
         this.sourceResearches = researches.researches ?: listOf()
         this.filteredResearches.value = researches.researches
     }

@@ -4,8 +4,8 @@
 
     <item
             android:id="@+id/researchesCategoryFragment"
-            android:icon="@drawable/research"
-            android:title="@string/research"
+            android:icon="@drawable/researches"
+            android:title="@string/researches"
             app:showAsAction="always"/>
 
     <item

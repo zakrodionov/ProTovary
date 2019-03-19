@@ -2,6 +2,7 @@ package com.zakrodionov.protovary.app.ui.researches
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.domain.entity.ResearchCompact
+import com.zakrodionov.protovary.domain.entity.Researches
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject
@@ -35,6 +37,7 @@ class ResearchesFragment : BaseFragment() {
 
         researchesViewModel = viewModel(viewModelFactory) {
             observe(filteredResearches, ::renderResearchesList)
+            observe(title, ::renderTitle)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -102,6 +105,8 @@ class ResearchesFragment : BaseFragment() {
         })
 
         editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
+
+        tvTitle.text = researchesViewModel.title.value ?: ""
     }
 
     private fun renderTitle(title: String?) {
