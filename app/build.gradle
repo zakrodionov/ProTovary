@@ -93,7 +93,7 @@ dependencies {
     def room_version = "2.1.0-alpha04"
     def retrofitVersion = '2.3.0'
     def anko_version = "0.10.8"
-    def ktx_version = "1.1.0-alpha04"
+    def ktx_version = "1.1.0-alpha05"
     def coroutines_version = "1.1.1"
     def lifecycle_version = "2.1.0-alpha02"
     def koin_version = '1.0.2'
@@ -146,8 +146,9 @@ dependencies {
     implementation 'com.github.orhanobut:hawk:2.0.1'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+
 
     //Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
