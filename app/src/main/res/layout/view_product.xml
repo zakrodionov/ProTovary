@@ -64,7 +64,7 @@
                     app:tabIndicatorColor="@color/colorPrimaryDark"
                     app:tabSelectedTextColor="@color/colorPrimaryDark"
                     app:tabTextColor="@color/gray"
-                    app:tabTextAppearance="@style/mainTextStyle"
+                    app:tabTextAppearance="@style/textMainStyle"
             />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

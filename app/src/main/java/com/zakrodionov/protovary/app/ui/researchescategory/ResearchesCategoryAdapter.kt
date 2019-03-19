@@ -9,21 +9,21 @@ import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
-import com.zakrodionov.protovary.domain.entity.ResearchesCategory
+import com.zakrodionov.protovary.domain.entity.Researches
 import kotlinx.android.synthetic.main.item_researches.view.*
 import javax.inject.Inject
 
 class ResearchesCategoryAdapter
 @Inject constructor() : Adapter<ResearchesCategoryAdapter.ViewHolder>() {
 
-    var collection: List<ResearchesCategory> = listOf()
+    var collection: List<Researches> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
 
-    internal var clickListener: (ResearchesCategory) -> Unit = {}
+    internal var clickListener: (Researches) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(parent.inflate(R.layout.item_researches))
@@ -34,13 +34,13 @@ class ResearchesCategoryAdapter
     override fun getItemCount() = collection.size
 
 
-    inner class ViewHolder(itemView: View) : BaseViewHolder<ResearchesCategory>(itemView) {
+    inner class ViewHolder(itemView: View) : BaseViewHolder<Researches>(itemView) {
 
         init {
             itemView.setOnClickListener { clickListener(item) }
         }
 
-        override fun bind(item: ResearchesCategory) {
+        override fun bind(item: Researches) {
             super.bind(item)
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"

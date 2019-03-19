@@ -9,7 +9,7 @@ import com.zakrodionov.protovary.data.db.converter.ResearchesCompactConverter
 
 @Entity
 @TypeConverters(ResearchesCompactConverter::class)
-data class ResearchesCategory(
+data class Researches(
     @PrimaryKey
     @SerializedName("id")
     var id: Long,

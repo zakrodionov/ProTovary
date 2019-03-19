@@ -35,7 +35,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/button_ripple"
-                android:textAppearance="@style/buttonTextWhiteStyle"
+                android:textAppearance="@style/textButtonWhiteStyle"
                 android:text="@string/scan_button"
         />
 

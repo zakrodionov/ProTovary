@@ -28,9 +28,8 @@
     <string name="empty_favorites">У вас пока нет товаров в «Избранном»</string>
     <string name="empty_products">Товары отсутствуют</string>
     <string name="empty_researches">Исследования отсутствуют</string>
-    <string name="researches">Исследования</string>
 
-    <string name="telegram">Написать автору в Телеграм</string>
+    <string name="telegram">Связаться с автором в Телеграм</string>
     <string name="about_app">О приложении</string>
     <string name="research_on_site">Поиск на сайте</string>
     <string name="rate_app">Оценить приложение</string>
@@ -49,7 +48,6 @@
     </string>
     <string name="status_sign">withsign</string>
     <string name="status_violation">withviolation</string>
-
 
     <string name="message_ask_never_barcode">Для работы сканера нужен доступ к камере. Необходимо включить разрешение в
         настройках.

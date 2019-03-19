@@ -3,11 +3,12 @@ package com.zakrodionov.protovary.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
+import com.zakrodionov.protovary.domain.entity.ProductInfo
 import com.zakrodionov.protovary.domain.entity.ResearchCompact
-import com.zakrodionov.protovary.domain.entity.ResearchesCategory
+import com.zakrodionov.protovary.domain.entity.Researches
 
 @Database(
-    entities = [ResearchesCategory::class, ResearchCompact::class, FavoriteProduct::class],
+    entities = [Researches::class, ResearchCompact::class, FavoriteProduct::class, ProductInfo::class],
     version = 1, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

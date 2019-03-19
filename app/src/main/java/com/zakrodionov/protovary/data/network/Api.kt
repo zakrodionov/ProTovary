@@ -17,7 +17,7 @@ interface Api {
     fun getProducts(): Deferred<List<Products>>
 
     @GET("researches")
-    fun getResearches(): Deferred<List<ResearchesCategory>>
+    fun getResearches(): Deferred<List<Researches>>
 
     @GET("research/{id}")
     fun getResearch(@Path("id") id: Long): Deferred<Research>

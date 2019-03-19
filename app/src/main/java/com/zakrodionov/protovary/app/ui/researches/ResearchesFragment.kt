@@ -42,7 +42,6 @@ class ResearchesFragment : BaseFragment() {
         setResearches()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
@@ -105,6 +104,9 @@ class ResearchesFragment : BaseFragment() {
         editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
+    private fun renderTitle(title: String?) {
+        tvTitle?.text = title
+    }
 
     private fun handleFailure(failure: Failure?) {
         when (failure) {

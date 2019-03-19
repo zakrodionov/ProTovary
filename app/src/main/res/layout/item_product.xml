@@ -23,22 +23,22 @@
                 android:id="@+id/tvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/textTitleStyle"
+                android:textAppearance="@style/textTitleItemStyle"
                 tools:text="Example"
                 android:layout_margin="5dp"
                 android:textAlignment="viewStart"
-                android:maxLines="5"
                 android:ellipsize="end"
+                android:maxLines="5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivImage"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
         />
 
         <TextView
                 android:id="@+id/tvTrademark"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 tools:text="Example"
                 android:textAlignment="viewStart"
                 android:layout_marginStart="5dp"
@@ -48,7 +48,7 @@
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
                 app:layout_constraintStart_toEndOf="@id/ivImage"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
                 app:layout_constraintBottom_toTopOf="@id/ratingBar"
         />
         <ImageView
@@ -58,7 +58,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"/>
-
         <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,6 +81,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ratingBar"
         />
-
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_favorite"
+                android:id="@+id/ivActionFavorite"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

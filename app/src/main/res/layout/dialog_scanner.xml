@@ -11,7 +11,7 @@
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:textAppearance="@style/mainTextStyle"
+                  android:textAppearance="@style/textMainStyle"
                   android:layout_margin="10dp"
                   android:gravity="center"
                   android:text="Товар не найден"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/button_ripple"
-                android:textAppearance="@style/buttonTextWhiteStyle"
+                android:textAppearance="@style/textButtonWhiteStyle"
                 android:text="@string/search"
         />
         <TextView

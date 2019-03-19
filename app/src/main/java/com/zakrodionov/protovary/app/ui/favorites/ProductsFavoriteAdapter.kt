@@ -12,7 +12,7 @@ import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
-import kotlinx.android.synthetic.main.item_product_favorite.view.*
+import kotlinx.android.synthetic.main.item_product.view.*
 import javax.inject.Inject
 
 class ProductsFavoriteAdapter
@@ -29,7 +29,7 @@ class ProductsFavoriteAdapter
     internal var actionFavoriteListener: (FavoriteProduct) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(parent.inflate(R.layout.item_product_favorite))
+        ViewHolder(parent.inflate(R.layout.item_product))
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
         viewHolder.bind(collection[position])
