@@ -10,4 +10,6 @@ sealed class Failure {
     object UnknownError : Failure()
 
     class CacheFailure<T>(val data: T) : Failure()
+    class BarcodeFailure(val barcode: String) : Failure()
+
 }

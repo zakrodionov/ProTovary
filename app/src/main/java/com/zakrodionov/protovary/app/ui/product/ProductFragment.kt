@@ -27,6 +27,11 @@ class ProductFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         productViewModel = viewModel(viewModelFactory) {
             observe(product, ::renderProduct)
@@ -35,12 +40,6 @@ class ProductFragment : BaseFragment() {
             observe(message, ::renderMessage)
             failure(failure, ::handleFailure)
         }
-
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         productViewModel.loadProduct(productId)
 

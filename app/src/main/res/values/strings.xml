@@ -60,6 +60,9 @@
     <string name="search_on_site">Поиск на сайте</string>
     <string name="input_barcode">Введите штрихкод</string>
     <string name="scan_button">Сканировать</string>
+    <string name="product_not_found">Товар не найден</string>
+    <string name="product_not_found_barcode">Товар по штрихкоду &lt;b>\"%s\"&lt;/b> не найден</string>
+
 
 
 </resources>

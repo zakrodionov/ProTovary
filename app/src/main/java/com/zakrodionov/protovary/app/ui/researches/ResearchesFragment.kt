@@ -32,6 +32,10 @@ class ResearchesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         researchesViewModel = viewModel(viewModelFactory) {
             observe(filteredResearches, ::renderResearchesList)
@@ -42,10 +46,7 @@ class ResearchesFragment : BaseFragment() {
         }
 
         setResearches()
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initializeView()
         setupToolbar()
     }

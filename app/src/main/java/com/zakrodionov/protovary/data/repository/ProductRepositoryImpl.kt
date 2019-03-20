@@ -40,12 +40,12 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProductByBarcode(id: String): Either<Failure, ProductCompact> {
+    override suspend fun getProductByBarcode(barcode: String): Either<Failure, ProductCompact> {
         return try {
-            val result = api.getProductByBarcode(id).await()
+            val result = api.getProductByBarcode(barcode).await()
             Right(result)
         } catch (exception: Throwable) {
-            errorHandler.proceedException(exception)
+            errorHandler.proceedException(exception, specialBarcodeFailureHandler = { barcode })
         }
     }
 

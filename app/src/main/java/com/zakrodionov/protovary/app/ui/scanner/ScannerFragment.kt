@@ -22,35 +22,38 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
 
     private lateinit var scannerViewModel: ScannerViewModel
 
-    var scannerFragment: SimpleScannerFragment? = null
+    var simpleScanner: SimpleScannerFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-
-        scannerViewModel = viewModel(viewModelFactory) {
-            observe(product, ::handleProduct)
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
-        }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        scannerFragment = childFragmentManager.findFragmentById(R.id.scanner_fragment) as SimpleScannerFragment
+        scannerViewModel = viewModel(viewModelFactory) {
+            observe(product, ::handleProduct)
+            observe(loading, ::loadingStatus)
+            failure(failure, ::handleFailure)
+        }
 
-        scannerFragment!!.resultListener = {
+        setupScanner()
+        initializeView()
+
+    }
+
+    private fun setupScanner() {
+        simpleScanner = childFragmentManager.findFragmentById(R.id.scanner_fragment) as SimpleScannerFragment
+
+        simpleScanner!!.resultListener = {
             if (it?.contents != null) {
                 scannerViewModel.loadProduct(it.contents)
             } else {
                 showDialog()
             }
         }
-
-        initializeView()
-
     }
 
     private fun handleProduct(product: ProductCompact?) {
@@ -72,17 +75,18 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.NetworkConnection -> notify(R.string.failure_network_connection)
-            is Failure.UnknownError -> {
-                showDialog()
-            }
-
+            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+            is Failure.BarcodeFailure -> { showDialog(failure.barcode) }
         }
     }
 
-    private fun showDialog() {
-        scannerFragment?.onPause()
+    private fun showDialog(barcode: String = "") {
+        simpleScanner?.onPause()
 
         val dialog = ScannerDialogFragment()
+        val bundle = Bundle().apply { putString("barcode", barcode) }
+
+        dialog.arguments = bundle
         dialog.setTargetFragment(this, RC_DIALOG)
         dialog.show(fragmentManager!!, "tag")
 
@@ -97,7 +101,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     }
 
     override fun actionClose() {
-        scannerFragment?.onResume()
+        simpleScanner?.onResume()
     }
 
     companion object {

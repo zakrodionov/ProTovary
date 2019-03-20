@@ -21,17 +21,14 @@ class AboutFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-
-        aboutViewModel = viewModel(viewModelFactory) {
-
-        }
-
-
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        aboutViewModel = viewModel(viewModelFactory) {}
+
         initializeView()
     }
 

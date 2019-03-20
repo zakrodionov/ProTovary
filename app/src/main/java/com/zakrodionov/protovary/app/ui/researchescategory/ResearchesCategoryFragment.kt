@@ -31,17 +31,18 @@ class ResearchesCategoryFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         researchesCategoryViewModel = viewModel(viewModelFactory) {
             observe(researches, ::renderResearchesList)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
-    }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initializeView()
         loadResearchList()
     }

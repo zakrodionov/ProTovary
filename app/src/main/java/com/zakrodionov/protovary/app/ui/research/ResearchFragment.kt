@@ -39,6 +39,12 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         researchViewModel = viewModel(viewModelFactory) {
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
@@ -46,12 +52,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
-
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         researchViewModel.loadResearch(idResearch)
         setupToolbar()

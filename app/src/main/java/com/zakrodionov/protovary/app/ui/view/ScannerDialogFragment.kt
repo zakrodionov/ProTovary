@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.afterTextChanged
+import com.zakrodionov.protovary.app.ext.parseHtml
+import com.zakrodionov.protovary.app.util.Utils
 import kotlinx.android.synthetic.main.dialog_scanner.*
 import kotlinx.android.synthetic.main.dialog_scanner.view.*
+import me.dm7.barcodescanner.zbar.BarcodeFormat
+import me.dm7.barcodescanner.zbar.BarcodeFormat.ALL_FORMATS
+import okhttp3.internal.Util
 
 class ScannerDialogFragment : DialogFragment() {
 
@@ -17,6 +22,20 @@ class ScannerDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_scanner, container, false)
+        setupView(view)
+
+        return view
+    }
+
+    private fun setupView(view: View){
+        val barcode = arguments?.getString("barcode") ?: ""
+
+        if (barcode.isEmpty()){
+            view.tvDescription.text = getString(R.string.product_not_found)
+        } else {
+            val text = String.format(getString(R.string.product_not_found_barcode), Utils.formatBarcode(barcode)).parseHtml()
+            view.tvDescription.text = text
+        }
 
         listener = targetFragment as? ScannerDialogListener
 
@@ -35,8 +54,6 @@ class ScannerDialogFragment : DialogFragment() {
             listener?.actionSearchOnSite()
             dismiss()
         }
-
-        return view
     }
 
     override fun onCancel(dialog: DialogInterface) {
