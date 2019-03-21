@@ -2,6 +2,8 @@ package com.zakrodionov.protovary.app.ui.researchescategory
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -63,8 +65,8 @@ class ResearchesCategoryFragment : BaseFragment() {
     }
 
     private fun itemClickListener(research: Researches) {
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
+        val bundle = bundleOf("id" to research.id)
+        findNavController().navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
     }
 
     private fun loadResearchList() {

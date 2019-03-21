@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.researches
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.domain.entity.ResearchCompact

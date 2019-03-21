@@ -3,6 +3,7 @@ package com.zakrodionov.protovary.app.ui.about
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.viewModel
@@ -36,7 +37,7 @@ class AboutFragment : BaseFragment() {
         tvText.movementMethod = LinkMovementMethod.getInstance()
 
         tvTitle.text = getString(R.string.about_app)
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
 
         val versionName = BuildConfig.VERSION_NAME
         tvVersion.text = "Версия: $versionName"

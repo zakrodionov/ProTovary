@@ -1,7 +1,6 @@
 package com.zakrodionov.protovary.app.ui.scanner
 
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.platform.SingleLiveEvent
 import com.zakrodionov.protovary.domain.entity.ProductCompact
 import com.zakrodionov.protovary.domain.interactor.product.GetProductByBarcodeUseCase

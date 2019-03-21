@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
@@ -57,7 +59,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         setupChips()
         initializeRecycler()
 
-        if (savedInstanceState.isFirstTimeCreated()){
+        if (savedInstanceState.isFirstTimeCreated()) {
             researchViewModel.loadResearch(idResearch)
         }
 
@@ -65,7 +67,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     private fun setupToolbar() {
 
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
@@ -130,8 +132,8 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     private fun itemClickListener(productInfo: ProductInfo) {
         actionSearch.onActionViewCollapsed()
-        val bundle = Bundle().apply { putLong("id", productInfo.id) }
-        navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
+        val bundle = bundleOf("id" to productInfo.id)
+        findNavController().navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
 
     private fun itemClickFavoriteListener(productInfo: ProductInfo) {

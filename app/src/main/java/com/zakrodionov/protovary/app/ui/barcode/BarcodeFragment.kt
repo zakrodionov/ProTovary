@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
@@ -48,7 +49,7 @@ class BarcodeFragment : BaseFragment() {
 
     @NeedsPermission(Manifest.permission.CAMERA)
     fun scanBarcodeCustomLayout() {
-        navController.navigate(R.id.action_barcodeFragment_to_scannerFragment)
+        findNavController().navigate(R.id.action_barcodeFragment_to_scannerFragment)
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)

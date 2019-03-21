@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
@@ -40,7 +42,7 @@ class ResearchesFragment : BaseFragment() {
         researchesViewModel = viewModel(viewModelFactory) {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
-            observe(queryText){ researchesViewModel.applyQueryText() }
+            observe(queryText) { researchesViewModel.applyQueryText() }
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
         }
@@ -75,12 +77,12 @@ class ResearchesFragment : BaseFragment() {
 
     private fun itemClickListener(research: ResearchCompact) {
         actionSearch.onActionViewCollapsed()
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        val bundle = bundleOf("id" to research.id)
+        findNavController().navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
         editText.setTextColor(Color.BLACK)

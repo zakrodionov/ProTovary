@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.researchescategory
 
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup

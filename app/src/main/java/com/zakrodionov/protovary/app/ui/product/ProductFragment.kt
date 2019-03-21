@@ -3,6 +3,7 @@ package com.zakrodionov.protovary.app.ui.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
@@ -49,7 +50,7 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
         actionShare.setOnClickListener { productViewModel.product.value?.url?.let { shareProduct("${getString(R.string.base_url)}$it") } }
     }

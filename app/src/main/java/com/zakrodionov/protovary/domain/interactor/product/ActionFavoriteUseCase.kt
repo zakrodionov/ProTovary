@@ -1,7 +1,6 @@
 package com.zakrodionov.protovary.domain.interactor.product
 
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
-import com.zakrodionov.protovary.domain.entity.Product
 import com.zakrodionov.protovary.domain.repository.ProductRepository
 import javax.inject.Inject
 

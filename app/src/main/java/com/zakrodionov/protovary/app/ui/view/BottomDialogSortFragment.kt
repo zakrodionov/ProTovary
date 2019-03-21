@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
@@ -34,7 +35,7 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
     companion object {
         fun newInstance(selectedResearchType: ResearchSortType): BottomDialogSortFragment {
             val dialog = BottomDialogSortFragment()
-            val bundle = Bundle().apply { putSerializable("type", selectedResearchType) }
+            val bundle = bundleOf("type" to selectedResearchType)
             dialog.arguments = bundle
             return dialog
         }

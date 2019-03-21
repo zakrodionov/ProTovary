@@ -6,7 +6,6 @@ import com.zakrodionov.protovary.app.functional.Either.Right
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.data.db.ProductDao
-import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.domain.entity.Product
