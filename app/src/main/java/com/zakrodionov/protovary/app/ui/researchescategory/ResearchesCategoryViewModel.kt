@@ -19,6 +19,6 @@ class ResearchesCategoryViewModel @Inject constructor(val getResearchesCategoryU
 
     private fun handleResearches(list: List<Researches>) {
         loading.value = false
-        researches.value = list
+        researches.value = list.sortedBy { it.name }
     }
 }

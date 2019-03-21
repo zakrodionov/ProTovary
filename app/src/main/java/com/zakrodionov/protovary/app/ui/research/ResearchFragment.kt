@@ -53,10 +53,13 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             failure(failure, ::handleFailure)
         }
 
-        researchViewModel.loadResearch(idResearch)
         setupToolbar()
         setupChips()
         initializeRecycler()
+
+        if (savedInstanceState.isFirstTimeCreated()){
+            researchViewModel.loadResearch(idResearch)
+        }
 
     }
 

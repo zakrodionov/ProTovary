@@ -44,7 +44,11 @@ class ResearchesCategoryFragment : BaseFragment() {
         }
 
         initializeView()
-        loadResearchList()
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearchList()
+
+        }
     }
 
 

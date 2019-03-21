@@ -45,7 +45,9 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     open fun onBackPressed() {}
 
-    internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
+    //internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
+
+    internal fun Bundle?.isFirstTimeCreated() = this == null
 
     internal fun loadingStatus(flag: Boolean?) {
         if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)

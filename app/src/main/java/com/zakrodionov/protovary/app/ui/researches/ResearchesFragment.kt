@@ -45,7 +45,9 @@ class ResearchesFragment : BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        setResearches()
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearches()
+        }
 
         initializeView()
         setupToolbar()
@@ -58,7 +60,7 @@ class ResearchesFragment : BaseFragment() {
         rvResearches.adapter = researchesAdapter
     }
 
-    private fun setResearches() {
+    private fun loadResearches() {
         val id = arguments?.getLong("id") ?: 0
         researchesViewModel.loadResearchesCategory(id)
     }

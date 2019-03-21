@@ -41,7 +41,9 @@ class ProductFragment : BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        productViewModel.loadProduct(productId)
+        if (savedInstanceState.isFirstTimeCreated()) {
+            productViewModel.loadProduct(productId)
+        }
 
         setupToolbar()
     }
