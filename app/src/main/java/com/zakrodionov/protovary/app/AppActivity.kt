@@ -48,6 +48,7 @@ class AppActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        bottomNavigation.requestApplyInsets()
         if (currentNavController?.popBackStack() != true) {
             super.onBackPressed()
         }
