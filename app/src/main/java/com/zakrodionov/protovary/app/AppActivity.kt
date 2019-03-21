@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class AppActivity : BaseActivity() {
 
-    private var currentNavController: NavController? = null
+    private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -41,15 +41,16 @@ class AppActivity : BaseActivity() {
             intent = intent
         )
 
-        currentNavController = controller.value
+        controller.observe(this, Observer {  })
+        currentNavController = controller
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.navigateUp() ?: false
+        return currentNavController?.value?.navigateUp() ?: false
     }
 
     override fun onBackPressed() {
-        if (currentNavController?.popBackStack() != true) {
+        if (currentNavController?.value?.popBackStack() != true) {
             super.onBackPressed()
         }
     }
