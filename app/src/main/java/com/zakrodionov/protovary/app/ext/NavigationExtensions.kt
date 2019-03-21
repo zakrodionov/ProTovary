@@ -86,7 +86,6 @@ fun BottomNavigationView.setupWithNavController(
 
     // When a navigation item is selected
     setOnNavigationItemSelectedListener { item ->
-        this.requestApplyInsets()
         // Don't do anything if the state is state has already been saved.
         if (fragmentManager.isStateSaved) {
             false

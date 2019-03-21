@@ -2,6 +2,7 @@ package com.zakrodionov.protovary.app
 
 import android.os.Bundle
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.setupWithNavController
@@ -40,6 +41,11 @@ class AppActivity : BaseActivity() {
             intent = intent
         )
 
+        controller.observe(this, Observer {
+            it.addOnDestinationChangedListener { _, _, _ ->
+                bottomNavigation.requestApplyInsets()
+            }
+        })
         currentNavController = controller.value
     }
 
