@@ -41,11 +41,6 @@ class AppActivity : BaseActivity() {
             intent = intent
         )
 
-//        controller.observe(this, Observer {
-//            it.addOnDestinationChangedListener { _, _, _ ->
-//                bottomNavigation.requestApplyInsets()
-//            }
-//        })
         currentNavController = controller.value
     }
 
@@ -54,7 +49,6 @@ class AppActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        //bottomNavigation.requestApplyInsets()
         if (currentNavController?.popBackStack() != true) {
             super.onBackPressed()
         }
