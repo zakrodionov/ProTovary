@@ -103,6 +103,9 @@ class ResearchesFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isNotEmpty() || !actionSearch.isIconified) {
+                    tvTitle.gone()
+                }
                 researchesViewModel.queryText.value = newText
                 return false
             }

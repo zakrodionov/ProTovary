@@ -89,6 +89,9 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isNotEmpty() || !actionSearch.isIconified) {
+                    tvTitle.gone()
+                }
                 researchViewModel.queryText.value = newText
                 return false
             }

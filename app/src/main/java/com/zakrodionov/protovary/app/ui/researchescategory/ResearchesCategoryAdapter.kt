@@ -48,7 +48,7 @@ class ResearchesCategoryAdapter
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
 
             Glide.with(itemView.context).load(url)
-                .placeholder(ColorDrawable(ContextCompat.getColor(itemView.context, R.color.gray2)))
+                .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
                 .apply(RequestOptions().override(750, 500)).optionalCenterCrop().into(itemView.ivImage)
 
             itemView.tvName.text = item.name?.trim()
