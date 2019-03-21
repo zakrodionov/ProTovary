@@ -6,25 +6,24 @@
             android:id="@+id/researches"
             android:icon="@drawable/researches"
             android:title="@string/researches"
-            app:showAsAction="always"/>
+            />
 
     <item
             android:id="@+id/barcode"
             android:icon="@drawable/barcode"
             android:title="@string/barcode"
-            app:showAsAction="ifRoom"/>
+            />
 
     <item
             android:id="@+id/favorites"
             android:icon="@drawable/favorite"
             android:title="@string/favorites"
-            app:showAsAction="ifRoom"/>
+            />
 
     <item
             android:id="@+id/more"
             android:icon="@drawable/ic_more"
             android:title="@string/more"
-            app:showAsAction="ifRoom"/>
-
+    />
 
 </menu>

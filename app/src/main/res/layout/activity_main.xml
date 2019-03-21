@@ -15,13 +15,10 @@
     />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemBackground="?attr/selectableItemBackgroundBorderless"
-            android:background="@android:color/white"
             app:itemIconTint="@drawable/bottom_button_selector"
             app:itemTextColor="@drawable/bottom_button_selector"
             app:labelVisibilityMode="unlabeled"
