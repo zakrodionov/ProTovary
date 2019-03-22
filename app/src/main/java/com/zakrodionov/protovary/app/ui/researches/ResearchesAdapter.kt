@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.domain.entity.ResearchCompact
@@ -47,9 +48,10 @@ class ResearchesAdapter
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
 
-            Glide.with(itemView.context).load(url)
+            GlideApp.with(itemView.context).load(url)
                 .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
-                .apply(RequestOptions().override(750, 500)).optionalCenterCrop().into(itemView.ivImage)
+                .override(750, 500)
+                .optionalCenterCrop().into(itemView.ivImage)
 
             itemView.tvName.text = item.name?.trim()
         }

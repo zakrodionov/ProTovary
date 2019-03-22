@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.gone
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.parseHtml
@@ -51,9 +52,10 @@ class ProductsAdapter
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
 
-            Glide.with(itemView.context).load(url)
+            GlideApp.with(itemView.context).load(url)
                 .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
-                .apply(RequestOptions().override(500, 450)).optionalCenterCrop().into(itemView.ivImage)
+                .override(500, 450)
+                .optionalCenterCrop().into(itemView.ivImage)
 
             itemView.tvName.text = item.name?.parseHtml()?.trim()
             itemView.ratingBar.rating = item.points?.toFloat() ?: 0F
