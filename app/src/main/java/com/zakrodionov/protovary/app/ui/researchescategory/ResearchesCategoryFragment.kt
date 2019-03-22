@@ -36,6 +36,7 @@ class ResearchesCategoryFragment : BaseFragment() {
 
         researchesCategoryViewModel = viewModel(viewModelFactory) {}
 
+        //Загружаем только при первом создании фрагмента
         if (savedInstanceState.isFirstTimeCreated()) {
             loadResearchList()
         }
@@ -52,6 +53,11 @@ class ResearchesCategoryFragment : BaseFragment() {
         }
 
         initializeView()
+
+        //Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
+        if (researchesCategoryViewModel.researches.value == null) {
+            loadResearchList()
+        }
 
     }
 

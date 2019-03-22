@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app.ui.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
@@ -46,6 +45,10 @@ class ProductFragment : BaseFragment() {
             observe(isFavoriteMediator, ::renderFavorite)
             observe(message, ::renderMessage)
             failure(failure, ::handleFailure)
+        }
+
+        if (productViewModel.product.value == null) {
+            productViewModel.loadProduct(productId)
         }
 
         setupToolbar()

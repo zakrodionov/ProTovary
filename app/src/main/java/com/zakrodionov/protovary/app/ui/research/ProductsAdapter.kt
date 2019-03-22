@@ -1,9 +1,9 @@
 package com.zakrodionov.protovary.app.ui.research
 
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class ProductsAdapter
 @Inject constructor() : Adapter<ProductsAdapter.ViewHolder>() {
 
-    var collection: List<ProductInfo> = listOf()
+    var collection: MutableList<ProductInfo> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -75,6 +75,15 @@ class ProductsAdapter
                 itemView.tvTrademark.gone()
             }
         }
+    }
+
+    fun updateUsingDiffUtil(products: List<ProductInfo>) {
+        val diffCallback = ProductsDiffCallback(collection, products)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        collection.clear()
+        collection.addAll(products)
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }

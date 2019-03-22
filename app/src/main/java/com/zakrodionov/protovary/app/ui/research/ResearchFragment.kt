@@ -60,6 +60,10 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             failure(failure, ::handleFailure)
         }
 
+        if (researchViewModel.filteredProducts.value == null) {
+            researchViewModel.loadResearch(idResearch)
+        }
+
         setupToolbar()
         setupChips()
         initializeRecycler()
@@ -125,12 +129,14 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     }
 
     private fun renderProductsList(products: List<ProductInfo>?) {
-        productsAdapter.collection = products ?: listOf()
+        productsAdapter.updateUsingDiffUtil(products ?: listOf())
         productsAdapter.clickListener = ::itemClickListener
         productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
 
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
+        rvResearch?.itemAnimator = null
+
     }
 
     private fun itemClickListener(productInfo: ProductInfo) {
