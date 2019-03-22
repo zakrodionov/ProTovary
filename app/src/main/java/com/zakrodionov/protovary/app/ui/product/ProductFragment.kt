@@ -28,22 +28,24 @@ class ProductFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        productViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            productViewModel.loadProduct(productId)
+        }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productViewModel = viewModel(viewModelFactory) {
+        with(productViewModel) {
             observe(product, ::renderProduct)
             observe(loading, ::loadingStatus)
             observe(isFavoriteMediator, ::renderFavorite)
             observe(message, ::renderMessage)
             failure(failure, ::handleFailure)
-        }
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            productViewModel.loadProduct(productId)
         }
 
         setupToolbar()

@@ -48,18 +48,15 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteFromStore(id: Long) =
-        productDao.deleteById(id)
-
     override fun getFavoriteProducts(): LiveData<List<FavoriteProduct>> =
         productDao.getFavoriteProducts()
 
     override fun productIsFavorite(id: Long): LiveData<Int> =
         productDao.productIsFavoriteLive(id)
 
-    override suspend fun actionFavorite(product: FavoriteProduct) =
+    override suspend fun actionFavorite(product: FavoriteProduct) {
         productDao.actionFavorite(product)
-
+    }
 
     override suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>> {
         return try {

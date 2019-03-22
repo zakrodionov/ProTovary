@@ -29,13 +29,13 @@ class BarcodeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        barcodeViewModel = viewModel(viewModelFactory) {}
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        barcodeViewModel = viewModel(viewModelFactory) {}
 
         initializeView()
     }

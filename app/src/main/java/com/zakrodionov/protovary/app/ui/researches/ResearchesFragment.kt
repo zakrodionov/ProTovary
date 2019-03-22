@@ -34,21 +34,23 @@ class ResearchesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        researchesViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearches()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        researchesViewModel = viewModel(viewModelFactory) {
+        with(researchesViewModel) {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
             observe(queryText) { researchesViewModel.applyQueryText() }
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
-        }
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            loadResearches()
         }
 
         initializeView()

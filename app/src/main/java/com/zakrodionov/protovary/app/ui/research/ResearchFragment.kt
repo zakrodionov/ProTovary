@@ -41,13 +41,18 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
+        researchViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            researchViewModel.loadResearch(idResearch)
+        }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        researchViewModel = viewModel(viewModelFactory) {
+        with(researchViewModel) {
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
@@ -58,11 +63,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         setupToolbar()
         setupChips()
         initializeRecycler()
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            researchViewModel.loadResearch(idResearch)
-        }
-
     }
 
     private fun setupToolbar() {

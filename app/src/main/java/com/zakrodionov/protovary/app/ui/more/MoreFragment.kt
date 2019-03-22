@@ -25,12 +25,12 @@ class MoreFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        moreViewModel = viewModel(viewModelFactory) {}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        moreViewModel = viewModel(viewModelFactory) {}
 
         initializeView()
     }

@@ -33,12 +33,14 @@ class FavoritesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        favoritesViewModel = viewModel(viewModelFactory) {}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoritesViewModel = viewModel(viewModelFactory) {
+        with(favoritesViewModel) {
             observe(favoriteProducts, ::renderFavoriteProductsList)
             failure(failure, ::handleFailure)
         }
@@ -62,7 +64,7 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun actionFavoriteListener(research: FavoriteProduct) {
-        favoritesViewModel.deleteFromStore(research.id)
+        favoritesViewModel.actionFavorite(research)
     }
 
     private fun initializeView() {

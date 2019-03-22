@@ -17,7 +17,6 @@ import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.domain.entity.Researches
 import kotlinx.android.synthetic.main.toolbar_main.*
-import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches_category.*
 import javax.inject.Inject
 
@@ -34,13 +33,19 @@ class ResearchesCategoryFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        researchesCategoryViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearchList()
+        }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        researchesCategoryViewModel = viewModel(viewModelFactory) {
+        with(researchesCategoryViewModel) {
             observe(researches, ::renderResearchesList)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
@@ -48,10 +53,6 @@ class ResearchesCategoryFragment : BaseFragment() {
 
         initializeView()
 
-        if (savedInstanceState.isFirstTimeCreated()) {
-            loadResearchList()
-
-        }
     }
 
 

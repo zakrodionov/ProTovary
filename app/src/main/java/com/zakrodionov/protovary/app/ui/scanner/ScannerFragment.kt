@@ -29,13 +29,15 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        scannerViewModel = viewModel(viewModelFactory) {}
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        scannerViewModel = viewModel(viewModelFactory) {
+        with(scannerViewModel) {
             observe(product, ::handleProduct)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
@@ -43,7 +45,6 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
 
         setupScanner()
         initializeView()
-
     }
 
     private fun setupScanner() {
