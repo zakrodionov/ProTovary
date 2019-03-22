@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.toolbar_back_title.*
 class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListener {
 
     override fun layoutId() = R.layout.view_scanner
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var scannerViewModel: ScannerViewModel
 

@@ -26,7 +26,6 @@ class ResearchesCategoryFragment : BaseFragment() {
     lateinit var researchesCategoryAdapter: ResearchesCategoryAdapter
 
     override fun layoutId() = R.layout.view_researches_category
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var researchesCategoryViewModel: ResearchesCategoryViewModel
 

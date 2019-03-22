@@ -18,7 +18,6 @@ import org.jetbrains.anko.toast
 class MoreFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_more
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var moreViewModel: MoreViewModel
 

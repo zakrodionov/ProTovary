@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.view_about.*
 class AboutFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_about
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var aboutViewModel: AboutViewModel
 

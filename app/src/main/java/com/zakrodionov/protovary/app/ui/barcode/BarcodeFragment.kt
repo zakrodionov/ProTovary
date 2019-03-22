@@ -21,7 +21,6 @@ import permissions.dispatcher.RuntimePermissions
 class BarcodeFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_barcode
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var barcodeViewModel: BarcodeViewModel
 

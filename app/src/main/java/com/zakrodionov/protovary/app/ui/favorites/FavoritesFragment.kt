@@ -22,7 +22,6 @@ import javax.inject.Inject
 class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
-    override fun navigationLayoutId() = R.id.hostFragment
 
     @Inject
     lateinit var productsFavoriteAdapter: ProductsFavoriteAdapter

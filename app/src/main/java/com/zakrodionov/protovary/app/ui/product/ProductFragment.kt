@@ -18,7 +18,6 @@ import org.jetbrains.anko.support.v4.toast
 class ProductFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_product
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private val productId: Long by argument("id", 0L)
 
