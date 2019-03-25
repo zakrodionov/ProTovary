@@ -88,6 +88,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 researchViewModel.queryText.value = newText
+                rvResearch?.scrollToPosition(0)
                 return false
             }
         })

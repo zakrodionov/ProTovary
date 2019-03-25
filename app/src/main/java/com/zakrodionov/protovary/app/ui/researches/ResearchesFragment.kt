@@ -102,13 +102,12 @@ class ResearchesFragment : BaseFragment() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 researchesViewModel.queryText.value = newText
+                rvResearches?.scrollToPosition(0)
                 return false
             }
         })
 
         editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
-
-        tvTitle.text = researchesViewModel.title.value ?: ""
     }
 
     private fun renderTitle(title: String?) {
