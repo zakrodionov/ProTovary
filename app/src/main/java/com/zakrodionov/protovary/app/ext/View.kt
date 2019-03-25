@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.BaseTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.zakrodionov.protovary.app.di.GlideApp
 
 
 fun Int.pxToDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
@@ -42,9 +43,9 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
 fun ImageView.loadFromUrl(url: String?) =
-    Glide.with(this.context.applicationContext)
+    GlideApp.with(this.context.applicationContext)
         .load(url)
-        .apply(RequestOptions().override(900, 600))
+        .override(900, 600)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
 

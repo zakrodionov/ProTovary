@@ -2,6 +2,8 @@ package com.zakrodionov.protovary.app.ui.scanner
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.failure
 import com.zakrodionov.protovary.app.ext.observe
@@ -18,7 +20,6 @@ import kotlinx.android.synthetic.main.toolbar_back_title.*
 class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListener {
 
     override fun layoutId() = R.layout.view_scanner
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var scannerViewModel: ScannerViewModel
 
@@ -27,13 +28,15 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        scannerViewModel = viewModel(viewModelFactory) {}
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        scannerViewModel = viewModel(viewModelFactory) {
+        with(scannerViewModel) {
             observe(product, ::handleProduct)
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
@@ -41,7 +44,6 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
 
         setupScanner()
         initializeView()
-
     }
 
     private fun setupScanner() {
@@ -58,8 +60,8 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
 
     private fun handleProduct(product: ProductCompact?) {
         if (product?.id != null) {
-            val bundle = Bundle().apply { putLong("id", product.id) }
-            navController.navigate(R.id.action_scannerFragment_to_productFragment, bundle)
+            val bundle = bundleOf("id" to product.id)
+            findNavController().navigate(R.id.action_scannerFragment_to_productFragment, bundle)
         } else {
             showDialog()
         }
@@ -68,7 +70,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     private fun initializeView() {
         tvTitle.text = getString(R.string.barcode)
 
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
     }
 
     private fun handleFailure(failure: Failure?) {
@@ -76,7 +78,9 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.NetworkConnection -> notify(R.string.failure_network_connection)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-            is Failure.BarcodeFailure -> { showDialog(failure.barcode) }
+            is Failure.BarcodeFailure -> {
+                showDialog(failure.barcode)
+            }
         }
     }
 
@@ -84,7 +88,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
         simpleScanner?.onPause()
 
         val dialog = ScannerDialogFragment()
-        val bundle = Bundle().apply { putString("barcode", barcode) }
+        val bundle = bundleOf("barcode" to barcode)
 
         dialog.arguments = bundle
         dialog.setTargetFragment(this, RC_DIALOG)

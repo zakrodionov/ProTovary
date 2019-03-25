@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
@@ -20,7 +21,6 @@ import permissions.dispatcher.RuntimePermissions
 class BarcodeFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_barcode
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var barcodeViewModel: BarcodeViewModel
 
@@ -28,13 +28,13 @@ class BarcodeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        barcodeViewModel = viewModel(viewModelFactory) {}
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        barcodeViewModel = viewModel(viewModelFactory) {}
 
         initializeView()
     }
@@ -48,7 +48,7 @@ class BarcodeFragment : BaseFragment() {
 
     @NeedsPermission(Manifest.permission.CAMERA)
     fun scanBarcodeCustomLayout() {
-        navController.navigate(R.id.action_barcodeFragment_to_scannerFragment)
+        findNavController().navigate(R.id.action_barcodeFragment_to_scannerFragment)
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)

@@ -1,39 +1,28 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:id="@+id/flFragmentContainer"
 >
 
-    <fragment
+    <FrameLayout
             android:id="@+id/hostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_app"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+            android:layout_weight="1"
     />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemBackground="?attr/selectableItemBackgroundBorderless"
-            android:background="@android:color/white"
             app:itemIconTint="@drawable/bottom_button_selector"
             app:itemTextColor="@drawable/bottom_button_selector"
             app:labelVisibilityMode="unlabeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:menu="@menu/main_bottom_menu"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

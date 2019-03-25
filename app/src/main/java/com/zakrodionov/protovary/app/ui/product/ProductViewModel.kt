@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app.ui.product
 import android.content.Context
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.domain.entity.Product
@@ -12,9 +11,7 @@ import com.zakrodionov.protovary.domain.interactor.product.GetProductUseCase
 import com.zakrodionov.protovary.domain.interactor.product.ProductIsFavoriteUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProductViewModel @Inject constructor(
@@ -45,7 +42,14 @@ class ProductViewModel @Inject constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             if (product.value != null) {
-                actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product.value!!, id)))
+                actionFavoriteUseCase.execute(
+                    ActionFavoriteUseCase.Params(
+                        FavoriteProductAdapter.productToStore(
+                            product.value!!,
+                            id
+                        )
+                    )
+                )
             }
 
         }

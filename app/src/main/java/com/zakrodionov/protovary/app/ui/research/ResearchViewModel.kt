@@ -12,18 +12,18 @@ import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
 import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.domain.entity.ProductInfo
-import com.zakrodionov.protovary.domain.entity.Research
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
 import com.zakrodionov.protovary.domain.interactor.product.GetProductsInfoUseCase
-import com.zakrodionov.protovary.domain.interactor.research.GetResearchUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProductsInfoUseCase,
-                                            val actionFavoriteUseCase: ActionFavoriteUseCase,
-                                            val context: Context) : BaseViewModel() {
+class ResearchViewModel @Inject constructor(
+    val getProductsInfoUseCase: GetProductsInfoUseCase,
+    val actionFavoriteUseCase: ActionFavoriteUseCase,
+    val context: Context
+) : BaseViewModel() {
 
     var sourceProducts: List<ProductInfo>? = null
     var filteredProducts = MutableLiveData<List<ProductInfo>>()
@@ -46,14 +46,19 @@ class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProdu
 
     fun loadResearch(id: Long) {
         loading.value = true
-        getProductsInfoUseCase.invoke(GetProductsInfoUseCase.Params(id)) { it.either(::handleFailure, ::handleProducts) }
+        getProductsInfoUseCase.invoke(GetProductsInfoUseCase.Params(id)) {
+            it.either(
+                ::handleFailure,
+                ::handleProducts
+            )
+        }
     }
 
     private fun handleProducts(research: LiveData<List<ProductInfo>>) {
         loading.value = false
 
         productsMediator.removeSource(research)
-        productsMediator.addSource(research){
+        productsMediator.addSource(research) {
             sourceProducts = it
             applyChanges()
         }
@@ -61,14 +66,15 @@ class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProdu
     }
 
     fun applyChanges() {
-        if (sourceProducts == null){
+        if (sourceProducts == null) {
             return
         }
 
         val list = sourceProducts!!.toMutableList()
 
         when (filterType.value) {
-            BY_DEFAULT -> {}
+            BY_DEFAULT -> {
+            }
             BY_QUALITY_MARK -> {
                 list.retainAll { it.status == context.getString(R.string.status_sign) }
             }
@@ -91,7 +97,7 @@ class ResearchViewModel @Inject constructor(val getProductsInfoUseCase: GetProdu
         filteredProducts.value = list
     }
 
-    fun actionFavorite(product: ProductInfo){
+    fun actionFavorite(product: ProductInfo) {
         CoroutineScope(Dispatchers.IO).launch {
             actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product)))
         }

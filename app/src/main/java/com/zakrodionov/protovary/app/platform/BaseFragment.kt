@@ -9,8 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.App
@@ -27,14 +26,9 @@ import javax.inject.Inject
 abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     abstract fun layoutId(): Int
-    abstract fun navigationLayoutId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (activity?.application as App).appComponent
-    }
-
-    protected val navController: NavController by lazy {
-        Navigation.findNavController(activity!!, navigationLayoutId())
     }
 
     @Inject
@@ -43,11 +37,9 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
 
-    open fun onBackPressed() {}
-
-    //internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
-
     internal fun Bundle?.isFirstTimeCreated() = this == null
+
+    internal fun close() = findNavController().popBackStack()
 
     internal fun loadingStatus(flag: Boolean?) {
         if (flag == true) progressStatus(View.VISIBLE) else progressStatus(View.GONE)

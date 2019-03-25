@@ -2,6 +2,8 @@ package com.zakrodionov.protovary.app.ui.favorites
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
@@ -20,7 +22,6 @@ import javax.inject.Inject
 class FavoritesFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_favorites
-    override fun navigationLayoutId() = R.id.hostFragment
 
     @Inject
     lateinit var productsFavoriteAdapter: ProductsFavoriteAdapter
@@ -31,12 +32,14 @@ class FavoritesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        favoritesViewModel = viewModel(viewModelFactory) {}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoritesViewModel = viewModel(viewModelFactory) {
+        with(favoritesViewModel) {
             observe(favoriteProducts, ::renderFavoriteProductsList)
             failure(failure, ::handleFailure)
         }
@@ -55,12 +58,12 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun itemClickListener(research: FavoriteProduct) {
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
+        val bundle = bundleOf("id" to research.id)
+        findNavController().navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
     }
 
     private fun actionFavoriteListener(research: FavoriteProduct) {
-        favoritesViewModel.deleteFromStore(research.id)
+        favoritesViewModel.actionFavorite(research)
     }
 
     private fun initializeView() {

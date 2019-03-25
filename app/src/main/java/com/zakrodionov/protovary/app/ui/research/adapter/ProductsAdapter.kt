@@ -1,14 +1,13 @@
-package com.zakrodionov.protovary.app.ui.research
+package com.zakrodionov.protovary.app.ui.research.adapter
 
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.gone
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.parseHtml
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class ProductsAdapter
 @Inject constructor() : Adapter<ProductsAdapter.ViewHolder>() {
 
-    var collection: List<ProductInfo> = listOf()
+    var collection: MutableList<ProductInfo> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -51,9 +50,10 @@ class ProductsAdapter
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
 
-            Glide.with(itemView.context).load(url)
-                .placeholder(ColorDrawable(ContextCompat.getColor(itemView.context, R.color.gray2)))
-                .apply(RequestOptions().override(500, 450)).optionalCenterCrop().into(itemView.ivImage)
+            GlideApp.with(itemView.context).load(url)
+                .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
+                .override(500, 450)
+                .optionalCenterCrop().into(itemView.ivImage)
 
             itemView.tvName.text = item.name?.parseHtml()?.trim()
             itemView.ratingBar.rating = item.points?.toFloat() ?: 0F
@@ -75,6 +75,15 @@ class ProductsAdapter
                 itemView.tvTrademark.gone()
             }
         }
+    }
+
+    fun updateUsingDiffUtil(products: List<ProductInfo>) {
+        val diffCallback = ProductsDiffCallback(collection, products)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        collection.clear()
+        collection.addAll(products)
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }

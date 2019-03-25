@@ -4,12 +4,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        >
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:background="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     >
@@ -17,7 +16,6 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:contentScrim="@android:color/white"
@@ -26,7 +24,6 @@
 
             <ImageView
                     android:id="@+id/ivCollapsingToolbar"
-                    android:fitsSystemWindows="true"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="?attr/actionBarSize"

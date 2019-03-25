@@ -40,7 +40,7 @@ class DescriptionFragment : Fragment() {
     //region Конструткторы текстовки
     private fun getManufacturer(model: Model): Spanned? {
 
-        if (model.product.producer.isNullOrEmpty() || model.product.producer == "false"){
+        if (model.product.producer.isNullOrEmpty() || model.product.producer == "false") {
             return SpannableStringBuilder("н/д")
         }
 
@@ -50,7 +50,7 @@ class DescriptionFragment : Fragment() {
     private fun getIndicators(model: Model): SpannableStringBuilder {
         val text = SpannableStringBuilder()
 
-        if (model.product.indicators.isNullOrEmpty()){
+        if (model.product.indicators.isNullOrEmpty()) {
             return SpannableStringBuilder("н/д")
         }
 
@@ -62,13 +62,13 @@ class DescriptionFragment : Fragment() {
                 .append("\n")
         }
 
-       return text
+        return text
     }
 
     private fun getProperties(model: Model): SpannableStringBuilder {
         val text = SpannableStringBuilder()
 
-        if (model.product.properties.isNullOrEmpty()){
+        if (model.product.properties.isNullOrEmpty()) {
             return SpannableStringBuilder("н/д")
         }
 

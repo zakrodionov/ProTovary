@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.Factory
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.app.platform.BaseActivity
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import org.jetbrains.anko.bundleOf
@@ -28,10 +29,6 @@ inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>) =
     T::class.java.newInstance().apply {
         arguments = bundleOf(*params)
     }
-
-fun BaseFragment.close() = fragmentManager?.popBackStack()
-
-val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer()
 
 val BaseFragment.appContext: Context get() = activity?.applicationContext!!
 

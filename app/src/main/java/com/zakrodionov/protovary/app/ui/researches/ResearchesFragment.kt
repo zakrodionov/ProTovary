@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
@@ -25,28 +27,29 @@ class ResearchesFragment : BaseFragment() {
     lateinit var researchesAdapter: ResearchesAdapter
 
     override fun layoutId() = R.layout.view_researches
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var researchesViewModel: ResearchesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        researchesViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearches()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        researchesViewModel = viewModel(viewModelFactory) {
+        with(researchesViewModel) {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
-            observe(queryText){ researchesViewModel.applyQueryText() }
+            observe(queryText) { researchesViewModel.applyQueryText() }
             observe(loading, ::loadingStatus)
             failure(failure, ::handleFailure)
-        }
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            loadResearches()
         }
 
         initializeView()
@@ -75,12 +78,12 @@ class ResearchesFragment : BaseFragment() {
 
     private fun itemClickListener(research: ResearchCompact) {
         actionSearch.onActionViewCollapsed()
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        val bundle = bundleOf("id" to research.id)
+        findNavController().navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
         editText.setTextColor(Color.BLACK)
@@ -101,6 +104,9 @@ class ResearchesFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isNotEmpty() || !actionSearch.isIconified) {
+                    tvTitle.gone()
+                }
                 researchesViewModel.queryText.value = newText
                 rvResearches?.scrollToPosition(0)
                 return false

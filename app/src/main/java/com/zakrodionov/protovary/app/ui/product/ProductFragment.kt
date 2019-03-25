@@ -18,7 +18,6 @@ import org.jetbrains.anko.support.v4.toast
 class ProductFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_product
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private val productId: Long by argument("id", 0L)
 
@@ -27,13 +26,19 @@ class ProductFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+        productViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            productViewModel.loadProduct(productId)
+        }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productViewModel = viewModel(viewModelFactory) {
+        with(productViewModel) {
             observe(product, ::renderProduct)
             observe(loading, ::loadingStatus)
             observe(isFavoriteMediator, ::renderFavorite)
@@ -41,7 +46,7 @@ class ProductFragment : BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        if (savedInstanceState.isFirstTimeCreated()) {
+        if (productViewModel.product.value == null) {
             productViewModel.loadProduct(productId)
         }
 
@@ -49,7 +54,7 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
         actionShare.setOnClickListener { productViewModel.product.value?.url?.let { shareProduct("${getString(R.string.base_url)}$it") } }
     }

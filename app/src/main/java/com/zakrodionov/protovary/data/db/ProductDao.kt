@@ -37,7 +37,7 @@ interface ProductDao {
     fun deleteProducts()
 
     @Transaction
-    fun refreshProducts(list: List<ProductInfo>){
+    fun refreshProducts(list: List<ProductInfo>) {
         deleteProducts()
         insertProducts(list)
         updateProducts()
