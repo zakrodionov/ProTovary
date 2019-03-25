@@ -1,4 +1,4 @@
-package com.zakrodionov.protovary.app.ui.research
+package com.zakrodionov.protovary.app.ui.research.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.zakrodionov.protovary.domain.entity.ProductInfo

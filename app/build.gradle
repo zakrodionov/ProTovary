@@ -184,6 +184,9 @@ dependencies {
     //barcode
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

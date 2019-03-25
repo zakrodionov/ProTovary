@@ -14,6 +14,7 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
+import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
@@ -135,7 +136,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
         rvResearch?.itemAnimator = null
-
     }
 
     private fun itemClickListener(productInfo: ProductInfo) {

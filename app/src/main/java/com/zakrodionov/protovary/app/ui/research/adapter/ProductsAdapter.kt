@@ -1,12 +1,10 @@
-package com.zakrodionov.protovary.app.ui.research
+package com.zakrodionov.protovary.app.ui.research.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
