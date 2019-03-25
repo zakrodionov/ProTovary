@@ -33,7 +33,7 @@ class App : Application() {
 
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)
-            LeakCanary.install(this);
+            LeakCanary.install(this)
         } else {
             Fabric.with(this, Crashlytics())
         }

@@ -97,6 +97,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
                     tvTitle.gone()
                 }
                 researchViewModel.queryText.value = newText
+                scrollToTop()
                 return false
             }
         })
@@ -159,7 +160,10 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
         researchViewModel.sortType.value = sortType
+        scrollToTop()
     }
+
+    private fun scrollToTop() = rvResearch?.scrollToPosition(0)
 
     private fun handleFailure(failure: Failure?) {
         when (failure) {
