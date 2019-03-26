@@ -108,6 +108,10 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
         simpleScanner?.onResume()
     }
 
+    override fun onDestroyView() {
+        simpleScanner = null
+        super.onDestroyView()
+    }
     companion object {
         const val RC_DIALOG = 33226
     }

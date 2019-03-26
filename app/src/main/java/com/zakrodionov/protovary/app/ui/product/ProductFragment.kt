@@ -102,6 +102,11 @@ class ProductFragment : BaseFragment() {
         startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
     }
 
+    override fun onDestroyView() {
+        viewpager.adapter = null
+        super.onDestroyView()
+    }
+
     private fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)

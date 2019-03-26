@@ -120,6 +120,11 @@ class ResearchesFragment : BaseFragment() {
         tvTitle?.text = title
     }
 
+    override fun onDestroyView() {
+        rvResearches.adapter = null
+        super.onDestroyView()
+    }
+
     private fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)

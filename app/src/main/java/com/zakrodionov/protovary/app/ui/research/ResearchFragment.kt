@@ -165,6 +165,11 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     private fun scrollToTop() = rvResearch?.scrollToPosition(0)
 
+    override fun onDestroyView() {
+        rvResearch.adapter = null
+        super.onDestroyView()
+    }
+
     private fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
