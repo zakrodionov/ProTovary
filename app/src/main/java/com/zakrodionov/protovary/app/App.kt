@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app
 import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
-import com.orhanobut.hawk.Hawk
 import com.squareup.leakcanary.LeakCanary
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.app.di.ApplicationComponent
@@ -28,8 +27,6 @@ class App : Application() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }
-
-        Hawk.init(this).build()
 
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)

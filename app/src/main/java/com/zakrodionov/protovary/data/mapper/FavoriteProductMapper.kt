@@ -1,10 +1,10 @@
-package com.zakrodionov.protovary.data.db.adapter
+package com.zakrodionov.protovary.data.mapper
 
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.domain.entity.Product
 import com.zakrodionov.protovary.domain.entity.ProductInfo
 
-object FavoriteProductAdapter {
+object FavoriteProductMapper {
 
     fun productToStore(product: Product, id: Long) =
         FavoriteProduct(
@@ -16,7 +16,7 @@ object FavoriteProductAdapter {
             points = product.points ?: 0.00
         )
 
-    fun productToStore(product: ProductInfo) =
+    fun productInfoToStore(product: ProductInfo) =
         FavoriteProduct(
             id = product.id,
             name = product.name ?: "",

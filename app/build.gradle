@@ -126,27 +126,16 @@ dependencies {
     //Okhttp Interceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
-    //EventBus
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt "com.github.bumptech.glide:compiler:4.9.0"
 
-    //AdapterDelegates
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.1.0'
-
     //Stetho
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-
-
-    //Hawk
-    implementation 'com.github.orhanobut:hawk:2.0.1'
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
-
 
     //Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
@@ -168,13 +157,11 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //Navigation
-    // Kotlin KTX
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Room
     implementation "androidx.room:room-runtime:2.1.0-alpha06"
-    implementation "androidx.room:room-rxjava2:2.1.0-alpha06"
     implementation "androidx.room:room-coroutines:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 

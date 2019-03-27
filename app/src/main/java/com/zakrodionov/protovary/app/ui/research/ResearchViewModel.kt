@@ -10,9 +10,10 @@ import com.zakrodionov.protovary.app.util.enums.ResearchFilterType
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
-import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
+import com.zakrodionov.protovary.data.mapper.FavoriteProductMapper
 import com.zakrodionov.protovary.domain.entity.ProductInfo
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
+import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase.*
 import com.zakrodionov.protovary.domain.interactor.product.GetProductsInfoUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,7 +100,7 @@ class ResearchViewModel @Inject constructor(
 
     fun actionFavorite(product: ProductInfo) {
         CoroutineScope(Dispatchers.IO).launch {
-            actionFavoriteUseCase.execute(ActionFavoriteUseCase.Params(FavoriteProductAdapter.productToStore(product)))
+            actionFavoriteUseCase.execute(Params(FavoriteProductMapper.productInfoToStore(product)))
         }
     }
 }
