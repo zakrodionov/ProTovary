@@ -74,7 +74,7 @@ class MoreFragment : BaseFragment() {
             intent.setPackage(getString(R.string.tg_package))
             startActivity(intent)
         } catch (e: Exception) {
-            activity!!.toast(getString(R.string.tg_not_installed))
+            tryOpenLink(getString(R.string.tg_my_url))
         }
     }
 
