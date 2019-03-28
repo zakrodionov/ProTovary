@@ -4,6 +4,7 @@ import com.zakrodionov.protovary.app.functional.Either
 import com.zakrodionov.protovary.app.functional.Either.Left
 import com.zakrodionov.protovary.app.platform.Failure.*
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 
@@ -21,6 +22,9 @@ class ErrorHandler @Inject constructor(private val networkHandler: NetworkHandle
         }
         when {
             exception is HttpException -> {
+                return Left(ServerError)
+            }
+            exception is SocketTimeoutException -> {
                 return Left(ServerError)
             }
             specialBarcodeFailureHandler != null -> {

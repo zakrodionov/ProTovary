@@ -53,7 +53,8 @@ class ProductsAdapter
             GlideApp.with(itemView.context).load(url)
                 .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
                 .override(500, 450)
-                .optionalCenterCrop().into(itemView.ivImage)
+                .optionalCenterCrop()
+                .into(itemView.ivImage)
 
             itemView.tvName.text = item.name?.parseHtml()?.trim()
             itemView.ratingBar.rating = item.points?.toFloat() ?: 0F
