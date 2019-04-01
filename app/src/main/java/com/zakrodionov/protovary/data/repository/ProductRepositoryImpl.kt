@@ -6,7 +6,6 @@ import com.zakrodionov.protovary.app.functional.Either.Right
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.data.db.ProductDao
-import com.zakrodionov.protovary.data.db.adapter.FavoriteProductAdapter
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.domain.entity.Product
@@ -40,17 +39,14 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProductByBarcode(id: String): Either<Failure, ProductCompact> {
+    override suspend fun getProductByBarcode(barcode: String): Either<Failure, ProductCompact> {
         return try {
-            val result = api.getProductByBarcode(id).await()
+            val result = api.getProductByBarcode(barcode).await()
             Right(result)
         } catch (exception: Throwable) {
-            errorHandler.proceedException(exception)
+            errorHandler.proceedException(exception, specialBarcodeFailureHandler = { barcode })
         }
     }
-
-    override suspend fun deleteFromStore(id: Long) =
-        productDao.deleteById(id)
 
     override fun getFavoriteProducts(): LiveData<List<FavoriteProduct>> =
         productDao.getFavoriteProducts()
@@ -58,9 +54,9 @@ class ProductRepositoryImpl @Inject constructor(
     override fun productIsFavorite(id: Long): LiveData<Int> =
         productDao.productIsFavoriteLive(id)
 
-    override suspend fun actionFavorite(product: FavoriteProduct) =
+    override suspend fun actionFavorite(product: FavoriteProduct) {
         productDao.actionFavorite(product)
-
+    }
 
     override suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>> {
         return try {

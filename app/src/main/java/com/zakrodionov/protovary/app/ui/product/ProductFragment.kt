@@ -18,7 +18,6 @@ import org.jetbrains.anko.support.v4.toast
 class ProductFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_product
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private val productId: Long by argument("id", 0L)
 
@@ -28,7 +27,18 @@ class ProductFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        productViewModel = viewModel(viewModelFactory) {
+        productViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            productViewModel.loadProduct(productId)
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(productViewModel) {
             observe(product, ::renderProduct)
             observe(loading, ::loadingStatus)
             observe(isFavoriteMediator, ::renderFavorite)
@@ -36,19 +46,15 @@ class ProductFragment : BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        productViewModel.loadProduct(productId)
+        if (productViewModel.product.value == null) {
+            productViewModel.loadProduct(productId)
+        }
 
         setupToolbar()
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
         actionShare.setOnClickListener { productViewModel.product.value?.url?.let { shareProduct("${getString(R.string.base_url)}$it") } }
     }
@@ -68,7 +74,7 @@ class ProductFragment : BaseFragment() {
 
     private fun renderProduct(product: Product?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
-        tvTitle.text = product?.name
+        tvTitle.text = product?.name?.parseHtml()
 
         when (product?.status) {
             getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)
@@ -94,6 +100,11 @@ class ProductFragment : BaseFragment() {
         intent.type = "text/plain"
         intent.putExtra(android.content.Intent.EXTRA_TEXT, text)
         startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
+    }
+
+    override fun onDestroyView() {
+        viewpager.adapter = null
+        super.onDestroyView()
     }
 
     private fun handleFailure(failure: Failure?) {

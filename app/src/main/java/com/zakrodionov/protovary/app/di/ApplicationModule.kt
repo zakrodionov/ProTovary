@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -43,7 +44,10 @@ class ApplicationModule(private val application: App) {
     }
 
     private fun createClient(): OkHttpClient {
-        val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        okHttpClientBuilder.connectTimeout(50, TimeUnit.SECONDS)
+        okHttpClientBuilder.readTimeout(50, TimeUnit.SECONDS)
+
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
@@ -76,7 +80,6 @@ class ApplicationModule(private val application: App) {
     @Singleton
     fun provideDb(app: Context): AppDatabase =
         Room.databaseBuilder(app, AppDatabase::class.java, "roskachestvo.db")
-            .fallbackToDestructiveMigration()
             .build()
 
     @Provides

@@ -6,12 +6,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
+import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
@@ -29,7 +32,6 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     lateinit var productsAdapter: ProductsAdapter
 
     override fun layoutId() = R.layout.view_research
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private val idResearch: Long by argument("id", 0L)
 
@@ -39,7 +41,18 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        researchViewModel = viewModel(viewModelFactory) {
+        researchViewModel = viewModel(viewModelFactory) {}
+
+        if (savedInstanceState.isFirstTimeCreated()) {
+            researchViewModel.loadResearch(idResearch)
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(researchViewModel) {
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
@@ -47,22 +60,18 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             failure(failure, ::handleFailure)
         }
 
-    }
+        if (researchViewModel.filteredProducts.value == null) {
+            researchViewModel.loadResearch(idResearch)
+        }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        researchViewModel.loadResearch(idResearch)
         setupToolbar()
         setupChips()
         initializeRecycler()
-
     }
 
     private fun setupToolbar() {
 
-        actionBack.setOnClickListener { navController.popBackStack() }
+        actionBack.setOnClickListener { close() }
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
@@ -84,7 +93,11 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isNotEmpty() || !actionSearch.isIconified) {
+                    tvTitle.gone()
+                }
                 researchViewModel.queryText.value = newText
+                scrollToTop()
                 return false
             }
         })
@@ -117,18 +130,19 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     }
 
     private fun renderProductsList(products: List<ProductInfo>?) {
-        productsAdapter.collection = products ?: listOf()
+        productsAdapter.updateUsingDiffUtil(products ?: listOf())
         productsAdapter.clickListener = ::itemClickListener
         productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
 
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
+        rvResearch?.itemAnimator = null
     }
 
     private fun itemClickListener(productInfo: ProductInfo) {
         actionSearch.onActionViewCollapsed()
-        val bundle = Bundle().apply { putLong("id", productInfo.id) }
-        navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
+        val bundle = bundleOf("id" to productInfo.id)
+        findNavController().navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
 
     private fun itemClickFavoriteListener(productInfo: ProductInfo) {
@@ -146,6 +160,14 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
         researchViewModel.sortType.value = sortType
+        scrollToTop()
+    }
+
+    private fun scrollToTop() = rvResearch?.scrollToPosition(0)
+
+    override fun onDestroyView() {
+        rvResearch.adapter = null
+        super.onDestroyView()
     }
 
     private fun handleFailure(failure: Failure?) {

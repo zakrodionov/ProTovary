@@ -1,11 +1,14 @@
 package com.zakrodionov.protovary.app
 
 import android.app.Application
+import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
-import com.orhanobut.hawk.Hawk
+import com.squareup.leakcanary.LeakCanary
+import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.app.di.ApplicationComponent
 import com.zakrodionov.protovary.app.di.ApplicationModule
 import com.zakrodionov.protovary.app.di.DaggerApplicationComponent
+import io.fabric.sdk.android.Fabric
 
 
 class App : Application() {
@@ -21,9 +24,16 @@ class App : Application() {
         super.onCreate()
         this.injectMembers()
 
-        Hawk.init(this).build()
-        Stetho.initializeWithDefaults(this)
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
 
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+            LeakCanary.install(this)
+        } else {
+            Fabric.with(this, Crashlytics())
+        }
     }
 
     private fun injectMembers() = appComponent.inject(this)

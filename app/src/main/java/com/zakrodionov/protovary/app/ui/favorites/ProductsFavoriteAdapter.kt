@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.gone
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.parseHtml
@@ -49,8 +50,9 @@ class ProductsFavoriteAdapter
 
             val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.urlImage}"
 
-            Glide.with(itemView.context).load(url)
-                .apply(RequestOptions().override(500, 450)).optionalCenterCrop().into(itemView.ivImage)
+            GlideApp.with(itemView.context).load(url)
+                .override(500, 450)
+                .optionalCenterCrop().into(itemView.ivImage)
 
             itemView.tvName.text = item.name.parseHtml()
             itemView.ratingBar.rating = item.points.toFloat()

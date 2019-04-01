@@ -2,6 +2,8 @@ package com.zakrodionov.protovary.app.ui.researchescategory
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -24,7 +26,6 @@ class ResearchesCategoryFragment : BaseFragment() {
     lateinit var researchesCategoryAdapter: ResearchesCategoryAdapter
 
     override fun layoutId() = R.layout.view_researches_category
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var researchesCategoryViewModel: ResearchesCategoryViewModel
 
@@ -32,18 +33,31 @@ class ResearchesCategoryFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        researchesCategoryViewModel = viewModel(viewModelFactory) {
-            observe(researches, ::renderResearchesList)
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
+        researchesCategoryViewModel = viewModel(viewModelFactory) {}
+
+        //Загружаем только при первом создании фрагмента
+        if (savedInstanceState.isFirstTimeCreated()) {
+            loadResearchList()
         }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(researchesCategoryViewModel) {
+            observe(researches, ::renderResearchesList)
+            observe(loading, ::loadingStatus)
+            failure(failure, ::handleFailure)
+        }
+
         initializeView()
-        loadResearchList()
+
+        //Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
+        if (researchesCategoryViewModel.researches.value == null) {
+            loadResearchList()
+        }
+
     }
 
 
@@ -58,8 +72,8 @@ class ResearchesCategoryFragment : BaseFragment() {
     }
 
     private fun itemClickListener(research: Researches) {
-        val bundle = Bundle().apply { putLong("id", research.id) }
-        navController.navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
+        val bundle = bundleOf("id" to research.id)
+        findNavController().navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
     }
 
     private fun loadResearchList() {
@@ -71,6 +85,11 @@ class ResearchesCategoryFragment : BaseFragment() {
 
         tvEmpty?.toggleVisibility(research.isNullOrEmpty())
         rvResearches?.toggleVisibility(!research.isNullOrEmpty())
+    }
+
+    override fun onDestroyView() {
+        rvResearches.adapter = null
+        super.onDestroyView()
     }
 
     private fun handleFailure(failure: Failure?) {

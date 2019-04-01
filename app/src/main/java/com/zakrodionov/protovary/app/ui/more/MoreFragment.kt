@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.tryOpenLink
@@ -17,7 +18,6 @@ import org.jetbrains.anko.toast
 class MoreFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.view_more
-    override fun navigationLayoutId() = R.id.hostFragment
 
     private lateinit var moreViewModel: MoreViewModel
 
@@ -25,9 +25,7 @@ class MoreFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
-        moreViewModel = viewModel(viewModelFactory) {
-
-        }
+        moreViewModel = viewModel(viewModelFactory) {}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +38,7 @@ class MoreFragment : BaseFragment() {
         tvToolbarTitle.text = getString(R.string.more)
 
         clActionRate.setOnClickListener { openPlayMarket() }
-        clAboutApp.setOnClickListener { navController.navigate(R.id.action_moreFragment_to_aboutFragment) }
+        clAboutApp.setOnClickListener { findNavController().navigate(R.id.action_moreFragment_to_aboutFragment) }
         clActionTelegram.setOnClickListener { openTelegram() }
         clActionSearch.setOnClickListener { tryOpenLink(getString(R.string.url_search)) }
 
@@ -76,7 +74,7 @@ class MoreFragment : BaseFragment() {
             intent.setPackage(getString(R.string.tg_package))
             startActivity(intent)
         } catch (e: Exception) {
-            activity!!.toast(getString(R.string.tg_not_installed))
+            tryOpenLink(getString(R.string.tg_my_url))
         }
     }
 
