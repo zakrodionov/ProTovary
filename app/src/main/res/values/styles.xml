@@ -1,11 +1,119 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- The launcher theme. It sets the main window background to the launch_screen drawable -->
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/ic_search_white</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="searchHintIcon">@drawable/ic_search_white_hint</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="textMainStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textLinkStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/link_selector</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textButtonWhiteStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textBigMainStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textMainBoldStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textChipStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/chip_selector</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="textMainWhiteSelectorStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/item_sort_selector_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textTitleStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:color">@android:color/black</item>
+    </style>
+
+    <style name="textTitleItemStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:color">@android:color/black</item>
+    </style>
+
+    <style name="textTitleCategoriesItemStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:color">@android:color/black</item>
+    </style>
+
+    <style name="textTitleRedBoldStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/red_dark</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackgroundBorderless</item>
+        <item name="colorControlHighlight">@color/gray1</item>
+
+    </style>
+
+    <style name="progressBarBlue" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/blue_light</item>
+    </style>
+
+
+    <style name="CustomDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+    </style>
+
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/blue_light</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/blue_light</item>
+    </style>
+
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">@android:color/black</item>
+        <item name="colorControlActivated">@color/blue_light</item>
+        <item name="colorControlHighlight">@android:color/black</item>
+    </style>
 </resources>

@@ -1,6 +1,6 @@
 *.iml
 .gradle
-/.idea
+.idea/
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
@@ -12,3 +12,4 @@
 /build
 /captures
 .externalNativeBuild
+/home/zak/Рабочий стол/ProTovary/app/google-services.json

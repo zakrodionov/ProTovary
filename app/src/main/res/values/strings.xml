@@ -1,3 +1,68 @@
 <resources>
-    <string name="app_name">Roskachestvo</string>
+    <string name="app_name">ПроТовары</string>
+
+    <string name="researches">Исследования</string>
+    <string name="research">Исследование</string>
+    <string name="barcode">Штрихкод</string>
+    <string name="favorites">Избранное</string>
+    <string name="more">Ещё</string>
+
+    <string name="failure_network_connection">Отсутствует подключение к интернету</string>
+    <string name="failure_server_error">Ошибка при работе с сервером</string>
+    <string name="failure_unknown_error">Неопознанная ошибка</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="failure_cache_date">Похоже отсутствует подключение к интернету. Достаем данные из кеша.</string>
+
+    <string name="sort">Сортировать…</string>
+    <string name="product_with_violent">Товары с нарушениями</string>
+    <string name="quality_sign">Знак Качества</string>
+    <string name="by_trademark">по производителю</string>
+    <string name="by_increase_rating">по возрастанию рейтинга</string>
+    <string name="by_decrease_rating">по убыванию рейтинга</string>
+
+    <string name="description">Описание</string>
+    <string name="properties">Свойства</string>
+    <string name="indicators">Показатели</string>
+    <string name="manufacturer">Производитель</string>
+    <string name="added_to_favorites">Товар добавлен в избранное</string>
+    <string name="removed_from_favorites">Товар удален из избранного</string>
+    <string name="empty_favorites">У вас пока нет товаров в «Избранном»</string>
+    <string name="empty_products">Товары отсутствуют</string>
+    <string name="empty_researches">Исследования отсутствуют</string>
+
+    <string name="telegram">Связаться с автором в Телеграм</string>
+    <string name="about_app">О приложении</string>
+    <string name="research_on_site">Поиск на сайте</string>
+    <string name="rate_app">Оценить приложение</string>
+    <string name="url_search">https://rskrf.ru/search/</string>
+    <string name="pm_or_browser_not_installed">PlayMarket или браузер не установлен</string>
+    <string name="tg_not_installed">Telegram app is not installed</string>
+    <string name="tg_package">org.telegram.messenger</string>
+    <string name="tg_my_url">https://t.me/ra1kkonen</string>
+    <string name="pm_link_browser">http://play.google.com/store/apps/details?id=</string>
+    <string name="pm_package">market://details?id=</string>
+    <string name="share_with">Поделиться с</string>
+
+
+    <string name="base_url">https://rskrf.ru</string>
+    <string name="text_about">Приложение "ПроТовары" - неофициальное приложение, основаное на  открытом api с портала <a href="https://rskrf.ru">https://rskrf.ru</a>.\n\nПредоставляется как есть, не использует персональные данные и не содержит рекламы.
+    </string>
+    <string name="status_sign">withsign</string>
+    <string name="status_violation">withviolation</string>
+
+    <string name="message_ask_never_barcode">Для работы сканера нужен доступ к камере. Необходимо включить разрешение в
+        настройках.
+    </string>
+    <string name="message_denied_barcode">Для работы сканера необходим доступ к камере.</string>
+    <string name="text_positive">Ок</string>
+    <string name="text_negative">Отмена</string>
+    <string name="search">Поиск</string>
+    <string name="search_on_site">Поиск на сайте</string>
+    <string name="input_barcode">Введите штрихкод</string>
+    <string name="scan_button">Сканировать</string>
+    <string name="product_not_found">Товар не найден</string>
+    <string name="product_not_found_barcode">Товар по штрихкоду &lt;b>\"%s\"&lt;/b> не найден</string>
+
+
+
 </resources>

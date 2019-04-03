@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                  android:id="@+id/tvDescription"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/textMainStyle"
+                  android:layout_margin="10dp"
+                  android:gravity="center"
+                  android:text="@string/product_not_found"
+        />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/input_barcode"
+                app:boxStrokeColor="@android:color/black"
+                app:hintTextColor="@android:color/black"
+                app:helperText="От 8 до 13 символов"
+                app:helperTextEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBarcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@android:color/black"
+                    android:textColorHint="@android:color/black"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/cursor_drawable"
+                    android:maxLines="1"
+                    android:maxLength="13"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/actionSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_ripple"
+                android:textAppearance="@style/textButtonWhiteStyle"
+                android:text="@string/search"
+        />
+        <TextView
+                android:id="@+id/actionSearchOnSite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="20dp"
+                android:textAppearance="@style/textLinkStyle"
+                android:text="@string/search_on_site"
+                android:gravity="center"
+        />
+
+    </LinearLayout>
+</RelativeLayout>
