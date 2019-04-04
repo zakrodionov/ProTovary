@@ -2,8 +2,8 @@ package com.zakrodionov.protovary.app.ui.researches
 
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.domain.entity.ResearchCompact
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.ResearchCompact
+import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.domain.interactor.research.GetResearchesUseCase
 import com.zakrodionov.protovary.domain.interactor.research.GetResearchesUseCase.Params
 import javax.inject.Inject

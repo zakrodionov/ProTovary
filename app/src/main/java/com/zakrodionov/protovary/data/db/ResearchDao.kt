@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.zakrodionov.protovary.domain.entity.ResearchCompact
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.ResearchCompact
+import com.zakrodionov.protovary.data.entity.Researches
 
 @Dao
 interface ResearchDao {
@@ -19,6 +19,6 @@ interface ResearchDao {
     @Query("SELECT * FROM researchcompact")
     suspend fun getResearchesCompact(): List<ResearchCompact>
 
-    @Query("SELECT * FROM researches WHERE id = :id")
+    @Query("SELECT * FROM Researches WHERE id = :id")
     suspend fun getResearchCategoryById(id: Long): Researches
 }

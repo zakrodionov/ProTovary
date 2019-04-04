@@ -15,7 +15,7 @@ import com.zakrodionov.protovary.app.ext.argument
 import com.zakrodionov.protovary.app.ext.instanceOf
 import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.DescriptionType.*
-import com.zakrodionov.protovary.domain.entity.Product
+import com.zakrodionov.protovary.data.entity.ProductDetail
 import kotlinx.android.synthetic.main.view_description.view.*
 import java.io.Serializable
 
@@ -148,7 +148,7 @@ class DescriptionFragment : Fragment() {
 
     //endregion
 
-    data class Model(val product: Product, val type: DescriptionType) : Serializable
+    data class Model(val product: ProductDetail, val type: DescriptionType) : Serializable
 
     enum class DescriptionType {
         DESCRIPTION,

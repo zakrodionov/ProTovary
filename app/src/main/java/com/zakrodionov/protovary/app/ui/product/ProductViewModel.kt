@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.data.mapper.FavoriteProductMapper
-import com.zakrodionov.protovary.domain.entity.Product
+import com.zakrodionov.protovary.data.mapper.ProductMapper
+import com.zakrodionov.protovary.data.entity.ProductDetail
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
 import com.zakrodionov.protovary.domain.interactor.product.GetProductUseCase
 import com.zakrodionov.protovary.domain.interactor.product.ProductIsFavoriteUseCase
@@ -21,7 +21,7 @@ class ProductViewModel @Inject constructor(
     val context: Context
 ) : BaseViewModel() {
 
-    var product = MutableLiveData<Product>()
+    var product = MutableLiveData<ProductDetail>()
     val isFavoriteMediator = MediatorLiveData<Boolean>()
 
     fun loadProduct(id: Long) {
@@ -33,7 +33,7 @@ class ProductViewModel @Inject constructor(
         getProductUseCase.invoke(GetProductUseCase.Params(id)) { it.either(::handleFailure, ::handleProduct) }
     }
 
-    private fun handleProduct(product: Product) {
+    private fun handleProduct(product: ProductDetail) {
         loading.value = false
         this.product.value = product
     }
@@ -44,7 +44,7 @@ class ProductViewModel @Inject constructor(
             if (product.value != null) {
                 actionFavoriteUseCase.execute(
                     ActionFavoriteUseCase.Params(
-                        FavoriteProductMapper.productToStore(
+                        ProductMapper.productDetailToProduct(
                             product.value!!,
                             id
                         )

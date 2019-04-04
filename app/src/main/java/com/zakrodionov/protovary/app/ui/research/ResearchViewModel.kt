@@ -10,11 +10,12 @@ import com.zakrodionov.protovary.app.util.enums.ResearchFilterType
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
-import com.zakrodionov.protovary.data.mapper.FavoriteProductMapper
-import com.zakrodionov.protovary.domain.entity.ProductInfo
+import com.zakrodionov.protovary.data.mapper.ProductMapper
+import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
 import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase.*
 import com.zakrodionov.protovary.domain.interactor.product.GetProductsInfoUseCase
+import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,8 +27,8 @@ class ResearchViewModel @Inject constructor(
     val context: Context
 ) : BaseViewModel() {
 
-    var sourceProducts: List<ProductInfo>? = null
-    var filteredProducts = MutableLiveData<List<ProductInfo>>()
+    var sourceProducts: List<Product>? = null
+    var filteredProducts = MutableLiveData<List<Product>>()
 
     var sortType = MutableLiveData<ResearchSortType>()
     var filterType = MutableLiveData<ResearchFilterType>()
@@ -60,7 +61,7 @@ class ResearchViewModel @Inject constructor(
 
         productsMediator.removeSource(research)
         productsMediator.addSource(research) {
-            sourceProducts = it
+            sourceProducts = it.map { ProductMapper.productInfoToProduct(it) }
             applyChanges()
         }
 
@@ -74,8 +75,7 @@ class ResearchViewModel @Inject constructor(
         val list = sourceProducts!!.toMutableList()
 
         when (filterType.value) {
-            BY_DEFAULT -> {
-            }
+            BY_DEFAULT -> { }
             BY_QUALITY_MARK -> {
                 list.retainAll { it.status == context.getString(R.string.status_sign) }
             }
@@ -85,8 +85,8 @@ class ResearchViewModel @Inject constructor(
         }
 
         list.retainAll {
-            it.name?.toLowerCase()?.contains(queryText.value?.toLowerCase() ?: "") ?: false ||
-                    it.trademark?.toLowerCase()?.contains(queryText.value?.toLowerCase() ?: "") ?: false
+            it.name.toLowerCase().contains(queryText.value?.toLowerCase() ?: "") ||
+                    it.trademark.toLowerCase().contains(queryText.value?.toLowerCase() ?: "")
         }
 
         when (sortType.value) {
@@ -98,9 +98,9 @@ class ResearchViewModel @Inject constructor(
         filteredProducts.value = list
     }
 
-    fun actionFavorite(product: ProductInfo) {
+    fun actionFavorite(product: Product) {
         CoroutineScope(Dispatchers.IO).launch {
-            actionFavoriteUseCase.execute(Params(FavoriteProductMapper.productInfoToStore(product)))
+            actionFavoriteUseCase.execute(Params(product))
         }
     }
 }

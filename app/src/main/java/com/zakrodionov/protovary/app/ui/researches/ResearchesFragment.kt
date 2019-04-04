@@ -15,7 +15,7 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.protovary.domain.entity.ResearchCompact
+import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import javax.inject.Inject

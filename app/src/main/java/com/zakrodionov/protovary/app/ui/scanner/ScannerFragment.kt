@@ -13,7 +13,7 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ScannerDialogFragment
 import com.zakrodionov.protovary.app.ui.view.SimpleScannerFragment
-import com.zakrodionov.protovary.domain.entity.ProductCompact
+import com.zakrodionov.protovary.data.entity.ProductCompact
 import kotlinx.android.synthetic.main.toolbar_back_title.*
 
 

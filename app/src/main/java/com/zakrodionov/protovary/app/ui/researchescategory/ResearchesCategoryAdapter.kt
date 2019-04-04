@@ -1,18 +1,15 @@
 package com.zakrodionov.protovary.app.ui.researchescategory
 
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.item_researches.view.*
 import javax.inject.Inject
 

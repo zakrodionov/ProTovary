@@ -1,5 +1,7 @@
 package com.zakrodionov.protovary.app.util
 
+import com.zakrodionov.protovary.BuildConfig
+
 /**
  * Created by Zakhar Rodionov on 20.03.19.
  */
@@ -15,4 +17,7 @@ object Utils {
             else -> barcode
         }
     }
+
+    fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
+
 }

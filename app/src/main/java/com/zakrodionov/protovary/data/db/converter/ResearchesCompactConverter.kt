@@ -3,7 +3,7 @@ package com.zakrodionov.protovary.data.db.converter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.zakrodionov.protovary.domain.entity.ResearchCompact
+import com.zakrodionov.protovary.data.entity.ResearchCompact
 
 class ResearchesCompactConverter {
 

@@ -2,7 +2,7 @@ package com.zakrodionov.protovary.app.ui.researchescategory
 
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.domain.interactor.UseCase
 import com.zakrodionov.protovary.domain.interactor.research.GetResearchesCategoryUseCase
 import javax.inject.Inject

@@ -9,7 +9,7 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
-import com.zakrodionov.protovary.domain.entity.Product
+import com.zakrodionov.protovary.data.entity.ProductDetail
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
@@ -72,7 +72,7 @@ class ProductFragment : BaseFragment() {
     }
 
 
-    private fun renderProduct(product: Product?) {
+    private fun renderProduct(product: ProductDetail?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
         tvTitle.text = product?.name?.parseHtml()
 

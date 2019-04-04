@@ -3,7 +3,7 @@ package com.zakrodionov.protovary.domain.interactor.product
 import androidx.lifecycle.LiveData
 import com.zakrodionov.protovary.app.functional.Either
 import com.zakrodionov.protovary.app.platform.Failure
-import com.zakrodionov.protovary.domain.entity.ProductInfo
+import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.domain.interactor.UseCase
 import com.zakrodionov.protovary.domain.repository.ProductRepository
 import javax.inject.Inject

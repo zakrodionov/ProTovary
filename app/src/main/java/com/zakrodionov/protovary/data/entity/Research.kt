@@ -1,4 +1,4 @@
-package com.zakrodionov.protovary.domain.entity
+package com.zakrodionov.protovary.data.entity
 
 import com.google.gson.annotations.SerializedName
 

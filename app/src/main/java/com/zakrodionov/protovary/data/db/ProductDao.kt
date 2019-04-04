@@ -3,7 +3,7 @@ package com.zakrodionov.protovary.data.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
-import com.zakrodionov.protovary.domain.entity.ProductInfo
+import com.zakrodionov.protovary.data.entity.ProductInfo
 
 @Dao
 interface ProductDao {

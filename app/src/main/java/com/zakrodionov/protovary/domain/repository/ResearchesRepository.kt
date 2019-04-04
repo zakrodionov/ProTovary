@@ -2,8 +2,8 @@ package com.zakrodionov.protovary.domain.repository
 
 import com.zakrodionov.protovary.app.functional.Either
 import com.zakrodionov.protovary.app.platform.Failure
-import com.zakrodionov.protovary.domain.entity.Research
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.Research
+import com.zakrodionov.protovary.data.entity.Researches
 
 interface ResearchesRepository {
 

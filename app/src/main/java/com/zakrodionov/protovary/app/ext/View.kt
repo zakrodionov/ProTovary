@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BaseTarget
@@ -35,6 +36,8 @@ fun View.invisible() = run { visibility = View.INVISIBLE }
 fun View.visible() = run { visibility = View.VISIBLE }
 
 fun View.gone() = run { visibility = View.GONE }
+
+fun RequestBuilder<Drawable>.setupCV() = this.override(500, 450).optionalCenterCrop()
 
 fun View.toggleVisibility(visible: Boolean, visibilityWhenFalse: Int = View.GONE) =
     run { visibility = if (visible) View.VISIBLE else visibilityWhenFalse }
@@ -76,11 +79,9 @@ private class ImageViewBaseTarget(var imageView: ImageView?, var activity: andro
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
 
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(editable: Editable?) {
             afterTextChanged.invoke(editable.toString())

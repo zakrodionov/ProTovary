@@ -1,11 +1,11 @@
 package com.zakrodionov.protovary.app.ui.research.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.zakrodionov.protovary.domain.entity.ProductInfo
+import com.zakrodionov.protovary.domain.model.Product
 
 class ProductsDiffCallback(
-    private val oldList: List<ProductInfo>,
-    private val newList: List<ProductInfo>
+    private val oldList: List<Product>,
+    private val newList: List<Product>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize() = oldList.size

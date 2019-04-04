@@ -8,10 +8,12 @@ import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.data.db.ProductDao
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.network.Api
-import com.zakrodionov.protovary.domain.entity.Product
-import com.zakrodionov.protovary.domain.entity.ProductCompact
-import com.zakrodionov.protovary.domain.entity.ProductInfo
-import com.zakrodionov.protovary.domain.entity.Products
+import com.zakrodionov.protovary.data.entity.ProductDetail
+import com.zakrodionov.protovary.data.entity.ProductCompact
+import com.zakrodionov.protovary.data.entity.ProductInfo
+import com.zakrodionov.protovary.data.entity.ProductDto
+import com.zakrodionov.protovary.data.mapper.ProductMapper
+import com.zakrodionov.protovary.domain.model.Product
 import com.zakrodionov.protovary.domain.repository.ProductRepository
 import javax.inject.Inject
 
@@ -21,7 +23,7 @@ class ProductRepositoryImpl @Inject constructor(
     private val errorHandler: ErrorHandler
 ) : ProductRepository {
 
-    override suspend fun getProduct(id: Long): Either<Failure, Product> {
+    override suspend fun getProduct(id: Long): Either<Failure, ProductDetail> {
         return try {
             val result = api.getProduct(id).await()
             Right(result)
@@ -30,7 +32,7 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProducts(): Either<Failure, List<Products>> {
+    override suspend fun getProductsDto(): Either<Failure, List<ProductDto>> {
         return try {
             val result = api.getProducts().await()
             Right(result)
@@ -54,9 +56,9 @@ class ProductRepositoryImpl @Inject constructor(
     override fun productIsFavorite(id: Long): LiveData<Int> =
         productDao.productIsFavoriteLive(id)
 
-    override suspend fun actionFavorite(product: FavoriteProduct) {
-        productDao.actionFavorite(product)
-    }
+    override suspend fun actionFavorite(product: Product)  =
+        productDao.actionFavorite(ProductMapper.productToStore(product))
+
 
     override suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>> {
         return try {

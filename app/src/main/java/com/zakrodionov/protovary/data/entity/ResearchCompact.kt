@@ -1,4 +1,4 @@
-package com.zakrodionov.protovary.domain.entity
+package com.zakrodionov.protovary.data.entity
 
 import androidx.room.Embedded
 import androidx.room.Entity

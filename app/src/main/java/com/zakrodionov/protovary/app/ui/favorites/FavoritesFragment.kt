@@ -15,6 +15,7 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
+import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_favorites.*
 import javax.inject.Inject
@@ -47,7 +48,7 @@ class FavoritesFragment : BaseFragment() {
         initializeView()
     }
 
-    private fun renderFavoriteProductsList(products: List<FavoriteProduct>?) {
+    private fun renderFavoriteProductsList(products: List<Product>?) {
         productsFavoriteAdapter.collection = products ?: listOf()
         productsFavoriteAdapter.clickListener = ::itemClickListener
         productsFavoriteAdapter.actionFavoriteListener = ::actionFavoriteListener
@@ -57,12 +58,12 @@ class FavoritesFragment : BaseFragment() {
 
     }
 
-    private fun itemClickListener(research: FavoriteProduct) {
+    private fun itemClickListener(research: Product) {
         val bundle = bundleOf("id" to research.id)
         findNavController().navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
     }
 
-    private fun actionFavoriteListener(research: FavoriteProduct) {
+    private fun actionFavoriteListener(research: Product) {
         favoritesViewModel.actionFavorite(research)
     }
 

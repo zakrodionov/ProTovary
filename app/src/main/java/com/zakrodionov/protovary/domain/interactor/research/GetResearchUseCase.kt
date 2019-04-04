@@ -2,7 +2,7 @@ package com.zakrodionov.protovary.domain.interactor.research
 
 import com.zakrodionov.protovary.app.functional.Either
 import com.zakrodionov.protovary.app.platform.Failure
-import com.zakrodionov.protovary.domain.entity.Research
+import com.zakrodionov.protovary.data.entity.Research
 import com.zakrodionov.protovary.domain.interactor.UseCase
 import com.zakrodionov.protovary.domain.interactor.research.GetResearchUseCase.Params
 import com.zakrodionov.protovary.domain.repository.ResearchesRepository

@@ -5,8 +5,8 @@ import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.data.db.ResearchDao
 import com.zakrodionov.protovary.data.network.Api
-import com.zakrodionov.protovary.domain.entity.Research
-import com.zakrodionov.protovary.domain.entity.Researches
+import com.zakrodionov.protovary.data.entity.Research
+import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.domain.repository.ResearchesRepository
 import javax.inject.Inject
 

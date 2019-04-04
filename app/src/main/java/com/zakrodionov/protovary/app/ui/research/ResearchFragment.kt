@@ -20,7 +20,8 @@ import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDial
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
-import com.zakrodionov.protovary.domain.entity.ProductInfo
+import com.zakrodionov.protovary.data.entity.ProductInfo
+import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import kotlinx.android.synthetic.main.view_research.*
 import javax.inject.Inject
@@ -129,7 +130,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         rvResearch.adapter = productsAdapter
     }
 
-    private fun renderProductsList(products: List<ProductInfo>?) {
+    private fun renderProductsList(products: List<Product>?) {
         productsAdapter.updateUsingDiffUtil(products ?: listOf())
         productsAdapter.clickListener = ::itemClickListener
         productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
@@ -139,14 +140,14 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         rvResearch?.itemAnimator = null
     }
 
-    private fun itemClickListener(productInfo: ProductInfo) {
+    private fun itemClickListener(product: Product) {
         actionSearch.onActionViewCollapsed()
-        val bundle = bundleOf("id" to productInfo.id)
+        val bundle = bundleOf("id" to product.id)
         findNavController().navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
 
-    private fun itemClickFavoriteListener(productInfo: ProductInfo) {
-        researchViewModel.actionFavorite(productInfo)
+    private fun itemClickFavoriteListener(product: Product) {
+        researchViewModel.actionFavorite(product)
     }
 
     private fun showBottomDialog() {

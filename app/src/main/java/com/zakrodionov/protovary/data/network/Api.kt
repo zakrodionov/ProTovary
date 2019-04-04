@@ -1,6 +1,6 @@
 package com.zakrodionov.protovary.data.network
 
-import com.zakrodionov.protovary.domain.entity.*
+import com.zakrodionov.protovary.data.entity.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,10 +11,10 @@ interface Api {
     fun getProductByBarcode(@Path("id") id: String): Deferred<ProductCompact>
 
     @GET("product/{id}")
-    fun getProduct(@Path("id") id: Long): Deferred<Product>
+    fun getProduct(@Path("id") id: Long): Deferred<ProductDetail>
 
     @GET("getproducts")
-    fun getProducts(): Deferred<List<Products>>
+    fun getProducts(): Deferred<List<ProductDto>>
 
     @GET("researches")
     fun getResearches(): Deferred<List<Researches>>

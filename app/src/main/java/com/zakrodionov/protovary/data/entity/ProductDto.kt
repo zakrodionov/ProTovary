@@ -1,8 +1,8 @@
-package com.zakrodionov.protovary.domain.entity
+package com.zakrodionov.protovary.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class Products(
+data class ProductDto(
     @SerializedName("barcode")
     val barcode: Long?,
     @SerializedName("category")

@@ -8,9 +8,9 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.Companion.newInstance
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.DescriptionType.*
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.Model
-import com.zakrodionov.protovary.domain.entity.Product
+import com.zakrodionov.protovary.data.entity.ProductDetail
 
-class DescriptionPagerAdapter(val context: Context, val product: Product, fm: FragmentManager) :
+class DescriptionPagerAdapter(val context: Context, val product: ProductDetail, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
     override fun getCount(): Int = 4
 
