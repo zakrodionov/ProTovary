@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import com.zakrodionov.protovary.R
@@ -37,14 +38,14 @@ class DescriptionFragment : Fragment() {
         return view
     }
 
-    //region Конструткторы текстовки
+    //region Строим текстовки
     private fun getManufacturer(model: Model): Spanned? {
 
         if (model.product.producer.isNullOrEmpty() || model.product.producer == "false") {
             return SpannableStringBuilder("н/д")
         }
 
-        return model.product.producer?.parseHtml()
+        return model.product.producer.parseHtml()
     }
 
     private fun getIndicators(model: Model): SpannableStringBuilder {
@@ -55,9 +56,9 @@ class DescriptionFragment : Fragment() {
         }
 
         model.product.indicators.forEach {
-            text.bold { append(it?.name?.parseHtml() ?: "н/д") }
+            text.bold { append(it.name?.parseHtml() ?: "н/д") }
                 .append("\n")
-                .append(it?.value?.parseHtml() ?: "н/д")
+                .append(it.value?.parseHtml() ?: "н/д")
                 .append("\n")
                 .append("\n")
         }
@@ -102,7 +103,7 @@ class DescriptionFragment : Fragment() {
 
             pros = SpannableStringBuilder(_pros).apply {
                 setSpan(
-                    ForegroundColorSpan(resources.getColor(R.color.blue_light)),
+                    ForegroundColorSpan(ContextCompat.getColor(activity!!, R.color.blue_light)),
                     0,
                     _pros.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -126,7 +127,7 @@ class DescriptionFragment : Fragment() {
 
             cons = SpannableStringBuilder(_cons).apply {
                 setSpan(
-                    ForegroundColorSpan(resources.getColor(R.color.red_light)),
+                    ForegroundColorSpan(ContextCompat.getColor(activity!!, R.color.red_light)),
                     0,
                     _cons.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

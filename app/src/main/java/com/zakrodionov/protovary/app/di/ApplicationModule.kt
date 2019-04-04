@@ -11,6 +11,7 @@ import com.zakrodionov.protovary.app.platform.NetworkHandler
 import com.zakrodionov.protovary.data.db.AppDatabase
 import com.zakrodionov.protovary.data.db.ProductDao
 import com.zakrodionov.protovary.data.db.ResearchDao
+import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.data.repository.ProductRepositoryImpl
 import com.zakrodionov.protovary.data.repository.ResearchesRepositoryImpl
@@ -64,8 +65,8 @@ class ApplicationModule(private val application: App) {
 
     @Provides
     @Singleton
-    fun provideProductRepository(api: Api, productDao: ProductDao, errorHandler: ErrorHandler): ProductRepository =
-        ProductRepositoryImpl(api, productDao, errorHandler)
+    fun provideProductRepository(api: Api, productDao: ProductDao, productMapper: ProductMapper, errorHandler: ErrorHandler): ProductRepository =
+        ProductRepositoryImpl(api, productDao, productMapper, errorHandler)
 
     @Provides
     @Singleton

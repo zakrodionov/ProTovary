@@ -20,6 +20,7 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val api: Api,
     private val productDao: ProductDao,
+    val productMapper: ProductMapper,
     private val errorHandler: ErrorHandler
 ) : ProductRepository {
 
@@ -57,7 +58,7 @@ class ProductRepositoryImpl @Inject constructor(
         productDao.productIsFavoriteLive(id)
 
     override suspend fun actionFavorite(product: Product)  =
-        productDao.actionFavorite(ProductMapper.productToStore(product))
+        productDao.actionFavorite(productMapper.productToStore(product))
 
 
     override suspend fun getProductsInfo(id: Long): Either<Failure, LiveData<List<ProductInfo>>> {

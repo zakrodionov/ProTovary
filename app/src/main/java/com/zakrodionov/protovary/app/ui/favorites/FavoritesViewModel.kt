@@ -14,11 +14,12 @@ import javax.inject.Inject
 
 class FavoritesViewModel @Inject constructor(
     val actionFavoriteUseCase: ActionFavoriteUseCase,
+    val productMapper: ProductMapper,
     getFavoriteProductsUseCase: GetFavoriteProductsUseCase
 ) : BaseViewModel() {
 
     val favoriteProducts = Transformations.map(getFavoriteProductsUseCase.execute())
-                                        { it.map { ProductMapper.productFromStore(it) } }
+                                        { it.map { productMapper.productFromStore(it) } }
 
     fun actionFavorite(product: Product) {
         CoroutineScope(Dispatchers.IO).launch {

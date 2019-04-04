@@ -24,6 +24,7 @@ import javax.inject.Inject
 class ResearchViewModel @Inject constructor(
     val getProductsInfoUseCase: GetProductsInfoUseCase,
     val actionFavoriteUseCase: ActionFavoriteUseCase,
+    val productMapper: ProductMapper,
     val context: Context
 ) : BaseViewModel() {
 
@@ -61,7 +62,7 @@ class ResearchViewModel @Inject constructor(
 
         productsMediator.removeSource(research)
         productsMediator.addSource(research) {
-            sourceProducts = it.map { ProductMapper.productInfoToProduct(it) }
+            sourceProducts = it.map { productMapper.productInfoToProduct(it) }
             applyChanges()
         }
 
@@ -75,13 +76,13 @@ class ResearchViewModel @Inject constructor(
         val list = sourceProducts!!.toMutableList()
 
         when (filterType.value) {
-            BY_DEFAULT -> { }
             BY_QUALITY_MARK -> {
                 list.retainAll { it.status == context.getString(R.string.status_sign) }
             }
             BY_PRODUCT_WITH_VIOLATION -> {
                 list.retainAll { it.status == context.getString(R.string.status_violation) }
             }
+            BY_DEFAULT -> { }
         }
 
         list.retainAll {

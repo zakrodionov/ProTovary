@@ -19,9 +19,8 @@ class ResearchesRepositoryImpl @Inject constructor(
     override suspend fun getResearches(): Either<Failure, List<Researches>> {
         return try {
             val result = api.getResearches().await()
-            val data = result
-            researchDao.insertResearchesCategory(data)
-            Either.Right(data)
+            researchDao.insertResearchesCategory(result)
+            Either.Right(result)
         } catch (exception: Throwable) {
             errorHandler.proceedException(exception)
         }
@@ -30,8 +29,7 @@ class ResearchesRepositoryImpl @Inject constructor(
     override suspend fun getResearch(id: Long): Either<Failure, Research> {
         return try {
             val result = api.getResearch(id).await()
-            val data = result
-            Either.Right(data)
+            Either.Right(result)
         } catch (exception: Throwable) {
             errorHandler.proceedException(exception)
         }
@@ -39,8 +37,8 @@ class ResearchesRepositoryImpl @Inject constructor(
 
     override suspend fun getResearchesCategory(id: Long): Either<Failure, Researches> {
         return try {
-            val data = researchDao.getResearchCategoryById(id)
-            Either.Right(data)
+            val result = researchDao.getResearchCategoryById(id)
+            Either.Right(result)
         } catch (exception: Throwable) {
             errorHandler.proceedException(exception)
         }

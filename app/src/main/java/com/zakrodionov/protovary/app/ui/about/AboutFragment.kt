@@ -39,6 +39,6 @@ class AboutFragment : BaseFragment() {
         actionBack.setOnClickListener { close() }
 
         val versionName = BuildConfig.VERSION_NAME
-        tvVersion.text = "Версия: $versionName"
+        tvVersion.text = getString(R.string.app_version, versionName)
     }
 }

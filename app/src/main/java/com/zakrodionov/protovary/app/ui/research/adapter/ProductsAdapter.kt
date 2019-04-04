@@ -51,11 +51,12 @@ class ProductsAdapter
             itemView.ratingBar.rating = item.points.toFloat()
             itemView.tvPoints.text = item.points.toString()
             itemView.tvTrademark.text = item.trademark
-            itemView.ivStatus.setImageResource(item.getStatusDrawable(itemView.context))
-            itemView.tvTrademark.toggleVisibility(item.trademarkAndNameIsSame())
-            itemView.ivActionFavorite.setImageResource(item.getFavoriteDrawable(itemView.context))
+            itemView.ivStatus.setImageResource(item.statusDrawable)
+            itemView.ivActionFavorite.setImageResource(item.favoriteDrawable)
+            itemView.tvTrademark.toggleVisibility(item.name != item.trademark)
 
-            GlideApp.with(itemView.context).load(item.fullImageUrl()).setupCV().into(itemView.ivImage)
+
+            GlideApp.with(itemView.context).load(item.fullImageUrl).setupCV().into(itemView.ivImage)
         }
     }
 

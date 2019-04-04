@@ -32,6 +32,7 @@
 
     <string name="telegram">Связаться с автором в Телеграм</string>
     <string name="about_app">О приложении</string>
+    <string name="app_version">Версия: %s</string>
     <string name="research_on_site">Поиск на сайте</string>
     <string name="rate_app">Оценить приложение</string>
     <string name="url_search">https://rskrf.ru/search/</string>

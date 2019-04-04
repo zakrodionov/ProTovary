@@ -103,7 +103,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             }
         })
 
-        editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
 
         tvTitle.text = getString(R.string.research)
 

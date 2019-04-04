@@ -8,10 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
-import com.zakrodionov.protovary.app.ext.gone
-import com.zakrodionov.protovary.app.ext.inflate
-import com.zakrodionov.protovary.app.ext.parseHtml
-import com.zakrodionov.protovary.app.ext.toggleVisibility
+import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.app.util.Utils
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
@@ -51,17 +48,14 @@ class ProductsFavoriteAdapter
         override fun bind(item: Product) {
             super.bind(item)
 
-            GlideApp.with(itemView.context).load(item.fullImageUrl())
-                .override(500, 450)
-                .optionalCenterCrop().into(itemView.ivImage)
-
             itemView.tvName.text = item.name.parseHtml()
             itemView.ratingBar.rating = item.points.toFloat()
             itemView.tvPoints.text = item.points.toString()
             itemView.tvTrademark.text = item.trademark
-            itemView.ivStatus.setImageResource(item.getStatusDrawable(itemView.context))
-            itemView.tvTrademark.toggleVisibility(item.trademarkAndNameIsSame())
+            itemView.ivStatus.setImageResource(item.statusDrawable)
+            itemView.tvTrademark.toggleVisibility(item.name != item.trademark)
 
+            GlideApp.with(itemView.context).load(item.fullImageUrl).setupCV().into(itemView.ivImage)
         }
     }
 

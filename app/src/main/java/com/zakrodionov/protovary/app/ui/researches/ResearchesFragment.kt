@@ -113,7 +113,7 @@ class ResearchesFragment : BaseFragment() {
             }
         })
 
-        editText.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
     private fun renderTitle(title: String?) {
