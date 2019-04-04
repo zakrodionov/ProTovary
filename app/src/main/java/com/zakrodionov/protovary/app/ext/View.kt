@@ -1,5 +1,6 @@
 package com.zakrodionov.protovary.app.ext
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -17,6 +19,7 @@ import com.bumptech.glide.request.target.BaseTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 
 
@@ -36,7 +39,15 @@ fun View.visible() = run { visibility = View.VISIBLE }
 
 fun View.gone() = run { visibility = View.GONE }
 
-fun RequestBuilder<Drawable>.setupCV() = this.override(500, 450).optionalCenterCrop()
+fun RequestBuilder<Drawable>.setupCV(context: Context)
+        = this.override(500, 450)
+              .optionalCenterCrop()
+              .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_grey))
+
+fun RequestBuilder<Drawable>.setupCVBig(context: Context)
+        = this.override(750, 500)
+    .optionalCenterCrop()
+    .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_grey))
 
 fun View.toggleVisibility(visible: Boolean, visibilityWhenFalse: Int = View.GONE) =
     run { visibility = if (visible) View.VISIBLE else visibilityWhenFalse }

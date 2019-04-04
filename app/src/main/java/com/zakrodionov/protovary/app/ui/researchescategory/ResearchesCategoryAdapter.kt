@@ -8,7 +8,10 @@ import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
+import com.zakrodionov.protovary.app.ext.setupCV
+import com.zakrodionov.protovary.app.ext.setupCVBig
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
+import com.zakrodionov.protovary.app.util.Utils
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.item_researches.view.*
 import javax.inject.Inject
@@ -43,16 +46,10 @@ class ResearchesCategoryAdapter
         override fun bind(item: Researches) {
             super.bind(item)
 
+            val url = "${Utils.baseImageUrl()}${item.image?.src}"
+            GlideApp.with(itemView.context).load(url).setupCVBig(itemView.context).into(itemView.ivImage)
+
             itemView.tvName.text = item.name?.trim()
-
-            val url = "${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${item.image?.src}"
-
-            GlideApp.with(itemView.context).load(url)
-                .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.ic_grey))
-                .override(750, 500)
-                .optionalCenterCrop()
-                .into(itemView.ivImage)
-
         }
     }
 

@@ -55,7 +55,7 @@ class ProductsFavoriteAdapter
             itemView.ivStatus.setImageResource(item.statusDrawable)
             itemView.tvTrademark.toggleVisibility(item.name != item.trademark)
 
-            GlideApp.with(itemView.context).load(item.fullImageUrl).setupCV().into(itemView.ivImage)
+            GlideApp.with(itemView.context).load(item.fullImageUrl).setupCV(itemView.context).into(itemView.ivImage)
         }
     }
 
