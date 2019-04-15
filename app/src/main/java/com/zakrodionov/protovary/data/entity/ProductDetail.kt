@@ -19,7 +19,7 @@ data class ProductDetail(
     @SerializedName("producer")
     val producer: String?,
     @SerializedName("properties")
-    val properties: List<Property?>?,
+    val properties: List<Property>?,
     @SerializedName("research_results")
     val researchResults: String?,
     @SerializedName("status")
