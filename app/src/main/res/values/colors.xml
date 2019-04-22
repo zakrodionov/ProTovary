@@ -10,7 +10,7 @@
 
     <color name="blue_light">#176CD3</color>
     <color name="blue_dark">#D20047AB</color>
-    <color name="blue_grey">#E573A8D5</color>
+    <color name="blue1">#E573A8D5</color>
 
     <color name="red_light">#f45057</color>
     <color name="red_dark">#f0424b</color>
@@ -18,6 +18,6 @@
     <color name="gray">#9398a0</color>
     <color name="gray1">#E0E0E0</color>
     <color name="gray2">#80E0E0E0</color>
-    <color name="blue_gray">#9EB8CF</color>
+    <color name="gray3">#9EB8CF</color>
 
 </resources>
