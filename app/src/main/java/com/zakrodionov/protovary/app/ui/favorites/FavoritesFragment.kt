@@ -64,10 +64,4 @@ class FavoritesFragment : BaseFragment(R.layout.view_favorites) {
         rvProductsFavorite.adapter = null
         super.onDestroyView()
     }
-//    private fun handleFailure(failure: Failure?) {
-//        when (failure) {
-//            is Failure.ServerError -> notify(R.string.failure_server_error)
-//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-//        }
-//    }
 }

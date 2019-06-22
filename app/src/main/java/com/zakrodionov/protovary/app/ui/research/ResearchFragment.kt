@@ -22,20 +22,13 @@ import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import kotlinx.android.synthetic.main.view_research.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortListener {
 
-    private val researchViewModel: ResearchViewModel by viewModel()
     private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
     private val idResearch: Long by argument("id", 0L)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            researchViewModel.loadResearch(idResearch)
-        }
-    }
+    private val researchViewModel: ResearchViewModel by viewModel{ parametersOf(idResearch) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +41,7 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
         }
 
         if (researchViewModel.filteredProducts.value == null) {
-            researchViewModel.loadResearch(idResearch)
+            loadData()
         }
 
         setupToolbar()
@@ -157,17 +150,7 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
         super.onDestroyView()
     }
 
-//    private fun handleFailure(failure: Failure?) {
-//        when (failure) {
-//            is Failure.ServerError -> notify(R.string.failure_server_error)
-//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-//            is Failure.NetworkConnection -> notifyWithAction(
-//                R.string.failure_network_connection,
-//                R.string.action_refresh,
-//                { researchViewModel.loadResearch(idResearch) }
-//            )
-//        }
-//    }
+    override fun loadData() = researchViewModel.loadResearch(idResearch)
 
     companion object {
         const val RC_SORT = 1122

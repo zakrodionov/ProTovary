@@ -11,10 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.gone
-import com.zakrodionov.protovary.app.ext.observe
-import com.zakrodionov.protovary.app.ext.toggleVisibility
-import com.zakrodionov.protovary.app.ext.visible
+import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
@@ -22,19 +19,13 @@ import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
-    private val researchesViewModel: ResearchesViewModel by viewModel()
+    private val researchesId: Long by argument("id", 0L)
+    private val researchesViewModel: ResearchesViewModel by viewModel{ parametersOf(researchesId) }
     private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            loadResearches()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,11 +46,6 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
         rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
-    }
-
-    private fun loadResearches() {
-        val id = arguments?.getLong("id") ?: 0
-        researchesViewModel.loadResearchesCategory(id)
     }
 
     private fun renderResearchesList(researches: List<ResearchCompact>?) {
@@ -118,4 +104,6 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
         rvResearches.adapter = null
         super.onDestroyView()
     }
+
+    override fun loadData() =  researchesViewModel.loadResearchesCategory(researchesId)
 }

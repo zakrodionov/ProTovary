@@ -32,24 +32,24 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     internal fun back() = navController.popBackStack()
 
     internal fun handleState(state: State?) {
+        snackBar?.dismiss()
         when (state) {
             is State.Loading -> {
-                progressStatus(View.VISIBLE, View.VISIBLE); snackBar?.dismiss()
+                progressStatus(View.VISIBLE)
             }
             is State.Loaded -> {
-                progressStatus(View.GONE, View.GONE); snackBar?.dismiss()
+                progressStatus(View.GONE)
             }
             is State.Error -> {
-                progressStatus(View.VISIBLE, View.GONE); snackBar?.dismiss()
+                progressStatus(View.GONE)
                 handleFailure(state.failure)
             }
         }
     }
 
-    private fun progressStatus(viewStatusLayout: Int, viewStatusProgress: Int) =
+    private fun progressStatus(viewStatusLayout: Int) =
         view?.let {
             it.progressLayout?.visibility = viewStatusLayout
-            // it.progressLayout?.progressBar?.visibility = viewStatusProgress
         }
 
 

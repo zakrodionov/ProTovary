@@ -17,6 +17,7 @@ import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 import com.zakrodionov.protovary.domain.model.Product
 
 class ResearchViewModel(
+    val id: Long,
     val researchInteractor: ResearchInteractor,
     val productInteractor: ProductInteractor,
     val productMapper: ProductMapper,
@@ -40,6 +41,8 @@ class ResearchViewModel(
         changesListener.addSource(sortType) { changesListener.value = Unit }
         changesListener.addSource(filterType) { changesListener.value = Unit }
         changesListener.addSource(queryText) { changesListener.value = Unit }
+
+        loadResearch(id)
     }
 
     fun loadResearch(id: Long) {

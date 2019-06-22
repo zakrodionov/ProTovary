@@ -6,13 +6,19 @@ import com.zakrodionov.protovary.data.entity.ResearchCompact
 import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 
-class ResearchesViewModel(val researchInteractor: ResearchInteractor) : BaseViewModel() {
+class ResearchesViewModel(
+    val id: Long,
+    val researchInteractor: ResearchInteractor
+) : BaseViewModel() {
 
     var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()
     var title = MutableLiveData<String>()
     var queryText = MutableLiveData<String>()
 
+    init {
+        loadResearchesCategory(id)
+    }
 
     fun loadResearchesCategory(id: Long) {
         launch {

@@ -16,11 +16,11 @@ val viewModelModule = module {
 
     viewModel { AboutViewModel() }
     viewModel { BarcodeViewModel() }
-    viewModel { FavoritesViewModel(get(), get()) }
+    viewModel { FavoritesViewModel(get()) }
     viewModel { MoreViewModel() }
     viewModel { (id : Long) -> ProductViewModel(id, get(), get(), get()) }
-    viewModel { ResearchViewModel(get(), get(), get(), get()) }
-    viewModel { ResearchesViewModel(get()) }
+    viewModel { (id : Long) -> ResearchViewModel(id, get(), get(), get(), get()) }
+    viewModel { (id : Long) -> ResearchesViewModel(id, get()) }
     viewModel { ResearchesCategoryViewModel(get()) }
     viewModel { ScannerViewModel(get()) }
 
