@@ -17,6 +17,8 @@ def keystoreProperties = new Properties()
 // Load your keystore.properties file into the keystoreProperties object.
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def API_ENDPOINT = "API_ENDPOINT"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -46,7 +48,6 @@ android {
     }
 
     buildTypes {
-        def API_ENDPOINT = "API_ENDPOINT"
         release {
             debuggable false
             minifyEnabled true

@@ -10,7 +10,7 @@
 
     <color name="blue_light">#176CD3</color>
     <color name="blue_dark">#D20047AB</color>
-    <color name="blue1">#E573A8D5</color>
+    <color name="blue_semi">#E573A8D5</color>
 
     <color name="red_light">#f45057</color>
     <color name="red_dark">#f0424b</color>
