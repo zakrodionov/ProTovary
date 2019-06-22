@@ -2,22 +2,17 @@ package com.zakrodionov.protovary.app.ui.researchescategory
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
-import com.zakrodionov.protovary.app.ext.setupCV
 import com.zakrodionov.protovary.app.ext.setupCVBig
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.app.util.Utils
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.item_researches.view.*
-import javax.inject.Inject
 
-class ResearchesCategoryAdapter
-@Inject constructor() : Adapter<ResearchesCategoryAdapter.ViewHolder>() {
+class ResearchesCategoryAdapter : Adapter<ResearchesCategoryAdapter.ViewHolder>() {
 
     var collection: List<Researches> = listOf()
         set(value) {

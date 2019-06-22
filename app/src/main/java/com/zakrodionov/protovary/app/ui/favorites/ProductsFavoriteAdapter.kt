@@ -3,21 +3,17 @@ package com.zakrodionov.protovary.app.ui.favorites
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
-import com.zakrodionov.protovary.app.ext.*
+import com.zakrodionov.protovary.app.ext.inflate
+import com.zakrodionov.protovary.app.ext.parseHtml
+import com.zakrodionov.protovary.app.ext.setupCV
+import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
-import com.zakrodionov.protovary.app.util.Utils
-import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.view.*
-import javax.inject.Inject
 
-class ProductsFavoriteAdapter
-@Inject constructor() : Adapter<ProductsFavoriteAdapter.ViewHolder>() {
+class ProductsFavoriteAdapter : Adapter<ProductsFavoriteAdapter.ViewHolder>() {
 
     var collection: List<Product> = listOf()
         set(value) {

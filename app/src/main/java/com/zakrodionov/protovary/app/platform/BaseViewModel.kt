@@ -2,20 +2,21 @@ package com.zakrodionov.protovary.app.platform
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-/**
- * Base ViewModel class with default Failure handling.
- * @see ViewModel
- * @see Failure
- */
+/*BaseViewModel для обработки State*/
 abstract class BaseViewModel : ViewModel() {
 
-    val loading: MutableLiveData<Boolean> = MutableLiveData()
-    var failure: MutableLiveData<Failure> = SingleLiveEvent()
+    val state: MutableLiveData<State> = MutableLiveData()
     var message: MutableLiveData<String> = SingleLiveEvent()
 
-    protected fun handleFailure(failure: Failure) {
-        loading.value = false
-        this.failure.value = failure
+    protected fun handleState(state: State) {
+        this.state.value = state
     }
+
+    protected fun launch(func: suspend () -> Unit) = viewModelScope.launch(Dispatchers.Main) { func.invoke() }
+
+    protected fun launchIO(func: suspend () -> Unit) = viewModelScope.launch(Dispatchers.IO) { func.invoke() }
 }

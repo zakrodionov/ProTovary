@@ -74,9 +74,9 @@ class DescriptionFragment : Fragment() {
         }
 
         model.product.properties.forEach {
-            text.bold { append(it?.name?.parseHtml() ?: "н/д") }
+            text.bold { append(it.name?.parseHtml() ?: "н/д") }
                 .append("\n")
-                .append(it?.value?.parseHtml() ?: "н/д")
+                .append(it.value?.parseHtml() ?: "н/д")
                 .append("\n")
                 .append("\n")
         }

@@ -1,41 +1,33 @@
 package com.zakrodionov.protovary.app.platform
 
-import com.zakrodionov.protovary.app.functional.Either
-import com.zakrodionov.protovary.app.functional.Either.Left
 import com.zakrodionov.protovary.app.platform.Failure.*
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.util.concurrent.CancellationException
-import javax.inject.Inject
 
+class ErrorHandler(private val networkHandler: NetworkHandler) {
 
-class ErrorHandler @Inject constructor(private val networkHandler: NetworkHandler) {
-
-    suspend fun <R> proceedException(
-        exception: Throwable,
-        updateFromDb: (suspend () -> R)? = null,
-        specialBarcodeFailureHandler: (() -> String)? = null
-    ): Either<Failure, R> {
-        if (!networkHandler.isConnected) {
-            val data = updateFromDb?.invoke()
-            return if (data == null) Left(NetworkConnection) else Left(CacheFailure(data))
-
-        }
+    fun proceedException(exception: Throwable): Failure {
         when {
+            !networkHandler.isConnected -> {
+                return NetworkConnection
+            }
             exception is HttpException -> {
-                return Left(ServerError)
+                return ServerError
             }
             exception is SocketTimeoutException -> {
-                return Left(ServerError)
+                return ServerError
             }
             exception is CancellationException -> {
-                return Left(CancellationError)
+                return CancellationError
             }
-            specialBarcodeFailureHandler != null -> {
-                return Left(BarcodeFailure(specialBarcodeFailureHandler()))
+
+            exception is KotlinNullPointerException -> {
+                return NullDataError
             }
-            else -> Left(UnknownError)
+
+            else -> UnknownError
         }
-        return Left(UnknownError)
+        return UnknownError
     }
 }

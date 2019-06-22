@@ -6,8 +6,6 @@ import android.util.AttributeSet
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 
-import java.lang.reflect.Field
-
 class FixedTextInputEditText : TextInputEditText {
 
     private val superHintHack: CharSequence

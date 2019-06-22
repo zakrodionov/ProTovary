@@ -6,34 +6,24 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.failure
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.toggleVisibility
-import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_researches_category.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ResearchesCategoryFragment : BaseFragment() {
+class ResearchesCategoryFragment : BaseFragment(R.layout.view_researches_category) {
 
-    @Inject
-    lateinit var researchesCategoryAdapter: ResearchesCategoryAdapter
-
-    override fun layoutId() = R.layout.view_researches_category
-
-    private lateinit var researchesCategoryViewModel: ResearchesCategoryViewModel
+    private val researchesCategoryViewModel: ResearchesCategoryViewModel  by viewModel()
+    private val researchesCategoryAdapter: ResearchesCategoryAdapter by lazy { ResearchesCategoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        researchesCategoryViewModel = viewModel(viewModelFactory) {}
 
         //Загружаем только при первом создании фрагмента
         if (savedInstanceState.isFirstTimeCreated()) {
@@ -41,14 +31,12 @@ class ResearchesCategoryFragment : BaseFragment() {
         }
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(researchesCategoryViewModel) {
             observe(researches, ::renderResearchesList)
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         initializeView()
@@ -73,7 +61,7 @@ class ResearchesCategoryFragment : BaseFragment() {
 
     private fun itemClickListener(research: Researches) {
         val bundle = bundleOf("id" to research.id)
-        findNavController().navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
+        navController.navigate(R.id.action_researchesCategoryFragment_to_researchesFragment, bundle)
     }
 
     private fun loadResearchList() {
@@ -92,19 +80,19 @@ class ResearchesCategoryFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-            is Failure.NetworkConnection -> notifyWithAction(
-                R.string.failure_network_connection,
-                R.string.action_refresh,
-                ::loadResearchList
-            )
-            is Failure.CacheFailure<*> -> notifyWithAction(
-                R.string.failure_cache_date, R.string.action_refresh, ::loadResearchList,
-                Snackbar.LENGTH_SHORT
-            )
-        }
-    }
+//    private fun handleFailure(failure: Failure?) {
+//        when (failure) {
+//            is Failure.ServerError -> notify(R.string.failure_server_error)
+//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+//            is Failure.NetworkConnection -> notifyWithAction(
+//                R.string.failure_network_connection,
+//                R.string.action_refresh,
+//                ::loadResearchList
+//            )
+//            is Failure.CacheFailure<*> -> notifyWithAction(
+//                R.string.failure_cache_date, R.string.action_refresh, ::loadResearchList,
+//                Snackbar.LENGTH_SHORT
+//            )
+//        }
+//    }
 }

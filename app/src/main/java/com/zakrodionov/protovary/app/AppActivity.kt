@@ -41,7 +41,7 @@ class AppActivity : BaseActivity() {
             intent = intent
         )
 
-        controller.observe(this, Observer {  })
+        controller.observe(this, Observer { })
         currentNavController = controller
     }
 

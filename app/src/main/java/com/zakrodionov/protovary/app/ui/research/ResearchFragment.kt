@@ -7,48 +7,35 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
-import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import kotlinx.android.synthetic.main.view_research.*
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortListener {
 
-class ResearchFragment : BaseFragment(), BottomDialogSortListener {
-
-    @Inject
-    lateinit var productsAdapter: ProductsAdapter
-
-    override fun layoutId() = R.layout.view_research
-
+    private val researchViewModel: ResearchViewModel by viewModel()
+    private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
     private val idResearch: Long by argument("id", 0L)
-
-    private lateinit var researchViewModel: ResearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        researchViewModel = viewModel(viewModelFactory) {}
 
         if (savedInstanceState.isFirstTimeCreated()) {
             researchViewModel.loadResearch(idResearch)
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,8 +44,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         if (researchViewModel.filteredProducts.value == null) {
@@ -72,7 +58,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
 
     private fun setupToolbar() {
 
-        actionBack.setOnClickListener { close() }
+        actionBack.setOnClickListener { back() }
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
@@ -103,7 +89,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
             }
         })
 
-        editText.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
 
         tvTitle.text = getString(R.string.research)
 
@@ -143,7 +129,7 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
     private fun itemClickListener(product: Product) {
         actionSearch.onActionViewCollapsed()
         val bundle = bundleOf("id" to product.id)
-        findNavController().navigate(R.id.action_researchFragment_to_productFragment, bundle)
+        navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
 
     private fun itemClickFavoriteListener(product: Product) {
@@ -171,17 +157,17 @@ class ResearchFragment : BaseFragment(), BottomDialogSortListener {
         super.onDestroyView()
     }
 
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-            is Failure.NetworkConnection -> notifyWithAction(
-                R.string.failure_network_connection,
-                R.string.action_refresh,
-                { researchViewModel.loadResearch(idResearch) }
-            )
-        }
-    }
+//    private fun handleFailure(failure: Failure?) {
+//        when (failure) {
+//            is Failure.ServerError -> notify(R.string.failure_server_error)
+//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+//            is Failure.NetworkConnection -> notifyWithAction(
+//                R.string.failure_network_connection,
+//                R.string.action_refresh,
+//                { researchViewModel.loadResearch(idResearch) }
+//            )
+//        }
+//    }
 
     companion object {
         const val RC_SORT = 1122

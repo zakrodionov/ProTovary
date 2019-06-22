@@ -57,12 +57,12 @@ class ScannerDialogFragment : DialogFragment() {
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
 
-        listener?.actionClose()
+        listener?.actionback()
     }
 
     interface ScannerDialogListener {
         fun actionSearch(text: String)
         fun actionSearchOnSite()
-        fun actionClose()
+        fun actionback()
     }
 }

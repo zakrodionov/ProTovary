@@ -1,29 +1,33 @@
 package com.zakrodionov.protovary.app.ui.favorites
 
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
+import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.mapper.ProductMapper
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase.*
-import com.zakrodionov.protovary.domain.interactor.product.GetFavoriteProductsUseCase
+import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.model.Product
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class FavoritesViewModel @Inject constructor(
-    val actionFavoriteUseCase: ActionFavoriteUseCase,
-    val productMapper: ProductMapper,
-    getFavoriteProductsUseCase: GetFavoriteProductsUseCase
-) : BaseViewModel() {
+class FavoritesViewModel(val productInteractor: ProductInteractor, val productMapper: ProductMapper) : BaseViewModel() {
 
-    val favoriteProducts = Transformations.map(getFavoriteProductsUseCase.execute())
-                                        { it.map { productMapper.productFromStore(it) } }
+    var favoriteProducts = MediatorLiveData<List<Product>>()
+
+    init {
+        launch {
+            productInteractor.getFavoriteProducts(::handleFavoriteProducts, ::handleState)
+        }
+    }
+
+    private fun handleFavoriteProducts(favoriteProducts_: LiveData<List<FavoriteProduct>>) {
+        favoriteProducts.removeSource(favoriteProducts)
+        favoriteProducts.addSource(favoriteProducts_) {
+            favoriteProducts.value = it.map { productMapper.productFromStore(it) }
+        }
+    }
 
     fun actionFavorite(product: Product) {
-        CoroutineScope(Dispatchers.IO).launch {
-            actionFavoriteUseCase.execute(Params(product))
+        launch {
+            productInteractor.actionFavorite(product)
         }
     }
 }

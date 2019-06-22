@@ -17,4 +17,4 @@ data class Product(
     var favoriteDrawable: Int,
     @DrawableRes
     var statusDrawable: Int
-): Serializable
+) : Serializable

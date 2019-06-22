@@ -7,42 +7,27 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.failure
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.toggleVisibility
-import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
-import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_favorites.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritesFragment : BaseFragment() {
+class FavoritesFragment : BaseFragment(R.layout.view_favorites) {
 
-    override fun layoutId() = R.layout.view_favorites
-
-    @Inject
-    lateinit var productsFavoriteAdapter: ProductsFavoriteAdapter
-
-    private lateinit var favoritesViewModel: FavoritesViewModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        favoritesViewModel = viewModel(viewModelFactory) {}
-    }
+    private val favoritesViewModel: FavoritesViewModel by viewModel()
+    private val productsFavoriteAdapter: ProductsFavoriteAdapter by lazy { ProductsFavoriteAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(favoritesViewModel) {
             observe(favoriteProducts, ::renderFavoriteProductsList)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         initializeView()
@@ -60,7 +45,7 @@ class FavoritesFragment : BaseFragment() {
 
     private fun itemClickListener(research: Product) {
         val bundle = bundleOf("id" to research.id)
-        findNavController().navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
+        navController.navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
     }
 
     private fun actionFavoriteListener(research: Product) {
@@ -79,10 +64,10 @@ class FavoritesFragment : BaseFragment() {
         rvProductsFavorite.adapter = null
         super.onDestroyView()
     }
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-        }
-    }
+//    private fun handleFailure(failure: Failure?) {
+//        when (failure) {
+//            is Failure.ServerError -> notify(R.string.failure_server_error)
+//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+//        }
+//    }
 }

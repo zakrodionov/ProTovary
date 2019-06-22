@@ -9,16 +9,16 @@ import com.zakrodionov.protovary.data.entity.ProductInfo
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavoriteProduct(favoriteProduct: FavoriteProduct)
+    suspend fun insertFavoriteProduct(favoriteProduct: FavoriteProduct)
 
     @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
     fun productIsFavoriteLive(id: Long): LiveData<Int>
 
     @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
-    fun productIsFavorite(id: Long): Int
+    suspend fun productIsFavorite(id: Long): Int
 
     @Query("DELETE FROM favoriteproduct WHERE id = :id")
-    fun deleteById(id: Long)
+    suspend fun deleteById(id: Long)
 
     @Query("SELECT * FROM favoriteproduct ")
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
@@ -28,23 +28,23 @@ interface ProductDao {
 
 
     @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
-    fun updateProducts()
+    suspend fun updateProducts()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProducts(list: List<ProductInfo>)
+    suspend fun insertProducts(list: List<ProductInfo>)
 
     @Query("DELETE FROM productinfo")
-    fun deleteProducts()
+    suspend fun deleteProducts()
 
     @Transaction
-    fun refreshProducts(list: List<ProductInfo>) {
+    suspend fun refreshProducts(list: List<ProductInfo>) {
         deleteProducts()
         insertProducts(list)
         updateProducts()
     }
 
     @Transaction
-    fun actionFavorite(favoriteProduct: FavoriteProduct) {
+    suspend fun actionFavorite(favoriteProduct: FavoriteProduct) {
         val isFavorite = productIsFavorite(favoriteProduct.id) > 0
 
         if (isFavorite) {

@@ -10,20 +10,15 @@ import com.zakrodionov.protovary.app.util.enums.ResearchFilterType
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
-import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.entity.ProductInfo
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase.*
-import com.zakrodionov.protovary.domain.interactor.product.GetProductsInfoUseCase
+import com.zakrodionov.protovary.data.mapper.ProductMapper
+import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
+import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 import com.zakrodionov.protovary.domain.model.Product
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class ResearchViewModel @Inject constructor(
-    val getProductsInfoUseCase: GetProductsInfoUseCase,
-    val actionFavoriteUseCase: ActionFavoriteUseCase,
+class ResearchViewModel(
+    val researchInteractor: ResearchInteractor,
+    val productInteractor: ProductInteractor,
     val productMapper: ProductMapper,
     val context: Context
 ) : BaseViewModel() {
@@ -48,18 +43,12 @@ class ResearchViewModel @Inject constructor(
     }
 
     fun loadResearch(id: Long) {
-        loading.value = true
-        getProductsInfoUseCase.invoke(GetProductsInfoUseCase.Params(id)) {
-            it.either(
-                ::handleFailure,
-                ::handleProducts
-            )
+        launch {
+            productInteractor.getProductsInfo(id, ::handleProducts, ::handleState)
         }
     }
 
     private fun handleProducts(research: LiveData<List<ProductInfo>>) {
-        loading.value = false
-
         productsMediator.removeSource(research)
         productsMediator.addSource(research) {
             sourceProducts = it.map { productMapper.productInfoToProduct(it) }
@@ -82,7 +71,8 @@ class ResearchViewModel @Inject constructor(
             BY_PRODUCT_WITH_VIOLATION -> {
                 list.retainAll { it.status == context.getString(R.string.status_violation) }
             }
-            BY_DEFAULT -> { }
+            BY_DEFAULT -> {
+            }
         }
 
         list.retainAll {
@@ -100,8 +90,8 @@ class ResearchViewModel @Inject constructor(
     }
 
     fun actionFavorite(product: Product) {
-        CoroutineScope(Dispatchers.IO).launch {
-            actionFavoriteUseCase.execute(Params(product))
+        launch {
+            productInteractor.actionFavorite(product)
         }
     }
 }

@@ -5,37 +5,47 @@ import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 import com.zakrodionov.protovary.BuildConfig
-import com.zakrodionov.protovary.app.di.ApplicationComponent
-import com.zakrodionov.protovary.app.di.ApplicationModule
-import com.zakrodionov.protovary.app.di.DaggerApplicationComponent
+import com.zakrodionov.protovary.app.di.appModule
+import com.zakrodionov.protovary.app.di.viewModelModule
 import io.fabric.sdk.android.Fabric
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 
 class App : Application() {
 
-    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        DaggerApplicationComponent
-            .builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-    }
-
     override fun onCreate() {
         super.onCreate()
-        this.injectMembers()
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }
 
+        initKoin()
+
         if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(this)
-            LeakCanary.install(this)
+            initDebugComponents()
         } else {
-            Fabric.with(this, Crashlytics())
+            initProductionComponents()
         }
     }
 
-    private fun injectMembers() = appComponent.inject(this)
+    private fun initDebugComponents() {
+        Stetho.initializeWithDefaults(this)
+        LeakCanary.install(this)
 
+    }
+
+    private fun initProductionComponents() {
+        Fabric.with(this, Crashlytics())
+    }
+
+    private fun initKoin() {
+        startKoin {
+            androidContext(this@App)
+            androidLogger()
+            modules(listOf(appModule, viewModelModule))
+        }
+    }
 }

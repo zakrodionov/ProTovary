@@ -11,30 +11,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.*
+import com.zakrodionov.protovary.app.ext.gone
+import com.zakrodionov.protovary.app.ext.observe
+import com.zakrodionov.protovary.app.ext.toggleVisibility
+import com.zakrodionov.protovary.app.ext.visible
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
-class ResearchesFragment : BaseFragment() {
-
-    @Inject
-    lateinit var researchesAdapter: ResearchesAdapter
-
-    override fun layoutId() = R.layout.view_researches
-
-    private lateinit var researchesViewModel: ResearchesViewModel
+    private val researchesViewModel: ResearchesViewModel by viewModel()
+    private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        researchesViewModel = viewModel(viewModelFactory) {}
 
         if (savedInstanceState.isFirstTimeCreated()) {
             loadResearches()
@@ -48,8 +43,7 @@ class ResearchesFragment : BaseFragment() {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
             observe(queryText) { researchesViewModel.applyQueryText() }
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         initializeView()
@@ -79,11 +73,11 @@ class ResearchesFragment : BaseFragment() {
     private fun itemClickListener(research: ResearchCompact) {
         actionSearch.onActionViewCollapsed()
         val bundle = bundleOf("id" to research.id)
-        findNavController().navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { close() }
+        actionBack.setOnClickListener { back() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
         editText.setTextColor(Color.BLACK)
@@ -113,7 +107,7 @@ class ResearchesFragment : BaseFragment() {
             }
         })
 
-        editText.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
     private fun renderTitle(title: String?) {
@@ -123,12 +117,5 @@ class ResearchesFragment : BaseFragment() {
     override fun onDestroyView() {
         rvResearches.adapter = null
         super.onDestroyView()
-    }
-
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-        }
     }
 }

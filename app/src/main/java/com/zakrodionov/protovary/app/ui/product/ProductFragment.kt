@@ -5,29 +5,26 @@ import android.os.Bundle
 import android.view.View
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.*
+import com.zakrodionov.protovary.app.ext.argument
+import com.zakrodionov.protovary.app.ext.loadFromUrl
+import com.zakrodionov.protovary.app.ext.observe
+import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ProductFragment : BaseFragment() {
+class ProductFragment : BaseFragment(R.layout.view_product) {
 
-    override fun layoutId() = R.layout.view_product
-
+    private val productViewModel: ProductViewModel by viewModel()
     private val productId: Long by argument("id", 0L)
-
-    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        productViewModel = viewModel(viewModelFactory) {}
 
         if (savedInstanceState.isFirstTimeCreated()) {
             productViewModel.loadProduct(productId)
@@ -40,10 +37,9 @@ class ProductFragment : BaseFragment() {
 
         with(productViewModel) {
             observe(product, ::renderProduct)
-            observe(loading, ::loadingStatus)
             observe(isFavoriteMediator, ::renderFavorite)
             observe(message, ::renderMessage)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         if (productViewModel.product.value == null) {
@@ -54,7 +50,7 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
-        actionBack.setOnClickListener { close() }
+        actionBack.setOnClickListener { back() }
         actionFavorite.setOnClickListener { productViewModel.actionFavorite(productId) }
         actionShare.setOnClickListener { productViewModel.product.value?.url?.let { shareProduct("${getString(R.string.base_url)}$it") } }
     }
@@ -107,16 +103,16 @@ class ProductFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.ServerError -> notify(R.string.failure_server_error)
-            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-            is Failure.NetworkConnection -> notifyWithAction(
-                R.string.failure_network_connection,
-                R.string.action_refresh,
-                { productViewModel.loadProduct(productId) }
-            )
-        }
-    }
+//    private fun handleFailure(failure: Failure?) {
+//        when (failure) {
+//            is Failure.ServerError -> notify(R.string.failure_server_error)
+//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+//            is Failure.NetworkConnection -> notifyWithAction(
+//                R.string.failure_network_connection,
+//                R.string.action_refresh,
+//                { productViewModel.loadProduct(productId) }
+//            )
+//        }
+//    }
 
 }

@@ -5,16 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import android.view.View
 import android.webkit.URLUtil
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.Factory
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
-import com.zakrodionov.protovary.app.platform.BaseActivity
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import org.jetbrains.anko.bundleOf
 
 inline fun androidx.fragment.app.FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> androidx.fragment.app.FragmentTransaction) =
     beginTransaction().func().commit()

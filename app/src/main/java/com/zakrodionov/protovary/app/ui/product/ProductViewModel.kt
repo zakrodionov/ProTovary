@@ -1,24 +1,16 @@
 package com.zakrodionov.protovary.app.ui.product
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.entity.ProductDetail
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase
-import com.zakrodionov.protovary.domain.interactor.product.ActionFavoriteUseCase.*
-import com.zakrodionov.protovary.domain.interactor.product.GetProductUseCase
-import com.zakrodionov.protovary.domain.interactor.product.ProductIsFavoriteUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import com.zakrodionov.protovary.data.mapper.ProductMapper
+import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 
-class ProductViewModel @Inject constructor(
-    val getProductUseCase: GetProductUseCase,
-    val actionFavoriteUseCase: ActionFavoriteUseCase,
-    val productIsFavoriteUseCase: ProductIsFavoriteUseCase,
+class ProductViewModel(
+    val productInteractor: ProductInteractor,
     val productMapper: ProductMapper,
     val context: Context
 ) : BaseViewModel() {
@@ -27,24 +19,30 @@ class ProductViewModel @Inject constructor(
     val isFavoriteMediator = MediatorLiveData<Boolean>()
 
     fun loadProduct(id: Long) {
-        loading.value = true
 
-        isFavoriteMediator.addSource(productIsFavoriteUseCase.execute(ProductIsFavoriteUseCase.Params(id))) {
-            isFavoriteMediator.value = it > 0
+
+        launch {
+            productInteractor.getProduct(id, ::handleProduct, ::handleState)
+            productInteractor.productIsFavorite(id, ::observeIsFavoriteProduct) {}
         }
-        getProductUseCase.invoke(GetProductUseCase.Params(id)) { it.either(::handleFailure, ::handleProduct) }
     }
 
     private fun handleProduct(product: ProductDetail) {
-        loading.value = false
         this.product.value = product
     }
 
+    private fun observeIsFavoriteProduct(productIsFavorite: LiveData<Int>) {
+        isFavoriteMediator.removeSource(isFavoriteMediator)
+        isFavoriteMediator.addSource(productIsFavorite) {
+            isFavoriteMediator.value = it > 0
+        }
+    }
+
     fun actionFavorite(id: Long) {
-        CoroutineScope(Dispatchers.IO).launch {
+        launch {
             if (product.value != null) {
                 val product = productMapper.productDetailToProduct(product.value!!, id)
-                actionFavoriteUseCase.execute(Params(product))
+                productInteractor.actionFavorite(product)
             }
 
         }

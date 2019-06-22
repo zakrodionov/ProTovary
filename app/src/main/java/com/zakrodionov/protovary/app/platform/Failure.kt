@@ -9,8 +9,7 @@ sealed class Failure {
     object ServerError : Failure()
     object UnknownError : Failure()
     object CancellationError : Failure()
+    object NullDataError : Failure()
 
-    class CacheFailure<T>(val data: T) : Failure()
     class BarcodeFailure(val barcode: String) : Failure()
-
 }

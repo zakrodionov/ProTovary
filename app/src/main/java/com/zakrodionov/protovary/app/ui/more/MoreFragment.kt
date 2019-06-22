@@ -8,25 +8,16 @@ import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.tryOpenLink
-import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_more.*
 import org.jetbrains.anko.toast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MoreFragment : BaseFragment() {
+class MoreFragment : BaseFragment(R.layout.view_more) {
 
-    override fun layoutId() = R.layout.view_more
-
-    private lateinit var moreViewModel: MoreViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        moreViewModel = viewModel(viewModelFactory) {}
-    }
+    private val moreViewModel: MoreViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +29,7 @@ class MoreFragment : BaseFragment() {
         tvToolbarTitle.text = getString(R.string.more)
 
         clActionRate.setOnClickListener { openPlayMarket() }
-        clAboutApp.setOnClickListener { findNavController().navigate(R.id.action_moreFragment_to_aboutFragment) }
+        clAboutApp.setOnClickListener { navController.navigate(R.id.action_moreFragment_to_aboutFragment) }
         clActionTelegram.setOnClickListener { openTelegram() }
         clActionSearch.setOnClickListener { tryOpenLink(getString(R.string.url_search)) }
 

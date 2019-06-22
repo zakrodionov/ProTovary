@@ -46,7 +46,9 @@
 
 
     <string name="base_url">https://rskrf.ru</string>
-    <string name="text_about">Приложение "ПроТовары" - неофициальное приложение, основаное на  открытом api с портала <a href="https://rskrf.ru">https://rskrf.ru</a>.\n\nПредоставляется как есть, не использует персональные данные и не содержит рекламы.
+    <string name="text_about">Приложение "ПроТовары" - неофициальное приложение, основаное на открытом api с портала <a
+            href="https://rskrf.ru">https://rskrf.ru</a>.\n\nПредоставляется как есть, не использует персональные данные
+        и не содержит рекламы.
     </string>
     <string name="status_sign">withsign</string>
     <string name="status_violation">withviolation</string>
@@ -63,7 +65,6 @@
     <string name="scan_button">Сканировать</string>
     <string name="product_not_found">Товар не найден</string>
     <string name="product_not_found_barcode">Товар по штрихкоду &lt;b>\"%s\"&lt;/b> не найден</string>
-
 
 
 </resources>

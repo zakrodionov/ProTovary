@@ -5,41 +5,28 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.failure
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.tryOpenLink
-import com.zakrodionov.protovary.app.ext.viewModel
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
 import com.zakrodionov.protovary.app.ui.view.ScannerDialogFragment
 import com.zakrodionov.protovary.app.ui.view.SimpleScannerFragment
 import com.zakrodionov.protovary.data.entity.ProductCompact
 import kotlinx.android.synthetic.main.toolbar_back_title.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListener {
+class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragment.ScannerDialogListener {
 
-    override fun layoutId() = R.layout.view_scanner
-
-    private lateinit var scannerViewModel: ScannerViewModel
-
-    var simpleScanner: SimpleScannerFragment? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        scannerViewModel = viewModel(viewModelFactory) {}
-    }
-
+    private val scannerViewModel: ScannerViewModel by viewModel()
+    private var simpleScanner: SimpleScannerFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(scannerViewModel) {
             observe(product, ::handleProduct)
-            observe(loading, ::loadingStatus)
-            failure(failure, ::handleFailure)
+            observe(state, ::handleState)
         }
 
         setupScanner()
@@ -61,7 +48,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     private fun handleProduct(product: ProductCompact?) {
         if (product?.id != null) {
             val bundle = bundleOf("id" to product.id)
-            findNavController().navigate(R.id.action_scannerFragment_to_productFragment, bundle)
+            navController.navigate(R.id.action_scannerFragment_to_productFragment, bundle)
         } else {
             showDialog()
         }
@@ -70,10 +57,10 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
     private fun initializeView() {
         tvTitle.text = getString(R.string.barcode)
 
-        actionBack.setOnClickListener { close() }
+        actionBack.setOnClickListener { back() }
     }
 
-    private fun handleFailure(failure: Failure?) {
+    override fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.NetworkConnection -> notify(R.string.failure_network_connection)
@@ -104,7 +91,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
         tryOpenLink(getString(R.string.url_search))
     }
 
-    override fun actionClose() {
+    override fun actionback() {
         simpleScanner?.onResume()
     }
 
@@ -112,6 +99,7 @@ class ScannerFragment : BaseFragment(), ScannerDialogFragment.ScannerDialogListe
         simpleScanner = null
         super.onDestroyView()
     }
+
     companion object {
         const val RC_DIALOG = 33226
     }

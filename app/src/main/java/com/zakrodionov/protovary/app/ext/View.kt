@@ -39,13 +39,11 @@ fun View.visible() = run { visibility = View.VISIBLE }
 
 fun View.gone() = run { visibility = View.GONE }
 
-fun RequestBuilder<Drawable>.setupCV(context: Context)
-        = this.override(500, 450)
-              .optionalCenterCrop()
-              .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_grey))
+fun RequestBuilder<Drawable>.setupCV(context: Context) = this.override(500, 450)
+    .optionalCenterCrop()
+    .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_grey))
 
-fun RequestBuilder<Drawable>.setupCVBig(context: Context)
-        = this.override(750, 500)
+fun RequestBuilder<Drawable>.setupCVBig(context: Context) = this.override(750, 500)
     .optionalCenterCrop()
     .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_grey))
 
@@ -61,31 +59,6 @@ fun ImageView.loadFromUrl(url: String?) =
         .override(900, 600)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
-
-fun ImageView.loadUrlAndPostponeEnterTransition(url: String, activity: androidx.fragment.app.FragmentActivity) {
-    val target: Target<Drawable> = ImageViewBaseTarget(this, activity)
-    Glide.with(context.applicationContext).load(url).into(target)
-}
-
-private class ImageViewBaseTarget(var imageView: ImageView?, var activity: androidx.fragment.app.FragmentActivity?) :
-    BaseTarget<Drawable>() {
-    override fun removeCallback(cb: SizeReadyCallback) {
-        imageView = null
-        activity = null
-    }
-
-    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-        imageView?.setImageDrawable(resource)
-        activity?.supportStartPostponedEnterTransition()
-    }
-
-    override fun onLoadFailed(errorDrawable: Drawable?) {
-        super.onLoadFailed(errorDrawable)
-        activity?.supportStartPostponedEnterTransition()
-    }
-
-    override fun getSize(cb: SizeReadyCallback) = cb.onSizeReady(SIZE_ORIGINAL, SIZE_ORIGINAL)
-}
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {

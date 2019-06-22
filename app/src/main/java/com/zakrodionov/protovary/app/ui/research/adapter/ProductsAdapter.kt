@@ -2,21 +2,19 @@ package com.zakrodionov.protovary.app.ui.research.adapter
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
-import com.zakrodionov.protovary.app.ext.*
+import com.zakrodionov.protovary.app.ext.inflate
+import com.zakrodionov.protovary.app.ext.parseHtml
+import com.zakrodionov.protovary.app.ext.setupCV
+import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
-import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.view.*
-import javax.inject.Inject
 
-class ProductsAdapter
-@Inject constructor() : Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
 
     var collection: MutableList<Product> = mutableListOf()
         set(value) {

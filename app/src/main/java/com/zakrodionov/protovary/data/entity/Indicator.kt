@@ -8,4 +8,4 @@ data class Indicator(
     val name: String?,
     @SerializedName("value")
     val value: String?
-): Serializable
+) : Serializable

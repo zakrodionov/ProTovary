@@ -7,9 +7,8 @@ import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.domain.model.Product
-import javax.inject.Inject
 
-class ProductMapper @Inject constructor(val context: Context) {
+class ProductMapper(val context: Context) {
 
     fun productDetailToProduct(product: ProductDetail, id: Long) =
         Product(
@@ -49,7 +48,6 @@ class ProductMapper @Inject constructor(val context: Context) {
             points = product.points,
             isFavorite = true
         )
-
 
 
     fun productFromStore(product: FavoriteProduct) =
