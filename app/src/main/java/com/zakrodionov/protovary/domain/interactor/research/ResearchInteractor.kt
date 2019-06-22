@@ -27,6 +27,17 @@ class ResearchInteractor(
         }
     }
 
+    suspend fun getResearchesCategory(
+        id: Long,
+        onSuccess: (Researches) -> Unit,
+        onState: (State) -> Unit
+    ) {
+        execute(onState) {
+            val result = researchRepository.getResearchesCategory(id)
+            onSuccess.invoke(result)
+        }
+    }
+
     suspend fun getResearches(
         onSuccess: (List<Researches>) -> Unit,
         onState: (State) -> Unit
@@ -38,17 +49,6 @@ class ResearchInteractor(
                 researchDao.insertResearchesCategory(result)
             }
 
-            onSuccess.invoke(result)
-        }
-    }
-
-    suspend fun getResearchesCategory(
-        id: Long,
-        onSuccess: (Researches) -> Unit,
-        onState: (State) -> Unit
-    ) {
-        execute(onState) {
-            val result = researchRepository.getResearchesCategory(id)
             onSuccess.invoke(result)
         }
     }

@@ -6,7 +6,7 @@ import com.zakrodionov.protovary.domain.model.Product
 
 class FavoritesViewModel(val productInteractor: ProductInteractor) : BaseViewModel() {
 
-    var favoriteProducts = productInteractor.getFavoriteProducts()
+    val favoriteProducts = productInteractor.getFavoriteProducts()
 
     fun actionFavorite(product: Product) {
         launch {

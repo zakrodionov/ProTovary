@@ -18,6 +18,7 @@ import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,38 +26,13 @@ import java.util.concurrent.TimeUnit
 
 val appModule = module {
 
-    //Retrofit
-    single {
-        Retrofit.Builder()
-            .baseUrl(BuildConfig.API_ENDPOINT)
-            .client(get())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+    single { buildRetrofit() }
 
-    //OkHttpClient
-    single {
-        val okHttpClientBuilder = OkHttpClient.Builder()
-        okHttpClientBuilder.connectTimeout(50, TimeUnit.SECONDS)
-        okHttpClientBuilder.readTimeout(50, TimeUnit.SECONDS)
+    single { buildOkHttp() }
 
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            okHttpClientBuilder.addInterceptor(loggingInterceptor)
-            okHttpClientBuilder.addNetworkInterceptor(StethoInterceptor())
-        }
+    single { buildApi() }
 
-        okHttpClientBuilder.build()
-    }
-
-    //Api
-    single {
-        val retrofit: Retrofit by inject()
-        retrofit.create(Api::class.java)
-    }
-
-    //Database
-    single { Room.databaseBuilder(get(), AppDatabase::class.java, "roskachestvo.db").build() }
+    single { buildDataBase() }
 
     single {
         val db: AppDatabase by inject()
@@ -68,7 +44,7 @@ val appModule = module {
         db.productDao
     }
 
-    //Data/Domain layers
+    //Data&Domain layers
     single { NetworkHandler(get()) }
     single { ErrorHandler(get()) }
 
@@ -80,4 +56,34 @@ val appModule = module {
 
     single { ProductMapper(get()) }
 
+}
+
+private fun Scope.buildDataBase() =
+    Room.databaseBuilder(get(), AppDatabase::class.java, "roskachestvo.db").build()
+
+private fun Scope.buildApi(): Api? {
+    val retrofit: Retrofit by inject()
+    return retrofit.create(Api::class.java)
+}
+
+private fun buildOkHttp(): OkHttpClient {
+    val okHttpClientBuilder = OkHttpClient.Builder()
+    okHttpClientBuilder.connectTimeout(50, TimeUnit.SECONDS)
+    okHttpClientBuilder.readTimeout(50, TimeUnit.SECONDS)
+
+    if (BuildConfig.DEBUG) {
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        okHttpClientBuilder.addInterceptor(loggingInterceptor)
+        okHttpClientBuilder.addNetworkInterceptor(StethoInterceptor())
+    }
+
+    return okHttpClientBuilder.build()
+}
+
+private fun Scope.buildRetrofit(): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl(BuildConfig.API_ENDPOINT)
+        .client(get())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 }

@@ -10,6 +10,7 @@
     <string name="failure_network_connection">Отсутствует подключение к интернету</string>
     <string name="failure_server_error">Ошибка при работе с сервером</string>
     <string name="failure_unknown_error">Неопознанная ошибка</string>
+    <string name="failure_null_data_error">Данные отсутствуют</string>
     <string name="action_refresh">Обновить</string>
     <string name="failure_cache_date">Похоже отсутствует подключение к интернету. Достаем данные из кеша.</string>
 
@@ -39,7 +40,7 @@
     <string name="pm_or_browser_not_installed">PlayMarket или браузер не установлен</string>
     <string name="tg_not_installed">Telegram app is not installed</string>
     <string name="tg_package">org.telegram.messenger</string>
-    <string name="tg_my_url">https://t.me/ra1kkonen</string>
+    <string name="tg_my_url">https://t.me/zak1ro</string>
     <string name="pm_link_browser">http://play.google.com/store/apps/details?id=</string>
     <string name="pm_package">market://details?id=</string>
     <string name="share_with">Поделиться с</string>

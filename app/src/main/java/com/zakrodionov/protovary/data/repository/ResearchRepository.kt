@@ -10,12 +10,9 @@ class ResearchRepository(
     private val researchDao: ResearchDao
 ) : BaseRepository() {
 
-    suspend fun getResearches() =
-        request(api.getResearches())
+    suspend fun getResearches() = request(api.getResearches())
 
-    suspend fun getResearch(id: Long) =
-        request(api.getResearch(id))
+    suspend fun getResearch(id: Long) = request(api.getResearch(id))
 
-    suspend fun getResearchesCategory(id: Long): Researches =
-        request(researchDao.getResearchCategoryById(id))
+    suspend fun getResearchesCategory(id: Long): Researches = request(researchDao.getResearchCategoryById(id))
 }

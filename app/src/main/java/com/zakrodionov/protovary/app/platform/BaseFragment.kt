@@ -104,6 +104,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         when (failure) {
             is Failure.ServerError -> notify(R.string.failure_server_error)
             is Failure.UnknownError -> notify(R.string.failure_unknown_error)
+            is Failure.NullDataError -> notify(R.string.failure_null_data_error)
             is Failure.NetworkConnection -> notifyWithAction(
                 R.string.failure_network_connection,
                 R.string.action_refresh,

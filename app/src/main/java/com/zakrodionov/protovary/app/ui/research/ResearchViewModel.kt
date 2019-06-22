@@ -18,7 +18,6 @@ import com.zakrodionov.protovary.domain.model.Product
 
 class ResearchViewModel(
     val id: Long,
-    val researchInteractor: ResearchInteractor,
     val productInteractor: ProductInteractor,
     val productMapper: ProductMapper,
     val context: Context
@@ -74,8 +73,7 @@ class ResearchViewModel(
             BY_PRODUCT_WITH_VIOLATION -> {
                 list.retainAll { it.status == context.getString(R.string.status_violation) }
             }
-            BY_DEFAULT -> {
-            }
+            BY_DEFAULT -> { }
         }
 
         list.retainAll {

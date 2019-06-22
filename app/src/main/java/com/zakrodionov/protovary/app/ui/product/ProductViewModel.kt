@@ -17,7 +17,7 @@ class ProductViewModel(
     val context: Context
 ) : BaseViewModel() {
 
-    var product = MutableLiveData<ProductDetail>()
+    val product = MutableLiveData<ProductDetail>()
     val isFavorite = productInteractor.productIsFavorite(id)
 
     init {
