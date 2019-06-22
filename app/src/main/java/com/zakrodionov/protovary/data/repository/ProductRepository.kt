@@ -16,15 +16,14 @@ class ProductRepository(
 
     suspend fun getProductByBarcode(barcode: String) = request(api.getProductByBarcode(barcode))
 
-    suspend fun getFavoriteProducts() =
-        request(productDao.getFavoriteProducts())
-
-    suspend fun productIsFavorite(id: Long) =
-        request(productDao.productIsFavoriteLive(id))
-
     suspend fun actionFavorite(product: FavoriteProduct) =
         request(productDao.actionFavorite(product))
 
     suspend fun getProductsInfo(id: Long) = request(api.getResearch(id))
 
+    fun getFavoriteProducts() =
+        productDao.getFavoriteProducts()
+
+    fun productIsFavorite(id: Long) =
+        productDao.productIsFavoriteLive(id)
 }

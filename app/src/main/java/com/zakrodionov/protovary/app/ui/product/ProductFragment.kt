@@ -16,28 +16,20 @@ import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
 import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 class ProductFragment : BaseFragment(R.layout.view_product) {
 
-    private val productViewModel: ProductViewModel by viewModel()
     private val productId: Long by argument("id", 0L)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState.isFirstTimeCreated()) {
-            productViewModel.loadProduct(productId)
-        }
-    }
-
+    private val productViewModel: ProductViewModel by viewModel{ parametersOf(productId)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(productViewModel) {
             observe(product, ::renderProduct)
-            observe(isFavoriteMediator, ::renderFavorite)
+            observe(isFavorite, ::renderFavorite)
             observe(message, ::renderMessage)
             observe(state, ::handleState)
         }
@@ -103,16 +95,5 @@ class ProductFragment : BaseFragment(R.layout.view_product) {
         super.onDestroyView()
     }
 
-//    private fun handleFailure(failure: Failure?) {
-//        when (failure) {
-//            is Failure.ServerError -> notify(R.string.failure_server_error)
-//            is Failure.UnknownError -> notify(R.string.failure_unknown_error)
-//            is Failure.NetworkConnection -> notifyWithAction(
-//                R.string.failure_network_connection,
-//                R.string.action_refresh,
-//                { productViewModel.loadProduct(productId) }
-//            )
-//        }
-//    }
-
+    override fun loadData() = productViewModel.loadProduct(productId)
 }

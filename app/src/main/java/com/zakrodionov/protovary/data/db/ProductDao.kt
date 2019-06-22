@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductInfo
-
+/*suspend для LiveData не требуется*/
 @Dao
 interface ProductDao {
 
@@ -12,20 +12,19 @@ interface ProductDao {
     suspend fun insertFavoriteProduct(favoriteProduct: FavoriteProduct)
 
     @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
-    fun productIsFavoriteLive(id: Long): LiveData<Int>
-
-    @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
     suspend fun productIsFavorite(id: Long): Int
 
     @Query("DELETE FROM favoriteproduct WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
+    fun productIsFavoriteLive(id: Long): LiveData<Int>
 
     @Query("SELECT * FROM favoriteproduct ")
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
 
     @Query("SELECT * FROM productinfo ")
     fun getProducts(): LiveData<List<ProductInfo>>
-
 
     @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
     suspend fun updateProducts()

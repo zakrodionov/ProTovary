@@ -1,10 +1,10 @@
 package com.zakrodionov.protovary.domain.interactor.product
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.State
 import com.zakrodionov.protovary.data.db.ProductDao
-import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductCompact
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import com.zakrodionov.protovary.data.entity.ProductDto
@@ -72,36 +72,22 @@ class ProductInteractor(
         }
     }
 
-    suspend fun getFavoriteProducts(
-        onSuccess: (LiveData<List<FavoriteProduct>>) -> Unit,
-        onState: (State) -> Unit
-    ) {
-        execute(onState) {
-            val result = productRepository.getFavoriteProducts()
-            onSuccess.invoke(result)
-        }
-    }
 
     suspend fun actionFavorite(
         product_: Product,
         onSuccess: (Unit) -> Unit = {},
         onState: (State) -> Unit = {}
-    ) {
+    ) =
         execute(onState) {
             val product = productMapper.productToStore(product_)
             val result = productRepository.actionFavorite(product)
             onSuccess.invoke(result)
         }
-    }
 
-    suspend fun productIsFavorite(
-        id: Long,
-        onSuccess: (LiveData<Int>) -> Unit,
-        onState: (State) -> Unit
-    ) {
-        execute(onState) {
-            val result = productRepository.productIsFavorite(id)
-            onSuccess.invoke(result)
-        }
-    }
+
+    /*DB*/
+    fun getFavoriteProducts() = Transformations.map(productRepository.getFavoriteProducts()) { it.map { productMapper.productFromStore(it) } }
+
+    fun productIsFavorite(id: Long) = Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
+
 }
