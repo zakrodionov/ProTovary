@@ -51,16 +51,6 @@ class ProductInteractor(
         }
     }
 
-    suspend fun productIsFavorite(
-        onSuccess: (List<ProductDto>) -> Unit,
-        onState: (State) -> Unit
-    ) {
-        execute(onState) {
-            val result = productRepository.getProductsDto()
-            onSuccess.invoke(result)
-        }
-    }
-
     suspend fun getProductByBarcode(
         id: String,
         onSuccess: (ProductCompact) -> Unit,
@@ -88,6 +78,6 @@ class ProductInteractor(
     /*DB*/
     fun getFavoriteProducts() = Transformations.map(productRepository.getFavoriteProducts()) { it.map { productMapper.productFromStore(it) } }
 
-    fun productIsFavorite(id: Long) = Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
+    fun observeProductIsFavorite(id: Long) = Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
 
 }

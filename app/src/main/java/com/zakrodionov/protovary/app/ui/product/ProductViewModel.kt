@@ -1,10 +1,7 @@
 package com.zakrodionov.protovary.app.ui.product
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import com.zakrodionov.protovary.data.mapper.ProductMapper
@@ -18,7 +15,7 @@ class ProductViewModel(
 ) : BaseViewModel() {
 
     val product = MutableLiveData<ProductDetail>()
-    val isFavorite = productInteractor.productIsFavorite(id)
+    val isFavorite = productInteractor.observeProductIsFavorite(id)
 
     init {
         loadProduct(id)
@@ -27,7 +24,6 @@ class ProductViewModel(
     fun loadProduct(id: Long) {
         launch {
             productInteractor.getProduct(id, ::handleProduct, ::handleState)
-            productInteractor.productIsFavorite(id)
         }
     }
 
