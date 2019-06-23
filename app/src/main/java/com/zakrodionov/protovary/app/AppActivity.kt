@@ -48,11 +48,4 @@ class AppActivity : BaseActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
-
-    override fun onBackPressed() {
-        if (currentNavController?.value?.popBackStack() != true) {
-            super.onBackPressed()
-        }
-    }
-
 }
