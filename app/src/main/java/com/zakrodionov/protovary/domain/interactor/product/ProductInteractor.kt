@@ -7,7 +7,6 @@ import com.zakrodionov.protovary.app.platform.State
 import com.zakrodionov.protovary.data.db.ProductDao
 import com.zakrodionov.protovary.data.entity.ProductCompact
 import com.zakrodionov.protovary.data.entity.ProductDetail
-import com.zakrodionov.protovary.data.entity.ProductDto
 import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.repository.ProductRepository
@@ -56,10 +55,12 @@ class ProductInteractor(
         onSuccess: (ProductCompact) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
+        execute(onState, {
             val result = productRepository.getProductByBarcode(id)
-            onSuccess.invoke(result)
-        }
+            onSuccess.invoke(result[0])
+            },
+            specialBarcodeErrorHandler = id
+        )
     }
 
 

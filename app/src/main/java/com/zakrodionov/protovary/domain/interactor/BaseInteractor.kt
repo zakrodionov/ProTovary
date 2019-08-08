@@ -11,14 +11,27 @@ abstract class BaseInteractor(val errorHandler: ErrorHandler) {
     /*Оборачиваем функцию в try-catch и подвязываем state*/
     protected suspend fun execute(
         onState: (State) -> Unit,
-        func: suspend () -> Unit
-    ) {
+        func: suspend () -> Unit) {
         try {
             onState.invoke(State.Loading)
             func.invoke()
             onState.invoke(State.Loaded)
         } catch (e: Exception) {
             onState.invoke(State.Error(errorHandler.proceedException(e)))
+        }
+    }
+
+    protected suspend fun execute(
+        onState: (State) -> Unit,
+        func: suspend () -> Unit,
+        specialBarcodeErrorHandler: String? = ""
+    ) {
+        try {
+            onState.invoke(State.Loading)
+            func.invoke()
+            onState.invoke(State.Loaded)
+        } catch (e: Exception) {
+            onState.invoke(State.Error(errorHandler.proceedException(e, specialBarcodeErrorHandler)))
         }
     }
 
