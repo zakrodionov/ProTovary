@@ -120,9 +120,15 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun itemClickListener(product: Product) {
-        actionSearch.onActionViewCollapsed()
+        closeSearch()
         val bundle = bundleOf("id" to product.id)
         navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
+    }
+
+    private fun closeSearch(){
+        if (actionSearch.query.isNullOrEmpty()) {
+            actionSearch.onActionViewCollapsed()
+        }
     }
 
     private fun itemClickFavoriteListener(product: Product) {

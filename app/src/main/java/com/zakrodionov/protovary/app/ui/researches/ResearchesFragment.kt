@@ -15,9 +15,10 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
-import kotlinx.android.synthetic.main.toolbar_search.*
+import kotlinx.android.synthetic.main.toolbar_search.actionBack
+import kotlinx.android.synthetic.main.toolbar_search.actionSearch
+import kotlinx.android.synthetic.main.toolbar_search.tvTitle
 import kotlinx.android.synthetic.main.view_researches.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -57,7 +58,7 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
     }
 
     private fun itemClickListener(research: ResearchCompact) {
-        actionSearch.onActionViewCollapsed()
+        closeSearch()
         val bundle = bundleOf("id" to research.id)
         navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
     }
@@ -94,6 +95,12 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
         })
 
         editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+    }
+
+    private fun closeSearch(){
+        if (actionSearch.query.isNullOrEmpty()) {
+            actionSearch.onActionViewCollapsed()
+        }
     }
 
     private fun renderTitle(title: String?) {
