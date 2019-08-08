@@ -75,6 +75,8 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
         simpleScanner?.onPause()
 
         val dialog = ScannerDialogFragment()
+        dialog.isCancelable = true
+
         val bundle = bundleOf("barcode" to barcode)
 
         dialog.arguments = bundle
