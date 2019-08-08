@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app
 import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
-import com.squareup.leakcanary.LeakCanary
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.app.di.appModule
 import com.zakrodionov.protovary.app.di.viewModelModule
@@ -12,15 +11,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
 
         initKoin()
 
@@ -33,8 +27,6 @@ class App : Application() {
 
     private fun initDebugComponents() {
         Stetho.initializeWithDefaults(this)
-        LeakCanary.install(this)
-
     }
 
     private fun initProductionComponents() {

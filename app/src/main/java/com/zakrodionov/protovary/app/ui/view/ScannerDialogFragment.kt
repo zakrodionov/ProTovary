@@ -32,7 +32,7 @@ class ScannerDialogFragment : DialogFragment() {
         } else {
             val text =
                 String.format(getString(R.string.product_not_found_barcode), Utils.formatBarcode(barcode)).parseHtml()
-            view.tvDescription.text = text
+            view.tvDescription.text = "$text ${getString(R.string.product_not_found_input_barcode)}"
         }
 
         listener = targetFragment as? ScannerDialogListener

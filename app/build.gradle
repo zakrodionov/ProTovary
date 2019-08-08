@@ -25,8 +25,8 @@ android {
         applicationId "com.zakrodionov.protovary"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 25
-        versionName "1.06"
+        versionCode 26
+        versionName "1.10"
         setProperty("archivesBaseName", "protovary-$versionName($versionCode)")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -173,11 +173,6 @@ dependencies {
 
     //barcode
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
-
-    //leakcanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

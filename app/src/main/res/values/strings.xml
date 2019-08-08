@@ -65,6 +65,7 @@
     <string name="input_barcode">Введите штрихкод</string>
     <string name="scan_button">Сканировать</string>
     <string name="product_not_found">Товар не найден</string>
+    <string name="product_not_found_input_barcode">\n\nЕсли штрихкод считался неверно, можете ввести его вручную.</string>
     <string name="product_not_found_barcode">Товар по штрихкоду &lt;b>\"%s\"&lt;/b> не найден</string>
 
 
