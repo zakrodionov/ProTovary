@@ -22,7 +22,6 @@ class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-
     internal var clickListener: (Product) -> Unit = {}
     internal var clickFavoriteListener: (Product) -> Unit = {}
 
@@ -34,27 +33,27 @@ class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
 
     override fun getItemCount() = collection.size
 
-
-    inner class ViewHolder(itemView: View) : BaseViewHolder<Product>(itemView) {
+    inner class ViewHolder(containerView: View) : BaseViewHolder<Product>(containerView) {
 
         init {
-            itemView.setOnClickListener { clickListener(item) }
-            itemView.ivActionFavorite.setOnClickListener { clickFavoriteListener(item) }
+            containerView.setOnClickListener { clickListener(item) }
+            containerView.ivActionFavorite.setOnClickListener { clickFavoriteListener(item) }
         }
 
         override fun bind(item: Product) {
             super.bind(item)
 
-            itemView.tvName.text = item.name.parseHtml()
-            itemView.ratingBar.rating = item.points.toFloat()
-            itemView.tvPoints.text = item.points.toString()
-            itemView.tvTrademark.text = item.trademark
-            itemView.ivStatus.setImageResource(item.statusDrawable)
-            itemView.ivActionFavorite.setImageResource(item.favoriteDrawable)
-            itemView.tvTrademark.toggleVisibility(item.name != item.trademark)
+            with(containerView) {
+                tvName.text = item.name.parseHtml()
+                ratingBar.rating = item.points.toFloat()
+                tvPoints.text = item.points.toString()
+                tvTrademark.text = item.trademark
+                ivStatus.setImageResource(item.statusDrawable)
+                ivActionFavorite.setImageResource(item.favoriteDrawable)
+                tvTrademark.toggleVisibility(item.name != item.trademark)
 
-
-            GlideApp.with(itemView.context).load(item.fullImageUrl).setupCV(itemView.context).into(itemView.ivImage)
+                GlideApp.with(context).load(item.fullImageUrl).setupCV(context).into(ivImage)
+            }
         }
     }
 

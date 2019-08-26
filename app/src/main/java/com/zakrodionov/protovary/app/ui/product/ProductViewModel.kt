@@ -9,8 +9,8 @@ import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 
 class ProductViewModel(
     val id: Long,
-    val productInteractor: ProductInteractor,
-    val productMapper: ProductMapper,
+    private val productInteractor: ProductInteractor,
+    private val productMapper: ProductMapper,
     val context: Context
 ) : BaseViewModel() {
 

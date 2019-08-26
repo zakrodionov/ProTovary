@@ -22,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 class ProductFragment : BaseFragment(R.layout.view_product) {
 
     private val productId: Long by argument("id", 0L)
-    private val productViewModel: ProductViewModel by viewModel{ parametersOf(productId)}
+    private val productViewModel: ProductViewModel by viewModel { parametersOf(productId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/progressLayout"
-              android:orientation="vertical"
-              android:gravity="center"
-              android:visibility="gone"
-              tools:visibility="visible"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
->
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progressLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible">
 
     <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:theme="@style/progressBarBlue"
-    />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/ProgressBar.App.Blue" />
 
 </LinearLayout>

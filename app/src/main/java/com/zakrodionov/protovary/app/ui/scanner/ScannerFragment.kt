@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app.ui.scanner
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.tryOpenLink
