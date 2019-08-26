@@ -6,25 +6,25 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
-    private val researchesId: Long by argument("id", 0L)
-    private val researchesViewModel: ResearchesViewModel by viewModel{ parametersOf(researchesId) }
+    private val args: ResearchesFragmentArgs by navArgs()
+    private val researchesId by lazy {  args.researchId }
+    private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
     private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,9 +57,9 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
     }
 
     private fun itemClickListener(research: ResearchCompact) {
-        actionSearch.onActionViewCollapsed()
-        val bundle = bundleOf("id" to research.id)
-        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        closeSearch()
+        val directions = ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
+        navController.navigate(directions)
     }
 
     private fun setupToolbar() {
@@ -94,6 +94,12 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
         })
 
         editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+    }
+
+    private fun closeSearch(){
+        if (actionSearch.query.isNullOrEmpty()) {
+            actionSearch.onActionViewCollapsed()
+        }
     }
 
     private fun renderTitle(title: String?) {

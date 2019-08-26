@@ -9,7 +9,7 @@ import com.zakrodionov.protovary.R
 class DeniedDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(activity!!, R.style.CustomDialogStyle)
+        val builder = AlertDialog.Builder(activity!!, R.style.Dialog_App)
 
         builder.setMessage(R.string.message_denied_barcode)
             .setPositiveButton(R.string.text_positive) { dialog, _ -> dialog.dismiss() }

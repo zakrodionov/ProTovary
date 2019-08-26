@@ -5,10 +5,6 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.NetworkHandler
-import com.zakrodionov.protovary.app.ui.favorites.ProductsFavoriteAdapter
-import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
-import com.zakrodionov.protovary.app.ui.researches.ResearchesAdapter
-import com.zakrodionov.protovary.app.ui.researchescategory.ResearchesCategoryAdapter
 import com.zakrodionov.protovary.data.db.AppDatabase
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.network.Api

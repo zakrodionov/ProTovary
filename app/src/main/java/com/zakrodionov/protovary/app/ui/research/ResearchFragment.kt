@@ -6,13 +6,14 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
+import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
@@ -26,9 +27,10 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortListener {
 
+    private val args: ResearchesFragmentArgs by navArgs()
+    private val researchesId by lazy { args.researchId }
     private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
-    private val idResearch: Long by argument("id", 0L)
-    private val researchViewModel: ResearchViewModel by viewModel{ parametersOf(idResearch) }
+    private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,8 +91,8 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun setupChips() {
-        chipQualityMark.setTextAppearanceResource(R.style.textChipStyle)
-        chipProductViolation.setTextAppearanceResource(R.style.textChipStyle)
+        chipQualityMark.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
+        chipProductViolation.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
 
         chipGroup.isSingleSelection = true
 
@@ -120,9 +122,15 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun itemClickListener(product: Product) {
-        actionSearch.onActionViewCollapsed()
-        val bundle = bundleOf("id" to product.id)
-        navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
+        closeSearch()
+        val action = ResearchFragmentDirections.actionResearchFragmentToProductFragment(product.id)
+        navController.navigate(action)
+    }
+
+    private fun closeSearch() {
+        if (actionSearch.query.isNullOrEmpty()) {
+            actionSearch.onActionViewCollapsed()
+        }
     }
 
     private fun itemClickFavoriteListener(product: Product) {
@@ -130,12 +138,11 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun showBottomDialog() {
-        val bottomSheetDialog =
-            BottomDialogSortFragment.newInstance(
-                researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
-            )
+        val bottomSheetDialog = BottomDialogSortFragment.newInstance(
+            researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
+        )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
-        bottomSheetDialog.show(fragmentManager!!, "Dialog Sort")
+        bottomSheetDialog.show(fragmentManager!!, DIALOG_SORT_TAG)
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
@@ -150,9 +157,10 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
         super.onDestroyView()
     }
 
-    override fun loadData() = researchViewModel.loadResearch(idResearch)
+    override fun loadData() = researchViewModel.loadResearch(researchesId)
 
     companion object {
         const val RC_SORT = 1122
+        const val DIALOG_SORT_TAG = "dialog_sort_tag"
     }
 }

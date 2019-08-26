@@ -3,18 +3,17 @@ package com.zakrodionov.protovary.app.ui.favorites
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import com.zakrodionov.protovary.app.ui.favorites.adapter.ProductsFavoriteAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_favorites.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : BaseFragment(R.layout.view_favorites) {
@@ -44,8 +43,8 @@ class FavoritesFragment : BaseFragment(R.layout.view_favorites) {
     }
 
     private fun itemClickListener(research: Product) {
-        val bundle = bundleOf("id" to research.id)
-        navController.navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
+        val directions = FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(research.id)
+        navController.navigate(directions)
     }
 
     private fun actionFavoriteListener(research: Product) {

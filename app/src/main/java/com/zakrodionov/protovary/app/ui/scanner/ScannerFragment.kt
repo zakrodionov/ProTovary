@@ -3,7 +3,6 @@ package com.zakrodionov.protovary.app.ui.scanner
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.tryOpenLink
@@ -47,8 +46,8 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
 
     private fun handleProduct(product: ProductCompact?) {
         if (product?.id != null) {
-            val bundle = bundleOf("id" to product.id)
-            navController.navigate(R.id.action_scannerFragment_to_productFragment, bundle)
+            val directions = ScannerFragmentDirections.actionScannerFragmentToProductFragment(product.id)
+            navController.navigate(directions)
         } else {
             showDialog()
         }

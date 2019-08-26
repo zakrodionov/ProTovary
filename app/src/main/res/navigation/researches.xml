@@ -1,36 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/researches"
-            app:startDestination="@id/researchesCategoryFragment"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/researches"
+    app:startDestination="@id/researchesCategoryFragment">
 
-    <fragment android:id="@+id/researchesCategoryFragment"
-              android:name="com.zakrodionov.protovary.app.ui.researchescategory.ResearchesCategoryFragment"
-              android:label="ResearchesFragment"
-              app:popUpToInclusive="true"
-              app:launchSingleTop="true"
-    >
-        <action android:id="@+id/action_researchesCategoryFragment_to_researchesFragment"
-                app:destination="@id/researchesFragment"/>
+    <fragment
+        android:id="@+id/researchesCategoryFragment"
+        android:name="com.zakrodionov.protovary.app.ui.researchescategory.ResearchesCategoryFragment"
+        android:label="ResearchesFragment"
+        app:launchSingleTop="true"
+        app:popUpToInclusive="true">
+        <action
+            android:id="@+id/action_researchesCategoryFragment_to_researchesFragment"
+            app:destination="@id/researchesFragment">
+            <argument
+                android:name="researchId"
+                android:defaultValue="0L"
+                app:argType="long" />
+        </action>
     </fragment>
 
-    <fragment android:id="@+id/researchesFragment"
-              android:name="com.zakrodionov.protovary.app.ui.researches.ResearchesFragment"
-              android:label="ResearchesFragment">
-        <action android:id="@+id/action_researchesFragment_to_researchFragment"
-                app:destination="@id/researchFragment"/>
+    <fragment
+        android:id="@+id/researchesFragment"
+        android:name="com.zakrodionov.protovary.app.ui.researches.ResearchesFragment"
+        android:label="ResearchesFragment">
+        <argument
+            android:name="researchId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_researchesFragment_to_researchFragment"
+            app:destination="@id/researchFragment" >
+            <argument
+                android:name="researchId"
+                android:defaultValue="0L"
+                app:argType="long" />
+        </action>
     </fragment>
 
-    <fragment android:id="@+id/researchFragment"
-              android:name="com.zakrodionov.protovary.app.ui.research.ResearchFragment"
-              android:label="ResearchFragment">
-        <action android:id="@+id/action_researchFragment_to_productFragment"
-                app:destination="@id/productFragment"/>
+    <fragment
+        android:id="@+id/researchFragment"
+        android:name="com.zakrodionov.protovary.app.ui.research.ResearchFragment"
+        android:label="ResearchFragment">
+        <argument
+            android:name="researchId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_researchFragment_to_productFragment"
+            app:destination="@id/productFragment">
+            <argument
+                android:name="productId"
+                android:defaultValue="0L"
+                app:argType="long" />
+        </action>
     </fragment>
 
-    <fragment android:id="@+id/productFragment"
-              android:name="com.zakrodionov.protovary.app.ui.product.ProductFragment"
-              android:label="ProductFragment"/>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.zakrodionov.protovary.app.ui.product.ProductFragment"
+        android:label="ProductFragment">
+
+        <argument
+            android:name="productId"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

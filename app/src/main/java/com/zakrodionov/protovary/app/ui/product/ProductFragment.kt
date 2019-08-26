@@ -3,9 +3,9 @@ package com.zakrodionov.protovary.app.ui.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.argument
 import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.parseHtml
@@ -18,11 +18,11 @@ import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-
 class ProductFragment : BaseFragment(R.layout.view_product) {
 
-    private val productId: Long by argument("id", 0L)
-    private val productViewModel: ProductViewModel by viewModel{ parametersOf(productId)}
+    private val args: ProductFragmentArgs by navArgs()
+    private val productId by lazy { args.productId }
+    private val productViewModel: ProductViewModel by viewModel { parametersOf(productId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.tryOpenLink
@@ -12,12 +11,9 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_more.*
 import org.jetbrains.anko.toast
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoreFragment : BaseFragment(R.layout.view_more) {
-
-    private val moreViewModel: MoreViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,9 +35,7 @@ class MoreFragment : BaseFragment(R.layout.view_more) {
         val uri = Uri.parse(getString(R.string.pm_package) + BuildConfig.APPLICATION_ID)
         var intent = Intent(Intent.ACTION_VIEW, uri)
         intent.addFlags(
-            Intent.FLAG_ACTIVITY_NO_HISTORY or
-                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         )
 
         if (intent.resolveActivity(activity!!.packageManager) != null) {
