@@ -5,7 +5,8 @@ import com.zakrodionov.protovary.app.platform.SingleLiveEvent
 import com.zakrodionov.protovary.data.entity.ProductCompact
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 
-class ScannerViewModel(private val productInteractor: ProductInteractor) : BaseViewModel() {
+class ScannerViewModel(val productInteractor: ProductInteractor) :
+    BaseViewModel() {
 
     val product = SingleLiveEvent<ProductCompact>()
 

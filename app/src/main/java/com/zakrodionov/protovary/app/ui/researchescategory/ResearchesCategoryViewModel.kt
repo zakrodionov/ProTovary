@@ -5,7 +5,7 @@ import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 
-class ResearchesCategoryViewModel(private val researchInteractor: ResearchInteractor) : BaseViewModel() {
+class ResearchesCategoryViewModel(val researchInteractor: ResearchInteractor) : BaseViewModel() {
 
     val researches = MutableLiveData<List<Researches>>()
 

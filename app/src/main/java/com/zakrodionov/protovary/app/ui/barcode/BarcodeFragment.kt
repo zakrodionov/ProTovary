@@ -1,14 +1,17 @@
 package com.zakrodionov.protovary.app.ui.barcode
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.view.DeniedDialogFragment
 import com.zakrodionov.protovary.app.ui.view.NeverAskDialogFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.view_barcode.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
@@ -17,8 +20,11 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class BarcodeFragment : BaseFragment(R.layout.view_barcode) {
 
+    private val barcodeViewModel: BarcodeViewModel by viewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeView()
     }
 
@@ -36,24 +42,16 @@ class BarcodeFragment : BaseFragment(R.layout.view_barcode) {
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
     fun onCameraDenied() {
-        DeniedDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        DeniedDialogFragment().show(fragmentManager!!, "tag")
     }
 
     @OnNeverAskAgain(Manifest.permission.CAMERA)
     fun onCameraNeverAskAgain() {
-        NeverAskDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        NeverAskDialogFragment().show(fragmentManager!!, "tag")
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
-    }
-
-    companion object {
-        const val PERMISSION_DIALOG_TAG = "permission_dialog_tag"
     }
 }

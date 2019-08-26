@@ -8,8 +8,11 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import kotlinx.android.synthetic.main.toolbar_back_title.*
 import kotlinx.android.synthetic.main.view_about.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutFragment : BaseFragment(R.layout.view_about) {
+
+    private val aboutViewModel: AboutViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

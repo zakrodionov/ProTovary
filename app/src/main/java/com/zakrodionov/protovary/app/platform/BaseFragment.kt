@@ -47,9 +47,10 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         }
     }
 
-    private fun progressStatus(viewStatusLayout: Int) = view?.let {
-        it.progressLayout?.visibility = viewStatusLayout
-    }
+    private fun progressStatus(viewStatusLayout: Int) =
+        view?.let {
+            it.progressLayout?.visibility = viewStatusLayout
+        }
 
 
     internal fun notify(@StringRes message: Int) {

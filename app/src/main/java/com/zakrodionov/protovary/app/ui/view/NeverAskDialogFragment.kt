@@ -12,7 +12,7 @@ import com.zakrodionov.protovary.R
 class NeverAskDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(activity!!, R.style.Dialog_App)
+        val builder = AlertDialog.Builder(activity!!, R.style.CustomDialogStyle)
 
         builder.setMessage(R.string.message_ask_never_barcode)
             .setPositiveButton(R.string.text_positive) { dialog, _ -> openSettings(); dialog.dismiss() }

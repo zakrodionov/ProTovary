@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#CC000000</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="ic_launcher_background">#3381C9</color>
 
     <color name="silver">#6A8398</color>
+
 
     <color name="blue_light">#176CD3</color>
     <color name="blue_dark">#D20047AB</color>
@@ -19,4 +19,5 @@
     <color name="gray1">#E0E0E0</color>
     <color name="gray2">#80E0E0E0</color>
     <color name="gray3">#9EB8CF</color>
+
 </resources>

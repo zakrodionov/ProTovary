@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 class ProductInteractor(
     private val productDao: ProductDao,
     private val productRepository: ProductRepository,
-    private val productMapper: ProductMapper,
+    val productMapper: ProductMapper,
     errorHandler: ErrorHandler
 ) : BaseInteractor(errorHandler) {
 

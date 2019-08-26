@@ -1,4 +1,4 @@
-package com.zakrodionov.protovary.app.ui.researches.adapter
+package com.zakrodionov.protovary.app.ui.researches
 
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +20,7 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
+
     internal var clickListener: (ResearchCompact) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -31,22 +32,19 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
     override fun getItemCount() = collection.size
 
 
-    inner class ViewHolder(containerView: View) : BaseViewHolder<ResearchCompact>(containerView) {
+    inner class ViewHolder(itemView: View) : BaseViewHolder<ResearchCompact>(itemView) {
 
         init {
-            containerView.setOnClickListener { clickListener(item) }
+            itemView.setOnClickListener { clickListener(item) }
         }
 
         override fun bind(item: ResearchCompact) {
             super.bind(item)
 
             val url = "${Utils.baseImageUrl()}${item.image?.src}"
+            GlideApp.with(itemView.context).load(url).setupCVBig(itemView.context).into(itemView.ivImage)
 
-            with(containerView) {
-                tvName.text = item.name?.trim()
-                GlideApp.with(context).load(url).setupCVBig(context).into(ivImage)
-            }
-
+            itemView.tvName.text = item.name?.trim()
         }
     }
 

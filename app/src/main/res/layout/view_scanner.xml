@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+>
 
-    <fragment
-        android:id="@+id/scanner_fragment"
-        android:name="com.zakrodionov.protovary.app.ui.view.SimpleScannerFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+    <fragment android:name="com.zakrodionov.protovary.app.ui.view.SimpleScannerFragment"
+              android:id="@+id/scanner_fragment"
+              android:layout_weight="1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
 
-
-    <include
-        layout="@layout/toolbar_back_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
 
     <include
-        layout="@layout/progress_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+            layout="@layout/toolbar_back_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+    />
+
+    <include
+            layout="@layout/progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+    />
 </RelativeLayout>
 

@@ -13,12 +13,13 @@ import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
 import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
+import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 import com.zakrodionov.protovary.domain.model.Product
 
 class ResearchViewModel(
     val id: Long,
-    private val productInteractor: ProductInteractor,
-    private val productMapper: ProductMapper,
+    val productInteractor: ProductInteractor,
+    val productMapper: ProductMapper,
     val context: Context
 ) : BaseViewModel() {
 

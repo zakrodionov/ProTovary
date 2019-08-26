@@ -1,25 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/flFragmentContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/flFragmentContainer"
+>
 
     <FrameLayout
-        android:id="@+id/hostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+            android:id="@+id/hostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+    />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="?attr/selectableItemBackgroundBorderless"
-        app:itemIconTint="@drawable/bottom_button_selector"
-        app:itemTextColor="@drawable/bottom_button_selector"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/main_bottom_menu" />
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="?attr/selectableItemBackgroundBorderless"
+            app:itemIconTint="@drawable/bottom_button_selector"
+            app:itemTextColor="@drawable/bottom_button_selector"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/main_bottom_menu"/>
 
 
 </LinearLayout>
