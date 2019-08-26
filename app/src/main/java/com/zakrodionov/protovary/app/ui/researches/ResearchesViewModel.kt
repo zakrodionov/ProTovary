@@ -8,13 +8,13 @@ import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 
 class ResearchesViewModel(
     val id: Long,
-    val researchInteractor: ResearchInteractor
+    private val researchInteractor: ResearchInteractor
 ) : BaseViewModel() {
 
-    var sourceResearches: List<ResearchCompact> = listOf()
     var filteredResearches = MutableLiveData<List<ResearchCompact>>()
     var title = MutableLiveData<String>()
     var queryText = MutableLiveData<String>()
+    private var sourceResearches: List<ResearchCompact> = listOf()
 
     init {
         loadResearchesCategory(id)

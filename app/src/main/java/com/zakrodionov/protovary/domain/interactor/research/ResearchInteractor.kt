@@ -11,8 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ResearchInteractor(
-    val researchRepository: ResearchRepository,
-    val researchDao: ResearchDao,
+    private val researchRepository: ResearchRepository,
+    private val researchDao: ResearchDao,
     errorHandler: ErrorHandler
 ) : BaseInteractor(errorHandler) {
 

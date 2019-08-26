@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/researches"
-            android:icon="@drawable/researches"
-            android:title="@string/researches"
-    />
+        android:id="@+id/researches"
+        android:icon="@drawable/researches"
+        android:title="@string/researches" />
 
     <item
-            android:id="@+id/barcode"
-            android:icon="@drawable/barcode"
-            android:title="@string/barcode"
-    />
+        android:id="@+id/barcode"
+        android:icon="@drawable/barcode"
+        android:title="@string/barcode" />
 
     <item
-            android:id="@+id/favorites"
-            android:icon="@drawable/favorite"
-            android:title="@string/favorites"
-    />
+        android:id="@+id/favorites"
+        android:icon="@drawable/favorite"
+        android:title="@string/favorites" />
 
     <item
-            android:id="@+id/more"
-            android:icon="@drawable/ic_more"
-            android:title="@string/more"
-    />
+        android:id="@+id/more"
+        android:icon="@drawable/ic_more"
+        android:title="@string/more" />
 
 </menu>

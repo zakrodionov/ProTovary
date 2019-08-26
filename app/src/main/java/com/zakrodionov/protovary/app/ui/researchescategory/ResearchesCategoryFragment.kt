@@ -9,6 +9,7 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import com.zakrodionov.protovary.app.ui.researchescategory.adapter.ResearchesCategoryAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -17,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResearchesCategoryFragment : BaseFragment(R.layout.view_researches_category) {
 
-    private val researchesCategoryViewModel: ResearchesCategoryViewModel  by viewModel()
+    private val researchesCategoryViewModel: ResearchesCategoryViewModel by viewModel()
     private val researchesCategoryAdapter: ResearchesCategoryAdapter by lazy { ResearchesCategoryAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,81 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <include
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                layout="@layout/toolbar_search_and_filter"/>
+            layout="@layout/toolbar_search_and_filter"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
 
 
         <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
-                android:layout_width="match_parent"
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipQualityMark"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-        >
+                android:checkable="true"
+                android:text="@string/quality_sign"
+                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                app:chipCornerRadius="15dp"
+                app:chipStrokeColor="@color/blue_light"
+                app:chipStrokeWidth="1dp"
+
+                />
 
             <com.google.android.material.chip.Chip
-                    android:id="@+id/chipQualityMark"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@drawable/chip_bg_selector"
-                    android:checkable="true"
-                    app:chipCornerRadius="15dp"
-                    app:chipStrokeWidth="1dp"
-                    app:chipStrokeColor="@color/blue_light"
-                    android:text="@string/quality_sign"
+                android:id="@+id/chipProductViolation"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/product_with_violent"
+                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                app:chipCornerRadius="15dp"
+                app:chipStrokeColor="@color/blue_light"
+                app:chipStrokeWidth="1dp"
 
-            />
-
-            <com.google.android.material.chip.Chip
-                    android:id="@+id/chipProductViolation"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checkable="true"
-                    app:chipBackgroundColor="@drawable/chip_bg_selector"
-                    app:chipCornerRadius="15dp"
-                    app:chipStrokeColor="@color/blue_light"
-                    app:chipStrokeWidth="1dp"
-                    android:text="@string/product_with_violent"
-
-            />
+                />
 
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvResearch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        />
+            android:id="@+id/rvResearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <TextView
-                android:id="@+id/tvEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="@string/empty_products"
-        />
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/empty_products"
+            android:visibility="gone" />
 
     </LinearLayout>
 
     <include
-            layout="@layout/progress_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-    />
+        layout="@layout/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

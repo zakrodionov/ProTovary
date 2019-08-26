@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <include
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                layout="@layout/toolbar_search"/>
+            layout="@layout/toolbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvResearches"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        />
+            android:id="@+id/rvResearches"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <TextView
-                android:id="@+id/tvEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="@string/empty_researches"
-        />
-    </LinearLayout>
-
-    <include
-            layout="@layout/progress_layout"
+            android:id="@+id/tvEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-    />
+            android:gravity="center"
+            android:text="@string/empty_researches"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

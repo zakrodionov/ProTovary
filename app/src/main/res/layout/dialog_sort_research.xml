@@ -1,105 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingBottom="10dp"
->
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/sort"
-              android:textSize="18sp"
-              android:layout_marginTop="20dp"
-              android:layout_marginStart="20dp"
-              android:textAppearance="@style/textMainBoldStyle"
-    />
-    <View android:layout_width="match_parent"
-          android:layout_marginTop="10dp"
-          android:layout_height="1dp"
-          android:background="@color/gray1"
-    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/sort"
+        android:textAppearance="@style/TextAppearance.App.Bold"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray1" />
 
     <RelativeLayout
-            android:id="@+id/rlRatingDecrease"
-            android:layout_width="match_parent"
+        android:id="@+id/rlRatingDecrease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_sort_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_sort_bg"
-    >
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/by_decrease_rating"
-                  android:textAppearance="@style/textMainWhiteSelectorStyle"
-                  android:layout_marginTop="15dp"
-                  android:layout_marginBottom="15dp"
-                  android:layout_marginStart="20dp"
-                  android:layout_alignParentStart="true"
-                  android:layout_centerVertical="true"
-                  android:duplicateParentState="true"
-        />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:duplicateParentState="true"
+            android:text="@string/by_decrease_rating"
+            android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
+
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_done"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_done" />
 
     </RelativeLayout>
+
     <RelativeLayout
-            android:id="@+id/rlRatingIncrease"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_sort_bg"
+        android:id="@+id/rlRatingIncrease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_sort_bg"
 
-    >
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/by_increase_rating"
-                  android:textAppearance="@style/textMainWhiteSelectorStyle"
-                  android:duplicateParentState="true"
-                  android:layout_marginTop="15dp"
-                  android:layout_marginBottom="15dp"
-                  android:layout_marginStart="20dp"
-                  android:layout_alignParentStart="true"
-                  android:layout_centerVertical="true"
-        />
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:duplicateParentState="true"
+            android:text="@string/by_increase_rating"
+            android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
+
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_done"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_done" />
 
     </RelativeLayout>
-    <RelativeLayout android:id="@+id/rlTradeMark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/item_sort_bg"
 
-    >
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/by_trademark"
-                  android:textAppearance="@style/textMainWhiteSelectorStyle"
-                  android:duplicateParentState="true"
-                  android:layout_marginTop="15dp"
-                  android:layout_marginBottom="15dp"
-                  android:layout_marginStart="20dp"
-                  android:layout_alignParentStart="true"
-                  android:layout_centerVertical="true"
-        />
+    <RelativeLayout
+        android:id="@+id/rlTradeMark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_sort_bg"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:duplicateParentState="true"
+            android:text="@string/by_trademark"
+            android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
+
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_done"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_done" />
 
     </RelativeLayout>
 

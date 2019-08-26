@@ -4,7 +4,7 @@ import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.model.Product
 
-class FavoritesViewModel(val productInteractor: ProductInteractor) : BaseViewModel() {
+class FavoritesViewModel(private val productInteractor: ProductInteractor) : BaseViewModel() {
 
     val favoriteProducts = productInteractor.getFavoriteProducts()
 

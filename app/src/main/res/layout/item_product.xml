@@ -1,95 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   xmlns:tools="http://schemas.android.com/tools"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="150dp"
-                                   app:cardElevation="3dp"
-                                   app:cardCornerRadius="5dp"
-                                   android:foreground="?android:attr/selectableItemBackground"
-                                   android:clickable="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <ImageView
-                android:layout_height="match_parent"
-                android:id="@+id/ivImage"
-                android:layout_width="150dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:padding="5dp"/>
+            android:id="@+id/ivImage"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/tvName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/textTitleItemStyle"
-                tools:text="Example"
-                android:layout_margin="5dp"
-                android:textAlignment="viewStart"
-                android:ellipsize="end"
-                android:maxLines="5"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivImage"
-                app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
-        />
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.App"
+            app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
+            app:layout_constraintStart_toEndOf="@id/ivImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Example" />
 
         <TextView
-                android:id="@+id/tvTrademark"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:textSize="14sp"
-                tools:text="Example"
-                android:textAlignment="viewStart"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:ellipsize="end"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintTop_toBottomOf="@id/tvName"
-                app:layout_constraintStart_toEndOf="@id/ivImage"
-                app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
-                app:layout_constraintBottom_toTopOf="@id/ratingBar"
-        />
+            android:id="@+id/tvTrademark"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/ratingBar"
+            app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
+            app:layout_constraintStart_toEndOf="@id/ivImage"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintVertical_bias="0"
+            tools:text="Example" />
+
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/ivStatus"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:padding="5dp"/>
+            android:id="@+id/ivStatus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                android:numStars="5"
-                android:stepSize="0.1"
-                android:isIndicator="true"
-                style="@android:style/Widget.Material.RatingBar.Small"
-                android:layout_margin="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivImage"
-        />
+            android:id="@+id/ratingBar"
+            style="@android:style/Widget.Material.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivImage" />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvPoints"
-                android:layout_margin="5dp"
-                android:textSize="12sp"
-                tools:text="0.9"
-                android:textColor="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ratingBar"
-        />
+            android:id="@+id/tvPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ratingBar"
+            tools:text="0.9" />
+
         <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_favorite"
-                android:id="@+id/ivActionFavorite"
-                android:layout_margin="5dp"
-                android:clickable="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-        />
+            android:id="@+id/ivActionFavorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_favorite" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

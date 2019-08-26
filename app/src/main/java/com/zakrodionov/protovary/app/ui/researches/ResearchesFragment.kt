@@ -7,17 +7,15 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
-import kotlinx.android.synthetic.main.toolbar_search.actionBack
-import kotlinx.android.synthetic.main.toolbar_search.actionSearch
-import kotlinx.android.synthetic.main.toolbar_search.tvTitle
+import kotlinx.android.synthetic.main.toolbar_search.*
 import kotlinx.android.synthetic.main.view_researches.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -25,7 +23,7 @@ import org.koin.core.parameter.parametersOf
 class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
     private val researchesId: Long by argument("id", 0L)
-    private val researchesViewModel: ResearchesViewModel by viewModel{ parametersOf(researchesId) }
+    private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
     private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

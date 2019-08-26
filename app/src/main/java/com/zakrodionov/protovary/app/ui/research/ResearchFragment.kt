@@ -28,7 +28,7 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
 
     private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
     private val idResearch: Long by argument("id", 0L)
-    private val researchViewModel: ResearchViewModel by viewModel{ parametersOf(idResearch) }
+    private val researchViewModel: ResearchViewModel by viewModel { parametersOf(idResearch) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,8 +89,8 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun setupChips() {
-        chipQualityMark.setTextAppearanceResource(R.style.textChipStyle)
-        chipProductViolation.setTextAppearanceResource(R.style.textChipStyle)
+        chipQualityMark.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
+        chipProductViolation.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
 
         chipGroup.isSingleSelection = true
 
@@ -125,7 +125,7 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
         navController.navigate(R.id.action_researchFragment_to_productFragment, bundle)
     }
 
-    private fun closeSearch(){
+    private fun closeSearch() {
         if (actionSearch.query.isNullOrEmpty()) {
             actionSearch.onActionViewCollapsed()
         }
@@ -136,12 +136,11 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
     }
 
     private fun showBottomDialog() {
-        val bottomSheetDialog =
-            BottomDialogSortFragment.newInstance(
-                researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
-            )
+        val bottomSheetDialog = BottomDialogSortFragment.newInstance(
+            researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
+        )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
-        bottomSheetDialog.show(fragmentManager!!, "Dialog Sort")
+        bottomSheetDialog.show(fragmentManager!!, DIALOG_SORT_TAG)
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
@@ -160,5 +159,6 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
 
     companion object {
         const val RC_SORT = 1122
+        const val DIALOG_SORT_TAG = "dialog_sort_tag"
     }
 }

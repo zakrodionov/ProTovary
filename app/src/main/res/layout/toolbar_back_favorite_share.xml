@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="?attr/actionBarSize"
-                                   android:background="@android:color/transparent"
-                                   app:layout_collapseMode="pin"
-                                   app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                                   android:theme="@style/CustomToolbarTheme"
-                                   app:contentInsetEnd="0dp"
-                                   app:contentInsetLeft="0dp"
-                                   app:contentInsetRight="0dp"
-                                   app:contentInsetStart="0dp"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@android:color/transparent"
+    android:theme="@style/ToolbarTheme.App"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
+    app:layout_collapseMode="pin"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-                                                       android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-        <ImageView android:id="@+id/actionBack"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   app:srcCompat="@drawable/ic_arrow_blue"
-                   android:background="?selectableItemBackgroundBorderless"
-                   android:layout_marginStart="20dp"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-        />
+        <ImageView
+            android:id="@+id/actionBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_blue" />
 
         <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:textAppearance="@style/textTitleStyle"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/actionFavorite"
-                app:layout_constraintStart_toEndOf="@id/actionBack"
-        />
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.App.Title"
+            app:layout_constraintEnd_toStartOf="@id/actionFavorite"
+            app:layout_constraintStart_toEndOf="@id/actionBack"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView android:id="@+id/actionShare"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   app:srcCompat="@drawable/ic_share"
-                   android:layout_gravity="end"
-                   android:background="?selectableItemBackgroundBorderless"
-                   android:layout_marginEnd="20dp"
-                   android:gravity="center_vertical"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintEnd_toEndOf="parent"
-        />
+        <ImageView
+            android:id="@+id/actionShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_share" />
 
 
-        <ImageView android:id="@+id/actionFavorite"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   app:srcCompat="@drawable/ic_favorite_border"
-                   android:background="?selectableItemBackgroundBorderless"
-                   android:layout_marginEnd="20dp"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintEnd_toStartOf="@id/actionShare"
-        />
+        <ImageView
+            android:id="@+id/actionFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toStartOf="@id/actionShare"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_favorite_border" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
