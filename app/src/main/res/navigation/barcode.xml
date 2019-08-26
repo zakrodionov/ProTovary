@@ -21,12 +21,23 @@
         android:label="ScannerFragment">
         <action
             android:id="@+id/action_scannerFragment_to_productFragment"
-            app:destination="@id/productFragment" />
+            app:destination="@id/productFragment">
+            <argument
+                android:name="productId"
+                android:defaultValue="0L"
+                app:argType="long" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/productFragment"
         android:name="com.zakrodionov.protovary.app.ui.product.ProductFragment"
-        android:label="ProductFragment" />
+        android:label="ProductFragment">
+
+        <argument
+            android:name="productId"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

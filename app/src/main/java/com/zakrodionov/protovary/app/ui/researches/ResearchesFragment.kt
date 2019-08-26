@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
@@ -22,7 +22,8 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
-    private val researchesId: Long by argument("id", 0L)
+    private val args: ResearchesFragmentArgs by navArgs()
+    private val researchesId by lazy {  args.researchId }
     private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
     private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
 
@@ -57,8 +58,8 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
 
     private fun itemClickListener(research: ResearchCompact) {
         closeSearch()
-        val bundle = bundleOf("id" to research.id)
-        navController.navigate(R.id.action_researchesFragment_to_researchFragment, bundle)
+        val directions = ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
+        navController.navigate(directions)
     }
 
     private fun setupToolbar() {

@@ -43,8 +43,8 @@ class FavoritesFragment : BaseFragment(R.layout.view_favorites) {
     }
 
     private fun itemClickListener(research: Product) {
-        val bundle = bundleOf("id" to research.id)
-        navController.navigate(R.id.action_favoritesFragment_to_productFragment, bundle)
+        val directions = FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(research.id)
+        navController.navigate(directions)
     }
 
     private fun actionFavoriteListener(research: Product) {

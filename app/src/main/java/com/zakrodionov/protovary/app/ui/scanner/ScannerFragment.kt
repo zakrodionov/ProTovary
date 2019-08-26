@@ -46,8 +46,8 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
 
     private fun handleProduct(product: ProductCompact?) {
         if (product?.id != null) {
-            val bundle = bundleOf("id" to product.id)
-            navController.navigate(R.id.action_scannerFragment_to_productFragment, bundle)
+            val directions = ScannerFragmentDirections.actionScannerFragmentToProductFragment(product.id)
+            navController.navigate(directions)
         } else {
             showDialog()
         }
