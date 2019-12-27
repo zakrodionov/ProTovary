@@ -7,8 +7,6 @@ import com.zakrodionov.protovary.data.entity.Research
 import com.zakrodionov.protovary.data.entity.Researches
 import com.zakrodionov.protovary.data.repository.ResearchRepository
 import com.zakrodionov.protovary.domain.interactor.BaseInteractor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ResearchInteractor(
     private val researchRepository: ResearchRepository,
@@ -21,9 +19,8 @@ class ResearchInteractor(
         onSuccess: (Research) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
-            val result = researchRepository.getResearch(id)
-            onSuccess.invoke(result)
+        execute(onSuccess, onState) {
+            researchRepository.getResearch(id)
         }
     }
 
@@ -32,9 +29,8 @@ class ResearchInteractor(
         onSuccess: (Researches) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
-            val result = researchRepository.getResearchesCategory(id)
-            onSuccess.invoke(result)
+        execute(onSuccess, onState) {
+            researchRepository.getResearchesCategory(id)
         }
     }
 
@@ -42,14 +38,12 @@ class ResearchInteractor(
         onSuccess: (List<Researches>) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
+        execute(onSuccess, onState) {
             val result = researchRepository.getResearches()
 
-            withContext(Dispatchers.IO) {
-                researchDao.insertResearchesCategory(result)
-            }
+            researchDao.insertResearchesCategory(result)
 
-            onSuccess.invoke(result)
+            result
         }
     }
 }

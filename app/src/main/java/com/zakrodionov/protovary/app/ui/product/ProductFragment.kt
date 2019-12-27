@@ -8,17 +8,18 @@ import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.observe
+import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.protovary.data.entity.ProductDetail
+import kotlinx.android.synthetic.main.fragment_product.*
 import kotlinx.android.synthetic.main.toolbar_back_favorite_share.*
-import kotlinx.android.synthetic.main.view_product.*
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ProductFragment : BaseFragment(R.layout.view_product) {
+class ProductFragment : BaseFragment(R.layout.fragment_product) {
 
     private val args: ProductFragmentArgs by navArgs()
     private val productId by lazy { args.productId }
@@ -30,8 +31,8 @@ class ProductFragment : BaseFragment(R.layout.view_product) {
         with(productViewModel) {
             observe(product, ::renderProduct)
             observe(isFavorite, ::renderFavorite)
-            observe(message, ::renderMessage)
-            observe(state, ::handleState)
+            observeEvent(message, ::renderMessage)
+            observeEvent(state, ::handleState)
         }
 
         if (productViewModel.product.value == null) {
@@ -61,7 +62,7 @@ class ProductFragment : BaseFragment(R.layout.view_product) {
 
 
     private fun renderProduct(product: ProductDetail?) {
-        ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_ENDPOINT.substringBeforeLast("api/")}${product?.image?.src}")
+        ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_IMAGE_URL}${product?.image?.src}")
         tvTitle.text = product?.name?.parseHtml()
 
         when (product?.status) {
@@ -84,9 +85,9 @@ class ProductFragment : BaseFragment(R.layout.view_product) {
     }
 
     private fun shareProduct(text: String) {
-        val intent = Intent(android.content.Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, text)
+        intent.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
     }
 

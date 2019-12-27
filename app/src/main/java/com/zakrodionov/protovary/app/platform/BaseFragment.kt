@@ -55,11 +55,11 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     internal fun notify(@StringRes message: Int) {
         view?.let {
             snackBar = Snackbar.make(it, message, Snackbar.LENGTH_SHORT)
-            snackBar!!.show()
+            snackBar?.show()
         }
     }
 
-    internal fun notifyWithAction(
+    private fun notifyWithAction(
         @StringRes message: Int,
         @StringRes actionText: Int,
         action: () -> Unit,
@@ -67,9 +67,9 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     ) {
         view?.let {
             snackBar = Snackbar.make(it, message, length)
-            snackBar!!.setAction(actionText) { action.invoke() }
-            snackBar!!.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
-            snackBar!!.show()
+            snackBar?.setAction(actionText) { action.invoke() }
+            snackBar?.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
+            snackBar?.show()
         }
 
     }
@@ -78,7 +78,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         super.onStop()
         hideSoftKeyboard()
     }
-
 
     private fun showSoftKeyboard() {
         view?.let {

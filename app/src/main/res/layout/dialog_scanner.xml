@@ -1,67 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/default_margin_10"
+        android:gravity="center"
+        android:text="@string/product_not_found"
+        android:textAppearance="@style/TextAppearance.App" />
 
-        <TextView
-            android:id="@+id/tvDescription"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_10"
+        android:hint="@string/input_barcode"
+        app:boxStrokeColor="@android:color/black"
+        app:helperText="От 8 до 13 символов"
+        app:helperTextEnabled="true"
+        app:hintTextColor="@android:color/black">
+
+        <com.zakrodionov.protovary.app.ui.view.FixedTextInputEditText
+            android:id="@+id/etBarcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="@string/product_not_found"
-            android:textAppearance="@style/TextAppearance.App" />
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textCursorDrawable="@drawable/cursor_drawable" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/input_barcode"
-            app:boxStrokeColor="@android:color/black"
-            app:helperText="От 8 до 13 символов"
-            app:helperTextEnabled="true"
-            app:hintTextColor="@android:color/black">
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.zakrodionov.protovary.app.ui.view.FixedTextInputEditText
-                android:id="@+id/etBarcode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="numberDecimal"
-                android:maxLength="13"
-                android:maxLines="1"
-                android:textColor="@android:color/black"
-                android:textColorHighlight="@android:color/black"
-                android:textColorHint="@android:color/black"
-                android:textCursorDrawable="@drawable/cursor_drawable" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/actionSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_10"
+        android:background="@drawable/button_ripple"
+        android:text="@string/search"
+        android:textAppearance="@style/TextAppearance.App.WhiteButton" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/actionSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_ripple"
-            android:text="@string/search"
-            android:textAppearance="@style/TextAppearance.App.WhiteButton" />
-
-        <TextView
-            android:id="@+id/actionSearchOnSite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="@string/search_on_site"
-            android:textAppearance="@style/TextAppearance.App.Link" />
-    </LinearLayout>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/actionSearchOnSite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_10"
+        android:layout_marginBottom="@dimen/default_margin_20"
+        android:gravity="center"
+        android:text="@string/search_on_site"
+        android:textAppearance="@style/TextAppearance.App.Link" />
+</LinearLayout>

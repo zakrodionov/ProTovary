@@ -6,10 +6,10 @@ import android.view.View
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.toolbar_back_title.*
-import kotlinx.android.synthetic.main.view_about.*
 
-class AboutFragment : BaseFragment(R.layout.view_about) {
+class AboutFragment : BaseFragment(R.layout.fragment_about) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

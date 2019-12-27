@@ -11,7 +11,7 @@ data class ProductDetail(
     @SerializedName("image")
     val image: Image?,
     @SerializedName("indicators")
-    val indicators: List<Indicator>?,
+    val indicators: List<CommonNameValueData>?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("points")
@@ -19,7 +19,7 @@ data class ProductDetail(
     @SerializedName("producer")
     val producer: String?,
     @SerializedName("properties")
-    val properties: List<Property>?,
+    val properties: List<CommonNameValueData>?,
     @SerializedName("research_results")
     val researchResults: String?,
     @SerializedName("status")

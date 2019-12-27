@@ -3,8 +3,10 @@ package com.zakrodionov.protovary.app.di
 import androidx.room.Room
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.zakrodionov.protovary.BuildConfig
+import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.NetworkHandler
+import com.zakrodionov.protovary.app.platform.ResourceManager
 import com.zakrodionov.protovary.data.db.AppDatabase
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.network.Api
@@ -28,16 +30,14 @@ val appModule = module {
 
     single { buildApi() }
 
-    single { buildDataBase() }
+    single { buildDataBase(get()) }
 
     single {
-        val db: AppDatabase by inject()
-        db.researchDao
+        get<AppDatabase>().researchDao
     }
 
     single {
-        val db: AppDatabase by inject()
-        db.productDao
+        get<AppDatabase>().productDao
     }
 
     //Data&Domain layers
@@ -51,11 +51,12 @@ val appModule = module {
     single { ResearchInteractor(get(), get(), get()) }
 
     single { ProductMapper(get()) }
+    single { ResourceManager(get()) }
 
 }
 
-private fun Scope.buildDataBase() =
-    Room.databaseBuilder(get(), AppDatabase::class.java, "roskachestvo.db").build()
+private fun Scope.buildDataBase(resourceManager: ResourceManager) =
+    Room.databaseBuilder(get(), AppDatabase::class.java, resourceManager.getString(R.string.db_name)).build()
 
 private fun Scope.buildApi(): Api? {
     val retrofit: Retrofit by inject()

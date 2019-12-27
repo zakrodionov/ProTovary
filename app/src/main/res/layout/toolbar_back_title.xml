@@ -3,19 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@android:color/white"
-    android:elevation="5dp"
+    android:elevation="@dimen/toolbar_elevation_5"
     app:contentInsetEnd="0dp"
     app:contentInsetLeft="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetStart="0dp">
-
 
     <ImageView
         android:id="@+id/actionBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/default_start_margin_20"
         android:background="?selectableItemBackgroundBorderless"
         android:gravity="center_vertical"
         app:srcCompat="@drawable/ic_arrow_back_white" />

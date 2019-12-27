@@ -16,6 +16,7 @@ import com.zakrodionov.protovary.app.ext.argument
 import com.zakrodionov.protovary.app.ext.instanceOf
 import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.DescriptionType.*
+import com.zakrodionov.protovary.data.entity.CommonNameValueData
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import kotlinx.android.synthetic.main.view_description.view.*
 import java.io.Serializable
@@ -25,7 +26,11 @@ class DescriptionFragment : Fragment() {
 
     val model: Model by argument("model")
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.view_description, container, false)
 
         when (model.type) {
@@ -42,102 +47,40 @@ class DescriptionFragment : Fragment() {
     private fun getManufacturer(model: Model): Spanned? {
 
         if (model.product.producer.isNullOrEmpty() || model.product.producer == "false") {
-            return SpannableStringBuilder("н/д")
+            return SpannableStringBuilder(getString(R.string.n_a))
         }
 
         return model.product.producer.parseHtml()
     }
 
-    private fun getIndicators(model: Model): SpannableStringBuilder {
+    private fun getIndicators(model: Model) = getNameValueStrings(model.product.indicators)
+
+    private fun getProperties(model: Model) = getNameValueStrings(model.product.properties)
+
+    private fun getNameValueStrings(data: List<CommonNameValueData>?): SpannableStringBuilder {
         val text = SpannableStringBuilder()
 
-        if (model.product.indicators.isNullOrEmpty()) {
-            return SpannableStringBuilder("н/д")
+        if (data.isNullOrEmpty()) {
+            return SpannableStringBuilder(getString(R.string.n_a))
         }
 
-        model.product.indicators.forEach {
-            text.bold { append(it.name?.parseHtml() ?: "н/д") }
-                .append("\n")
-                .append(it.value?.parseHtml() ?: "н/д")
-                .append("\n")
-                .append("\n")
-        }
-
-        return text
-    }
-
-    private fun getProperties(model: Model): SpannableStringBuilder {
-        val text = SpannableStringBuilder()
-
-        if (model.product.properties.isNullOrEmpty()) {
-            return SpannableStringBuilder("н/д")
-        }
-
-        model.product.properties.forEach {
-            text.bold { append(it.name?.parseHtml() ?: "н/д") }
-                .append("\n")
-                .append(it.value?.parseHtml() ?: "н/д")
-                .append("\n")
-                .append("\n")
+        data.forEach {
+            text.bold { append(it.name?.parseHtml() ?: getString(R.string.n_a)) }
+                .append(
+                    getString(
+                        R.string.name_value_template,
+                        it.value?.parseHtml() ?: getString(R.string.n_a)
+                    )
+                )
         }
 
         return text
     }
 
     private fun getDescription(model: Model): SpannableStringBuilder {
+        val pros = getColoredSpan(model.product.pros, R.string.advantages, R.color.blue_light)
+        val cons = getColoredSpan(model.product.cons, R.string.disadvantages, R.color.red_light)
         val text = SpannableStringBuilder()
-        var pros = SpannableStringBuilder()
-
-        if (!model.product.pros.isNullOrEmpty()) {
-            val _pros = StringBuilder("")
-
-            _pros.append("Достоинства")
-                .append("\n")
-
-            model.product.pros.forEach {
-                _pros.append("\u25CF $it")
-                    .append("\n")
-            }
-
-            pros.append("\n")
-
-            pros = SpannableStringBuilder(_pros).apply {
-                setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(activity!!, R.color.blue_light)),
-                    0,
-                    _pros.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
-
-        }
-
-        var cons = SpannableStringBuilder()
-
-        if (!model.product.cons.isNullOrEmpty()) {
-            val _cons = StringBuilder("")
-
-            _cons.append("Недостатки")
-                .append("\n")
-
-            model.product.cons.forEach {
-                _cons.append("\u25CF $it ")
-                    .append("\n")
-            }
-
-            cons = SpannableStringBuilder(_cons).apply {
-                setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(activity!!, R.color.red_light)),
-                    0,
-                    _cons.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
-
-            cons.append("\n")
-
-        }
-
 
         text.append(pros)
             .append(cons)
@@ -147,6 +90,32 @@ class DescriptionFragment : Fragment() {
         return text
     }
 
+    private fun getColoredSpan(
+        strings: List<String>?,
+        title: Int,
+        color: Int
+    ): SpannableStringBuilder {
+        val ssb = SpannableStringBuilder()
+
+        if (!strings.isNullOrEmpty()) {
+
+            val prosText = strings.joinToString(
+                prefix = "${getString(title)}\n",
+                separator = ""
+            ) { getString(R.string.dot_value_template, it) }
+
+            ssb.append(prosText).apply {
+                setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(activity!!, color)),
+                    0,
+                    prosText.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+
+        }
+        return ssb
+    }
     //endregion
 
     data class Model(val product: ProductDetail, val type: DescriptionType) : Serializable

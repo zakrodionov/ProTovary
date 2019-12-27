@@ -22,12 +22,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="40dp">
+                android:paddingBottom="@dimen/default_margin_40">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clActionRate"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/default_margin_50"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -37,9 +37,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="@dimen/default_margin_10"
+                        android:layout_marginTop="@dimen/default_margin_10"
+                        android:layout_marginBottom="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="@dimen/default_margin_8"
                         android:text="@string/rate_app"
                         android:textAppearance="@style/TextAppearance.App"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +72,7 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="1dp"
+                        android:layout_height="@dimen/divider_height"
                         android:background="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clActionSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/default_margin_50"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -92,9 +92,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="@dimen/default_margin_10"
+                        android:layout_marginTop="@dimen/default_margin_10"
+                        android:layout_marginBottom="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="@dimen/default_margin_8"
                         android:text="@string/research_on_site"
                         android:textAppearance="@style/TextAppearance.App"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -127,7 +127,7 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="1dp"
+                        android:layout_height="@dimen/divider_height"
                         android:background="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -137,10 +137,9 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clAboutApp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/default_margin_50"
                     android:clickable="true"
                     android:focusable="true"
-
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <ImageView
@@ -148,9 +147,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="@dimen/default_margin_10"
+                        android:layout_marginTop="@dimen/default_margin_10"
+                        android:layout_marginBottom="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -160,7 +159,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="@dimen/default_margin_8"
                         android:text="@string/about_app"
                         android:textAppearance="@style/TextAppearance.App"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="@dimen/default_margin_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -183,35 +182,25 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="@dimen/big_divider_height"
                     android:background="@color/gray1" />
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:text="Связаться с автором: "-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginStart="14dp"-->
-                <!--android:textAppearance="@style/TextMainStyle"-->
-                <!--/>-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clActionTelegram"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/default_margin_50"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <ImageView
                         android:id="@+id/ivIconTelegram"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="@dimen/icon_tg_size"
+                        android:layout_height="@dimen/icon_tg_size"
                         android:layout_gravity="start"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="@dimen/default_margin_10"
+                        android:layout_marginTop="@dimen/default_margin_10"
+                        android:layout_marginBottom="@dimen/default_margin_10"
                         android:src="@drawable/ic_telegram2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="@dimen/default_margin_8"
                         android:text="@string/telegram"
                         android:textAppearance="@style/TextAppearance.App"
                         app:layout_constraintBottom_toBottomOf="parent"

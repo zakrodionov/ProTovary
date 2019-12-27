@@ -9,11 +9,11 @@ import kotlinx.coroutines.launch
 /*BaseViewModel для обработки State*/
 abstract class BaseViewModel : ViewModel() {
 
-    val state: MutableLiveData<State> = MutableLiveData()
-    var message: MutableLiveData<String> = SingleLiveEvent()
+    val state: MutableLiveData<Event<State>> = MutableLiveData()
+    val message: MutableLiveData<Event<String>> = MutableLiveData()
 
     protected fun handleState(state: State) {
-        this.state.value = state
+        this.state.value = Event(state)
     }
 
     protected fun launch(func: suspend () -> Unit) = viewModelScope.launch(Dispatchers.Main) { func.invoke() }

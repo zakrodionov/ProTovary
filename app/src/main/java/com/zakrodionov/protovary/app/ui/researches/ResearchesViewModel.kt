@@ -11,9 +11,9 @@ class ResearchesViewModel(
     private val researchInteractor: ResearchInteractor
 ) : BaseViewModel() {
 
-    var filteredResearches = MutableLiveData<List<ResearchCompact>>()
-    var title = MutableLiveData<String>()
-    var queryText = MutableLiveData<String>()
+    val filteredResearches = MutableLiveData<List<ResearchCompact>>()
+    val title = MutableLiveData<String>()
+    val queryText = MutableLiveData<String>()
     private var sourceResearches: List<ResearchCompact> = listOf()
 
     init {
