@@ -15,5 +15,7 @@ object AndroidConfig {
     const val API_DEV_URL = "\"https://rskrf.ru/api/\""
     const val API_PROD_URL = "\"https://rskrf.ru/api/\""
 
+    const val API_IMAGE_URL = "\"https://rskrf.ru/\""
+
     const val APK_NAME = "ProTovary-$VERSION_NAME($VERSION_CODE)"
 }

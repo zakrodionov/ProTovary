@@ -39,7 +39,7 @@ class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortL
             observe(changesListener) { researchViewModel.applyChanges() }
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
-            observe(state, ::handleState)
+            observeEvent(state, ::handleState)
         }
 
         if (researchViewModel.filteredProducts.value == null) {

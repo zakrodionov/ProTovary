@@ -9,14 +9,13 @@
     app:contentInsetRight="0dp"
     app:contentInsetStart="0dp">
 
-
     <TextView
         android:id="@+id/tvToolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
-        android:paddingStart="10dp"
+        android:paddingStart="@dimen/default_margin_10"
+        android:paddingEnd="@dimen/default_margin_10"
         android:textAppearance="@style/TextAppearance.App.Title" />
-
 
 </androidx.appcompat.widget.Toolbar>

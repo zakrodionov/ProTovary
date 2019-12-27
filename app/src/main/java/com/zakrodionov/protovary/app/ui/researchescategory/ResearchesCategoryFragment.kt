@@ -2,12 +2,12 @@ package com.zakrodionov.protovary.app.ui.researchescategory
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
-import com.zakrodionov.protovary.app.ext.toggleVisibility
+import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researchescategory.adapter.ResearchesCategoryAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
@@ -26,7 +26,7 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.view_researches_categor
 
         with(researchesCategoryViewModel) {
             observe(researches, ::renderResearchesList)
-            observe(state, ::handleState)
+            observeEvent(state, ::handleState)
         }
 
         initializeView()
@@ -56,8 +56,8 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.view_researches_categor
     private fun renderResearchesList(research: List<Researches>?) {
         researchesCategoryAdapter.collection = research.orEmpty()
 
-        tvEmpty?.toggleVisibility(research.isNullOrEmpty())
-        rvResearches?.toggleVisibility(!research.isNullOrEmpty())
+        tvEmpty?.isVisible = research.isNullOrEmpty()
+        rvResearches?.isVisible = !research.isNullOrEmpty()
     }
 
     override fun onDestroyView() {

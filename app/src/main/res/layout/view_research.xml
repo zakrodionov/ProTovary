@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -14,13 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="@dimen/default_margin_start_10"
+            android:paddingEnd="@dimen/default_margin_end_10">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipQualityMark"
@@ -30,11 +28,9 @@
                 android:checkable="true"
                 android:text="@string/quality_sign"
                 app:chipBackgroundColor="@drawable/chip_bg_selector"
-                app:chipCornerRadius="15dp"
+                app:chipCornerRadius="@dimen/card_corner_radius_15"
                 app:chipStrokeColor="@color/blue_light"
-                app:chipStrokeWidth="1dp"
-
-                />
+                app:chipStrokeWidth="@dimen/chip_stroke_width" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipProductViolation"
@@ -44,11 +40,9 @@
                 android:checkable="true"
                 android:text="@string/product_with_violent"
                 app:chipBackgroundColor="@drawable/chip_bg_selector"
-                app:chipCornerRadius="15dp"
+                app:chipCornerRadius="@dimen/card_corner_radius_15"
                 app:chipStrokeColor="@color/blue_light"
-                app:chipStrokeWidth="1dp"
-
-                />
+                app:chipStrokeWidth="@dimen/chip_stroke_width" />
 
         </com.google.android.material.chip.ChipGroup>
 

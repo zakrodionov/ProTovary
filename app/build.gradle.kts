@@ -50,6 +50,7 @@ android {
 
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "API_ENDPOINT", AndroidConfig.API_PROD_URL)
+            buildConfigField("String", "API_IMAGE_URL", AndroidConfig.API_IMAGE_URL)
             addManifestPlaceholders(mapOf("enableCrashReporting" to "true"))
         }
         getByName("debug") {
@@ -59,6 +60,7 @@ android {
 
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "API_ENDPOINT", AndroidConfig.API_DEV_URL)
+            buildConfigField("String", "API_IMAGE_URL", AndroidConfig.API_IMAGE_URL)
             addManifestPlaceholders(mapOf("enableCrashReporting" to "false"))
         }
         create("staging") {

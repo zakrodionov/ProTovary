@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.afterTextChanged
@@ -17,7 +18,11 @@ class ScannerDialogFragment : DialogFragment() {
 
     var listener: ScannerDialogListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.dialog_scanner, container, false)
         setupView(view)
 
@@ -25,7 +30,7 @@ class ScannerDialogFragment : DialogFragment() {
     }
 
     private fun setupView(view: View) {
-        val barcode = arguments?.getString("barcode") ?: ""
+        val barcode = arguments?.getString(ARG_BARCODE) ?: ""
 
         if (barcode.isEmpty()) {
             view.tvDescription.text = getString(R.string.product_not_found)
@@ -56,13 +61,22 @@ class ScannerDialogFragment : DialogFragment() {
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
-
-        listener?.actionback()
+        listener?.actionBack()
     }
 
     interface ScannerDialogListener {
         fun actionSearch(text: String)
         fun actionSearchOnSite()
-        fun actionback()
+        fun actionBack()
+    }
+
+    companion object {
+        private const val ARG_BARCODE = "arg_barcode"
+
+        fun newInstance(barcode: String) = ScannerDialogFragment().apply {
+            arguments = bundleOf(
+                ARG_BARCODE to barcode
+            )
+        }
     }
 }

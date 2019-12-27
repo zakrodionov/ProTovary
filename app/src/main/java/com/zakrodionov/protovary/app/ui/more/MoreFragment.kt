@@ -8,12 +8,12 @@ import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.tryOpenLink
 import com.zakrodionov.protovary.app.platform.BaseFragment
+import kotlinx.android.synthetic.main.fragment_more.*
 import kotlinx.android.synthetic.main.toolbar_main.*
-import kotlinx.android.synthetic.main.view_more.*
 import org.jetbrains.anko.toast
 
 
-class MoreFragment : BaseFragment(R.layout.view_more) {
+class MoreFragment : BaseFragment(R.layout.fragment_more) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

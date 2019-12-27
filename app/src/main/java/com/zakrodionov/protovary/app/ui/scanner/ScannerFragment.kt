@@ -2,9 +2,8 @@ package com.zakrodionov.protovary.app.ui.scanner
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.observe
+import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.ext.tryOpenLink
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.Failure
@@ -24,8 +23,8 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
         super.onViewCreated(view, savedInstanceState)
 
         with(scannerViewModel) {
-            observe(product, ::handleProduct)
-            observe(state, ::handleState)
+            observeEvent(product, ::handleProduct)
+            observeEvent(state, ::handleState)
         }
 
         setupScanner()
@@ -73,15 +72,12 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
     private fun showDialog(barcode: String = "") {
         simpleScanner?.onPause()
 
-        val dialog = ScannerDialogFragment()
-        dialog.isCancelable = true
-
-        val bundle = bundleOf("barcode" to barcode)
-
-        dialog.arguments = bundle
-        dialog.setTargetFragment(this, RC_DIALOG)
-        dialog.show(fragmentManager!!, "tag")
-
+        ScannerDialogFragment.newInstance(barcode)
+            .apply {
+                isCancelable = true
+                setTargetFragment(this@ScannerFragment, RC_SCANNER_DIALOG)
+            }
+            .show(fragmentManager!!, TAG_SCANNER_DIALOG)
     }
 
     override fun actionSearch(text: String) {
@@ -92,7 +88,7 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
         tryOpenLink(getString(R.string.url_search))
     }
 
-    override fun actionback() {
+    override fun actionBack() {
         simpleScanner?.onResume()
     }
 
@@ -102,6 +98,7 @@ class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragme
     }
 
     companion object {
-        const val RC_DIALOG = 33226
+        const val RC_SCANNER_DIALOG = 33226
+        const val TAG_SCANNER_DIALOG = "tag_scanner_dialog"
     }
 }

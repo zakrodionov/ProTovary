@@ -7,15 +7,15 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.view.DeniedDialogFragment
 import com.zakrodionov.protovary.app.ui.view.NeverAskDialogFragment
+import kotlinx.android.synthetic.main.fragment_barcode.*
 import kotlinx.android.synthetic.main.toolbar_main.*
-import kotlinx.android.synthetic.main.view_barcode.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
-class BarcodeFragment : BaseFragment(R.layout.view_barcode) {
+class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

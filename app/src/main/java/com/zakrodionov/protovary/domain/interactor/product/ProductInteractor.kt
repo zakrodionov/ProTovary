@@ -12,8 +12,6 @@ import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.repository.ProductRepository
 import com.zakrodionov.protovary.domain.interactor.BaseInteractor
 import com.zakrodionov.protovary.domain.model.Product
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ProductInteractor(
     private val productDao: ProductDao,
@@ -22,15 +20,13 @@ class ProductInteractor(
     errorHandler: ErrorHandler
 ) : BaseInteractor(errorHandler) {
 
-
     suspend fun getProduct(
         id: Long,
         onSuccess: (ProductDetail) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
-            val result = productRepository.getProduct(id)
-            onSuccess.invoke(result)
+        execute(onSuccess, onState) {
+            productRepository.getProduct(id)
         }
     }
 
@@ -39,14 +35,12 @@ class ProductInteractor(
         onSuccess: (LiveData<List<ProductInfo>>) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState) {
+        execute(onSuccess, onState) {
             val result = productRepository.getProductsInfo(id)
+            //Обновляем бд
+            productDao.refreshProducts(result.productInfo ?: listOf())
 
-            withContext(Dispatchers.IO) {
-                productDao.refreshProducts(result.productInfo ?: listOf())
-            }
-
-            onSuccess.invoke(productDao.getProducts())
+            productDao.getProducts()
         }
     }
 
@@ -55,9 +49,10 @@ class ProductInteractor(
         onSuccess: (ProductCompact) -> Unit,
         onState: (State) -> Unit
     ) {
-        execute(onState, {
-            val result = productRepository.getProductByBarcode(id)
-            onSuccess.invoke(result[0])
+        execute(
+            onSuccess, onState, {
+                val result = productRepository.getProductByBarcode(id)
+                result[0]
             },
             specialBarcodeErrorHandler = id
         )
@@ -69,16 +64,19 @@ class ProductInteractor(
         onSuccess: (Unit) -> Unit = {},
         onState: (State) -> Unit = {}
     ) =
-        execute(onState) {
+        execute(onSuccess, onState) {
             val product = productMapper.productToStore(product_)
-            val result = productRepository.actionFavorite(product)
-            onSuccess.invoke(result)
+            productRepository.actionFavorite(product)
         }
 
-
     /*DB*/
-    fun getFavoriteProducts() = Transformations.map(productRepository.getFavoriteProducts()) { it.map { productMapper.productFromStore(it) } }
+    fun getFavoriteProducts() = Transformations.map(productRepository.getFavoriteProducts()) {
+        it.map {
+            productMapper.productFromStore(it)
+        }
+    }
 
-    fun observeProductIsFavorite(id: Long) = Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
+    fun observeProductIsFavorite(id: Long) =
+        Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
 
 }

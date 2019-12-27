@@ -6,11 +6,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.*
+import com.zakrodionov.protovary.app.ext.gone
+import com.zakrodionov.protovary.app.ext.observe
+import com.zakrodionov.protovary.app.ext.observeEvent
+import com.zakrodionov.protovary.app.ext.visible
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
@@ -34,7 +38,7 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
             observe(queryText) { researchesViewModel.applyQueryText() }
-            observe(state, ::handleState)
+            observeEvent(state, ::handleState)
         }
 
         initializeView()
@@ -46,14 +50,15 @@ class ResearchesFragment : BaseFragment(R.layout.view_researches) {
         rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
+
+        researchesAdapter.clickListener = ::itemClickListener
     }
 
     private fun renderResearchesList(researches: List<ResearchCompact>?) {
         researchesAdapter.collection = researches ?: listOf()
-        researchesAdapter.clickListener = ::itemClickListener
 
-        tvEmpty?.toggleVisibility(researches.isNullOrEmpty())
-        rvResearches?.toggleVisibility(!researches.isNullOrEmpty())
+        tvEmpty?.isVisible = researches.isNullOrEmpty()
+        rvResearches?.isVisible = !researches.isNullOrEmpty()
     }
 
     private fun itemClickListener(research: ResearchCompact) {

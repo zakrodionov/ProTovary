@@ -3,21 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="@dimen/default_margin_10">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/default_start_margin_20"
+        android:layout_marginTop="@dimen/default_top_margin_20"
         android:text="@string/sort"
         android:textAppearance="@style/TextAppearance.App.Bold"
         android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/default_margin_10"
         android:background="@color/gray1" />
 
     <RelativeLayout
@@ -31,9 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginStart="@dimen/default_start_margin_20"
+            android:layout_marginTop="@dimen/default_margin_15"
+            android:layout_marginBottom="@dimen/default_margin_15"
             android:duplicateParentState="true"
             android:text="@string/by_decrease_rating"
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/default_end_margin_20"
             android:src="@drawable/ic_done" />
 
     </RelativeLayout>
@@ -52,18 +52,16 @@
         android:id="@+id/rlRatingIncrease"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_sort_bg"
-
-        >
+        android:background="@drawable/item_sort_bg">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginStart="@dimen/default_start_margin_20"
+            android:layout_marginTop="@dimen/default_margin_15"
+            android:layout_marginBottom="@dimen/default_margin_15"
             android:duplicateParentState="true"
             android:text="@string/by_increase_rating"
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
@@ -73,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/default_end_margin_20"
             android:src="@drawable/ic_done" />
 
     </RelativeLayout>
@@ -82,18 +80,16 @@
         android:id="@+id/rlTradeMark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_sort_bg"
-
-        >
+        android:background="@drawable/item_sort_bg">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginStart="@dimen/default_start_margin_20"
+            android:layout_marginTop="@dimen/default_margin_15"
+            android:layout_marginBottom="@dimen/default_margin_15"
             android:duplicateParentState="true"
             android:text="@string/by_trademark"
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
@@ -103,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/default_end_margin_20"
             android:src="@drawable/ic_done" />
 
     </RelativeLayout>

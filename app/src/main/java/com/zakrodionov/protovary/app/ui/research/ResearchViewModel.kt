@@ -22,8 +22,8 @@ class ResearchViewModel(
     val context: Context
 ) : BaseViewModel() {
 
-    var sourceProducts: List<Product>? = null
-    var filteredProducts = MutableLiveData<List<Product>>()
+    private var sourceProducts: List<Product>? = null
+    val filteredProducts = MutableLiveData<List<Product>>()
 
     var sortType = MutableLiveData<ResearchSortType>()
     var filterType = MutableLiveData<ResearchFilterType>()

@@ -67,5 +67,12 @@
     <string name="product_not_found_input_barcode">\n\nЕсли штрихкод считался неверно, можете ввести его вручную.</string>
     <string name="product_not_found_barcode">Товар по штрихкоду &lt;b>\"%s\"&lt;/b> не найден</string>
 
+    <string name="n_a">н/д</string>
+    <string name="advantages">Достоинства</string>
+    <string name="disadvantages">Недостатки</string>
+
+    <string name="name_value_template">\n%s\n\n</string>
+    <string name="dot_value_template">\u25CF %s \n"</string>
+
 
 </resources>

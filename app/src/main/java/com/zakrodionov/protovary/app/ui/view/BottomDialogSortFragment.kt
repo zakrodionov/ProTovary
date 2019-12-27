@@ -15,7 +15,7 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_sort_research, container, false)
-        val type = arguments?.getSerializable("type") ?: BY_RATING_DECREASE
+        val type = arguments?.getSerializable(ARG_SORT_TYPE) ?: BY_RATING_DECREASE
 
         when (type) {
             BY_RATING_DECREASE -> view.rlRatingDecrease.isSelected = true
@@ -25,19 +25,18 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
 
         val parentFragment = targetFragment as? BottomDialogSortListener
 
-        view.rlRatingDecrease.setOnClickListener { parentFragment?.onSortTypeSelected(ResearchSortType.BY_RATING_DECREASE); dismiss() }
-        view.rlRatingIncrease.setOnClickListener { parentFragment?.onSortTypeSelected(ResearchSortType.BY_RATING_INCREASE); dismiss() }
-        view.rlTradeMark.setOnClickListener { parentFragment?.onSortTypeSelected(ResearchSortType.BY_TRADEMARK); dismiss() }
+        view.rlRatingDecrease.setOnClickListener { parentFragment?.onSortTypeSelected(BY_RATING_DECREASE); dismiss() }
+        view.rlRatingIncrease.setOnClickListener { parentFragment?.onSortTypeSelected(BY_RATING_INCREASE); dismiss() }
+        view.rlTradeMark.setOnClickListener { parentFragment?.onSortTypeSelected(BY_TRADEMARK); dismiss() }
 
         return view
     }
 
     companion object {
-        fun newInstance(selectedResearchType: ResearchSortType): BottomDialogSortFragment {
-            val dialog = BottomDialogSortFragment()
-            val bundle = bundleOf("type" to selectedResearchType)
-            dialog.arguments = bundle
-            return dialog
+        private const val ARG_SORT_TYPE = "arg_sort_type"
+
+        fun newInstance(selectedResearchType: ResearchSortType) = BottomDialogSortFragment().apply {
+            arguments = bundleOf(ARG_SORT_TYPE to selectedResearchType)
         }
     }
 

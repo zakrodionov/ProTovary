@@ -2,12 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="@dimen/card_researches_height"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="3dp">
+    app:cardCornerRadius="@dimen/card_corner_radius_5"
+    app:cardElevation="@dimen/card_elevation_3">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,9 +15,9 @@
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/iv_researches_width"
             android:layout_height="match_parent"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="@dimen/default_end_margin_20" />
 
         <TextView
             android:id="@+id/tvName"

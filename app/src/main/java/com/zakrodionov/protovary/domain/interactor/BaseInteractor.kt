@@ -2,37 +2,64 @@ package com.zakrodionov.protovary.domain.interactor
 
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.State
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Zakhar Rodionov on 23.05.19.
  */
 abstract class BaseInteractor(val errorHandler: ErrorHandler) {
 
-    /*Оборачиваем функцию в try-catch и подвязываем state*/
-    protected suspend fun execute(
-        onState: (State) -> Unit,
-        func: suspend () -> Unit) {
+    protected suspend inline fun <T> execute(
+        crossinline onSuccess: (T) -> Unit,
+        crossinline onState: (State) -> Unit,
+        noinline func: suspend () -> T
+    ) {
         try {
-            onState.invoke(State.Loading)
-            func.invoke()
-            onState.invoke(State.Loaded)
+            //Показываем прогресс - главный поток
+            withContext(Dispatchers.Main) {
+                onState.invoke(State.Loading)
+            }
+            //Загрузка, вызов бд, маппинг в IO
+            val result = withContext(Dispatchers.IO) { func.invoke() }
+
+            //Результат и скрытие прогресса - главный поток
+            withContext(Dispatchers.Main) {
+                onSuccess.invoke(result)
+                onState.invoke(State.Loaded)
+            }
         } catch (e: Exception) {
-            onState.invoke(State.Error(errorHandler.proceedException(e)))
+            //Обработка ошибки - главный поток
+            withContext(Dispatchers.Main) {
+                onState.invoke(State.Error(errorHandler.proceedException(e)))
+            }
         }
     }
 
-    protected suspend fun execute(
-        onState: (State) -> Unit,
-        func: suspend () -> Unit,
+    protected suspend inline fun <T> execute(
+        crossinline onSuccess: (T) -> Unit,
+        crossinline onState: (State) -> Unit,
+        noinline func: suspend () -> T,
         specialBarcodeErrorHandler: String? = ""
     ) {
         try {
-            onState.invoke(State.Loading)
-            func.invoke()
-            onState.invoke(State.Loaded)
+            //Показываем прогресс - главный поток
+            withContext(Dispatchers.Main) {
+                onState.invoke(State.Loading)
+            }
+            //Загрузка, вызов бд, маппинг в IO
+            val result = withContext(Dispatchers.IO) { func.invoke() }
+
+            //Результат и скрытие прогресса - главный поток
+            withContext(Dispatchers.Main) {
+                onSuccess.invoke(result)
+                onState.invoke(State.Loaded)
+            }
         } catch (e: Exception) {
-            onState.invoke(State.Error(errorHandler.proceedException(e, specialBarcodeErrorHandler)))
+            //Обработка ошибки - главный поток
+            withContext(Dispatchers.Main) {
+                onState.invoke(State.Error(errorHandler.proceedException(e, specialBarcodeErrorHandler)))
+            }
         }
     }
-
 }

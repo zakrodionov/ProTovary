@@ -33,13 +33,10 @@ class ProductViewModel(
 
     fun actionFavorite(id: Long) {
         launch {
-            if (product.value != null) {
-                val product = productMapper.productDetailToProduct(product.value!!, id)
+            product.value?.let {
+                val product = productMapper.productDetailToProduct(it, id)
                 productInteractor.actionFavorite(product)
             }
-
         }
     }
-
-
 }

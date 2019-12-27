@@ -7,9 +7,7 @@
         android:id="@+id/scanner_fragment"
         android:name="com.zakrodionov.protovary.app.ui.view.SimpleScannerFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
+        android:layout_height="match_parent" />
 
     <include
         layout="@layout/toolbar_back_title"

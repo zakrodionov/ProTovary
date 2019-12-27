@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/ivCollapsingToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/collapsing_toolbar_size"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -33,13 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|bottom"
-                android:layout_marginStart="10dp">
+                android:layout_marginStart="@dimen/default_margin_10">
 
                 <ImageView
                     android:id="@+id/ivStatus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_width="@dimen/logo_status_size"
+                    android:layout_height="@dimen/logo_status_size"
+                    android:padding="@dimen/default_margin_5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +48,7 @@
                     style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="@dimen/default_margin_5"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:stepSize="0.1"
@@ -61,7 +61,7 @@
                     android:id="@+id/tvPoints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="@dimen/default_margin_5"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
