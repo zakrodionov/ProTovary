@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">#CC000000</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorStatusBar">@color/white</color>
 
     <color name="ic_launcher_background">#3381C9</color>
 
     <color name="silver">#6A8398</color>
 
+    <color name="white">#FFFFFF</color>
     <color name="blue_light">#176CD3</color>
     <color name="blue_dark">#D20047AB</color>
     <color name="blue_semi">#E573A8D5</color>

@@ -9,9 +9,9 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/toolbar_search"
+            layout="@layout/toolbar_main"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResearches"
@@ -26,12 +26,12 @@
             android:gravity="center"
             android:text="@string/empty_researches"
             android:visibility="gone" />
+
     </LinearLayout>
 
     <include
-        layout="@layout/progress_layout"
+        layout="@layout/layout_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

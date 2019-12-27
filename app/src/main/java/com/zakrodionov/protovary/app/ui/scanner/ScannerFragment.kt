@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.toolbar_back_title.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ScannerFragment : BaseFragment(R.layout.view_scanner), ScannerDialogFragment.ScannerDialogListener {
+class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFragment.ScannerDialogListener {
 
     private val scannerViewModel: ScannerViewModel by viewModel()
     private var simpleScanner: SimpleScannerFragment? = null

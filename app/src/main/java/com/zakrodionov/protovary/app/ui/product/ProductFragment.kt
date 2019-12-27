@@ -3,13 +3,13 @@ package com.zakrodionov.protovary.app.ui.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.text.parseAsHtml
 import androidx.navigation.fragment.navArgs
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
-import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.protovary.data.entity.ProductDetail
@@ -63,7 +63,7 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
 
     private fun renderProduct(product: ProductDetail?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_IMAGE_URL}${product?.image?.src}")
-        tvTitle.text = product?.name?.parseHtml()
+        tvTitle.text = product?.name?.parseAsHtml()
 
         when (product?.status) {
             getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)

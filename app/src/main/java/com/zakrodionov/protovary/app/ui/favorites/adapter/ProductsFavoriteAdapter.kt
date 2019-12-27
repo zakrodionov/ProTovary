@@ -2,11 +2,11 @@ package com.zakrodionov.protovary.app.ui.favorites.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
-import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ext.setupCV
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
@@ -43,7 +43,7 @@ class ProductsFavoriteAdapter : Adapter<ProductsFavoriteAdapter.ViewHolder>() {
             super.bind(item)
 
             with(containerView) {
-                tvName.text = item.name.parseHtml()
+                tvName.text = item.name.parseAsHtml()
                 ratingBar.rating = item.points.toFloat()
                 tvPoints.text = item.points.toString()
                 tvTrademark.text = item.trademark

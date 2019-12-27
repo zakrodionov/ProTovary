@@ -12,11 +12,11 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researchescategory.adapter.ResearchesCategoryAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.Researches
+import kotlinx.android.synthetic.main.fragment_researches_category.*
 import kotlinx.android.synthetic.main.toolbar_main.*
-import kotlinx.android.synthetic.main.view_researches_category.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ResearchesCategoryFragment : BaseFragment(R.layout.view_researches_category) {
+class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_category) {
 
     private val researchesCategoryViewModel: ResearchesCategoryViewModel by viewModel()
     private val researchesCategoryAdapter: ResearchesCategoryAdapter by lazy { ResearchesCategoryAdapter() }

@@ -10,15 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.argument
 import com.zakrodionov.protovary.app.ext.instanceOf
-import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.DescriptionType.*
 import com.zakrodionov.protovary.data.entity.CommonNameValueData
 import com.zakrodionov.protovary.data.entity.ProductDetail
-import kotlinx.android.synthetic.main.view_description.view.*
+import kotlinx.android.synthetic.main.fragment_description.view.*
 import java.io.Serializable
 
 
@@ -31,7 +31,7 @@ class DescriptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.view_description, container, false)
+        val view = inflater.inflate(R.layout.fragment_description, container, false)
 
         when (model.type) {
             DESCRIPTION -> view.tvDescription.text = getDescription(model)
@@ -50,7 +50,7 @@ class DescriptionFragment : Fragment() {
             return SpannableStringBuilder(getString(R.string.n_a))
         }
 
-        return model.product.producer.parseHtml()
+        return model.product.producer.parseAsHtml()
     }
 
     private fun getIndicators(model: Model) = getNameValueStrings(model.product.indicators)
@@ -65,11 +65,11 @@ class DescriptionFragment : Fragment() {
         }
 
         data.forEach {
-            text.bold { append(it.name?.parseHtml() ?: getString(R.string.n_a)) }
+            text.bold { append(it.name?.parseAsHtml() ?: getString(R.string.n_a)) }
                 .append(
                     getString(
                         R.string.name_value_template,
-                        it.value?.parseHtml() ?: getString(R.string.n_a)
+                        it.value?.parseAsHtml() ?: getString(R.string.n_a)
                     )
                 )
         }
@@ -85,7 +85,7 @@ class DescriptionFragment : Fragment() {
         text.append(pros)
             .append(cons)
             .append("\n")
-            .append(model.product.researchResults?.parseHtml())
+            .append(model.product.researchResults?.parseAsHtml())
 
         return text
     }

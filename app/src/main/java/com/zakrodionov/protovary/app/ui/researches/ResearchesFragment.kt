@@ -19,12 +19,12 @@ import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
 import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
+import kotlinx.android.synthetic.main.fragment_researches.*
 import kotlinx.android.synthetic.main.toolbar_search.*
-import kotlinx.android.synthetic.main.view_researches.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ResearchesFragment : BaseFragment(R.layout.view_researches) {
+class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy {  args.researchId }

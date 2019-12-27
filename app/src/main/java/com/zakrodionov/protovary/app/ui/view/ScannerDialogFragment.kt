@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.text.parseAsHtml
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.afterTextChanged
-import com.zakrodionov.protovary.app.ext.parseHtml
 import com.zakrodionov.protovary.app.util.Utils
 import kotlinx.android.synthetic.main.dialog_scanner.*
 import kotlinx.android.synthetic.main.dialog_scanner.view.*
@@ -36,7 +36,7 @@ class ScannerDialogFragment : DialogFragment() {
             view.tvDescription.text = getString(R.string.product_not_found)
         } else {
             val text =
-                String.format(getString(R.string.product_not_found_barcode), Utils.formatBarcode(barcode)).parseHtml()
+                String.format(getString(R.string.product_not_found_barcode), Utils.formatBarcode(barcode)).parseAsHtml()
             view.tvDescription.text = "$text ${getString(R.string.product_not_found_input_barcode)}"
         }
 
@@ -44,8 +44,8 @@ class ScannerDialogFragment : DialogFragment() {
 
         view.actionSearch.isEnabled = false
 
-        view.etBarcode.afterTextChanged {
-            view.actionSearch.isEnabled = it.length in 8..13
+        view.etBarcode.doAfterTextChanged {
+            view.actionSearch.isEnabled = it?.length in 8..13
         }
 
         view.actionSearch.setOnClickListener {

@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.appContext
-import kotlinx.android.synthetic.main.progress_layout.view.*
+import kotlinx.android.synthetic.main.layout_progress.view.*
 
 /**
  * Base Fragment class with helper methods for handling views and back button events.

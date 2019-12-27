@@ -50,7 +50,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <include
-                    layout="@layout/progress_layout"
+                    layout="@layout/layout_progress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,12 +20,12 @@ import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.domain.model.Product
+import kotlinx.android.synthetic.main.fragment_research.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
-import kotlinx.android.synthetic.main.view_research.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ResearchFragment : BaseFragment(R.layout.view_research), BottomDialogSortListener {
+class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
