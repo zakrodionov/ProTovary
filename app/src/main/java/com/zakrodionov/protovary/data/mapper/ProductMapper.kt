@@ -80,6 +80,6 @@ class ProductMapper(val context: Context) {
         }
     }
 
-    fun fullImageUrl(urlImage: String) = "${Utils.baseImageUrl()}$urlImage"
+    fun fullImageUrl(urlImage: String) = Utils.createImageUrl(urlImage)
 
 }

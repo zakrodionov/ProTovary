@@ -8,7 +8,7 @@ import com.zakrodionov.protovary.app.di.GlideApp
 import com.zakrodionov.protovary.app.ext.inflate
 import com.zakrodionov.protovary.app.ext.setupCVBig
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
-import com.zakrodionov.protovary.app.util.Utils
+import com.zakrodionov.protovary.app.util.Utils.createImageUrl
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.item_researches.view.*
 
@@ -40,7 +40,7 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
         override fun bind(item: ResearchCompact) {
             super.bind(item)
 
-            val url = "${Utils.baseImageUrl()}${item.image?.src}"
+            val url = createImageUrl(item.image?.src)
 
             with(containerView) {
                 tvName.text = item.name?.trim()

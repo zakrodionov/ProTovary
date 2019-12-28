@@ -18,6 +18,6 @@ object Utils {
         }
     }
 
-    fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
+    fun createImageUrl(path: String?) = "${BuildConfig.API_IMAGE_URL}$path"
 
 }
