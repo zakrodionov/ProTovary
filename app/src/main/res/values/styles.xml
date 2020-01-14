@@ -44,6 +44,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextAppearance.App.Bold.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="TextAppearance.App.Chip">
         <item name="android:textColor">@color/chip_selector</item>
         <item name="android:textSize">14sp</item>

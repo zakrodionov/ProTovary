@@ -11,8 +11,7 @@
         android:layout_marginStart="@dimen/default_start_margin_20"
         android:layout_marginTop="@dimen/default_top_margin_20"
         android:text="@string/sort"
-        android:textAppearance="@style/TextAppearance.App.Bold"
-        android:textSize="18sp" />
+        android:textAppearance="@style/TextAppearance.App.Bold.18" />
 
     <View
         android:layout_width="match_parent"

@@ -45,7 +45,7 @@
             android:layout_marginBottom="@dimen/default_margin_5"
             android:ellipsize="end"
             android:textAlignment="viewStart"
-            android:textSize="14sp"
+            android:textSize="@dimen/tv_trademark_size"
             app:layout_constraintBottom_toTopOf="@id/ratingBar"
             app:layout_constraintEnd_toStartOf="@id/ivActionFavorite"
             app:layout_constraintStart_toEndOf="@id/ivImage"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin_5"
             android:textColor="@color/colorAccent"
-            android:textSize="12sp"
+            android:textSize="@dimen/tv_points_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ratingBar"
             tools:text="0.9" />
