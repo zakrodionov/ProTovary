@@ -2,13 +2,19 @@ package com.zakrodionov.protovary.app.ui.research
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
@@ -32,6 +38,16 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
     private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
+        val view = inflater.inflate(R.layout.fragment_research, container, false)
+        return view
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -106,6 +122,11 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
+        postponeEnterTransition()
+        rvResearch.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
         rvResearch.addItemDecoration(ListPaddingDecoration(activity!!))
         rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearch.adapter = productsAdapter
@@ -121,10 +142,15 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         rvResearch?.itemAnimator = null
     }
 
-    private fun itemClickListener(product: Product) {
+    private fun itemClickListener(product: Product, imageView: ImageView) {
         closeSearch()
-        val action = ResearchFragmentDirections.actionResearchFragmentToProductFragment(product.id)
-        navController.navigate(action)
+        //val action = ResearchFragmentDirections.actionResearchFragmentToProductFragment(product.id)
+        val extras = FragmentNavigatorExtras(
+            imageView to product.id.toString()
+        )
+        navController.navigate(R.id.productFragment,
+            bundleOf("productId" to product.id,
+            "imageUrl" to product.fullImageUrl), null, extras)
     }
 
     private fun closeSearch() {

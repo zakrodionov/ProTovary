@@ -23,7 +23,7 @@ class ProductViewModel(
 
     fun loadProduct(id: Long) {
         launch {
-            productInteractor.getProduct(id, ::handleProduct, ::handleState)
+            productInteractor.getProduct(id, ::handleProduct, {})
         }
     }
 

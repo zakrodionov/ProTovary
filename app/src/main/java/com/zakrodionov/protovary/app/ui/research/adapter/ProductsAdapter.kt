@@ -2,7 +2,9 @@ package com.zakrodionov.protovary.app.ui.research.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.text.parseAsHtml
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.zakrodionov.protovary.R
@@ -12,6 +14,7 @@ import com.zakrodionov.protovary.app.ext.setupCV
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.domain.model.Product
+import kotlinx.android.synthetic.main.item_product.*
 import kotlinx.android.synthetic.main.item_product.view.*
 
 class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
@@ -22,7 +25,7 @@ class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-    internal var clickListener: (Product) -> Unit = {}
+    internal var clickListener: (Product, ImageView) -> Unit = {product, iv ->  }
     internal var clickFavoriteListener: (Product) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -36,12 +39,14 @@ class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
     inner class ViewHolder(containerView: View) : BaseViewHolder<Product>(containerView) {
 
         init {
-            containerView.setOnClickListener { clickListener(item) }
+            containerView.setOnClickListener { clickListener(item, ivImage) }
             containerView.ivActionFavorite.setOnClickListener { clickFavoriteListener(item) }
         }
 
         override fun bind(item: Product) {
             super.bind(item)
+
+            ivImage.transitionName = item.id.toString()
 
             with(containerView) {
                 tvName.text = item.name.parseAsHtml()
