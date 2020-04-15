@@ -70,7 +70,7 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
         }
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
-                activity!!,
+                requireActivity(),
                 product,
                 childFragmentManager
             )

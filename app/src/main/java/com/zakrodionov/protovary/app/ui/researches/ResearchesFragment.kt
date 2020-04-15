@@ -46,7 +46,7 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
     }
 
     private fun initializeView() {
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvResearches.addItemDecoration(ListPaddingDecoration(requireActivity()))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
 

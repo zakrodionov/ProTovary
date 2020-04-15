@@ -38,7 +38,7 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
     private fun setupScanner() {
         simpleScanner = childFragmentManager.findFragmentById(R.id.scanner_fragment) as SimpleScannerFragment
 
-        simpleScanner!!.resultListener = {
+        simpleScanner?.resultListener = {
             if (it?.contents != null) {
                 scannerViewModel.loadProduct(it.contents)
             } else {
@@ -81,7 +81,7 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
                 isCancelable = true
                 setTargetFragment(this@ScannerFragment, RC_SCANNER_DIALOG)
             }
-            .show(fragmentManager!!, TAG_SCANNER_DIALOG)
+            .show(requireFragmentManager(), TAG_SCANNER_DIALOG)
     }
 
     override fun actionSearch(text: String) {

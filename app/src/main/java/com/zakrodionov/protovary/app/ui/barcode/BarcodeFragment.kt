@@ -40,12 +40,12 @@ class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
     fun onCameraDenied() {
-        DeniedDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        DeniedDialogFragment().show(requireFragmentManager(), PERMISSION_DIALOG_TAG)
     }
 
     @OnNeverAskAgain(Manifest.permission.CAMERA)
     fun onCameraNeverAskAgain() {
-        NeverAskDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        NeverAskDialogFragment().show(requireFragmentManager(), PERMISSION_DIALOG_TAG)
     }
 
     override fun onRequestPermissionsResult(

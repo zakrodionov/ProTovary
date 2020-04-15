@@ -50,7 +50,7 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
     private fun initializeView() {
         tvToolbarTitle.text = getString(R.string.favorites)
 
-        rvProductsFavorite.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvProductsFavorite.addItemDecoration(ListPaddingDecoration(requireActivity()))
         rvProductsFavorite.layoutManager = LinearLayoutManager(activity)
         rvProductsFavorite.adapter = productsFavoriteAdapter
 

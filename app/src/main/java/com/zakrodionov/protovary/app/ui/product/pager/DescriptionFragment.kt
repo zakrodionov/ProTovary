@@ -109,7 +109,7 @@ class DescriptionFragment : Fragment() {
 
             ssb.append(prosText).apply {
                 setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(activity!!, color)),
+                    ForegroundColorSpan(ContextCompat.getColor(requireActivity(), color)),
                     0,
                     prosText.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

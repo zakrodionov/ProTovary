@@ -36,17 +36,17 @@ class MoreFragment : BaseFragment(R.layout.fragment_more) {
             Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         )
 
-        if (intent.resolveActivity(activity!!.packageManager) != null) {
+        if (intent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(intent)
         } else {
             intent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(getString(R.string.pm_link_browser) + BuildConfig.APPLICATION_ID)
             )
-            if (intent.resolveActivity(activity!!.packageManager) != null) {
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivity(intent)
             } else {
-                activity!!.toast(getString(R.string.pm_or_browser_not_installed))
+                activity?.toast(getString(R.string.pm_or_browser_not_installed))
             }
         }
     }

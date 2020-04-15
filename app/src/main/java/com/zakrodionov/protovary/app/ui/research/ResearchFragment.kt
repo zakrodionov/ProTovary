@@ -110,7 +110,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
-        rvResearch.addItemDecoration(ListPaddingDecoration(activity!!))
+        rvResearch.addItemDecoration(ListPaddingDecoration(requireActivity()))
         rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearch.adapter = productsAdapter
     }
@@ -146,7 +146,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
             researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
         )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
-        bottomSheetDialog.show(fragmentManager!!, DIALOG_SORT_TAG)
+        bottomSheetDialog.show(requireFragmentManager(), DIALOG_SORT_TAG)
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
