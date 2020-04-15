@@ -81,6 +81,7 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
         }
     }
 
+    //todo
     private fun shareProduct(text: String) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"

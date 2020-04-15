@@ -29,6 +29,7 @@ class MoreFragment : BaseFragment(R.layout.fragment_more) {
         clActionSearch.setOnClickListener { tryOpenLink(getString(R.string.url_search)) }
     }
 
+    //todo
     private fun openPlayMarket() {
         val uri = Uri.parse(getString(R.string.pm_package) + BuildConfig.APPLICATION_ID)
         var intent = Intent(Intent.ACTION_VIEW, uri)
@@ -51,6 +52,7 @@ class MoreFragment : BaseFragment(R.layout.fragment_more) {
         }
     }
 
+    //todo
     private fun openTelegram() {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.tg_my_url)))
