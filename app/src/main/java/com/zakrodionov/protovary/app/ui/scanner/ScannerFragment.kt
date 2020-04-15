@@ -15,6 +15,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFragment.ScannerDialogListener {
 
+    companion object {
+        const val RC_SCANNER_DIALOG = 33226
+        const val TAG_SCANNER_DIALOG = "tag_scanner_dialog"
+    }
+
     private val scannerViewModel: ScannerViewModel by viewModel()
     private var simpleScanner: SimpleScannerFragment? = null
 
@@ -94,10 +99,5 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
     override fun onDestroyView() {
         simpleScanner = null
         super.onDestroyView()
-    }
-
-    companion object {
-        const val RC_SCANNER_DIALOG = 33226
-        const val TAG_SCANNER_DIALOG = "tag_scanner_dialog"
     }
 }

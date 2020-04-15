@@ -16,6 +16,16 @@ import kotlinx.android.synthetic.main.dialog_scanner.view.*
 
 class ScannerDialogFragment : DialogFragment() {
 
+    companion object {
+        private const val ARG_BARCODE = "arg_barcode"
+
+        fun newInstance(barcode: String) = ScannerDialogFragment().apply {
+            arguments = bundleOf(
+                ARG_BARCODE to barcode
+            )
+        }
+    }
+
     var listener: ScannerDialogListener? = null
 
     override fun onCreateView(
@@ -68,15 +78,5 @@ class ScannerDialogFragment : DialogFragment() {
         fun actionSearch(text: String)
         fun actionSearchOnSite()
         fun actionBack()
-    }
-
-    companion object {
-        private const val ARG_BARCODE = "arg_barcode"
-
-        fun newInstance(barcode: String) = ScannerDialogFragment().apply {
-            arguments = bundleOf(
-                ARG_BARCODE to barcode
-            )
-        }
     }
 }

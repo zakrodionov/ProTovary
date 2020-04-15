@@ -8,6 +8,11 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 
 class ListPaddingDecoration(@NonNull context: Context) : RecyclerView.ItemDecoration() {
+
+    companion object {
+        private const val PADDING_IN_DIPS = 10.0F
+    }
+
     private val mPadding: Int
 
     init {
@@ -34,9 +39,5 @@ class ListPaddingDecoration(@NonNull context: Context) : RecyclerView.ItemDecora
             outRect.left = mPadding
             outRect.right = mPadding
         }
-    }
-
-    companion object {
-        private const val PADDING_IN_DIPS = 10.0F
     }
 }

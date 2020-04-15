@@ -23,6 +23,10 @@ import kotlinx.android.synthetic.main.fragment_description.view.*
 
 class DescriptionFragment : Fragment() {
 
+    companion object {
+        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
+    }
+
     val model: Model by argument("model")
 
     override fun onCreateView(
@@ -123,9 +127,5 @@ class DescriptionFragment : Fragment() {
         PROPERTIES,
         INDICATORS,
         MANUFACTURER
-    }
-
-    companion object {
-        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
     }
 }
