@@ -55,7 +55,6 @@ class ResearchViewModel(
             sourceProducts = it.map { productMapper.productInfoToProduct(it) }
             applyChanges()
         }
-
     }
 
     fun applyChanges() {
@@ -95,4 +94,3 @@ class ResearchViewModel(
         }
     }
 }
-

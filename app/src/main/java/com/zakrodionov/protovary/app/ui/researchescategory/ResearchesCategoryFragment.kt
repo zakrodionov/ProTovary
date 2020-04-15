@@ -31,11 +31,10 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
 
         initializeView()
 
-        //Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
+        // Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
         if (researchesCategoryViewModel.researches.value == null) {
             loadData()
         }
-
     }
 
     private fun initializeView() {
@@ -66,5 +65,4 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
     }
 
     override fun loadData() = researchesCategoryViewModel.loadResearches()
-
 }

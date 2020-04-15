@@ -87,7 +87,6 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
 
         tvTitle.text = getString(R.string.research)
-
     }
 
     private fun setupChips() {

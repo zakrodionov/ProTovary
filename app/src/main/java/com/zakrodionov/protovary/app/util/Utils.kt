@@ -19,5 +19,4 @@ object Utils {
     }
 
     fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
-
 }

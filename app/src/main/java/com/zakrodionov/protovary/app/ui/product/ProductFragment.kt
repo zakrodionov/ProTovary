@@ -53,13 +53,11 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
             actionFavorite.setImageResource(R.drawable.ic_favorite)
         else
             actionFavorite.setImageResource(R.drawable.ic_favorite_border)
-
     }
 
     private fun renderMessage(message: String?) {
         message?.let { toast(it) }
     }
-
 
     private fun renderProduct(product: ProductDetail?) {
         ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_IMAGE_URL}${product?.image?.src}")
@@ -81,7 +79,6 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
             viewpager.offscreenPageLimit = 4
             tabs.setupWithViewPager(viewpager)
         }
-
     }
 
     private fun shareProduct(text: String) {

@@ -22,12 +22,13 @@ allprojects {
         jcenter()
         mavenCentral()
         maven("https://maven.google.com/")
-        maven ("https://jitpack.io")
+        maven("https://jitpack.io")
     }
 }
 
 plugins {
     id(Libs.gradle_versions_plugin) version Versions.gradle_versions_plugin
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1" // todo
 }
 
 task("clean") {

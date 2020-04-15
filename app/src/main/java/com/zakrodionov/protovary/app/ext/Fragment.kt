@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ext
 
-
 import android.content.Context
 import android.content.Intent
 import android.net.Uri

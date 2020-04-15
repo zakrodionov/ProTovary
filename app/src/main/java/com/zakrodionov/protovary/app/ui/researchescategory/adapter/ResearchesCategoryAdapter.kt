@@ -45,8 +45,6 @@ class ResearchesCategoryAdapter : Adapter<ResearchesCategoryAdapter.ViewHolder>(
                 tvName.text = item.name?.trim()
                 GlideApp.with(context).load(url).setupCVBig(context).into(ivImage)
             }
-
         }
     }
-
 }

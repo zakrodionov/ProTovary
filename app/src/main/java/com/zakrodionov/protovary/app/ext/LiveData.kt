@@ -12,5 +12,5 @@ fun <T : Any?> MutableLiveData<Event<T>>.repeat() = apply {
     }
 }
 
-//Достаем из лайвдаты(со списком) данные по индексу хранящимся в другой лайвдате
-fun <T, L: List<T>> LiveData<L>.getOrNull(liveDataInt: LiveData<Int>) = value?.getOrNull(liveDataInt.value ?: -1)
+// Достаем из лайвдаты(со списком) данные по индексу хранящимся в другой лайвдате
+fun <T, L : List<T>> LiveData<L>.getOrNull(liveDataInt: LiveData<Int>) = value?.getOrNull(liveDataInt.value ?: -1)

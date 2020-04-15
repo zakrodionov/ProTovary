@@ -54,5 +54,4 @@ class ProductsFavoriteAdapter : Adapter<ProductsFavoriteAdapter.ViewHolder>() {
             }
         }
     }
-
 }

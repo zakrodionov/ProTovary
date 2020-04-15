@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_more.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import org.jetbrains.anko.toast
 
-
 class MoreFragment : BaseFragment(R.layout.fragment_more) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,7 +27,6 @@ class MoreFragment : BaseFragment(R.layout.fragment_more) {
         clAboutApp.setOnClickListener { navController.navigate(R.id.action_moreFragment_to_aboutFragment) }
         clActionTelegram.setOnClickListener { openTelegram() }
         clActionSearch.setOnClickListener { tryOpenLink(getString(R.string.url_search)) }
-
     }
 
     private fun openPlayMarket() {
@@ -62,5 +60,4 @@ class MoreFragment : BaseFragment(R.layout.fragment_more) {
             tryOpenLink(getString(R.string.tg_my_url))
         }
     }
-
 }

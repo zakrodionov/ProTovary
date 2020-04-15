@@ -14,7 +14,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
 
-
 fun Int.pxToDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 
 fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -51,4 +50,3 @@ fun ImageView.loadFromUrl(url: String?) =
         .override(900, 600)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
-

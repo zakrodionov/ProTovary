@@ -22,7 +22,6 @@ class ListPaddingDecoration(@NonNull context: Context) : RecyclerView.ItemDecora
             return
         }
 
-
         if (itemPosition < state.itemCount - 1) {
             outRect.top = mPadding
             outRect.left = mPadding
@@ -40,5 +39,4 @@ class ListPaddingDecoration(@NonNull context: Context) : RecyclerView.ItemDecora
     companion object {
         private const val PADDING_IN_DIPS = 10.0F
     }
-
 }

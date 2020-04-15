@@ -21,7 +21,6 @@ class NeverAskDialogFragment : DialogFragment() {
         return builder.create()
     }
 
-
     private fun openSettings() {
         val appSettingsIntent =
             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${activity!!.packageName}"))

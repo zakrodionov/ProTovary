@@ -49,7 +49,6 @@ class ProductMapper(val context: Context) {
             isFavorite = true
         )
 
-
     fun productFromStore(product: FavoriteProduct) =
         Product(
             id = product.id,
@@ -64,7 +63,7 @@ class ProductMapper(val context: Context) {
             statusDrawable = getStatusDrawable(product.status, context)
         )
 
-    //helper methods
+    // helper methods
     fun getStatusDrawable(status: String, context: Context): Int {
         when (status) {
             context.getString(R.string.status_sign) -> return R.drawable.quality_sign
@@ -81,5 +80,4 @@ class ProductMapper(val context: Context) {
     }
 
     fun fullImageUrl(urlImage: String) = "${Utils.baseImageUrl()}$urlImage"
-
 }

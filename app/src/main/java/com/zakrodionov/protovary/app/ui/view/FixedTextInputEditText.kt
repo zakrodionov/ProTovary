@@ -32,7 +32,6 @@ class FixedTextInputEditText : TextInputEditText {
             } catch (e: Exception) {
                 super.getHint()
             }
-
         }
     }
 }

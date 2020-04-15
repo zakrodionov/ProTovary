@@ -29,7 +29,6 @@ class AppActivity : BaseActivity() {
         setupBottomNavigationBar()
     }
 
-
     private fun setupBottomNavigationBar() {
         val navGraphIds =
             listOf(R.navigation.researches, R.navigation.barcode, R.navigation.favorites, R.navigation.more)

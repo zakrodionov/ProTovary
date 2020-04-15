@@ -17,5 +17,4 @@ val viewModelModule = module {
     viewModel { (id: Long) -> ResearchesViewModel(id, get()) }
     viewModel { ResearchesCategoryViewModel(get()) }
     viewModel { ScannerViewModel(get()) }
-
 }

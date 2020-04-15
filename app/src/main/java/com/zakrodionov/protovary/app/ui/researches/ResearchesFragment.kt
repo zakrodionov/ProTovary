@@ -27,7 +27,7 @@ import org.koin.core.parameter.parametersOf
 class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private val args: ResearchesFragmentArgs by navArgs()
-    private val researchesId by lazy {  args.researchId }
+    private val researchesId by lazy { args.researchId }
     private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
     private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
 
@@ -44,7 +44,6 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         initializeView()
         setupToolbar()
     }
-
 
     private fun initializeView() {
         rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
@@ -101,7 +100,7 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
-    private fun closeSearch(){
+    private fun closeSearch() {
         if (actionSearch.query.isNullOrEmpty()) {
             actionSearch.onActionViewCollapsed()
         }
@@ -116,5 +115,5 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         super.onDestroyView()
     }
 
-    override fun loadData() =  researchesViewModel.loadResearchesCategory(researchesId)
+    override fun loadData() = researchesViewModel.loadResearchesCategory(researchesId)
 }

@@ -13,7 +13,6 @@ import com.zakrodionov.protovary.data.entity.ProductCompact
 import kotlinx.android.synthetic.main.toolbar_back_title.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFragment.ScannerDialogListener {
 
     private val scannerViewModel: ScannerViewModel by viewModel()

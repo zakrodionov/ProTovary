@@ -15,5 +15,4 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract val researchDao: ResearchDao
     abstract val productDao: ProductDao
-
 }

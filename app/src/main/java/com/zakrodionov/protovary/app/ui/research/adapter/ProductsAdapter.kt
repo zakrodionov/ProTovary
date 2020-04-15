@@ -65,5 +65,4 @@ class ProductsAdapter : Adapter<ProductsAdapter.ViewHolder>() {
         collection.addAll(products)
         diffResult.dispatchUpdatesTo(this)
     }
-
 }

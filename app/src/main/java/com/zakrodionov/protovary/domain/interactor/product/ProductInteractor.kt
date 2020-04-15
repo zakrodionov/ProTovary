@@ -37,7 +37,7 @@ class ProductInteractor(
     ) {
         execute(onSuccess, onState) {
             val result = productRepository.getProductsInfo(id)
-            //Обновляем бд
+            // Обновляем бд
             productDao.refreshProducts(result.productInfo ?: listOf())
 
             productDao.getProducts()
@@ -58,7 +58,6 @@ class ProductInteractor(
         )
     }
 
-
     suspend fun actionFavorite(
         product_: Product,
         onSuccess: (Unit) -> Unit = {},
@@ -78,5 +77,4 @@ class ProductInteractor(
 
     fun observeProductIsFavorite(id: Long) =
         Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
-
 }

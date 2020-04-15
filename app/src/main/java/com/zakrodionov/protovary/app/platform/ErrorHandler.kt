@@ -1,9 +1,9 @@
 package com.zakrodionov.protovary.app.platform
 
 import com.zakrodionov.protovary.app.platform.Failure.*
-import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.util.concurrent.CancellationException
+import retrofit2.HttpException
 
 class ErrorHandler(private val networkHandler: NetworkHandler) {
 

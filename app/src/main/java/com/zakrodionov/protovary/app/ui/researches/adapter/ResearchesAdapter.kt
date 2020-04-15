@@ -30,7 +30,6 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
 
     override fun getItemCount() = collection.size
 
-
     inner class ViewHolder(containerView: View) : BaseViewHolder<ResearchCompact>(containerView) {
 
         init {
@@ -46,8 +45,6 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
                 tvName.text = item.name?.trim()
                 GlideApp.with(context).load(url).setupCVBig(context).into(ivImage)
             }
-
         }
     }
-
 }
