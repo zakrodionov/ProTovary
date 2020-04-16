@@ -6,7 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.app.ui.research.adapter.ResearchDescriptionItem
+import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType

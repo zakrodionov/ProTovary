@@ -11,7 +11,7 @@ import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.ext.setData
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.DiffItem
-import com.zakrodionov.protovary.app.ui.research.adapter.productDelegate
+import com.zakrodionov.protovary.app.ui.research.delegates.productDelegate
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.toolbar_main.*

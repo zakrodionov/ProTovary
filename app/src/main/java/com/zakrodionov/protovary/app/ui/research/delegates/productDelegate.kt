@@ -1,4 +1,4 @@
-package com.zakrodionov.protovary.app.ui.research.adapter
+package com.zakrodionov.protovary.app.ui.research.delegates
 
 import androidx.core.text.parseAsHtml
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
