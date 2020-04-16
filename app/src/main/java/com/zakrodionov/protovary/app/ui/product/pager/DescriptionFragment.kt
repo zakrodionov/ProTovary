@@ -18,8 +18,8 @@ import com.zakrodionov.protovary.app.ext.instanceOf
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionFragment.DescriptionType.*
 import com.zakrodionov.protovary.data.entity.CommonNameValueData
 import com.zakrodionov.protovary.data.entity.ProductDetail
-import java.io.Serializable
 import kotlinx.android.synthetic.main.fragment_description.view.*
+import java.io.Serializable
 
 class DescriptionFragment : Fragment() {
 

@@ -14,13 +14,13 @@ import com.zakrodionov.protovary.data.repository.ProductRepository
 import com.zakrodionov.protovary.data.repository.ResearchRepository
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
-import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val appModule = module {
 
