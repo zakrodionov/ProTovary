@@ -67,8 +67,15 @@ object Versions {
 
     //Permission
     const val permissions_dispatcher = "4.3.0"
+
     //Barcode
     const val barcode = "1.9.13"
+
+    //AdapterDelegates
+    const val adapter_delegates = "4.3.0"
+
+    //ExpandableLayout
+    const val expandable_layout = "1.0.5"
 
     //Test
     const val junit = "4.12"

@@ -81,6 +81,13 @@ object Libs {
     //Barcode
     const val barcode = "me.dm7.barcodescanner:zbar:${Versions.barcode}"
 
+    //AdapterDelegates
+    const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates}"
+    const val adapter_delegates_dsl = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates}"
+
+    //ExpandableLayout
+    const val expandable_layout = "com.github.skydoves:expandablelayout:${Versions.expandable_layout}"
+
     //Test
     const val junit = "junit:junit:${Versions.junit}"
     const val junit_ext = "androidx.test.ext:junit:${Versions.test_ext_junit}"

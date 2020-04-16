@@ -1,6 +1,7 @@
 package com.zakrodionov.protovary.domain.model
 
 import androidx.annotation.DrawableRes
+import com.zakrodionov.protovary.app.platform.DiffItem
 import java.io.Serializable
 
 data class Product(
@@ -12,9 +13,13 @@ data class Product(
     val trademark: String,
     val isFavorite: Boolean?,
 
+    //todo
     var fullImageUrl: String,
     @DrawableRes
     var favoriteDrawable: Int,
     @DrawableRes
     var statusDrawable: Int
-) : Serializable
+) : Serializable, DiffItem {
+    override val itemId = id.toString()
+    override val itemHash = hashCode()
+}

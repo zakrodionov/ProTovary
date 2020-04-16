@@ -163,6 +163,13 @@ dependencies {
     // Barcode
     implementation(Libs.barcode)
 
+    //AdapterDelegates
+    implementation(Libs.adapter_delegates)
+    implementation(Libs.adapter_delegates_dsl)
+
+    //ExpandableLayout
+    implementation(Libs.expandable_layout)
+
     // Test
     testImplementation(Libs.junit)
     testImplementation(Libs.mockito_core)

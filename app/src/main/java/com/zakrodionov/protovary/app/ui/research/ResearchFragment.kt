@@ -9,10 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
+import com.zakrodionov.protovary.app.platform.DiffCallback
+import com.zakrodionov.protovary.app.platform.DiffItem
+import com.zakrodionov.protovary.app.ui.research.adapter.ResearchDescriptionItem
+import com.zakrodionov.protovary.app.ui.research.adapter.productDelegate
+import com.zakrodionov.protovary.app.ui.research.adapter.researchDescriptionDelegate
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
@@ -34,7 +39,14 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
-    private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
+    private val productsAdapter by lazy {
+        AsyncListDifferDelegationAdapter(
+            DiffCallback,
+            productDelegate(::itemClickListener, ::itemClickFavoriteListener),
+            researchDescriptionDelegate()
+        )
+    }
+
     private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,7 +101,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
             }
         })
 
-        editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.onFocusChangeListener =
+            View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
 
         tvTitle.text = getString(R.string.research)
     }
@@ -116,13 +129,17 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun renderProductsList(products: List<Product>?) {
-        productsAdapter.updateUsingDiffUtil(products ?: listOf())
-        productsAdapter.clickListener = ::itemClickListener
-        productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
-
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-        rvResearch?.itemAnimator = null
+       // rvResearch?.itemAnimator = null
+
+        //todo
+        val temp = mutableListOf<DiffItem>().apply {
+            add(ResearchDescriptionItem("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
+            addAll(products ?: listOf())
+        }
+
+        productsAdapter.items = temp
     }
 
     private fun itemClickListener(product: Product) {
