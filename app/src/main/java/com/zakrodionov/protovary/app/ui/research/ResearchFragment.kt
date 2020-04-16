@@ -16,7 +16,6 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.DiffCallback
-import com.zakrodionov.protovary.app.platform.DiffItem
 import com.zakrodionov.protovary.app.ui.research.adapter.ResearchDescriptionItem
 import com.zakrodionov.protovary.app.ui.research.adapter.productDelegate
 import com.zakrodionov.protovary.app.ui.research.adapter.researchDescriptionDelegate
@@ -30,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_research.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 

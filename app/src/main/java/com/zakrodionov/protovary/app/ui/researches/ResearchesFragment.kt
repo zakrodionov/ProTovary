@@ -17,7 +17,6 @@ import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.ext.visible
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.fragment_researches.*
 import kotlinx.android.synthetic.main.toolbar_search.*
@@ -46,7 +45,6 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
     }
 
     private fun initializeView() {
-        rvResearches.addItemDecoration(ListPaddingDecoration(requireActivity()))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesAdapter
 

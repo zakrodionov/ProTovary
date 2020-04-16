@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
+import com.zakrodionov.protovary.app.ext.customBigSizeCropPlaceholder
 import com.zakrodionov.protovary.app.ext.inflate
-import com.zakrodionov.protovary.app.ext.setupCVBig
+import com.zakrodionov.protovary.app.ext.loadFromUrl
+import com.zakrodionov.protovary.app.ext.toFullImageUrl
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.app.util.Utils
 import com.zakrodionov.protovary.data.entity.ResearchCompact
@@ -39,11 +41,11 @@ class ResearchesAdapter : Adapter<ResearchesAdapter.ViewHolder>() {
         override fun bind(item: ResearchCompact) {
             super.bind(item)
 
-            val url = "${Utils.baseImageUrl()}${item.image?.src}"
+            val url = item.image?.src?.toFullImageUrl()
 
             with(containerView) {
                 tvName.text = item.name?.trim()
-                GlideApp.with(context).load(url).setupCVBig(context).into(ivImage)
+                ivImage.loadFromUrl(url) { customBigSizeCropPlaceholder(context) }
             }
         }
     }

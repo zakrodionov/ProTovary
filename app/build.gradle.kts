@@ -116,7 +116,7 @@ dependencies {
     implementation(Libs.jdk8)
     implementation(Libs.coroutines)
 
-    // /Networking
+    // Networking
     implementation(Libs.retrofit)
     implementation(Libs.gson)
     implementation(Libs.okhttp_logging_interceptor)
@@ -163,15 +163,15 @@ dependencies {
     // Barcode
     implementation(Libs.barcode)
 
-    //AdapterDelegates
+    // AdapterDelegates
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
 
-    //ExpandableLayout
+    // ExpandableLayout
     implementation(Libs.expandable_layout)
 
-    implementation("org.sufficientlysecure:html-textview:3.9")
-
+    // Html textview
+    implementation(Libs.html_textview)
 
     // Test
     testImplementation(Libs.junit)

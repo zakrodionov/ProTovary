@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.product
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.text.parseAsHtml
@@ -10,6 +9,7 @@ import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
+import com.zakrodionov.protovary.app.ext.shareText
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.protovary.data.entity.ProductDetail
@@ -81,12 +81,8 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
         }
     }
 
-    //todo
     private fun shareProduct(text: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
+        activity?.shareText(text = text, title = getString(R.string.share_with))
     }
 
     override fun onDestroyView() {

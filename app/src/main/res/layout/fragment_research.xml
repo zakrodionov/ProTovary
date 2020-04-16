@@ -49,7 +49,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResearch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/default_margin_5"
+            android:paddingBottom="@dimen/default_margin_5" />
 
         <TextView
             android:id="@+id/tvEmpty"

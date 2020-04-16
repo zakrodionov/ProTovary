@@ -10,7 +10,6 @@ import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.researchescategory.adapter.ResearchesCategoryAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.fragment_researches_category.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -40,7 +39,6 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
     private fun initializeView() {
         tvToolbarTitle.text = getString(R.string.researches)
 
-        rvResearches.addItemDecoration(ListPaddingDecoration(requireActivity()))
         rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearches.adapter = researchesCategoryAdapter
 

@@ -6,8 +6,8 @@ import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
+import com.zakrodionov.protovary.app.ext.customSizeCropPlaceholder
 import com.zakrodionov.protovary.app.ext.inflate
-import com.zakrodionov.protovary.app.ext.setupCV
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
 import com.zakrodionov.protovary.domain.model.Product
@@ -50,7 +50,7 @@ class ProductsFavoriteAdapter : Adapter<ProductsFavoriteAdapter.ViewHolder>() {
                 ivStatus.setImageResource(item.statusDrawable)
                 tvTrademark.toggleVisibility(item.name != item.trademark)
 
-                GlideApp.with(context).load(item.fullImageUrl).setupCV(context).into(ivImage)
+                GlideApp.with(context).load(item.fullImageUrl).customSizeCropPlaceholder(context).into(ivImage)
             }
         }
     }

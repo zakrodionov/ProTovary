@@ -6,6 +6,7 @@ object Versions {
     const val fabric_plugin = "1.+"
     const val gradle_versions_plugin = "0.22.0"
     const val navigation_safe_args_plugin = "2.1.0-rc01"
+    const val ktlint_plugin_version = "9.2.1"
 
     //AndroidX
     const val androidx_appcompat = "1.1.0-rc01"
@@ -76,6 +77,9 @@ object Versions {
 
     //ExpandableLayout
     const val expandable_layout = "1.0.5"
+
+    //Html textview
+    const val html_textview = "3.9"
 
     //Test
     const val junit = "4.12"

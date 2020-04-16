@@ -3,16 +3,16 @@ package com.zakrodionov.protovary.app.ui.research.adapter
 import androidx.core.text.parseAsHtml
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.di.GlideApp
-import com.zakrodionov.protovary.app.ext.setupCV
+import com.zakrodionov.protovary.app.ext.customSizeCropPlaceholder
+import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.app.platform.DiffItem
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.*
 
 fun productDelegate(
-    clickListener: (Product) -> Unit = {},
-    favoriteClickListener: (Product) -> Unit = {}
+    clickListener: (Product) -> Unit,
+    favoriteClickListener: (Product) -> Unit
 ) = adapterDelegateLayoutContainer<Product, DiffItem>(R.layout.item_product) {
 
     containerView.setOnClickListener {
@@ -32,7 +32,6 @@ fun productDelegate(
         ivActionFavorite.setImageResource(item.favoriteDrawable)
         tvTrademark.toggleVisibility(item.name != item.trademark)
 
-        //todo
-        GlideApp.with(context).load(item.fullImageUrl).setupCV(context).into(ivImage)
+        ivImage.loadFromUrl(item.fullImageUrl) { customSizeCropPlaceholder(context) }
     }
 }

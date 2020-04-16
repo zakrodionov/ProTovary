@@ -28,7 +28,7 @@ allprojects {
 
 plugins {
     id(Libs.gradle_versions_plugin) version Versions.gradle_versions_plugin
-    id("org.jlleitschuh.gradle.ktlint") version "9.2.1" // todo
+    id(Libs.ktlint_plugin) version Versions.ktlint_plugin_version
 }
 
 task("clean") {
@@ -40,9 +40,9 @@ tasks {
         resolutionStrategy {
             componentSelection {
                 all {
-                    val rejected = kotlin.collections.listOf("alpha", "beta", "rc", "cr", "m", "preview")
+                    val rejected = listOf<String>(/*"alpha", "beta", "rc", "cr", "m", "preview"*/)
                         .any { qualifier ->
-                            candidate.version.matches(kotlin.text.Regex("(?i).*[.-]$qualifier[.\\d-+]*"))
+                            candidate.version.matches(Regex("(?i).*[.-]$qualifier[.\\d-+]*"))
                         }
 
                     if (rejected) {

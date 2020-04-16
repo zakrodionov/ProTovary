@@ -1,8 +1,6 @@
 package com.zakrodionov.protovary.app.platform
 
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DiffUtil.*
-import com.zakrodionov.protovary.app.platform.DiffItem
+import androidx.recyclerview.widget.DiffUtil.ItemCallback
 
 object DiffCallback : ItemCallback<DiffItem>() {
 

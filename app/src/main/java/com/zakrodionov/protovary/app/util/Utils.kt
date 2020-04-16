@@ -24,8 +24,6 @@ object Utils {
         }
     }
 
-    fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
-
     fun slideTopTransition(view: View, animDuration: Long = 500) {
         val transition = Slide(Gravity.BOTTOM)
         transition.duration = animDuration

@@ -9,7 +9,6 @@ import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.favorites.adapter.ProductsFavoriteAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.toolbar_main.*
