@@ -31,7 +31,7 @@ class AppActivity : BaseActivity() {
         bottomNavigation.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = R.id.hostFragment,
+            containerId = R.id.fragmentContainer,
             intent = intent
         )
     }

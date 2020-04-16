@@ -27,7 +27,7 @@ object Libs {
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
     //Lifecycle
-    const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_ext}"
     const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 

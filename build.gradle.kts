@@ -35,8 +35,7 @@ task("clean") {
     delete(rootProject.buildDir)
 }
 
-tasks {
-    "dependencyUpdates"(DependencyUpdatesTask::class) {
+tasks.withType<DependencyUpdatesTask>  {
         resolutionStrategy {
             componentSelection {
                 all {
@@ -56,4 +55,3 @@ tasks {
         outputDir = "build/dependencyUpdates"
         reportfileName = "report"
     }
-}
