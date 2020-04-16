@@ -32,5 +32,4 @@ class DescriptionPagerAdapter(
         3 -> context.getString(R.string.manufacturer)
         else -> throw RuntimeException("Wrong adapter position $position actual items count $count")
     }
-
 }

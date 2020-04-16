@@ -19,5 +19,4 @@ class ScannerViewModel(private val productInteractor: ProductInteractor) : BaseV
     private fun handleProduct(product: ProductCompact) {
         this.product.value = Event(product)
     }
-
 }

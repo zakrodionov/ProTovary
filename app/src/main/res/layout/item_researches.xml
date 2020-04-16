@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_researches_height"
+    android:layout_marginStart="@dimen/default_margin_10"
+    android:layout_marginTop="@dimen/default_margin_5"
+    android:layout_marginEnd="@dimen/default_margin_10"
+    android:layout_marginBottom="@dimen/default_margin_5"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/card_corner_radius_5"
     app:cardElevation="@dimen/card_elevation_3">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="@dimen/iv_researches_width"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/default_end_margin_20" />
+            android:layout_marginEnd="@dimen/default_end_margin_20"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/ivImage"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/default_margin_5"
             android:ellipsize="end"
-            android:textAppearance="@style/TextAppearance.App.Title.Categories" />
-    </RelativeLayout>
+            android:maxLines="4"
+            android:textAppearance="@style/TextAppearance.App.Title.Categories"
+            tools:text="Напитки" />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

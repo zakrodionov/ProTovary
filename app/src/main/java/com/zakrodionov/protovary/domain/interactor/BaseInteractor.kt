@@ -16,20 +16,20 @@ abstract class BaseInteractor(val errorHandler: ErrorHandler) {
         noinline func: suspend () -> T
     ) {
         try {
-            //Показываем прогресс - главный поток
+            // Показываем прогресс - главный поток
             withContext(Dispatchers.Main) {
                 onState.invoke(State.Loading)
             }
-            //Загрузка, вызов бд, маппинг в IO
+            // Загрузка, вызов бд, маппинг в IO
             val result = withContext(Dispatchers.IO) { func.invoke() }
 
-            //Результат и скрытие прогресса - главный поток
+            // Результат и скрытие прогресса - главный поток
             withContext(Dispatchers.Main) {
                 onSuccess.invoke(result)
                 onState.invoke(State.Loaded)
             }
         } catch (e: Exception) {
-            //Обработка ошибки - главный поток
+            // Обработка ошибки - главный поток
             withContext(Dispatchers.Main) {
                 onState.invoke(State.Error(errorHandler.proceedException(e)))
             }
@@ -43,20 +43,20 @@ abstract class BaseInteractor(val errorHandler: ErrorHandler) {
         specialBarcodeErrorHandler: String? = ""
     ) {
         try {
-            //Показываем прогресс - главный поток
+            // Показываем прогресс - главный поток
             withContext(Dispatchers.Main) {
                 onState.invoke(State.Loading)
             }
-            //Загрузка, вызов бд, маппинг в IO
+            // Загрузка, вызов бд, маппинг в IO
             val result = withContext(Dispatchers.IO) { func.invoke() }
 
-            //Результат и скрытие прогресса - главный поток
+            // Результат и скрытие прогресса - главный поток
             withContext(Dispatchers.Main) {
                 onSuccess.invoke(result)
                 onState.invoke(State.Loaded)
             }
         } catch (e: Exception) {
-            //Обработка ошибки - главный поток
+            // Обработка ошибки - главный поток
             withContext(Dispatchers.Main) {
                 onState.invoke(State.Error(errorHandler.proceedException(e, specialBarcodeErrorHandler)))
             }

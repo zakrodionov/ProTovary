@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
+import com.zakrodionov.protovary.app.ext.setData
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.researchescategory.adapter.ResearchesCategoryAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
+import com.zakrodionov.protovary.app.platform.DisplayableItem
+import com.zakrodionov.protovary.app.ui.researchescategory.delegates.researchCategoryDelegate
 import com.zakrodionov.protovary.data.entity.Researches
 import kotlinx.android.synthetic.main.fragment_researches_category.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -19,8 +20,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_category) {
 
     private val researchesCategoryViewModel: ResearchesCategoryViewModel by viewModel()
-    private val researchesCategoryAdapter: ResearchesCategoryAdapter by lazy { ResearchesCategoryAdapter() }
-
+    private val researchesCategoryAdapter: ListDelegationAdapter<List<DisplayableItem>> by lazy {
+        ListDelegationAdapter(researchCategoryDelegate(::itemClickListener))
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -31,21 +33,17 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
 
         initializeView()
 
-        //Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
+        // Если отсутствовал интернет/либо по другой причине нет данных, пробуем их загрузить
         if (researchesCategoryViewModel.researches.value == null) {
             loadData()
         }
-
     }
 
     private fun initializeView() {
         tvToolbarTitle.text = getString(R.string.researches)
 
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
-        rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        rvResearches.layoutManager = LinearLayoutManager(activity)
         rvResearches.adapter = researchesCategoryAdapter
-
-        researchesCategoryAdapter.clickListener = ::itemClickListener
     }
 
     private fun itemClickListener(research: Researches) {
@@ -54,7 +52,7 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
     }
 
     private fun renderResearchesList(research: List<Researches>?) {
-        researchesCategoryAdapter.collection = research.orEmpty()
+        researchesCategoryAdapter.setData(research)
 
         tvEmpty?.isVisible = research.isNullOrEmpty()
         rvResearches?.isVisible = !research.isNullOrEmpty()
@@ -66,5 +64,4 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
     }
 
     override fun loadData() = researchesCategoryViewModel.loadResearches()
-
 }

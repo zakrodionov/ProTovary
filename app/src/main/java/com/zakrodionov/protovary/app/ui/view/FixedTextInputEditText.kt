@@ -22,7 +22,7 @@ class FixedTextInputEditText : TextInputEditText {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getHint(): CharSequence {
+    override fun getHint(): CharSequence? {
         val manufacturer = Build.MANUFACTURER.toUpperCase()
         return if (!manufacturer.contains("MEIZU") || Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             super.getHint()
@@ -32,7 +32,6 @@ class FixedTextInputEditText : TextInputEditText {
             } catch (e: Exception) {
                 super.getHint()
             }
-
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import com.zakrodionov.protovary.app.platform.DisplayableItem
 import com.zakrodionov.protovary.data.db.converter.ResearchesCompactConverter
 
 @Entity
@@ -27,4 +28,4 @@ data class Researches(
 
     @SerializedName("utime")
     var utime: Int?
-)
+) : DisplayableItem

@@ -1,15 +1,11 @@
 package com.zakrodionov.protovary.app.ui.product
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.text.parseAsHtml
 import androidx.navigation.fragment.navArgs
-import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.loadFromUrl
-import com.zakrodionov.protovary.app.ext.observe
-import com.zakrodionov.protovary.app.ext.observeEvent
+import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.product.pager.DescriptionPagerAdapter
 import com.zakrodionov.protovary.data.entity.ProductDetail
@@ -53,16 +49,14 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
             actionFavorite.setImageResource(R.drawable.ic_favorite)
         else
             actionFavorite.setImageResource(R.drawable.ic_favorite_border)
-
     }
 
     private fun renderMessage(message: String?) {
         message?.let { toast(it) }
     }
 
-
     private fun renderProduct(product: ProductDetail?) {
-        ivCollapsingToolbar.loadFromUrl("${BuildConfig.API_IMAGE_URL}${product?.image?.src}")
+        ivCollapsingToolbar.loadFromUrl(product?.image?.src?.toFullImageUrl())
         tvTitle.text = product?.name?.parseAsHtml()
 
         when (product?.status) {
@@ -72,7 +66,7 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
         }
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
-                activity!!,
+                requireActivity(),
                 product,
                 childFragmentManager
             )
@@ -81,14 +75,10 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
             viewpager.offscreenPageLimit = 4
             tabs.setupWithViewPager(viewpager)
         }
-
     }
 
     private fun shareProduct(text: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
+        activity?.shareText(text = text, title = getString(R.string.share_with))
     }
 
     override fun onDestroyView() {

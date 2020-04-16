@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.platform
 
-
 /**
  * Base Class for handling errors/failures/exceptions.
  */

@@ -33,7 +33,8 @@
                     android:src="@drawable/ic_barcode"
                     app:layout_constraintBottom_toTopOf="@id/actionScan"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/actionScan"
@@ -42,7 +43,7 @@
                     android:layout_marginStart="@dimen/default_btn_start_margin_40"
                     android:layout_marginEnd="@dimen/default_btn_end_margin_40"
                     android:layout_marginBottom="@dimen/default_margin_40"
-                    android:background="@drawable/button_ripple"
+                    android:background="@drawable/bg_pressed_ripple"
                     android:text="@string/scan_button"
                     android:textAppearance="@style/TextAppearance.App.WhiteButton"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -32,11 +32,9 @@ class ResearchesViewModel(
         applyQueryText()
     }
 
-
     fun applyQueryText() {
         val text = queryText.value?.toLowerCase() ?: ""
         filteredResearches.value =
             sourceResearches.filter { it.name?.toLowerCase()?.contains(text) ?: false }
     }
-
 }

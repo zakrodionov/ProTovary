@@ -1,6 +1,11 @@
 package com.zakrodionov.protovary.app.util
 
-import com.zakrodionov.protovary.BuildConfig
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 
 /**
  * Created by Zakhar Rodionov on 20.03.19.
@@ -18,6 +23,19 @@ object Utils {
         }
     }
 
-    fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
+    fun slideTopTransition(view: View, animDuration: Long = 500) {
+        val transition = Slide(Gravity.BOTTOM)
+        transition.duration = animDuration
+        transition.addTarget(view.id)
+        TransitionManager.beginDelayedTransition(view.parent as ViewGroup, transition)
+        view.isVisible = false
+    }
 
+    fun slideBottomTransition(view: View, animDuration: Long = 500) {
+        val transition = Slide(Gravity.TOP)
+        transition.duration = animDuration
+        transition.addTarget(view.id)
+        TransitionManager.beginDelayedTransition(view.parent as ViewGroup, transition)
+        view.isVisible = true
+    }
 }

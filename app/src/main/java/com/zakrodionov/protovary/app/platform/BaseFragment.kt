@@ -51,7 +51,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         it.progressLayout?.visibility = viewStatusLayout
     }
 
-
     internal fun notify(@StringRes message: Int) {
         view?.let {
             snackBar = Snackbar.make(it, message, Snackbar.LENGTH_SHORT)
@@ -71,7 +70,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             snackBar?.setActionTextColor(ContextCompat.getColor(appContext, R.color.silver))
             snackBar?.show()
         }
-
     }
 
     override fun onStop() {
@@ -95,7 +93,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected fun postDelayed(delayMillis: Long, r: () -> Unit) = Handler().postDelayed(r, delayMillis)
 
-    //Если необходимо переопределяем в наследнике
+    // Если необходимо переопределяем в наследнике
     open fun loadData() {}
 
     open fun handleFailure(failure: Failure?) {
