@@ -52,14 +52,3 @@ class ProductMapper(val context: Context) {
             isFavorite = product.isFavorite
         )
 }
-
-    fun getFavoriteDrawable(isFavorite: Boolean?): Int {
-        when (isFavorite) {
-            true -> return R.drawable.ic_favorite
-            false, null -> return R.drawable.ic_favorite_border
-        }
-    }
-
-    fun fullImageUrl(urlImage: String) = "${Utils.baseImageUrl()}$urlImage"
-
-}
