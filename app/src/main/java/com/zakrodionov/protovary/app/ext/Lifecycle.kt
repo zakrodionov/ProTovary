@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ext
 
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -21,7 +20,6 @@ fun <T : Any?, L : LiveData<Event<T>>> Fragment.observeEvent(liveData: L, body: 
 
 fun <L : LiveData<Failure>> Fragment.failure(liveData: L, body: (Failure?) -> Unit) =
     liveData.observe(viewLifecycleOwner, Observer(body))
-
 
 fun <T : Any?, L : LiveData<T>> AppCompatActivity.observe(liveData: L, body: (T?) -> Unit) =
     liveData.observe(this, Observer(body))

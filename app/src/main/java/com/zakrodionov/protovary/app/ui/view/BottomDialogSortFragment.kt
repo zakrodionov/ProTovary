@@ -13,6 +13,14 @@ import kotlinx.android.synthetic.main.dialog_sort_research.view.*
 
 class BottomDialogSortFragment : BottomSheetDialogFragment() {
 
+    companion object {
+        private const val ARG_SORT_TYPE = "arg_sort_type"
+
+        fun newInstance(selectedResearchType: ResearchSortType) = BottomDialogSortFragment().apply {
+            arguments = bundleOf(ARG_SORT_TYPE to selectedResearchType)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_sort_research, container, false)
         val type = arguments?.getSerializable(ARG_SORT_TYPE) ?: BY_RATING_DECREASE
@@ -30,14 +38,6 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
         view.rlTradeMark.setOnClickListener { parentFragment?.onSortTypeSelected(BY_TRADEMARK); dismiss() }
 
         return view
-    }
-
-    companion object {
-        private const val ARG_SORT_TYPE = "arg_sort_type"
-
-        fun newInstance(selectedResearchType: ResearchSortType) = BottomDialogSortFragment().apply {
-            arguments = bundleOf(ARG_SORT_TYPE to selectedResearchType)
-        }
     }
 
     interface BottomDialogSortListener {

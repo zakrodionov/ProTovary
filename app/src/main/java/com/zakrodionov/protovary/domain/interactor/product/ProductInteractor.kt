@@ -32,15 +32,15 @@ class ProductInteractor(
 
     suspend fun getProductsInfo(
         id: Long,
-        onSuccess: (LiveData<List<ProductInfo>>) -> Unit,
+        onSuccess: (Pair<LiveData<List<ProductInfo>>, String?>) -> Unit,
         onState: (State) -> Unit
     ) {
         execute(onSuccess, onState) {
             val result = productRepository.getProductsInfo(id)
-            //Обновляем бд
+            // Обновляем бд
             productDao.refreshProducts(result.productInfo ?: listOf())
 
-            productDao.getProducts()
+            Pair(productDao.getProducts(), result.anons)
         }
     }
 
@@ -57,7 +57,6 @@ class ProductInteractor(
             specialBarcodeErrorHandler = id
         )
     }
-
 
     suspend fun actionFavorite(
         product_: Product,
@@ -78,5 +77,4 @@ class ProductInteractor(
 
     fun observeProductIsFavorite(id: Long) =
         Transformations.map(productRepository.productIsFavorite(id)) { it > 0 }
-
 }

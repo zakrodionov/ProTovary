@@ -21,8 +21,11 @@ import com.zakrodionov.protovary.data.entity.ProductDetail
 import kotlinx.android.synthetic.main.fragment_description.view.*
 import java.io.Serializable
 
-
 class DescriptionFragment : Fragment() {
+
+    companion object {
+        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
+    }
 
     val model: Model by argument("model")
 
@@ -106,13 +109,12 @@ class DescriptionFragment : Fragment() {
 
             ssb.append(prosText).apply {
                 setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(activity!!, color)),
+                    ForegroundColorSpan(ContextCompat.getColor(requireActivity(), color)),
                     0,
                     prosText.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
-
         }
         return ssb
     }
@@ -125,9 +127,5 @@ class DescriptionFragment : Fragment() {
         PROPERTIES,
         INDICATORS,
         MANUFACTURER
-    }
-
-    companion object {
-        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
     }
 }

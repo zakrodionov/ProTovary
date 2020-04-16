@@ -1,6 +1,11 @@
 package com.zakrodionov.protovary.app.util
 
-import com.zakrodionov.protovary.BuildConfig
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 
 /**
  * Created by Zakhar Rodionov on 20.03.19.
@@ -18,6 +23,6 @@ object Utils {
         }
     }
 
-    fun createImageUrl(path: String?) = "${BuildConfig.API_IMAGE_URL}$path"
+    fun baseImageUrl() = BuildConfig.API_ENDPOINT.substringBeforeLast("api/")
 
 }

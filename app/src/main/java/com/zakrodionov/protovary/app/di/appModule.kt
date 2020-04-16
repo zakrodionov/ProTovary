@@ -40,7 +40,7 @@ val appModule = module {
         get<AppDatabase>().productDao
     }
 
-    //Data&Domain layers
+    // Data&Domain layers
     single { NetworkHandler(get()) }
     single { ErrorHandler(get()) }
 
@@ -52,16 +52,12 @@ val appModule = module {
 
     single { ProductMapper(get()) }
     single { ResourceManager(get()) }
-
 }
 
 private fun Scope.buildDataBase(resourceManager: ResourceManager) =
     Room.databaseBuilder(get(), AppDatabase::class.java, resourceManager.getString(R.string.db_name)).build()
 
-private fun Scope.buildApi(): Api? {
-    val retrofit: Retrofit by inject()
-    return retrofit.create(Api::class.java)
-}
+private fun Scope.buildApi(): Api = get<Retrofit>().create(Api::class.java)
 
 private fun buildOkHttp(): OkHttpClient {
     val okHttpClientBuilder = OkHttpClient.Builder()

@@ -44,8 +44,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextAppearance.App.Bold.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="TextAppearance.App.Chip">
-        <item name="android:textColor">@color/chip_selector</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -61,6 +64,11 @@
 
     <style name="TextAppearance.App.Title.Categories">
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Title.Desc">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextAppearance.App.Bold.TitleRed">

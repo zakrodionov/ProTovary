@@ -9,15 +9,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.ext.gone
-import com.zakrodionov.protovary.app.ext.observe
-import com.zakrodionov.protovary.app.ext.observeEvent
-import com.zakrodionov.protovary.app.ext.visible
+import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.researches.adapter.ResearchesAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
+import com.zakrodionov.protovary.app.platform.DisplayableItem
+import com.zakrodionov.protovary.app.ui.researches.delegates.researchDelegate
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.fragment_researches.*
 import kotlinx.android.synthetic.main.toolbar_search.*
@@ -27,9 +24,11 @@ import org.koin.core.parameter.parametersOf
 class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private val args: ResearchesFragmentArgs by navArgs()
-    private val researchesId by lazy {  args.researchId }
+    private val researchesId by lazy { args.researchId }
     private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
-    private val researchesAdapter: ResearchesAdapter by lazy { ResearchesAdapter() }
+    private val researchesAdapter: ListDelegationAdapter<List<DisplayableItem>> by lazy {
+        ListDelegationAdapter(researchDelegate(::itemClickListener))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,17 +44,13 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         setupToolbar()
     }
 
-
     private fun initializeView() {
-        rvResearches.addItemDecoration(ListPaddingDecoration(activity!!))
-        rvResearches.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        rvResearches.layoutManager = LinearLayoutManager(activity)
         rvResearches.adapter = researchesAdapter
-
-        researchesAdapter.clickListener = ::itemClickListener
     }
 
     private fun renderResearchesList(researches: List<ResearchCompact>?) {
-        researchesAdapter.collection = researches ?: listOf()
+        researchesAdapter.setData(researches)
 
         tvEmpty?.isVisible = researches.isNullOrEmpty()
         rvResearches?.isVisible = !researches.isNullOrEmpty()
@@ -63,7 +58,8 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private fun itemClickListener(research: ResearchCompact) {
         closeSearch()
-        val directions = ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
+        val directions =
+            ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
         navController.navigate(directions)
     }
 
@@ -98,10 +94,11 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
             }
         })
 
-        editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.onFocusChangeListener =
+            View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
     }
 
-    private fun closeSearch(){
+    private fun closeSearch() {
         if (actionSearch.query.isNullOrEmpty()) {
             actionSearch.onActionViewCollapsed()
         }
@@ -116,5 +113,5 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         super.onDestroyView()
     }
 
-    override fun loadData() =  researchesViewModel.loadResearchesCategory(researchesId)
+    override fun loadData() = researchesViewModel.loadResearchesCategory(researchesId)
 }

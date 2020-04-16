@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.observe
 import com.zakrodionov.protovary.app.ext.observeEvent
+import com.zakrodionov.protovary.app.ext.setData
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.favorites.adapter.ProductsFavoriteAdapter
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
+import com.zakrodionov.protovary.app.platform.DiffItem
+import com.zakrodionov.protovary.app.ui.research.delegates.productDelegate
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -18,7 +20,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
 
     private val favoritesViewModel: FavoritesViewModel by viewModel()
-    private val productsFavoriteAdapter: ProductsFavoriteAdapter by lazy { ProductsFavoriteAdapter() }
+    private val productsFavoriteAdapter: ListDelegationAdapter<List<DiffItem>> by lazy {
+        ListDelegationAdapter(productDelegate(::itemClickListener, ::actionFavoriteListener))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,14 +36,15 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
     }
 
     private fun handleFavoriteProductsList(products: List<Product>?) {
-        productsFavoriteAdapter.collection = products ?: listOf()
+        productsFavoriteAdapter.setData(products)
 
         tvEmpty?.isVisible = products.isNullOrEmpty()
         rvProductsFavorite?.isVisible = !products.isNullOrEmpty()
     }
 
     private fun itemClickListener(research: Product) {
-        val directions = FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(research.id)
+        val directions =
+            FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(research.id)
         navController.navigate(directions)
     }
 
@@ -50,12 +55,8 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
     private fun initializeView() {
         tvToolbarTitle.text = getString(R.string.favorites)
 
-        rvProductsFavorite.addItemDecoration(ListPaddingDecoration(activity!!))
         rvProductsFavorite.layoutManager = LinearLayoutManager(activity)
         rvProductsFavorite.adapter = productsFavoriteAdapter
-
-        productsFavoriteAdapter.clickListener = ::itemClickListener
-        productsFavoriteAdapter.actionFavoriteListener = ::actionFavoriteListener
     }
 
     override fun onDestroyView() {

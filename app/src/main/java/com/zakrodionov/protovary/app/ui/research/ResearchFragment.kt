@@ -8,15 +8,19 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.MergeAdapter
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.research.adapter.ProductsAdapter
+import com.zakrodionov.protovary.app.platform.DiffCallback
+import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
+import com.zakrodionov.protovary.app.ui.research.delegates.productDelegate
+import com.zakrodionov.protovary.app.ui.research.delegates.researchDescriptionDelegate
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.domain.model.Product
@@ -27,9 +31,26 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
+    companion object {
+        const val RC_SORT = 1122
+        const val DIALOG_SORT_TAG = "dialog_sort_tag"
+    }
+
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
-    private val productsAdapter: ProductsAdapter by lazy { ProductsAdapter() }
+
+    private val descriptionAdapter by lazy {
+        ListDelegationAdapter(researchDescriptionDelegate())
+    }
+
+    private val productsAdapter by lazy {
+        AsyncListDifferDelegationAdapter(
+            DiffCallback,
+            productDelegate(::itemClickListener, ::itemClickFavoriteListener),
+            researchDescriptionDelegate()
+        )
+    }
+
     private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +58,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
         with(researchViewModel) {
             observe(changesListener) { researchViewModel.applyChanges() }
+            observe(researchDescription, ::renderResearchDescription)
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
             observeEvent(state, ::handleState)
@@ -84,18 +106,13 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
             }
         })
 
-        editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
+        editText.onFocusChangeListener =
+            View.OnFocusChangeListener { _, hasFocus -> if (hasFocus) tvTitle.gone() }
 
         tvTitle.text = getString(R.string.research)
-
     }
 
     private fun setupChips() {
-        chipQualityMark.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
-        chipProductViolation.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
-
-        chipGroup.isSingleSelection = true
-
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipQualityMark -> researchViewModel.filterType.value = BY_QUALITY_MARK
@@ -106,19 +123,19 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
-        rvResearch.addItemDecoration(ListPaddingDecoration(activity!!))
-        rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        rvResearch.adapter = productsAdapter
+        rvResearch.disableAllAnimations()
+        rvResearch.layoutManager = LinearLayoutManager(activity)
+        rvResearch.adapter = MergeAdapter(descriptionAdapter, productsAdapter)
+    }
+
+    private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
+        descriptionAdapter.setData(descriptionItems)
     }
 
     private fun renderProductsList(products: List<Product>?) {
-        productsAdapter.updateUsingDiffUtil(products ?: listOf())
-        productsAdapter.clickListener = ::itemClickListener
-        productsAdapter.clickFavoriteListener = ::itemClickFavoriteListener
-
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-        rvResearch?.itemAnimator = null
+        productsAdapter.items = products
     }
 
     private fun itemClickListener(product: Product) {
@@ -142,7 +159,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
             researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
         )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
-        bottomSheetDialog.show(fragmentManager!!, DIALOG_SORT_TAG)
+        bottomSheetDialog.show(requireFragmentManager(), DIALOG_SORT_TAG)
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
@@ -158,9 +175,4 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     override fun loadData() = researchViewModel.loadResearch(researchesId)
-
-    companion object {
-        const val RC_SORT = 1122
-        const val DIALOG_SORT_TAG = "dialog_sort_tag"
-    }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@android:color/white"
-    android:elevation="@dimen/toolbar_elevation_5"
+    android:elevation="0dp"
     android:theme="@style/ToolbarTheme.App"
     app:contentInsetEnd="0dp"
     app:contentInsetLeft="0dp"

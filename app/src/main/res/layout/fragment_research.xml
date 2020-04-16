@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/default_margin_start_10"
-            android:paddingEnd="@dimen/default_margin_end_10">
+            android:paddingEnd="@dimen/default_margin_end_10"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipQualityMark"
@@ -27,7 +28,9 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:text="@string/quality_sign"
-                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                android:textAppearance="@style/TextAppearance.App.Chip"
+                android:textColor="@color/chip_selector"
+                app:chipBackgroundColor="@drawable/bg_chip_selector"
                 app:chipCornerRadius="@dimen/card_corner_radius_15"
                 app:chipStrokeColor="@color/blue_light"
                 app:chipStrokeWidth="@dimen/chip_stroke_width" />
@@ -39,17 +42,27 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:text="@string/product_with_violent"
-                app:chipBackgroundColor="@drawable/chip_bg_selector"
+                android:textAppearance="@style/TextAppearance.App.Chip"
+                android:textColor="@color/chip_selector"
+                app:chipBackgroundColor="@drawable/bg_chip_selector"
                 app:chipCornerRadius="@dimen/card_corner_radius_15"
                 app:chipStrokeColor="@color/blue_light"
                 app:chipStrokeWidth="@dimen/chip_stroke_width" />
 
         </com.google.android.material.chip.ChipGroup>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray1" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResearch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/default_margin_5"
+            android:paddingBottom="@dimen/default_margin_5" />
 
         <TextView
             android:id="@+id/tvEmpty"

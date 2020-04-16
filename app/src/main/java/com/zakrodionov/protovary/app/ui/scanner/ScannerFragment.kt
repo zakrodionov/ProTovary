@@ -13,8 +13,12 @@ import com.zakrodionov.protovary.data.entity.ProductCompact
 import kotlinx.android.synthetic.main.toolbar_back_title.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFragment.ScannerDialogListener {
+
+    companion object {
+        const val RC_SCANNER_DIALOG = 33226
+        const val TAG_SCANNER_DIALOG = "tag_scanner_dialog"
+    }
 
     private val scannerViewModel: ScannerViewModel by viewModel()
     private var simpleScanner: SimpleScannerFragment? = null
@@ -34,7 +38,7 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
     private fun setupScanner() {
         simpleScanner = childFragmentManager.findFragmentById(R.id.scanner_fragment) as SimpleScannerFragment
 
-        simpleScanner!!.resultListener = {
+        simpleScanner?.resultListener = {
             if (it?.contents != null) {
                 scannerViewModel.loadProduct(it.contents)
             } else {
@@ -77,7 +81,7 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
                 isCancelable = true
                 setTargetFragment(this@ScannerFragment, RC_SCANNER_DIALOG)
             }
-            .show(fragmentManager!!, TAG_SCANNER_DIALOG)
+            .show(requireFragmentManager(), TAG_SCANNER_DIALOG)
     }
 
     override fun actionSearch(text: String) {
@@ -95,10 +99,5 @@ class ScannerFragment : BaseFragment(R.layout.fragment_scanner), ScannerDialogFr
     override fun onDestroyView() {
         simpleScanner = null
         super.onDestroyView()
-    }
-
-    companion object {
-        const val RC_SCANNER_DIALOG = 33226
-        const val TAG_SCANNER_DIALOG = "tag_scanner_dialog"
     }
 }

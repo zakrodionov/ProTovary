@@ -25,7 +25,6 @@ class SimpleScannerFragment : Fragment(), ZBarScannerView.ResultHandler {
         scannerView?.startCamera()
     }
 
-
     override fun handleResult(rawResult: Result?) {
         resultListener?.invoke(rawResult)
         val handler = Handler()

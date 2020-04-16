@@ -1,0 +1,9 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_pressed_ripple"
+    android:padding="@dimen/default_margin_10"
+    android:text="@string/description"
+    android:textAppearance="@style/TextAppearance.App.Title.Desc" />
+

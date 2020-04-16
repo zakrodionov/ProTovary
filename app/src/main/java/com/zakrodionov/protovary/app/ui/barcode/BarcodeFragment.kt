@@ -17,6 +17,10 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
 
+    companion object {
+        const val PERMISSION_DIALOG_TAG = "permission_dialog_tag"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
@@ -36,12 +40,12 @@ class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
     fun onCameraDenied() {
-        DeniedDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        DeniedDialogFragment().show(requireFragmentManager(), PERMISSION_DIALOG_TAG)
     }
 
     @OnNeverAskAgain(Manifest.permission.CAMERA)
     fun onCameraNeverAskAgain() {
-        NeverAskDialogFragment().show(fragmentManager!!, PERMISSION_DIALOG_TAG)
+        NeverAskDialogFragment().show(requireFragmentManager(), PERMISSION_DIALOG_TAG)
     }
 
     override fun onRequestPermissionsResult(
@@ -51,9 +55,5 @@ class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
-    }
-
-    companion object {
-        const val PERMISSION_DIALOG_TAG = "permission_dialog_tag"
     }
 }

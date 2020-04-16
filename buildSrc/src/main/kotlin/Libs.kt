@@ -6,6 +6,7 @@ object Libs {
     const val fabric_plugin = "io.fabric.tools:gradle:${Versions.fabric_plugin}"
     const val gradle_versions_plugin = "com.github.ben-manes.versions"
     const val navigation_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_safe_args_plugin}"
+    const val ktlint_plugin = "org.jlleitschuh.gradle.ktlint"
 
     //AndroidX
     const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
@@ -26,7 +27,7 @@ object Libs {
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
     //Lifecycle
-    const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_ext}"
     const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
@@ -80,6 +81,16 @@ object Libs {
 
     //Barcode
     const val barcode = "me.dm7.barcodescanner:zbar:${Versions.barcode}"
+
+    //AdapterDelegates
+    const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates}"
+    const val adapter_delegates_dsl = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates}"
+
+    //ExpandableLayout
+    const val expandable_layout = "com.github.skydoves:expandablelayout:${Versions.expandable_layout}"
+
+    //Html textview
+    const val html_textview = "org.sufficientlysecure:html-textview:${Versions.html_textview}"
 
     //Test
     const val junit = "junit:junit:${Versions.junit}"

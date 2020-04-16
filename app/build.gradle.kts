@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+
 
 plugins {
     id("com.android.application")
@@ -7,6 +7,7 @@ plugins {
     id("kotlin-kapt")
     id("io.fabric")
     id("androidx.navigation.safeargs.kotlin")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -19,7 +20,7 @@ android {
         targetSdkVersion(AndroidConfig.TARGET_SDK_VERSION)
         versionCode = AndroidConfig.VERSION_CODE
         versionName = AndroidConfig.VERSION_NAME
-        multiDexEnabled  = AndroidConfig.MULTI_DEX_ENABLED
+        multiDexEnabled = AndroidConfig.MULTI_DEX_ENABLED
         vectorDrawables.useSupportLibrary = AndroidConfig.SUPPORT_LIBRARY_VECTOR_DRAWABLES
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 
@@ -67,7 +68,6 @@ android {
             initWith(getByName("debug"))
             isMinifyEnabled = true
         }
-
     }
 
     compileOptions {
@@ -76,12 +76,8 @@ android {
     }
 
     kotlinOptions {
-        // "this" is currently lacking a proper type
-        // See: https://youtrack.jetbrains.com/issue/KT-31077
-        val options = this as? KotlinJvmOptions
-        options?.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
 
     bundle {
         density {
@@ -103,76 +99,86 @@ kapt {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    //AndroidX
-    implementation (Libs.androidx_app_compat)
-    implementation (Libs.androidx_material)
-    implementation (Libs.androidx_recyclerview)
-    implementation (Libs.androidx_cardview)
-    implementation (Libs.androidx_core)
-    implementation (Libs.androidx_constraintlayout)
-    implementation (Libs.androidx_fragment)
-    implementation (Libs.androidx_multidex)
+    // AndroidX
+    implementation(Libs.androidx_app_compat)
+    implementation(Libs.androidx_material)
+    implementation(Libs.androidx_recyclerview)
+    implementation(Libs.androidx_cardview)
+    implementation(Libs.androidx_core)
+    implementation(Libs.androidx_constraintlayout)
+    implementation(Libs.androidx_fragment)
+    implementation(Libs.androidx_multidex)
 
-    //Kotlin
-    implementation (Libs.jdk8)
-    implementation (Libs.coroutines)
+    // Kotlin
+    implementation(Libs.jdk8)
+    implementation(Libs.coroutines)
 
-    ///Networking
-    implementation (Libs.retrofit)
-    implementation (Libs.gson)
-    implementation (Libs.okhttp_logging_interceptor)
-    implementation (Libs.stetho)
+    // Networking
+    implementation(Libs.retrofit)
+    implementation(Libs.gson)
+    implementation(Libs.okhttp_logging_interceptor)
+    implementation(Libs.stetho)
 
-    //Glide
-    implementation (Libs.glide_runtime)
-    kapt (Libs.glide_compiler)
+    // Glide
+    implementation(Libs.glide_runtime)
+    kapt(Libs.glide_compiler)
 
-    //Koin
-    implementation (Libs.koin_scope)
-    implementation (Libs.koin_viewmodel)
+    // Koin
+    implementation(Libs.koin_scope)
+    implementation(Libs.koin_viewmodel)
 
-    //Room
-    implementation (Libs.room_runtime)
-    implementation (Libs.room_ktx)
-    kapt (Libs.room_compiler)
+    // Room
+    implementation(Libs.room_runtime)
+    implementation(Libs.room_ktx)
+    kapt(Libs.room_compiler)
 
-    //Lifecycle
-    implementation (Libs.lifecycle_extensions)
-    implementation (Libs.lifecycle_livedata)
-    implementation (Libs.lifecycle_viewmodel)
+    // Lifecycle
+    implementation(Libs.lifecycle_extensions)
+    implementation(Libs.lifecycle_livedata)
+    implementation(Libs.lifecycle_viewmodel)
 
-    //Firebase
-    implementation (Libs.firebase_core)
-    implementation (Libs.firebase_messaging)
+    // Firebase
+    implementation(Libs.firebase_core)
+    implementation(Libs.firebase_messaging)
 
-    //Crashlytics
+    // Crashlytics
     implementation(Libs.crashlytics) {
         isTransitive = true
     }
 
-    //Anko
+    // Anko
     implementation(Libs.anko)
 
-    //Navigation
+    // Navigation
     implementation(Libs.navigation_fragment)
     implementation(Libs.navigation_ui)
 
-    //Permission
+    // Permission
     implementation(Libs.permissions_dispatcher)
     kapt(Libs.permissions_dispatcher_processor)
 
-    //Barcode
+    // Barcode
     implementation(Libs.barcode)
 
-    //Test
-    testImplementation (Libs.junit)
-    testImplementation (Libs.mockito_core)
-    androidTestImplementation (Libs.junit_ext)
-    androidTestImplementation (Libs.runner)
-    androidTestImplementation (Libs.rules)
-    androidTestImplementation (Libs.espresso_core)
-    androidTestImplementation (Libs.espresso_contrib)
-    androidTestImplementation (Libs.espresso_intents)
+    // AdapterDelegates
+    implementation(Libs.adapter_delegates)
+    implementation(Libs.adapter_delegates_dsl)
+
+    // ExpandableLayout
+    implementation(Libs.expandable_layout)
+
+    // Html textview
+    implementation(Libs.html_textview)
+
+    // Test
+    testImplementation(Libs.junit)
+    testImplementation(Libs.mockito_core)
+    androidTestImplementation(Libs.junit_ext)
+    androidTestImplementation(Libs.runner)
+    androidTestImplementation(Libs.rules)
+    androidTestImplementation(Libs.espresso_core)
+    androidTestImplementation(Libs.espresso_contrib)
+    androidTestImplementation(Libs.espresso_intents)
 }
 
 repositories {
