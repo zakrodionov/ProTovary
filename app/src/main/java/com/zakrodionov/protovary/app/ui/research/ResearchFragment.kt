@@ -40,7 +40,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private val researchesId by lazy { args.researchId }
 
     private val descriptionAdapter by lazy {
-        ListDelegationAdapter(researchDescriptionDelegate(), productDelegate(::itemClickListener, ::itemClickFavoriteListener))
+        ListDelegationAdapter(
+            researchDescriptionDelegate(),
+            productDelegate(::itemClickListener, ::itemClickFavoriteListener)
+        )
     }
 
     private val productsAdapter by lazy {
@@ -122,8 +125,14 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
     private fun initializeRecycler() {
         rvResearch.disableAllAnimations()
+        rvResearch.disableAllAnimations()
         rvResearch.layoutManager = LinearLayoutManager(activity)
-        rvResearch.adapter = MergeAdapter(descriptionAdapter, productsAdapter)
+        rvResearch.adapter = buildMergeAdapter()
+    }
+
+    private fun buildMergeAdapter(): MergeAdapter {
+        val config = MergeAdapter.Config.DEFAULT
+        return MergeAdapter(config, descriptionAdapter, productsAdapter)
     }
 
     private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
