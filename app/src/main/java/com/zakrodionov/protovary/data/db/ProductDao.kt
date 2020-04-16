@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductInfo
+import kotlinx.coroutines.flow.Flow
+
 /*suspend для LiveData не требуется*/
 @Dao
 interface ProductDao {
@@ -24,7 +26,7 @@ interface ProductDao {
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
 
     @Query("SELECT * FROM productinfo ")
-    fun getProducts(): LiveData<List<ProductInfo>>
+    fun getProducts(): Flow<List<ProductInfo>>
 
     @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
     suspend fun updateProducts()

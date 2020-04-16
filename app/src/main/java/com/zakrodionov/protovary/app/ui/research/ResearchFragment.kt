@@ -40,7 +40,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private val researchesId by lazy { args.researchId }
 
     private val descriptionAdapter by lazy {
-        ListDelegationAdapter(researchDescriptionDelegate(),productDelegate(::itemClickListener, ::itemClickFavoriteListener))
+        ListDelegationAdapter(researchDescriptionDelegate(), productDelegate(::itemClickListener, ::itemClickFavoriteListener))
     }
 
     private val productsAdapter by lazy {

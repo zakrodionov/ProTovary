@@ -3,8 +3,6 @@ package com.zakrodionov.protovary.app.ui.research
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.map
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
@@ -16,35 +14,25 @@ import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 
 class ResearchViewModel(
     val id: Long,
     private val productInteractor: ProductInteractor,
-    private val productDao: ProductDao,
     private val productMapper: ProductMapper,
+    private val productDao: ProductDao,
     val context: Context
 ) : BaseViewModel() {
 
+    private val productsFlow = productDao.getProducts().map { productMapper.mapToProducts(it) }
+    private val sourceProducts = mutableListOf<Product>()
+
     val researchDescription = MutableLiveData<List<ResearchDescriptionItem>>()
-
-    private val productsFlow =
-        productDao.getProducts().map { productMapper.mapToProducts(it) }.asFlow()
-
     val filteredProducts = MutableLiveData<List<Product>>()
 
-    private var sourceProducts by changeObservable(listOf<Product>()) {
-        applyFilters()
-    }
-
-    var sortType by changeObservable(BY_RATING_DECREASE) {
-        applyFilters()
-    }
-    var filterType by changeObservable(BY_DEFAULT) {
-        applyFilters()
-    }
-    var queryText by changeObservable("") {
-        applyFilters()
-    }
+    var sortType by changeObservable(BY_RATING_DECREASE) { applyFilters() }
+    var filterType by changeObservable(BY_DEFAULT) { applyFilters() }
+    var queryText by changeObservable("") { applyFilters() }
 
     init {
         loadResearch(id)
@@ -60,9 +48,15 @@ class ResearchViewModel(
         if (!info.isNullOrBlank()) {
             researchDescription.value = listOf(ResearchDescriptionItem(info))
         }
+        collectProducts()
+    }
+
+    private fun collectProducts() {
         launch {
             productsFlow.collect {
-                sourceProducts = it ?: listOf()
+                sourceProducts.clear()
+                sourceProducts.addAll(it ?: listOf())
+                applyFilters()
             }
         }
     }
