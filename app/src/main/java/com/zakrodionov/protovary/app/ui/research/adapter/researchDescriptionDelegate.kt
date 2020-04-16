@@ -1,13 +1,12 @@
 package com.zakrodionov.protovary.app.ui.research.adapter
 
+import android.util.Log
 import androidx.core.text.parseAsHtml
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
+import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.di.GlideApp
-import com.zakrodionov.protovary.app.ext.gone
-import com.zakrodionov.protovary.app.ext.setupCV
-import com.zakrodionov.protovary.app.ext.toggleVisibility
-import com.zakrodionov.protovary.app.ext.visible
+import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.DiffItem
 import com.zakrodionov.protovary.app.util.Utils.slideBottomTransition
 import com.zakrodionov.protovary.app.util.Utils.slideTopTransition
@@ -15,6 +14,7 @@ import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.*
 import kotlinx.android.synthetic.main.item_research.*
 import kotlinx.android.synthetic.main.item_research_desc.*
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter
 
 fun researchDescriptionDelegate() =
     adapterDelegateLayoutContainer<ResearchDescriptionItem, DiffItem>(R.layout.item_research) {
@@ -25,10 +25,14 @@ fun researchDescriptionDelegate() =
             }
         }
 
-        bind {
-            tvDesc.text = item.desc
+        val htmlHttpImageGetter = HtmlHttpImageGetter(tvDesc)
+        tvDesc.setOnClickATagListener { _, href ->
+            context.tryOpenLink("${getString(R.string.base_url)}$href")
         }
 
+        bind {
+            tvDesc.setHtml(item.desc, htmlHttpImageGetter)
+        }
     }
 
 data class ResearchDescriptionItem(val desc: String) : DiffItem {

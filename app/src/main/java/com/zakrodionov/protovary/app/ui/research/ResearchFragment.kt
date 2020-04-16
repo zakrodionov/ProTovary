@@ -8,9 +8,10 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
@@ -22,7 +23,6 @@ import com.zakrodionov.protovary.app.ui.research.adapter.researchDescriptionDele
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
-import com.zakrodionov.protovary.app.ui.view.ListPaddingDecoration
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.domain.model.Product
@@ -41,6 +41,11 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
+
+    private val descriptionAdapter by lazy {
+        ListDelegationAdapter(researchDescriptionDelegate())
+    }
+
     private val productsAdapter by lazy {
         AsyncListDifferDelegationAdapter(
             DiffCallback,
@@ -56,6 +61,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
         with(researchViewModel) {
             observe(changesListener) { researchViewModel.applyChanges() }
+            observe(researchDescription, ::renderResearchDescription)
             observe(filteredProducts, ::renderProductsList)
             observe(productsMediator) { }
             observeEvent(state, ::handleState)
@@ -127,21 +133,18 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private fun initializeRecycler() {
         rvResearch.disableChangeAnimation()
         rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        rvResearch.adapter = productsAdapter
+        rvResearch.adapter = MergeAdapter(descriptionAdapter, productsAdapter)
+    }
+
+    private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
+        descriptionAdapter.items = descriptionItems
+        descriptionAdapter.notifyDataSetChanged()
     }
 
     private fun renderProductsList(products: List<Product>?) {
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-       // rvResearch?.itemAnimator = null
-
-        //todo
-        val temp = mutableListOf<DiffItem>().apply {
-            add(ResearchDescriptionItem("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
-            addAll(products ?: listOf())
-        }
-
-        productsAdapter.items = temp
+        productsAdapter.items = products
     }
 
     private fun itemClickListener(product: Product) {

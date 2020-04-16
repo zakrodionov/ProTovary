@@ -170,6 +170,9 @@ dependencies {
     //ExpandableLayout
     implementation(Libs.expandable_layout)
 
+    implementation("org.sufficientlysecure:html-textview:3.9")
+
+
     // Test
     testImplementation(Libs.junit)
     testImplementation(Libs.mockito_core)

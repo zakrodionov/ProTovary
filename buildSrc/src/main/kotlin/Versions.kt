@@ -12,7 +12,7 @@ object Versions {
     const val androidx_constraint_layout = "2.0.0-beta2"
     const val androidx_material = "1.1.0-alpha09"
     const val androidx_cardview = "1.0.0"
-    const val androidx_recyclerview = "1.1.0-beta03"
+    const val androidx_recyclerview = "1.2.0-alpha02"
     const val ktx = "1.2.0-alpha03"
     const val multidex = "2.0.1"
     const val fragment = "1.1.0-alpha09"

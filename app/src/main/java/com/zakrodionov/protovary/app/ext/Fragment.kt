@@ -29,19 +29,5 @@ inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>) =
 val BaseFragment.appContext: Context get() = activity?.applicationContext!!
 
 fun Fragment.tryOpenLink(link: String?, basePath: String? = "https://google.com/search?q=") {
-    if (link != null) {
-        try {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW, when {
-                        URLUtil.isValidUrl(link) -> Uri.parse(link)
-                        else -> Uri.parse(basePath + link)
-                    }
-                )
-            )
-        } catch (e: Exception) {
-            Log.e("error Url", "tryOpenLink error: $e")
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com/search?q=$link")))
-        }
-    }
+    activity?.tryOpenLink(link, basePath)
 }

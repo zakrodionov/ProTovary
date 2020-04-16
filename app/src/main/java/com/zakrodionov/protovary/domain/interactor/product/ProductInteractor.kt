@@ -32,7 +32,7 @@ class ProductInteractor(
 
     suspend fun getProductsInfo(
         id: Long,
-        onSuccess: (LiveData<List<ProductInfo>>) -> Unit,
+        onSuccess: (Pair<LiveData<List<ProductInfo>>, String?>) -> Unit,
         onState: (State) -> Unit
     ) {
         execute(onSuccess, onState) {
@@ -40,7 +40,7 @@ class ProductInteractor(
             // Обновляем бд
             productDao.refreshProducts(result.productInfo ?: listOf())
 
-            productDao.getProducts()
+            Pair(productDao.getProducts(), result.anons)
         }
     }
 

@@ -33,6 +33,8 @@ class ResearchViewModel(
     val changesListener = MediatorLiveData<Unit>()
     val productsMediator = MediatorLiveData<Unit>()
 
+    val researchDescription = MutableLiveData<List<ResearchDescriptionItem>>()
+
     init {
         sortType.value = BY_RATING_DECREASE
         filterType.value = BY_DEFAULT
@@ -50,11 +52,16 @@ class ResearchViewModel(
         }
     }
 
-    private fun handleProducts(research: LiveData<List<ProductInfo>>) {
-        productsMediator.removeSource(research)
-        productsMediator.addSource(research) {
+    private fun handleProducts(data: Pair<LiveData<List<ProductInfo>>, String?>) {
+        productsMediator.removeSource(data.first)
+        productsMediator.addSource(data.first) {
             sourceProducts = it.map { productMapper.productInfoToProduct(it) }
             applyChanges()
+        }
+
+        val desc = data.second
+        if (!desc.isNullOrBlank()) {
+            researchDescription.value = listOf(ResearchDescriptionItem(desc))
         }
     }
 
