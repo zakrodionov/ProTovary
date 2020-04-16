@@ -43,7 +43,7 @@
                     android:layout_marginStart="@dimen/default_btn_start_margin_40"
                     android:layout_marginEnd="@dimen/default_btn_end_margin_40"
                     android:layout_marginBottom="@dimen/default_margin_40"
-                    android:background="@drawable/button_ripple"
+                    android:background="@drawable/bg_pressed_ripple"
                     android:text="@string/scan_button"
                     android:textAppearance="@style/TextAppearance.App.WhiteButton"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -49,7 +49,6 @@
     </style>
 
     <style name="TextAppearance.App.Chip">
-        <item name="android:textColor">@color/chip_selector</item>
         <item name="android:textSize">14sp</item>
     </style>
 

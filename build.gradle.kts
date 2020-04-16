@@ -35,7 +35,7 @@ task("clean") {
     delete(rootProject.buildDir)
 }
 
-tasks.withType<DependencyUpdatesTask>  {
+tasks.withType<DependencyUpdatesTask> {
         resolutionStrategy {
             componentSelection {
                 all {

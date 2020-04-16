@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.domain.model
 
-import android.content.Context
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.toFullImageUrl
 import com.zakrodionov.protovary.app.platform.DiffItem

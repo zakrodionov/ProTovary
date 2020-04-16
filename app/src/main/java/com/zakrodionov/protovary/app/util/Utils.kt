@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
-import com.zakrodionov.protovary.BuildConfig
 
 /**
  * Created by Zakhar Rodionov on 20.03.19.

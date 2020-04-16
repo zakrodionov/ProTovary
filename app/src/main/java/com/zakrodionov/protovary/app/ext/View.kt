@@ -58,3 +58,7 @@ fun ImageView.loadFromUrl(
 fun RecyclerView.disableChangeAnimation() {
     (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 }
+
+fun RecyclerView.disableAllAnimations() {
+    itemAnimator = null
+}

@@ -114,11 +114,6 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun setupChips() {
-        chipQualityMark.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
-        chipProductViolation.setTextAppearanceResource(R.style.TextAppearance_App_Chip)
-
-        chipGroup.isSingleSelection = true
-
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipQualityMark -> researchViewModel.filterType.value = BY_QUALITY_MARK
@@ -129,14 +124,13 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
-        rvResearch.disableChangeAnimation()
-        rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        rvResearch.disableAllAnimations()
+        rvResearch.layoutManager = LinearLayoutManager(activity)
         rvResearch.adapter = MergeAdapter(descriptionAdapter, productsAdapter)
     }
 
     private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
-        descriptionAdapter.items = descriptionItems
-        descriptionAdapter.notifyDataSetChanged()
+        descriptionAdapter.setData(descriptionItems)
     }
 
     private fun renderProductsList(products: List<Product>?) {

@@ -1,7 +1,6 @@
 package com.zakrodionov.protovary.data.mapper
 
 import android.content.Context
-import com.zakrodionov.protovary.app.util.Utils
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductDetail
 import com.zakrodionov.protovary.data.entity.ProductInfo
@@ -52,5 +51,4 @@ class ProductMapper(val context: Context) {
             points = product.points,
             isFavorite = product.isFavorite
         )
-
 }

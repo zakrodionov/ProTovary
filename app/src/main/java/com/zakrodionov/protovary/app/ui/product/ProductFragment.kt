@@ -1,11 +1,9 @@
 package com.zakrodionov.protovary.app.ui.product
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.text.parseAsHtml
 import androidx.navigation.fragment.navArgs
-import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
