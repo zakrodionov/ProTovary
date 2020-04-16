@@ -67,6 +67,11 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TextAppearance.App.Title.Desc">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="TextAppearance.App.Bold.TitleRed">
         <item name="android:textColor">@color/red_dark</item>
     </style>

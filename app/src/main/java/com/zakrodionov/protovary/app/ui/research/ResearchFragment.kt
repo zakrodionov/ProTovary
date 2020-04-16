@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_research.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
@@ -123,7 +125,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
-        rvResearch.addItemDecoration(ListPaddingDecoration(requireActivity()))
+        rvResearch.disableChangeAnimation()
         rvResearch.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvResearch.adapter = productsAdapter
     }

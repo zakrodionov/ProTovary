@@ -4,8 +4,12 @@
     android:id="@+id/expandableLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/default_margin_10"
+    android:layout_marginTop="@dimen/default_margin_5"
+    android:layout_marginEnd="@dimen/default_margin_10"
+    android:layout_marginBottom="@dimen/default_margin_5"
     app:expandable_duration="300"
     app:expandable_isExpanded="false"
     app:expandable_parentLayout="@layout/item_research_title"
     app:expandable_secondLayout="@layout/item_research_desc"
-    app:expandable_spinner_color="@color/blue_light" />
+    app:expandable_spinner_color="@color/white" />

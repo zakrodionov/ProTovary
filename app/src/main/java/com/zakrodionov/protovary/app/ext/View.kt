@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.zakrodionov.protovary.R
@@ -50,3 +52,7 @@ fun ImageView.loadFromUrl(url: String?) =
         .override(900, 600)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
+
+fun RecyclerView.disableChangeAnimation(){
+    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+}

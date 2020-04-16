@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/description"
-    android:background="@drawable/desc_bg"
+    android:background="@drawable/blue_rounded_bg"
     android:padding="@dimen/default_margin_10"
-    android:textAppearance="@style/TextAppearance.App.Title.Categories" />
+    android:textAppearance="@style/TextAppearance.App.Title.Desc" />
 
