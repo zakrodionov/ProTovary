@@ -21,7 +21,13 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.dialog_sort_research, container, false)
         val type = arguments?.getSerializable(ARG_SORT_TYPE) ?: BY_RATING_DECREASE
 

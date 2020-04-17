@@ -40,7 +40,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private val researchesId by lazy { args.researchId }
 
     private val descriptionAdapter by lazy {
-        ListDelegationAdapter(researchDescriptionDelegate())
+        ListDelegationAdapter(
+            researchDescriptionDelegate(),
+            productDelegate(::itemClickListener, ::itemClickFavoriteListener)
+        )
     }
 
     private val productsAdapter by lazy {
@@ -57,10 +60,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         super.onViewCreated(view, savedInstanceState)
 
         with(researchViewModel) {
-            observe(changesListener) { researchViewModel.applyChanges() }
             observe(researchDescription, ::renderResearchDescription)
             observe(filteredProducts, ::renderProductsList)
-            observe(productsMediator) { }
             observeEvent(state, ::handleState)
         }
 
@@ -100,7 +101,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
                 if (newText.isNotEmpty() || !actionSearch.isIconified) {
                     tvTitle.gone()
                 }
-                researchViewModel.queryText.value = newText
+                researchViewModel.queryText = newText
                 scrollToTop()
                 return false
             }
@@ -115,9 +116,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private fun setupChips() {
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.chipQualityMark -> researchViewModel.filterType.value = BY_QUALITY_MARK
-                R.id.chipProductViolation -> researchViewModel.filterType.value = BY_PRODUCT_WITH_VIOLATION
-                else -> researchViewModel.filterType.value = BY_DEFAULT
+                R.id.chipQualityMark -> researchViewModel.filterType = BY_QUALITY_MARK
+                R.id.chipProductViolation -> researchViewModel.filterType = BY_PRODUCT_WITH_VIOLATION
+                else -> researchViewModel.filterType = BY_DEFAULT
             }
         }
     }
@@ -125,7 +126,12 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private fun initializeRecycler() {
         rvResearch.disableAllAnimations()
         rvResearch.layoutManager = LinearLayoutManager(activity)
-        rvResearch.adapter = MergeAdapter(descriptionAdapter, productsAdapter)
+        rvResearch.adapter = buildMergeAdapter()
+    }
+
+    private fun buildMergeAdapter(): MergeAdapter {
+        val config = MergeAdapter.Config.DEFAULT
+        return MergeAdapter(config, descriptionAdapter, productsAdapter)
     }
 
     private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
@@ -156,14 +162,14 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
     private fun showBottomDialog() {
         val bottomSheetDialog = BottomDialogSortFragment.newInstance(
-            researchViewModel.sortType.value ?: ResearchSortType.BY_RATING_DECREASE
+            researchViewModel.sortType
         )
         bottomSheetDialog.setTargetFragment(this, RC_SORT)
         bottomSheetDialog.show(requireFragmentManager(), DIALOG_SORT_TAG)
     }
 
     override fun onSortTypeSelected(sortType: ResearchSortType) {
-        researchViewModel.sortType.value = sortType
+        researchViewModel.sortType = sortType
         scrollToTop()
     }
 

@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/item_sort_selector" />
+    <corners
+        android:topLeftRadius="@dimen/default_margin_15"
+        android:topRightRadius="@dimen/default_margin_15" />
+</shape>
