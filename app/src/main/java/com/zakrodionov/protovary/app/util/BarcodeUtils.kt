@@ -3,7 +3,7 @@ package com.zakrodionov.protovary.app.util
 /**
  * Created by Zakhar Rodionov on 20.03.19.
  */
-object Utils {
+object BarcodeUtils {
     fun formatBarcode(barcode: String): String {
         return when (barcode.length) {
             11 -> {

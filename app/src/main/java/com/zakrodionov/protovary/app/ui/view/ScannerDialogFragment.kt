@@ -10,7 +10,7 @@ import androidx.core.text.parseAsHtml
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import com.zakrodionov.protovary.R
-import com.zakrodionov.protovary.app.util.Utils
+import com.zakrodionov.protovary.app.util.BarcodeUtils
 import kotlinx.android.synthetic.main.dialog_scanner.*
 import kotlinx.android.synthetic.main.dialog_scanner.view.*
 
@@ -46,7 +46,7 @@ class ScannerDialogFragment : DialogFragment() {
             view.tvDescription.text = getString(R.string.product_not_found)
         } else {
             val text =
-                String.format(getString(R.string.product_not_found_barcode), Utils.formatBarcode(barcode)).parseAsHtml()
+                String.format(getString(R.string.product_not_found_barcode), BarcodeUtils.formatBarcode(barcode)).parseAsHtml()
             view.tvDescription.text = "$text ${getString(R.string.product_not_found_input_barcode)}"
         }
 

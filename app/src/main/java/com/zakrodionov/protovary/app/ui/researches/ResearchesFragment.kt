@@ -36,7 +36,6 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         with(researchesViewModel) {
             observe(filteredResearches, ::renderResearchesList)
             observe(title, ::renderTitle)
-            observe(queryText) { researchesViewModel.applyQueryText() }
             observeEvent(state, ::handleState)
         }
 
@@ -88,7 +87,7 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
                 if (newText.isNotEmpty() || !actionSearch.isIconified) {
                     tvTitle.gone()
                 }
-                researchesViewModel.queryText.value = newText
+                researchesViewModel.queryText = newText
                 rvResearches?.scrollToPosition(0)
                 return false
             }
