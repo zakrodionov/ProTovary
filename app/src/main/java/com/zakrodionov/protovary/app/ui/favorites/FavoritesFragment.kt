@@ -17,7 +17,6 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
 
     private val favoritesViewModel: FavoritesViewModel by viewModel()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -30,7 +29,7 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
     }
 
     private fun handleFavoriteProductsList(products: List<Product>?) {
-        //productsFavoriteAdapter.setData(products)
+        // productsFavoriteAdapter.setData(products)
 
         tvEmpty?.isVisible = products.isNullOrEmpty()
         rvProductsFavorite?.isVisible = !products.isNullOrEmpty()
@@ -50,7 +49,7 @@ class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
         tvToolbarTitle.text = getString(R.string.favorites)
 
         rvProductsFavorite.layoutManager = LinearLayoutManager(activity)
-        //rvProductsFavorite.adapter = productsFavoriteAdapter
+        // rvProductsFavorite.adapter = productsFavoriteAdapter
     }
 
     override fun onDestroyView() {

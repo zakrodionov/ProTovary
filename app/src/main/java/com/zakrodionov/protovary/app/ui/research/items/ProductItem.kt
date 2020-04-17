@@ -1,9 +1,11 @@
-package com.zakrodionov.protovary.app.ui.research.delegates
+package com.zakrodionov.protovary.app.ui.research.items
 
+import android.view.View
 import androidx.core.text.parseAsHtml
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.ext.context
 import com.zakrodionov.protovary.app.ext.customSizeCropPlaceholder
 import com.zakrodionov.protovary.app.ext.loadFromUrl
 import com.zakrodionov.protovary.app.ext.toggleVisibility
@@ -22,8 +24,8 @@ data class ProductItem(
         return R.layout.item_product
     }
 
-    override fun bind(vh: GroupieViewHolder, position: Int) {
-        with(vh) {
+    override fun createViewHolder(itemView: View): GroupieViewHolder {
+        return GroupieViewHolder(itemView).apply {
             containerView.setOnClickListener {
                 clickListener.invoke(product)
             }
@@ -31,7 +33,11 @@ data class ProductItem(
             ivActionFavorite.setOnClickListener {
                 favoriteClickListener.invoke(product)
             }
+        }
+    }
 
+    override fun bind(vh: GroupieViewHolder, position: Int) {
+        with(vh) {
             tvName.text = product.name.parseAsHtml()
             ratingBar.rating = product.points.toFloat()
             tvPoints.text = product.points.toString()
@@ -40,7 +46,6 @@ data class ProductItem(
             ivActionFavorite.setImageResource(product.favoriteDrawable)
             tvTrademark.toggleVisibility(product.name != product.trademark)
 
-            val context = vh.containerView.context
             ivImage.loadFromUrl(product.fullImageUrl) { customSizeCropPlaceholder(context) }
         }
     }

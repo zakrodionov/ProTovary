@@ -170,13 +170,13 @@ dependencies {
     // Html textview
     implementation(Libs.html_textview)
 
-    //todo
+    // todo
     val groupie_version = "2.8.0"
-    implementation ("com.xwray:groupie:$groupie_version")
-    implementation ("com.xwray:groupie-kotlin-android-extensions:$groupie_version")
+    implementation("com.xwray:groupie:$groupie_version")
+    implementation("com.xwray:groupie-kotlin-android-extensions:$groupie_version")
 
-    implementation ("androidx.vectordrawable:vectordrawable:1.1.0")
-    implementation ("androidx.vectordrawable:vectordrawable-animated:1.1.0")
+    implementation("androidx.vectordrawable:vectordrawable:1.1.0")
+    implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
 
     // Test
     testImplementation(Libs.junit)

@@ -15,9 +15,9 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.research.delegates.DescItem
-import com.zakrodionov.protovary.app.ui.research.delegates.ExpandableHeaderItem
-import com.zakrodionov.protovary.app.ui.research.delegates.ProductItem
+import com.zakrodionov.protovary.app.ui.research.items.DescItem
+import com.zakrodionov.protovary.app.ui.research.items.ExpandableHeaderItem
+import com.zakrodionov.protovary.app.ui.research.items.ProductItem
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener

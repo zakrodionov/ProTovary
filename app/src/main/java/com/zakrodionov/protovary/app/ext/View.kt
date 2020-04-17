@@ -62,3 +62,7 @@ fun RecyclerView.disableChangeAnimation() {
 fun RecyclerView.disableAllAnimations() {
     itemAnimator = null
 }
+
+fun View.rotate(value: Float, duration: Long) {
+    animate().rotationBy(value).setDuration(duration).start()
+}
