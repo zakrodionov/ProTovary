@@ -8,16 +8,15 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
-import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.platform.DiffCallback
+import com.zakrodionov.protovary.app.ui.research.delegates.HeaderItem
+import com.zakrodionov.protovary.app.ui.research.delegates.ProductItem
 import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
-import com.zakrodionov.protovary.app.ui.research.delegates.productDelegate
-import com.zakrodionov.protovary.app.ui.research.delegates.researchDescriptionDelegate
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
@@ -39,20 +38,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
 
-    private val descriptionAdapter by lazy {
-        ListDelegationAdapter(
-            researchDescriptionDelegate(),
-            productDelegate(::itemClickListener, ::itemClickFavoriteListener)
-        )
-    }
-
-    private val productsAdapter by lazy {
-        AsyncListDifferDelegationAdapter(
-            DiffCallback,
-            productDelegate(::itemClickListener, ::itemClickFavoriteListener),
-            researchDescriptionDelegate()
-        )
-    }
+    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
+    private val section = Section()
 
     private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
 
@@ -126,22 +113,17 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private fun initializeRecycler() {
         rvResearch.disableAllAnimations()
         rvResearch.layoutManager = LinearLayoutManager(activity)
-        rvResearch.adapter = buildMergeAdapter()
-    }
-
-    private fun buildMergeAdapter(): MergeAdapter {
-        val config = MergeAdapter.Config.DEFAULT
-        return MergeAdapter(config, descriptionAdapter, productsAdapter)
+        rvResearch.adapter = groupAdapter.apply { add(section) }
     }
 
     private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
-        descriptionAdapter.setData(descriptionItems)
+        section.setHeader(HeaderItem(descriptionItems?.first()?.desc ?: ""))
     }
 
     private fun renderProductsList(products: List<Product>?) {
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-        productsAdapter.items = products
+        section.update(products?.map { ProductItem(it) } ?: listOf())
     }
 
     private fun itemClickListener(product: Product) {
