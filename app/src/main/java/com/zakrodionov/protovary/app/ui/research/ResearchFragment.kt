@@ -8,14 +8,12 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.research.items.DescItem
 import com.zakrodionov.protovary.app.ui.research.items.ExpandableHeaderItem
 import com.zakrodionov.protovary.app.ui.research.items.ProductItem
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
@@ -90,7 +88,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
                     tvTitle.gone()
                 }
                 researchViewModel.queryText = newText
-                scrollToTop()
+
+                if (researchViewModel.queryText != newText) {
+                    scrollToTop()
+                }
                 return false
             }
         })
@@ -119,9 +120,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun renderResearchDescription(desc: String?) {
-        section.setHeader(ExpandableGroup(ExpandableHeaderItem).apply {
-            add(DescItem(desc ?: ""))
-        })
+        if (!desc.isNullOrBlank()) {
+            section.setHeader(ExpandableHeaderItem(desc))
+        }
     }
 
     private fun renderProductsList(products: List<Product>?) {

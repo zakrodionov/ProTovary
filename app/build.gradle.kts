@@ -171,6 +171,8 @@ dependencies {
     // Html textview
     implementation(Libs.html_textview)
 
+    implementation("com.github.skydoves:expandablelayout:1.0.5")//todo
+
     // Test
     testImplementation(Libs.junit)
     testImplementation(Libs.mockito_core)
