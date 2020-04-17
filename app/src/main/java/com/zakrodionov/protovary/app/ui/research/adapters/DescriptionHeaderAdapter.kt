@@ -22,13 +22,7 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
         setHasStableIds(true)
     }
 
-    val items = mutableListOf<String>()
-
-    fun setItems(newItems: List<String>?) {
-        items.clear()
-        items.addAll(newItems.orEmpty())
-        notifyDataSetChanged()
-    }
+    private val items = mutableListOf<String>()
 
     override fun getItemId(position: Int) = id
 
@@ -59,5 +53,11 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
             super.bind(item)
             tvDesc.setHtml(item, HtmlHttpImageGetter(tvDesc))
         }
+    }
+
+    fun setItems(newItems: List<String>?) {
+        items.clear()
+        items.addAll(newItems.orEmpty())
+        notifyDataSetChanged()
     }
 }

@@ -19,7 +19,7 @@ class ProductsAdapter(
     private val clickFavoriteListener: (Product) -> Unit
 ) : Adapter<ProductsAdapter.ViewHolder>() {
 
-    val items = mutableListOf<Product>()
+    private val items = mutableListOf<Product>()
 
     init {
         setHasStableIds(true)
@@ -57,12 +57,6 @@ class ProductsAdapter(
                 ivImage.loadFromUrl(item.fullImageUrl) { customSizeCropPlaceholder(context) }
             }
         }
-    }
-
-    fun setItems(newItems: List<Product>?) {
-        items.clear()
-        items.addAll(newItems.orEmpty())
-        notifyDataSetChanged()
     }
 
     fun updateItems(newItems: List<Product>?) {
