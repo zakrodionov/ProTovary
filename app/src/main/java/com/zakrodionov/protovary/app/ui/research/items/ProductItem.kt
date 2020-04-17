@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research.items
 
-import android.view.View
 import androidx.core.text.parseAsHtml
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -24,8 +23,8 @@ data class ProductItem(
         return R.layout.item_product
     }
 
-    override fun createViewHolder(itemView: View): GroupieViewHolder {
-        return GroupieViewHolder(itemView).apply {
+    override fun bind(vh: GroupieViewHolder, position: Int) {
+        with(vh) {
             containerView.setOnClickListener {
                 clickListener.invoke(product)
             }
@@ -33,11 +32,7 @@ data class ProductItem(
             ivActionFavorite.setOnClickListener {
                 favoriteClickListener.invoke(product)
             }
-        }
-    }
 
-    override fun bind(vh: GroupieViewHolder, position: Int) {
-        with(vh) {
             tvName.text = product.name.parseAsHtml()
             ratingBar.rating = product.points.toFloat()
             tvPoints.text = product.points.toString()

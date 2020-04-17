@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research.items
 
-import android.view.View
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.zakrodionov.protovary.R
@@ -22,17 +21,13 @@ data class DescItem(
         return R.layout.item_research_desc
     }
 
-    override fun createViewHolder(itemView: View): GroupieViewHolder {
-        return GroupieViewHolder(itemView).apply {
+    override fun bind(vh: GroupieViewHolder, position: Int) {
+        with(vh) {
             htmlHttpImageGetter = HtmlHttpImageGetter(tvDesc)
             tvDesc.setOnClickATagListener { _, href ->
                 context.tryOpenLink("${getString(R.string.base_url)}$href")
             }
-        }
-    }
 
-    override fun bind(vh: GroupieViewHolder, position: Int) {
-        with(vh) {
             tvDesc.setHtml(desc, htmlHttpImageGetter)
         }
     }

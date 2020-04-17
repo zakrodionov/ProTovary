@@ -114,7 +114,7 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     private fun initializeRecycler() {
         rvResearch.disableChangeAnimation()
         rvResearch.layoutManager = LinearLayoutManager(activity)
-        rvResearch.adapter = groupAdapter.apply { add(section) }
+        rvResearch.safeAttachAdapter(groupAdapter, section)
     }
 
     private fun renderResearchDescription(desc: String?) {

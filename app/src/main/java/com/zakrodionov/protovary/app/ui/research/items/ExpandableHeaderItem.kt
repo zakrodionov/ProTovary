@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research.items
 
-import android.view.View
 import android.widget.ImageView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
@@ -20,17 +19,13 @@ object ExpandableHeaderItem : Item(), ExpandableItem {
         return R.layout.item_research_title
     }
 
-    override fun createViewHolder(itemView: View): GroupieViewHolder {
-        return GroupieViewHolder(itemView).apply {
+    override fun bind(vh: GroupieViewHolder, position: Int) {
+        with(vh) {
             tvTitle.setOnClickListener {
                 expandableGroup.onToggleExpanded()
                 bindIcon(icon, true)
             }
-        }
-    }
 
-    override fun bind(vh: GroupieViewHolder, position: Int) {
-        with(vh) {
             bindIcon(icon)
         }
     }
