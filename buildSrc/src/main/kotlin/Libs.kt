@@ -86,8 +86,9 @@ object Libs {
     const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates}"
     const val adapter_delegates_dsl = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates}"
 
-    //ExpandableLayout
-    const val expandable_layout = "com.github.skydoves:expandablelayout:${Versions.expandable_layout}"
+    //Groupie
+    const val groupie = "com.xwray:groupie:${Versions.groupie}"
+    const val groupie_dsl = "com.xwray:groupie-kotlin-android-extensions:${Versions.groupie}"
 
     //Html textview
     const val html_textview = "org.sufficientlysecure:html-textview:${Versions.html_textview}"

@@ -76,6 +76,9 @@ object Versions {
     //AdapterDelegates
     const val adapter_delegates = "4.3.0"
 
+    //Groupie
+    const val groupie = "2.8.0"
+
     //ExpandableLayout
     const val expandable_layout = "1.0.5"
 

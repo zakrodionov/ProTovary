@@ -164,19 +164,12 @@ dependencies {
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
 
-    // ExpandableLayout
-    implementation(Libs.expandable_layout)
+    //Groupie
+    implementation(Libs.groupie)
+    implementation(Libs.groupie_dsl)
 
     // Html textview
     implementation(Libs.html_textview)
-
-    // todo
-    val groupie_version = "2.8.0"
-    implementation("com.xwray:groupie:$groupie_version")
-    implementation("com.xwray:groupie-kotlin-android-extensions:$groupie_version")
-
-    implementation("androidx.vectordrawable:vectordrawable:1.1.0")
-    implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
 
     // Test
     testImplementation(Libs.junit)
