@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.BaseViewModel
-import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
 import com.zakrodionov.protovary.app.util.changeObservable
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
@@ -27,7 +26,7 @@ class ResearchViewModel(
     private val productsFlow = productDao.getProducts().map { productMapper.mapToProducts(it) }
     private val sourceProducts = mutableListOf<Product>()
 
-    val researchDescription = MutableLiveData<List<ResearchDescriptionItem>>()
+    val researchDescription = MutableLiveData<List<String>>()
     val filteredProducts = MutableLiveData<List<Product>>()
 
     var sortType by changeObservable(BY_RATING_DECREASE) { applyFilters() }
@@ -46,7 +45,7 @@ class ResearchViewModel(
 
     private fun handleProductsInfo(info: String?) {
         if (!info.isNullOrBlank()) {
-            researchDescription.value = listOf(ResearchDescriptionItem(info))
+            researchDescription.value = listOf(info)
         }
         collectProducts()
     }
