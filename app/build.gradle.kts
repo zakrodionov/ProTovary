@@ -1,4 +1,5 @@
-
+import java.io.FileInputStream
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -34,20 +35,28 @@ android {
         resConfigs("ru")
     }
 
-//    signingConfigs {
-//        register("release") {
-//            storeFile = file(project.property("keyStore") as String)
-//            storePassword = project.property("storePassword") as String
-//            keyPassword = project.property("keyPassword") as String
-//            keyAlias = project.property("keyAlias") as String
-//        }
-//    }
+    signingConfigs {
+        register("release") {
+            val keystorePropertiesFile = rootProject.file("keystore.properties")
+            val keystoreProperties =
+                Properties().apply { load(FileInputStream(keystorePropertiesFile)) }
+
+            storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            keyAlias = keystoreProperties["keyAlias"] as String
+
+            isV1SigningEnabled = true
+            isV2SigningEnabled = true
+        }
+    }
 
     buildTypes {
         getByName("release") {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs["release"]
 
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "API_ENDPOINT", AndroidConfig.API_PROD_URL)
