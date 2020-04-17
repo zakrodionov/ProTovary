@@ -16,7 +16,6 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.research.delegates.HeaderItem
 import com.zakrodionov.protovary.app.ui.research.delegates.ProductItem
-import com.zakrodionov.protovary.app.ui.research.delegates.ResearchDescriptionItem
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
@@ -116,14 +115,14 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         rvResearch.adapter = groupAdapter.apply { add(section) }
     }
 
-    private fun renderResearchDescription(descriptionItems: List<ResearchDescriptionItem>?) {
-        section.setHeader(HeaderItem(descriptionItems?.first()?.desc ?: ""))
+    private fun renderResearchDescription(desc: String?) {
+        section.setHeader(HeaderItem(desc ?: "")) //todo
     }
 
     private fun renderProductsList(products: List<Product>?) {
         tvEmpty?.toggleVisibility(products.isNullOrEmpty())
         rvResearch?.toggleVisibility(!products.isNullOrEmpty())
-        section.update(products?.map { ProductItem(it) } ?: listOf())
+        section.update(products?.map { ProductItem(it, ::itemClickListener, ::itemClickFavoriteListener) } ?: listOf())
     }
 
     private fun itemClickListener(product: Product) {

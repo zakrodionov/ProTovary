@@ -11,7 +11,9 @@ import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.*
 
 open class ProductItem(
-    private val product: Product
+    private val product: Product,
+    private val clickListener: (Product) -> Unit,
+    private val favoriteClickListener: (Product) -> Unit
 ) : Item() {
 
     override fun getId() = product.id
@@ -22,6 +24,14 @@ open class ProductItem(
 
     override fun bind(vh: GroupieViewHolder, position: Int) {
         with(vh) {
+            containerView.setOnClickListener {
+                clickListener.invoke(product)
+            }
+
+            ivActionFavorite.setOnClickListener {
+                favoriteClickListener.invoke(product)
+            }
+
             tvName.text = product.name.parseAsHtml()
             ratingBar.rating = product.points.toFloat()
             tvPoints.text = product.points.toString()

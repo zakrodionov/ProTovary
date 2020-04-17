@@ -170,6 +170,11 @@ dependencies {
     // Html textview
     implementation(Libs.html_textview)
 
+    //todo
+    val groupie_version = "2.8.0"
+    implementation ("com.xwray:groupie:$groupie_version")
+    implementation ("com.xwray:groupie-kotlin-android-extensions:$groupie_version")
+
     // Test
     testImplementation(Libs.junit)
     testImplementation(Libs.mockito_core)
