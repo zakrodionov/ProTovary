@@ -8,10 +8,13 @@ import com.zakrodionov.protovary.app.ext.tryOpenLink
 import kotlinx.android.synthetic.main.item_research.*
 import kotlinx.android.synthetic.main.item_research_desc.view.*
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter
+import kotlin.random.Random
 
 data class ExpandableHeaderItem(private val desc: String) : Item() {
 
-    override fun getId() = hashCode().toLong()
+    private val id = Random.nextLong()
+
+    override fun getId() = id
 
     override fun getLayout(): Int {
         return R.layout.item_research
