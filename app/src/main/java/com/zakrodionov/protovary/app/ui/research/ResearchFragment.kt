@@ -125,7 +125,6 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
     private fun initializeRecycler() {
         rvResearch.disableAllAnimations()
-        rvResearch.disableAllAnimations()
         rvResearch.layoutManager = LinearLayoutManager(activity)
         rvResearch.adapter = buildMergeAdapter()
     }
