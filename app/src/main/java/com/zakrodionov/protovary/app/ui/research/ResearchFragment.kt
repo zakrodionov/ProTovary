@@ -90,8 +90,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
                 if (newText.isNotEmpty() || !actionSearch.isIconified) {
                     tvTitle.gone()
                 }
+                if (researchViewModel.queryText != newText) {
+                    scrollToTop()
+                }
                 researchViewModel.queryText = newText
-                scrollToTop()
                 return false
             }
         })
