@@ -8,13 +8,15 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
-import com.zakrodionov.protovary.app.ui.research.delegates.HeaderItem
+import com.zakrodionov.protovary.app.ui.research.delegates.DescItem
+import com.zakrodionov.protovary.app.ui.research.delegates.ExpandableHeaderItem
 import com.zakrodionov.protovary.app.ui.research.delegates.ProductItem
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
@@ -110,13 +112,15 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     private fun initializeRecycler() {
-        rvResearch.disableAllAnimations()
+        rvResearch.disableChangeAnimation()
         rvResearch.layoutManager = LinearLayoutManager(activity)
         rvResearch.adapter = groupAdapter.apply { add(section) }
     }
 
     private fun renderResearchDescription(desc: String?) {
-        section.setHeader(HeaderItem(desc ?: "")) //todo
+        section.setHeader(ExpandableGroup(ExpandableHeaderItem).apply {
+            add(DescItem(desc ?: ""))
+        })
     }
 
     private fun renderProductsList(products: List<Product>?) {

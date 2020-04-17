@@ -10,7 +10,7 @@ import com.zakrodionov.protovary.app.ext.toggleVisibility
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.item_product.*
 
-open class ProductItem(
+data class ProductItem(
     private val product: Product,
     private val clickListener: (Product) -> Unit,
     private val favoriteClickListener: (Product) -> Unit
