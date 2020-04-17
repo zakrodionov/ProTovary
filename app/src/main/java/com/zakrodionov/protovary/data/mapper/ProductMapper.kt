@@ -19,6 +19,8 @@ class ProductMapper(val context: Context) {
             isFavorite = null
         )
 
+    fun mapToProducts(productsInfo: List<ProductInfo>?) = productsInfo?.map { productInfoToProduct(it) }
+
     fun productInfoToProduct(product: ProductInfo) =
         Product(
             id = product.id,

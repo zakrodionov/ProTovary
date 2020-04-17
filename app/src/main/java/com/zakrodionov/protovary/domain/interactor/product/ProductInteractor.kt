@@ -1,13 +1,11 @@
 package com.zakrodionov.protovary.domain.interactor.product
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.State
 import com.zakrodionov.protovary.data.db.ProductDao
 import com.zakrodionov.protovary.data.entity.ProductCompact
 import com.zakrodionov.protovary.data.entity.ProductDetail
-import com.zakrodionov.protovary.data.entity.ProductInfo
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.repository.ProductRepository
 import com.zakrodionov.protovary.domain.interactor.BaseInteractor
@@ -32,15 +30,14 @@ class ProductInteractor(
 
     suspend fun getProductsInfo(
         id: Long,
-        onSuccess: (Pair<LiveData<List<ProductInfo>>, String?>) -> Unit,
+        onSuccess: (String?) -> Unit,
         onState: (State) -> Unit
     ) {
         execute(onSuccess, onState) {
             val result = productRepository.getProductsInfo(id)
             // Обновляем бд
             productDao.refreshProducts(result.productInfo ?: listOf())
-
-            Pair(productDao.getProducts(), result.anons)
+            result.anons
         }
     }
 
