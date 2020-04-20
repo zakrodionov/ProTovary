@@ -2,6 +2,7 @@ package com.zakrodionov.protovary.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.zakrodionov.protovary.data.db.entity.FavoriteProduct
 import com.zakrodionov.protovary.data.entity.ProductInfo
 import kotlinx.coroutines.flow.Flow
@@ -36,6 +37,9 @@ interface ProductDao {
 
     @Query("DELETE FROM productinfo")
     suspend fun deleteProducts()
+
+    @RawQuery(observedEntities = [ProductInfo::class])
+    fun observeProducts(rawQuery: SimpleSQLiteQuery): Flow<List<ProductInfo>>
 
     @Transaction
     suspend fun refreshProducts(list: List<ProductInfo>) {

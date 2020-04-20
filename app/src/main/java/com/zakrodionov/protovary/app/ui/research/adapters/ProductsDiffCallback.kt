@@ -19,5 +19,4 @@ class ProductsDiffCallback(
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition].hashCode() == newList[newItemPosition].hashCode()
     }
-
 }

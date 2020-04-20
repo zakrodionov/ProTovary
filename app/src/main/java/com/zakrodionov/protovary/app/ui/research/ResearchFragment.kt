@@ -50,11 +50,11 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
 
         with(researchViewModel) {
             observe(researchDescription, ::renderResearchDescription)
-            observe(filteredProducts, ::renderProductsList)
+            observe(products, ::renderProductsList)
             observeEvent(state, ::handleState)
         }
 
-        if (researchViewModel.filteredProducts.value == null) {
+        if (researchViewModel.products.value == null) {
             loadData()
         }
 
