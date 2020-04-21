@@ -47,17 +47,21 @@ class ResearchViewModel(
     private fun applyFilters() {
         collectJob?.cancel()
         collectJob = launch {
-            val rawQuery = SimpleSQLiteQuery(
-                "SELECT * FROM productinfo WHERE name LIKE '%$queryText%'" +
-                        " AND IFNULL(status, '') = '${filterType.value}'" +
-                        " ORDER BY ${sortType.value} ${sortType.direction}"
-            )
+            val query = buildQuery()
 
-            productInteractor.observeProduct(rawQuery)
+            productInteractor.observeProduct(query)
                 .collect {
                     products.value = it
                 }
         }
+    }
+
+    private fun buildQuery(): SimpleSQLiteQuery {
+        val select = "SELECT * FROM productinfo "
+        val whereName = "WHERE name LIKE '%$queryText%' "
+        val whereStatus = "AND IFNULL(status, '') = '${filterType.value}' "
+        val order = "ORDER BY ${sortType.value} ${sortType.direction}"
+        return SimpleSQLiteQuery(select + whereName + whereStatus + order)
     }
 
     fun actionFavorite(product: Product) {
