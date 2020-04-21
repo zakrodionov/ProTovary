@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.zakrodionov.protovary.app.platform.BaseViewModel
@@ -14,8 +13,7 @@ import kotlinx.coroutines.flow.collect
 
 class ResearchViewModel(
     val id: Long,
-    private val productInteractor: ProductInteractor,
-    val context: Context
+    private val productInteractor: ProductInteractor
 ) : BaseViewModel() {
 
     val researchDescription = MutableLiveData<List<String>>()
