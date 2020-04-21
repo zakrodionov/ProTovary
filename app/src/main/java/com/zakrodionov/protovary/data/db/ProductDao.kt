@@ -12,25 +12,19 @@ import kotlinx.coroutines.flow.Flow
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavoriteProduct(favoriteProduct: FavoriteProduct)
+    suspend fun addFavoriteProduct(favoriteProduct: FavoriteProduct)
+
+    @Query("DELETE FROM favoriteproduct WHERE id = :id")
+    suspend fun deleteFavoriteProduct(id: Long)
 
     @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
     suspend fun productIsFavorite(id: Long): Int
-
-    @Query("DELETE FROM favoriteproduct WHERE id = :id")
-    suspend fun deleteById(id: Long)
 
     @Query("SELECT COUNT(*) FROM favoriteproduct WHERE id = :id ")
     fun productIsFavoriteLive(id: Long): LiveData<Int>
 
     @Query("SELECT * FROM favoriteproduct ")
     fun getFavoriteProducts(): LiveData<List<FavoriteProduct>>
-
-    @Query("SELECT * FROM productinfo ")
-    fun getProducts(): Flow<List<ProductInfo>>
-
-    @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
-    suspend fun updateProducts()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProducts(list: List<ProductInfo>)
@@ -48,14 +42,17 @@ interface ProductDao {
         updateProducts()
     }
 
+    @Query("UPDATE productinfo SET isFavorite = (SELECT favoriteproduct.isFavorite FROM favoriteproduct WHERE productinfo.id = favoriteproduct.id)")
+    suspend fun updateProducts()
+
     @Transaction
     suspend fun actionFavorite(favoriteProduct: FavoriteProduct) {
         val isFavorite = productIsFavorite(favoriteProduct.id) > 0
 
         if (isFavorite) {
-            deleteById(favoriteProduct.id)
+            deleteFavoriteProduct(favoriteProduct.id)
         } else {
-            insertFavoriteProduct(favoriteProduct)
+            addFavoriteProduct(favoriteProduct)
         }
 
         updateProducts()
