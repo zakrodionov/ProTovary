@@ -43,6 +43,8 @@ class ProductMapper(val context: Context) {
             isFavorite = true
         )
 
+    fun mapProductsFromStore(favoriteProducts: List<FavoriteProduct>?) = favoriteProducts?.map { productFromStore(it) }
+
     fun productFromStore(product: FavoriteProduct) =
         Product(
             id = product.id,

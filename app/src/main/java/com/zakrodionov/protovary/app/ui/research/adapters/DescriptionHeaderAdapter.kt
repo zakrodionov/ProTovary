@@ -46,7 +46,6 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
             tvDesc.setOnClickATagListener { _, href ->
                 context.tryOpenLink("${getString(R.string.base_url)}$href")
             }
-
         }
 
         override fun bind(item: String) {
