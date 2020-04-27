@@ -74,6 +74,7 @@
             android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.1"
+            android:theme="@style/AppTheme.RatingBarTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivImage" />
 
@@ -82,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin_5"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/tv_points_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ratingBar"

@@ -122,4 +122,8 @@
         <item name="colorControlActivated">@color/blue_light</item>
         <item name="colorControlHighlight">@android:color/black</item>
     </style>
+
+    <style name="AppTheme.RatingBarTheme">
+        <item name="colorAccent">@color/red_light</item>
+    </style>
 </resources>

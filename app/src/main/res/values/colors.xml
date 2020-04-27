@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/white</color>
-    <color name="colorPrimaryDark">#CC000000</color>
+    <color name="colorPrimary">@color/black</color>
+    <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">@color/blue_light</color>
     <color name="colorStatusBar">@color/white</color>
 
@@ -10,17 +10,15 @@
     <color name="silver">#6A8398</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="black">#CC000000</color>
+    <color name="black">#202125</color>
     <color name="blue_light">#176CD3</color>
     <color name="blue_dark">#D20047AB</color>
-    <color name="blue_semi">#E573A8D5</color>
 
     <color name="red_light">#f45057</color>
     <color name="red_dark">#f0424b</color>
 
     <color name="gray">#9398a0</color>
     <color name="gray1">#E0E0E0</color>
-    <color name="gray2">#80E0E0E0</color>
     <color name="gray3">#9EB8CF</color>
 
     <color name="bg_color">@color/white</color>

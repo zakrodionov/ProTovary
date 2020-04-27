@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#CC000000</color>
+    <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/white</color>
     <color name="colorAccent">@color/blue_light</color>
-    <color name="colorStatusBar">#CC000000</color>
+    <color name="colorStatusBar">@color/black</color>
 
     <color name="bg_color">@color/black</color>
     <color name="bg_card_color">@color/gray</color>
-    <color name="bg_divider_color">@color/white</color>
+    <color name="bg_divider_color">#f2f2f2</color>
     <color name="text_color">@color/white</color>
 
 </resources>
