@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="themeListArray">
+    <string-array name="themeTitles">
         <item>@string/preferences_system_theme</item>
         <item>@string/preferences_light_theme</item>
         <item>@string/preferences_dark_theme</item>
     </string-array>
 
-    <string-array name="themeEntryArray">
+    <string-array name="themeValues">
         <item>default</item>
         <item>light</item>
         <item>dark</item>

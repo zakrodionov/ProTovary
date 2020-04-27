@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -17,6 +16,7 @@ import com.zakrodionov.protovary.app.ui.research.adapters.ProductsAdapter
 import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
+import com.zakrodionov.protovary.app.util.ColorUtils
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.domain.model.Product
@@ -69,8 +69,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
-        editText.setTextColor(Color.BLACK)
-        editText.setHintTextColor(Color.BLACK)
+        editText.setTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
+        editText.setHintTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
         searchClose.setImageResource(R.drawable.ic_close)

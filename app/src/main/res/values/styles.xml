@@ -126,4 +126,5 @@
     <style name="AppTheme.RatingBarTheme">
         <item name="colorAccent">@color/red_light</item>
     </style>
+
 </resources>

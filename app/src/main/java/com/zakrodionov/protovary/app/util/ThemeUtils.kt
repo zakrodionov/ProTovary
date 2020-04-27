@@ -5,7 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import com.zakrodionov.protovary.R
 
-object ThemeHelper {
+object ThemeUtils {
     private const val LIGHT_MODE = "light"
     private const val DARK_MODE = "dark"
     const val DEFAULT_MODE = "default"
@@ -29,7 +29,7 @@ object ThemeHelper {
     }
 
     fun getThemeIndex(context: Context, theme: String): Int {
-        val themeEntry = context.resources.getStringArray(R.array.themeEntryArray)
+        val themeEntry = context.resources.getStringArray(R.array.themeValues)
 
         return when (theme) {
             LIGHT_MODE -> {

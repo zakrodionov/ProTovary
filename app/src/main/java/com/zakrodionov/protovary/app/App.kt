@@ -6,7 +6,7 @@ import com.facebook.stetho.Stetho
 import com.zakrodionov.protovary.BuildConfig
 import com.zakrodionov.protovary.app.di.appModule
 import com.zakrodionov.protovary.app.di.viewModelModule
-import com.zakrodionov.protovary.app.util.ThemeHelper
+import com.zakrodionov.protovary.app.util.ThemeUtils
 import com.zakrodionov.protovary.data.storage.PreferenceStorage
 import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.koin.androidContext
@@ -48,6 +48,6 @@ class App : Application(), KoinComponent {
     }
 
     private fun setTheme() {
-        ThemeHelper.applyTheme(get<PreferenceStorage>().theme)
+        ThemeUtils.applyTheme(get<PreferenceStorage>().theme)
     }
 }
