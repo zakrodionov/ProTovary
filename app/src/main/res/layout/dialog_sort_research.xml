@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:layout_marginTop="@dimen/default_margin_10"
-        android:background="@color/gray1" />
+        android:background="?attr/bgDividerColor" />
 
     <RelativeLayout
         android:id="@+id/rlRatingDecrease"

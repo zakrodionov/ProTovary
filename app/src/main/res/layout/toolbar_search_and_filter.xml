@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@android:color/white"
+    android:background="?attr/bgColor"
     android:elevation="0dp"
     android:theme="@style/ToolbarTheme.App"
     app:contentInsetEnd="0dp"

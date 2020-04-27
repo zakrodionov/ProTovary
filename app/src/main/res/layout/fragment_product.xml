@@ -85,11 +85,12 @@
             android:layout_gravity="bottom"
             android:background="@android:color/white"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabIndicator="@drawable/tabs_rounded_line"
+            app:tabIndicatorColor="@color/blue_light"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabSelectedTextColor="@color/blue_light"
             app:tabTextAppearance="@style/TextAppearance.App"
-            app:tabTextColor="@color/gray" />
+            app:tabTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
