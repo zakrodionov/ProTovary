@@ -35,5 +35,4 @@ class ThemePreferenceDialogFragment : DialogFragment() {
 
         return builder.create()
     }
-
 }

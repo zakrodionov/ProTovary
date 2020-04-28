@@ -9,7 +9,7 @@ object ColorUtils {
     /**
      * Queries the theme of the given `context` for a theme color.
      *
-     * @param context   the context holding the current theme.
+     * @param context the context holding the current theme.
      * @param attrResId the theme color attribute to resolve.
      * @return the theme color
      */

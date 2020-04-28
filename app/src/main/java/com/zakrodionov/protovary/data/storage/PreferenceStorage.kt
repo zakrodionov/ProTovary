@@ -17,5 +17,4 @@ class PreferenceStorage(context: Context) {
         set(value) {
             sharedPreferences.edit { putString(THEME_KEY, value) }
         }
-
 }
