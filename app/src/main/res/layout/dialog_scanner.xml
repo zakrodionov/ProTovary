@@ -20,10 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin_10"
         android:hint="@string/input_barcode"
-        app:boxStrokeColor="@android:color/black"
+        app:boxStrokeColor="?attr/textColor"
         app:helperText="От 8 до 13 символов"
         app:helperTextEnabled="true"
-        app:hintTextColor="@android:color/black">
+        app:hintTextColor="?attr/textColor">
 
         <com.zakrodionov.protovary.app.ui.view.FixedTextInputEditText
             android:id="@+id/etBarcode"
@@ -33,9 +33,9 @@
             android:inputType="numberDecimal"
             android:maxLength="13"
             android:maxLines="1"
-            android:textColor="@android:color/black"
-            android:textColorHighlight="@android:color/black"
-            android:textColorHint="@android:color/black"
+            android:textColor="?attr/textColor"
+            android:textColorHighlight="?attr/textColor"
+            android:textColorHint="?attr/textColor"
             android:textCursorDrawable="@drawable/cursor_drawable" />
 
     </com.google.android.material.textfield.TextInputLayout>

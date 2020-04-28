@@ -52,6 +52,8 @@
                     android:isIndicator="true"
                     android:numStars="5"
                     android:stepSize="0.1"
+                    android:progressBackgroundTint="@color/gray"
+                    android:theme="@style/AppTheme.RatingBarTheme"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_margin_5"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/tv_points_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/ratingBar" />
@@ -83,13 +85,14 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
-            android:background="@android:color/white"
+            android:background="?attr/bgColor"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabIndicator="@drawable/tabs_rounded_line"
+            app:tabIndicatorColor="@color/blue_light"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabSelectedTextColor="@color/blue_light"
             app:tabTextAppearance="@style/TextAppearance.App"
-            app:tabTextColor="@color/gray" />
+            app:tabTextColor="?attr/textColor" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@android:color/white"
+    android:background="?attr/bgColor"
     android:elevation="@dimen/default_margin_5"
     android:theme="@style/ToolbarTheme.App"
     app:contentInsetEnd="0dp"

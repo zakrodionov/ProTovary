@@ -13,10 +13,16 @@
         <action
             android:id="@+id/action_moreFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/actionShowThemePreferenceDialog"
+            app:destination="@id/themePreferenceDialog" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.zakrodionov.protovary.app.ui.about.AboutFragment"
         android:label="AboutFragment" />
 
+    <dialog
+        android:id="@+id/themePreferenceDialog"
+        android:name="com.zakrodionov.protovary.app.ui.view.ThemePreferenceDialogFragment"/>
 </navigation>

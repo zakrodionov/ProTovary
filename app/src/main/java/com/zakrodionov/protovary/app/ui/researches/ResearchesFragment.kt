@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.researches
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -15,6 +14,7 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.platform.DisplayableItem
 import com.zakrodionov.protovary.app.ui.researches.delegates.researchDelegate
+import com.zakrodionov.protovary.app.util.ColorUtils
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import kotlinx.android.synthetic.main.fragment_researches.*
 import kotlinx.android.synthetic.main.toolbar_search.*
@@ -66,8 +66,8 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         actionBack.setOnClickListener { back() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
-        editText.setTextColor(Color.BLACK)
-        editText.setHintTextColor(Color.BLACK)
+        editText.setTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
+        editText.setHintTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
         searchClose.setImageResource(R.drawable.ic_close)
