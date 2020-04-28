@@ -7,8 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
-        <item name="bgColor">@color/bg_color</item>
         <item name="textColor">@color/text_color</item>
+        <item name="bgColor">@color/bg_color</item>
         <item name="bgCardColor">@color/bg_card_color</item>
         <item name="bgDividerColor">@color/bg_divider_color</item>
     </style>
