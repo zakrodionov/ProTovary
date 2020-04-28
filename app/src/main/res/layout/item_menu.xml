@@ -43,6 +43,7 @@
         app:srcCompat="@drawable/ic_arrow_right" />
 
     <View
+        android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="@dimen/divider_height"
         android:background="?attr/bgDividerColor"

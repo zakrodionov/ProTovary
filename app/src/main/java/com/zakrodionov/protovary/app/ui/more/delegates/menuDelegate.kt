@@ -2,6 +2,7 @@ package com.zakrodionov.protovary.app.ui.more.delegates
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.platform.DisplayableItem
@@ -17,6 +18,7 @@ fun menuDelegate(clickListener: (MenuItem) -> Unit) =
         bind {
             tvTitle.text = getString(item.title)
             ivIcon.setImageResource(item.icon)
+            divider.isVisible = item != MenuItem.TELEGRAM
         }
     }
 
