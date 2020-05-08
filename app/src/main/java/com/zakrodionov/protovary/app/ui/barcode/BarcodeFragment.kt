@@ -17,10 +17,6 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
 
-    companion object {
-        const val PERMISSION_DIALOG_TAG = "permission_dialog_tag"
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
@@ -55,5 +51,9 @@ class BarcodeFragment : BaseFragment(R.layout.fragment_barcode) {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    companion object {
+        const val PERMISSION_DIALOG_TAG = "permission_dialog_tag"
     }
 }

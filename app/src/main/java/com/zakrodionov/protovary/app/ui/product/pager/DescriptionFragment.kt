@@ -23,10 +23,6 @@ import java.io.Serializable
 
 class DescriptionFragment : Fragment() {
 
-    companion object {
-        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
-    }
-
     val model: Model by argument("model")
 
     override fun onCreateView(
@@ -119,6 +115,10 @@ class DescriptionFragment : Fragment() {
         return ssb
     }
     //endregion
+
+    companion object {
+        fun newInstance(model: Model): DescriptionFragment = instanceOf("model" to model)
+    }
 
     data class Model(val product: ProductDetail, val type: DescriptionType) : Serializable
 

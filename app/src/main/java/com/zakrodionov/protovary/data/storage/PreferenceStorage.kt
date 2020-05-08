@@ -6,9 +6,6 @@ import com.zakrodionov.protovary.app.util.ThemeUtils.DEFAULT_MODE
 import org.jetbrains.anko.defaultSharedPreferences
 
 class PreferenceStorage(context: Context) {
-    companion object {
-        const val THEME_KEY = "theme_key"
-    }
 
     private val sharedPreferences by lazy { context.defaultSharedPreferences }
 
@@ -17,4 +14,8 @@ class PreferenceStorage(context: Context) {
         set(value) {
             sharedPreferences.edit { putString(THEME_KEY, value) }
         }
+
+    companion object {
+        const val THEME_KEY = "theme_key"
+    }
 }

@@ -27,11 +27,6 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
-    companion object {
-        const val RC_SORT = 1122
-        const val DIALOG_SORT_TAG = "dialog_sort_tag"
-    }
-
     private val args: ResearchesFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
 
@@ -175,4 +170,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     override fun loadData() = researchViewModel.loadResearch(researchesId)
+
+    companion object {
+        const val RC_SORT = 1122
+        const val DIALOG_SORT_TAG = "dialog_sort_tag"
+    }
 }

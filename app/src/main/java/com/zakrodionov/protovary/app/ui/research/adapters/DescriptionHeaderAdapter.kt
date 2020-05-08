@@ -14,10 +14,6 @@ import kotlin.random.Random
 
 class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() {
 
-    companion object {
-        val id = Random.nextLong()
-    }
-
     init {
         setHasStableIds(true)
     }
@@ -58,5 +54,9 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
         items.clear()
         items.addAll(newItems.orEmpty())
         notifyDataSetChanged()
+    }
+
+    companion object {
+        val id = Random.nextLong()
     }
 }
