@@ -57,7 +57,7 @@ class ResearchViewModel(
     private fun buildQuery(): SimpleSQLiteQuery {
         val select = "SELECT * FROM productinfo "
         val whereName = "WHERE name LIKE '%$queryText%' "
-        val whereStatus = "AND IFNULL(status, '') = '${filterType.value}' "
+        val whereStatus = "AND IFNULL(status, '') LIKE '%${filterType.value}%' "
         val order = "ORDER BY ${sortType.value} ${sortType.direction}"
         return SimpleSQLiteQuery(select + whereName + whereStatus + order)
     }
