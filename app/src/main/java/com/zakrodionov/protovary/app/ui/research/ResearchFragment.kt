@@ -14,11 +14,11 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.research.adapters.DescriptionHeaderAdapter
 import com.zakrodionov.protovary.app.ui.research.adapters.ProductsAdapter
-import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
+import com.zakrodionov.protovary.data.entity.DescriptionHeader
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.fragment_research.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
@@ -32,8 +32,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         const val DIALOG_SORT_TAG = "dialog_sort_tag"
     }
 
-    private val args: ResearchesFragmentArgs by navArgs()
+    private val args: ResearchFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
+    private val researchesTime by lazy { args.researchTime }
 
     private val descriptionAdapter by lazy {
         DescriptionHeaderAdapter()
@@ -128,8 +129,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         return MergeAdapter(config, descriptionAdapter, productsAdapter)
     }
 
-    private fun renderResearchDescription(descriptionItems: List<String>?) {
-        descriptionAdapter.setItems(descriptionItems)
+    private fun renderResearchDescription(descriptionItem: String?) {
+        descriptionAdapter.setItems(listOf(DescriptionHeader(researchesTime, descriptionItem)))
     }
 
     private fun renderProductsList(products: List<Product>?) {

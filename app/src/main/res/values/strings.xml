@@ -73,6 +73,7 @@
 
     <string name="name_value_template">\n%s\n\n</string>
     <string name="dot_value_template">\u25CF %s \n"</string>
+    <string name="research_date_template">Дата публикации: %s г.</string>
 
 
 </resources>

@@ -27,5 +27,5 @@ data class Researches(
     var researches: List<ResearchCompact>?,
 
     @SerializedName("utime")
-    var utime: Int?
+    var utime: Long?
 ) : DisplayableItem

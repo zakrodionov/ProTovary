@@ -31,5 +31,5 @@ data class ResearchCompact(
     var url: String?,
 
     @SerializedName("utime")
-    var utime: Int?
+    var utime: Long?
 ) : Serializable, DisplayableItem

@@ -30,9 +30,14 @@
             app:argType="long" />
         <action
             android:id="@+id/action_researchesFragment_to_researchFragment"
-            app:destination="@id/researchFragment" >
+            app:destination="@id/researchFragment">
             <argument
                 android:name="researchId"
+                android:defaultValue="0L"
+                app:argType="long" />
+
+            <argument
+                android:name="researchTime"
                 android:defaultValue="0L"
                 app:argType="long" />
         </action>
@@ -46,6 +51,12 @@
             android:name="researchId"
             android:defaultValue="0L"
             app:argType="long" />
+
+        <argument
+            android:name="researchTime"
+            android:defaultValue="0L"
+            app:argType="long" />
+
         <action
             android:id="@+id/action_researchFragment_to_productFragment"
             app:destination="@id/productFragment">

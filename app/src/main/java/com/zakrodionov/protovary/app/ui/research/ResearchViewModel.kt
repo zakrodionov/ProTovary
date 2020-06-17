@@ -26,7 +26,7 @@ class ResearchViewModel(
     private val productsFlow = productDao.getProducts().map { productMapper.mapToProducts(it) }
     private val sourceProducts = mutableListOf<Product>()
 
-    val researchDescription = MutableLiveData<List<String>>()
+    val researchDescription = MutableLiveData<String>()
     val filteredProducts = MutableLiveData<List<Product>>()
 
     var sortType by changeObservable(BY_RATING_DECREASE) { applyFilters() }
@@ -45,7 +45,7 @@ class ResearchViewModel(
 
     private fun handleProductsInfo(info: String?) {
         if (!info.isNullOrBlank()) {
-            researchDescription.value = listOf(info)
+            researchDescription.value = info
         }
         collectProducts()
     }
