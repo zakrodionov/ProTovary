@@ -13,7 +13,6 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.research.adapters.DescriptionHeaderAdapter
 import com.zakrodionov.protovary.app.ui.research.adapters.ProductsAdapter
-import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.util.ColorUtils
@@ -27,7 +26,7 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
-    private val args: ResearchesFragmentArgs by navArgs()
+    private val args: ResearchFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
 
     private val descriptionAdapter by lazy {

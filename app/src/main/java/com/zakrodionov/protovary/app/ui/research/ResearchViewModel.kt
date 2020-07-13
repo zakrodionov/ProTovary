@@ -1,29 +1,36 @@
 package com.zakrodionov.protovary.app.ui.research
 
 import androidx.lifecycle.MutableLiveData
-import androidx.sqlite.db.SimpleSQLiteQuery
+import com.snakydesign.livedataextensions.combineLatest
+import com.snakydesign.livedataextensions.toMutableLiveData
+import com.zakrodionov.protovary.app.ext.refresh
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.util.changeObservable
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_DEFAULT
-import com.zakrodionov.protovary.app.util.enums.ResearchSortType.BY_RATING_DECREASE
+import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
+import com.zakrodionov.protovary.data.entity.Research
+import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.model.Product
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 
 class ResearchViewModel(
     val id: Long,
-    private val productInteractor: ProductInteractor
+    private val productInteractor: ProductInteractor,
+    private val productMapper: ProductMapper
 ) : BaseViewModel() {
 
     val researchDescription = MutableLiveData<List<String>>()
-    val products = MutableLiveData<List<Product>>()
 
-    var sortType by changeObservable(BY_RATING_DECREASE) { applyFilters() }
-    var filterType by changeObservable(BY_DEFAULT) { applyFilters() }
-    var queryText by changeObservable("") { applyFilters() }
+    private val sourceProducts = MutableLiveData<List<Product>>()
+    private val favoriteProducts = productInteractor.getFavoriteProducts()
 
-    private var collectJob: Job? = null
+    val products = combineLatest(sourceProducts, favoriteProducts) { source, favorite ->
+        mapAndFilterProducts(source, favorite)
+    }
+
+    var sortType by changeObservable(BY_RATING_DECREASE) { sourceProducts.refresh() }
+    var filterType by changeObservable(BY_DEFAULT) { sourceProducts.refresh() }
+    var queryText by changeObservable("") { sourceProducts.refresh() }
 
     init {
         loadResearch(id)
@@ -35,31 +42,37 @@ class ResearchViewModel(
         }
     }
 
-    private fun handleProductsInfo(info: String?) {
-        if (!info.isNullOrBlank()) {
-            researchDescription.value = listOf(info)
+    private fun handleProductsInfo(research: Research) {
+        if (!research.anons.isNullOrBlank()) {
+            researchDescription.value = listOf(research.anons)
         }
-        applyFilters()
+
+        sourceProducts.value = productMapper.mapToProducts(research.productInfo)
     }
 
-    private fun applyFilters() {
-        collectJob?.cancel()
-        collectJob = launch {
-            val query = buildQuery()
+    private fun mapAndFilterProducts(
+        sourceProducts: List<Product>?,
+        favoriteProducts: List<Product>?
+    ): List<Product>? {
+        val mappedProducts = sourceProducts?.map { sourceProduct ->
+            sourceProduct.copy(isFavorite = favoriteProducts?.find { sourceProduct.id == it.id } != null)
+        }
 
-            productInteractor.observeProduct(query)
-                .collect {
-                    products.value = it
+        val filteredList = mappedProducts
+            ?.filter {
+                it.name.contains(queryText, true)
+                        || it.trademark.contains(queryText, true)
+            }
+            ?.filter { it.status == filterType.value }
+            ?.let {
+                when (sortType) {
+                    BY_RATING_DECREASE -> it.sortedByDescending { it.points }
+                    BY_RATING_INCREASE -> it.sortedBy { it.points }
+                    BY_TRADEMARK -> it.sortedBy { it.trademark }
                 }
-        }
-    }
+            }
 
-    private fun buildQuery(): SimpleSQLiteQuery {
-        val select = "SELECT * FROM productinfo "
-        val whereName = "WHERE name LIKE '%$queryText%' "
-        val whereStatus = "AND IFNULL(status, '') LIKE '%${filterType.value}%' "
-        val order = "ORDER BY ${sortType.value} ${sortType.direction}"
-        return SimpleSQLiteQuery(select + whereName + whereStatus + order)
+        return filteredList
     }
 
     fun actionFavorite(product: Product) {

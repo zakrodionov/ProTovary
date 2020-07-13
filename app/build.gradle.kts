@@ -179,6 +179,9 @@ dependencies {
     // Html textview
     implementation(Libs.html_textview)
 
+    //Lives
+    implementation(Libs.lives)
+
     // Test
     testImplementation(Libs.junit)
     testImplementation(Libs.mockito_core)

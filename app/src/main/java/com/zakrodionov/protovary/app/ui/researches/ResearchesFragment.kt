@@ -24,8 +24,11 @@ import org.koin.core.parameter.parametersOf
 class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private val args: ResearchesFragmentArgs by navArgs()
-    private val researchesId by lazy { args.researchId }
-    private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researchesId) }
+
+    private val researches by lazy { args.research }
+
+    private val researchesViewModel: ResearchesViewModel by viewModel { parametersOf(researches) }
+
     private val researchesAdapter: ListDelegationAdapter<List<DisplayableItem>> by lazy {
         ListDelegationAdapter(researchDelegate(::itemClickListener))
     }
@@ -57,8 +60,7 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private fun itemClickListener(research: ResearchCompact) {
         closeSearch()
-        val directions =
-            ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
+        val directions = ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
         navController.navigate(directions)
     }
 
@@ -88,7 +90,6 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
                     tvTitle.gone()
                 }
                 researchesViewModel.queryText = newText
-                rvResearches?.scrollToPosition(0)
                 return false
             }
         })
@@ -111,6 +112,4 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
         rvResearches.adapter = null
         super.onDestroyView()
     }
-
-    override fun loadData() = researchesViewModel.loadResearchesCategory(researchesId)
 }

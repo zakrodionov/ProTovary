@@ -1,35 +1,16 @@
 package com.zakrodionov.protovary.data.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
 import com.zakrodionov.protovary.app.platform.DisplayableItem
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
-@Entity
+@Parcelize
 data class ResearchCompact(
-    @PrimaryKey
-    @SerializedName("id")
-    var id: Long,
-
-    @SerializedName("category")
-    var category: Int?,
-
-    @Embedded
-    @SerializedName("image")
-    var image: Image?,
-
-    @SerializedName("name")
-    var name: String?,
-
-    @Embedded
-    @SerializedName("summary")
-    var summary: Summary?,
-
-    @SerializedName("url")
-    var url: String?,
-
-    @SerializedName("utime")
-    var utime: Int?
-) : Serializable, DisplayableItem
+    val id: Long,
+    val category: Int?,
+    val image: Image?,
+    val name: String?,
+    val summary: Summary?,
+    val url: String?,
+    val utime: Int?
+) : DisplayableItem, Parcelable
