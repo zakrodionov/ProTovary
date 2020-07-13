@@ -34,10 +34,6 @@ val appModule = module {
     single { buildDataBase(get()) }
 
     single {
-        get<AppDatabase>().researchDao
-    }
-
-    single {
         get<AppDatabase>().productDao
     }
 
@@ -46,10 +42,10 @@ val appModule = module {
     single { ErrorHandler(get()) }
 
     single { ProductRepository(get(), get()) }
-    single { ResearchRepository(get(), get()) }
+    single { ResearchRepository(get()) }
 
     single { ProductInteractor(get(), get(), get(), get()) }
-    single { ResearchInteractor(get(), get(), get()) }
+    single { ResearchInteractor(get(), get()) }
 
     single { ProductMapper(get()) }
     single { ResourceManager(get()) }

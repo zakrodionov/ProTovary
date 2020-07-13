@@ -1,31 +1,14 @@
 package com.zakrodionov.protovary.data.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
 import com.zakrodionov.protovary.app.platform.DisplayableItem
-import com.zakrodionov.protovary.data.db.converter.ResearchesCompactConverter
+import kotlinx.android.parcel.Parcelize
 
-@Entity
-@TypeConverters(ResearchesCompactConverter::class)
+@Parcelize
 data class Researches(
-    @PrimaryKey
-    @SerializedName("id")
-    var id: Long,
-
-    @Embedded
-    @SerializedName("image")
-    var image: Image?,
-
-    @SerializedName("name")
-    var name: String?,
-
-    @TypeConverters(ResearchesCompactConverter::class)
-    @SerializedName("researches")
-    var researches: List<ResearchCompact>?,
-
-    @SerializedName("utime")
-    var utime: Int?
-) : DisplayableItem
+    val id: Long,
+    val image: Image?,
+    val name: String?,
+    val researches: List<ResearchCompact>?,
+    val utime: Int?
+) : DisplayableItem, Parcelable
