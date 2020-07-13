@@ -12,5 +12,5 @@ data class ResearchCompact(
     val name: String?,
     val summary: Summary?,
     val url: String?,
-    val utime: Int?
+    val utime: Long?
 ) : DisplayableItem, Parcelable

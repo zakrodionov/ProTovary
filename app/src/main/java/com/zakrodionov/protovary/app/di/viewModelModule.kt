@@ -14,7 +14,7 @@ val viewModelModule = module {
 
     viewModel { FavoritesViewModel(get()) }
     viewModel { (id: Long) -> ProductViewModel(id, get(), get(), get()) }
-    viewModel { (id: Long) -> ResearchViewModel(id, get(), get()) }
+    viewModel { (id: Long, publishTime: Long?) -> ResearchViewModel(id, publishTime, get(), get()) }
     viewModel { (researches: Researches) -> ResearchesViewModel(researches) }
     viewModel { ResearchesCategoryViewModel(get()) }
     viewModel { ScannerViewModel(get()) }

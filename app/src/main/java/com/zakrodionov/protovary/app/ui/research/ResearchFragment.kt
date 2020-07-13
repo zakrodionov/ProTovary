@@ -39,7 +39,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         ProductsAdapter(::itemClickListener, ::itemClickFavoriteListener)
     }
 
-    private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
+    private val researchViewModel: ResearchViewModel by viewModel {
+        parametersOf(researchesId, researchesTime)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -124,8 +126,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         return MergeAdapter(config, descriptionAdapter, productsAdapter)
     }
 
-    private fun renderResearchDescription(descriptionItem: String?) {
-        descriptionAdapter.setItems(listOf(DescriptionHeader(researchesTime, descriptionItem)))
+    private fun renderResearchDescription(descriptionHeader: DescriptionHeader?) {
+        descriptionHeader?.let {
+            descriptionAdapter.setItems(listOf(it))
+        }
     }
 
     private fun renderProductsList(products: List<Product>?) {

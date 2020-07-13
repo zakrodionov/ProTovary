@@ -8,6 +8,7 @@ import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.util.changeObservable
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_DEFAULT
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
+import com.zakrodionov.protovary.data.entity.DescriptionHeader
 import com.zakrodionov.protovary.data.entity.Research
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
@@ -15,11 +16,12 @@ import com.zakrodionov.protovary.domain.model.Product
 
 class ResearchViewModel(
     val id: Long,
+    private val publishTime: Long?,
     private val productInteractor: ProductInteractor,
     private val productMapper: ProductMapper
 ) : BaseViewModel() {
 
-    val researchDescription = MutableLiveData<List<String>>()
+    val researchDescription = MutableLiveData<DescriptionHeader>()
 
     private val sourceProducts = MutableLiveData<List<Product>>()
     private val favoriteProducts = productInteractor.getFavoriteProducts()
@@ -44,7 +46,7 @@ class ResearchViewModel(
 
     private fun handleProductsInfo(research: Research) {
         if (!research.anons.isNullOrBlank()) {
-            researchDescription.value = listOf(research.anons)
+            researchDescription.value = DescriptionHeader(publishTime, research.anons)
         }
 
         sourceProducts.value = productMapper.mapToProducts(research.productInfo)
