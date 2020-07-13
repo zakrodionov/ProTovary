@@ -60,7 +60,11 @@ class ResearchesFragment : BaseFragment(R.layout.fragment_researches) {
 
     private fun itemClickListener(research: ResearchCompact) {
         closeSearch()
-        val directions = ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(research.id)
+        val directions =
+            ResearchesFragmentDirections.actionResearchesFragmentToResearchFragment(
+                research.id,
+                research.utime ?: 0L
+            )
         navController.navigate(directions)
     }
 
