@@ -12,10 +12,19 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.zakrodionov.protovary.app.di.GlideApp
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun Int.pxToDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 
 fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+fun Long.toDateFormatGmt(pattern: String = "dd MMM yyyy"): String =
+    SimpleDateFormat(pattern, Locale("RU"))
+        .apply { timeZone = TimeZone.getDefault() }
+        .format(this.checkUnixTimeStamp())
+
+fun Long.checkUnixTimeStamp() = if (this.toString().length <= 10) this * 1000L else this
 
 fun View.cancelTransition() {
     transitionName = null

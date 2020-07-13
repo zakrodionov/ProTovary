@@ -13,14 +13,6 @@ import kotlinx.android.synthetic.main.dialog_sort_research.view.*
 
 class BottomDialogSortFragment : BottomSheetDialogFragment() {
 
-    companion object {
-        private const val ARG_SORT_TYPE = "arg_sort_type"
-
-        fun newInstance(selectedResearchType: ResearchSortType) = BottomDialogSortFragment().apply {
-            arguments = bundleOf(ARG_SORT_TYPE to selectedResearchType)
-        }
-    }
-
     override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 
     override fun onCreateView(
@@ -44,6 +36,14 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
         view.rlTradeMark.setOnClickListener { parentFragment?.onSortTypeSelected(BY_TRADEMARK); dismiss() }
 
         return view
+    }
+
+    companion object {
+        private const val ARG_SORT_TYPE = "arg_sort_type"
+
+        fun newInstance(selectedResearchType: ResearchSortType) = BottomDialogSortFragment().apply {
+            arguments = bundleOf(ARG_SORT_TYPE to selectedResearchType)
+        }
     }
 
     interface BottomDialogSortListener {

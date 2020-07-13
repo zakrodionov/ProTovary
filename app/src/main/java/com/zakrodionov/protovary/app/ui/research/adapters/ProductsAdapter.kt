@@ -67,5 +67,4 @@ class ProductsAdapter(
         items.addAll(newItems.orEmpty())
         diffResult.dispatchUpdatesTo(this)
     }
-
 }

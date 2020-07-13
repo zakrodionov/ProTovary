@@ -6,11 +6,9 @@ import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.util.changeObservable
 import com.zakrodionov.protovary.data.entity.ResearchCompact
 import com.zakrodionov.protovary.data.entity.Researches
-import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 
 class ResearchesViewModel(
-    val id: Long,
-    private val researchInteractor: ResearchInteractor
+    val researches: Researches
 ) : BaseViewModel() {
 
     private val sourceResearches = mutableListOf<ResearchCompact>()
@@ -21,16 +19,10 @@ class ResearchesViewModel(
     var queryText by changeObservable("") { applyQueryText() }
 
     init {
-        loadResearchesCategory(id)
+        handleResearches(researches)
     }
 
-    fun loadResearchesCategory(id: Long) {
-        launch {
-            researchInteractor.getResearchesCategory(id, ::handleResearch, ::handleState)
-        }
-    }
-
-    private fun handleResearch(researches: Researches) {
+    private fun handleResearches(researches: Researches) {
         title.value = researches.name
         sourceResearches.clear()
         sourceResearches.addAll(researches.researches?.sortedBy { it.name } ?: listOf())

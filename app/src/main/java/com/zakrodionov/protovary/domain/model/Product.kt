@@ -15,11 +15,6 @@ data class Product(
     val isFavorite: Boolean?
 ) : Serializable, DiffItem {
 
-    companion object {
-        const val STATUS_SIGN = "withsign"
-        const val STATUS_VIOLATION = "withviolation"
-    }
-
     override val itemId = id.toString()
     override val itemHash = hashCode()
 
@@ -38,4 +33,9 @@ data class Product(
 
     val fullImageUrl
         get() = urlImage.toFullImageUrl()
+
+    companion object {
+        const val STATUS_SIGN = "withsign"
+        const val STATUS_VIOLATION = "withviolation"
+    }
 }

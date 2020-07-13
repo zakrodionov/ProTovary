@@ -59,11 +59,22 @@ class ProductFragment : BaseFragment(R.layout.fragment_product) {
         ivCollapsingToolbar.loadFromUrl(product?.image?.src?.toFullImageUrl())
         tvTitle.text = product?.name?.parseAsHtml()
 
+        if (product?.points != null) {
+            ratingBar.visible()
+            tvPoints.visible()
+            ratingBar.rating = product.points.toFloat()
+            tvPoints.text = product.points.toString()
+        } else {
+            ratingBar.gone()
+            tvPoints.gone()
+        }
+
         when (product?.status) {
             getString(R.string.status_sign) -> ivStatus.setImageResource(R.drawable.quality_sign)
             getString(R.string.status_violation) -> ivStatus.setImageResource(R.drawable.with_violation)
             else -> ivStatus.setImageResource(0)
         }
+
         product?.let {
             val pagerAdapter = DescriptionPagerAdapter(
                 requireActivity(),

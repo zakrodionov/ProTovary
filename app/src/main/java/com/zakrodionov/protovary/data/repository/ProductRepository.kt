@@ -17,7 +17,7 @@ class ProductRepository(
 
     suspend fun actionFavorite(product: FavoriteProduct) = productDao.actionFavorite(product)
 
-    suspend fun getProductsInfo(id: Long) = api.getResearch(id)
+    suspend fun getResearch(id: Long) = api.getResearch(id)
 
     fun getFavoriteProducts() =
         productDao.getFavoriteProducts()

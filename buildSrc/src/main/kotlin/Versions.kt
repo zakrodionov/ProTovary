@@ -9,7 +9,7 @@ object Versions {
     const val ktlint_plugin_version = "9.2.1"
 
     //AndroidX
-    const val androidx_appcompat = "1.2.0-beta01"
+    const val androidx_appcompat = "1.1.0"
     const val androidx_constraint_layout = "2.0.0-beta4"
     const val androidx_material = "1.2.0-alpha06"
     const val androidx_cardview = "1.0.0"

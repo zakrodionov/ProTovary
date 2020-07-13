@@ -73,6 +73,11 @@
 
     <string name="name_value_template">\n%s\n\n</string>
     <string name="dot_value_template">\u25CF %s \n"</string>
+    <string name="research_date_template">Дата публикации: %s г.</string>
 
+    <string name="preferences_theme">Тема</string>
+    <string name="preferences_system_theme">Системная</string>
+    <string name="preferences_light_theme">Светлая</string>
+    <string name="preferences_dark_theme">Темная</string>
 
 </resources>

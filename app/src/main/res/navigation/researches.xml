@@ -10,13 +10,13 @@
         android:label="ResearchesFragment"
         app:launchSingleTop="true"
         app:popUpToInclusive="true">
+
         <action
             android:id="@+id/action_researchesCategoryFragment_to_researchesFragment"
             app:destination="@id/researchesFragment">
             <argument
-                android:name="researchId"
-                android:defaultValue="0L"
-                app:argType="long" />
+                android:name="research"
+                app:argType="com.zakrodionov.protovary.data.entity.Researches" />
         </action>
     </fragment>
 
@@ -24,15 +24,21 @@
         android:id="@+id/researchesFragment"
         android:name="com.zakrodionov.protovary.app.ui.researches.ResearchesFragment"
         android:label="ResearchesFragment">
+
         <argument
-            android:name="researchId"
-            android:defaultValue="0L"
-            app:argType="long" />
+            android:name="research"
+            app:argType="com.zakrodionov.protovary.data.entity.Researches" />
+
         <action
             android:id="@+id/action_researchesFragment_to_researchFragment"
-            app:destination="@id/researchFragment" >
+            app:destination="@id/researchFragment">
             <argument
                 android:name="researchId"
+                android:defaultValue="0L"
+                app:argType="long" />
+
+            <argument
+                android:name="researchTime"
                 android:defaultValue="0L"
                 app:argType="long" />
         </action>
@@ -46,6 +52,12 @@
             android:name="researchId"
             android:defaultValue="0L"
             app:argType="long" />
+
+        <argument
+            android:name="researchTime"
+            android:defaultValue="0L"
+            app:argType="long" />
+
         <action
             android:id="@+id/action_researchFragment_to_productFragment"
             app:destination="@id/productFragment">

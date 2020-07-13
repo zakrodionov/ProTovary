@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.inflate
+import com.zakrodionov.protovary.app.ext.toDateFormatGmt
 import com.zakrodionov.protovary.app.ext.tryOpenLink
 import com.zakrodionov.protovary.app.ui.view.BaseViewHolder
+import com.zakrodionov.protovary.data.entity.DescriptionHeader
 import kotlinx.android.synthetic.main.item_research.*
 import kotlinx.android.synthetic.main.item_research_desc.*
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter
@@ -14,15 +16,11 @@ import kotlin.random.Random
 
 class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() {
 
-    companion object {
-        val id = Random.nextLong()
-    }
-
     init {
         setHasStableIds(true)
     }
 
-    private val items = mutableListOf<String>()
+    private val items = mutableListOf<DescriptionHeader>()
 
     override fun getItemId(position: Int) = id
 
@@ -34,7 +32,8 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
 
     override fun getItemCount() = items.size
 
-    inner class ViewHolder(containerView: View) : BaseViewHolder<String>(containerView) {
+    inner class ViewHolder(containerView: View) :
+        BaseViewHolder<DescriptionHeader>(containerView) {
 
         init {
             with(expandableLayout) {
@@ -46,18 +45,22 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
             tvDesc.setOnClickATagListener { _, href ->
                 context.tryOpenLink("${getString(R.string.base_url)}$href")
             }
-
         }
 
-        override fun bind(item: String) {
+        override fun bind(item: DescriptionHeader) {
             super.bind(item)
-            tvDesc.setHtml(item, HtmlHttpImageGetter(tvDesc))
+            tvDate.text = getString(R.string.research_date_template, item.date?.toDateFormatGmt())
+            item.description?.let { tvDesc.setHtml(it, HtmlHttpImageGetter(tvDesc)) }
         }
     }
 
-    fun setItems(newItems: List<String>?) {
+    fun setItems(newItems: List<DescriptionHeader>?) {
         items.clear()
         items.addAll(newItems.orEmpty())
         notifyDataSetChanged()
+    }
+
+    companion object {
+        val id = Random.nextLong()
     }
 }

@@ -1,6 +1,5 @@
 package com.zakrodionov.protovary.app.ui.research
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -14,11 +13,12 @@ import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
 import com.zakrodionov.protovary.app.ui.research.adapters.DescriptionHeaderAdapter
 import com.zakrodionov.protovary.app.ui.research.adapters.ProductsAdapter
-import com.zakrodionov.protovary.app.ui.researches.ResearchesFragmentArgs
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
+import com.zakrodionov.protovary.app.util.ColorUtils
 import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
+import com.zakrodionov.protovary.data.entity.DescriptionHeader
 import com.zakrodionov.protovary.domain.model.Product
 import kotlinx.android.synthetic.main.fragment_research.*
 import kotlinx.android.synthetic.main.toolbar_search_and_filter.*
@@ -27,13 +27,9 @@ import org.koin.core.parameter.parametersOf
 
 class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogSortListener {
 
-    companion object {
-        const val RC_SORT = 1122
-        const val DIALOG_SORT_TAG = "dialog_sort_tag"
-    }
-
-    private val args: ResearchesFragmentArgs by navArgs()
+    private val args: ResearchFragmentArgs by navArgs()
     private val researchesId by lazy { args.researchId }
+    private val researchesTime by lazy { args.researchTime }
 
     private val descriptionAdapter by lazy {
         DescriptionHeaderAdapter()
@@ -43,18 +39,20 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         ProductsAdapter(::itemClickListener, ::itemClickFavoriteListener)
     }
 
-    private val researchViewModel: ResearchViewModel by viewModel { parametersOf(researchesId) }
+    private val researchViewModel: ResearchViewModel by viewModel {
+        parametersOf(researchesId, researchesTime)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(researchViewModel) {
             observe(researchDescription, ::renderResearchDescription)
-            observe(filteredProducts, ::renderProductsList)
+            observe(products, ::renderProductsList)
             observeEvent(state, ::handleState)
         }
 
-        if (researchViewModel.filteredProducts.value == null) {
+        if (researchViewModel.products.value == null) {
             loadData()
         }
 
@@ -69,8 +67,8 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         actionSort.setOnClickListener { showBottomDialog() }
 
         val editText = actionSearch.findViewById(R.id.search_src_text) as EditText
-        editText.setTextColor(Color.BLACK)
-        editText.setHintTextColor(Color.BLACK)
+        editText.setTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
+        editText.setHintTextColor(ColorUtils.getThemeColor(requireContext(), R.attr.textColor))
 
         val searchClose = actionSearch.findViewById(R.id.search_close_btn) as ImageView
         searchClose.setImageResource(R.drawable.ic_close)
@@ -128,8 +126,10 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         return MergeAdapter(config, descriptionAdapter, productsAdapter)
     }
 
-    private fun renderResearchDescription(descriptionItems: List<String>?) {
-        descriptionAdapter.setItems(descriptionItems)
+    private fun renderResearchDescription(descriptionHeader: DescriptionHeader?) {
+        descriptionHeader?.let {
+            descriptionAdapter.setItems(listOf(it))
+        }
     }
 
     private fun renderProductsList(products: List<Product>?) {
@@ -175,4 +175,9 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
     }
 
     override fun loadData() = researchViewModel.loadResearch(researchesId)
+
+    companion object {
+        const val RC_SORT = 1122
+        const val DIALOG_SORT_TAG = "dialog_sort_tag"
+    }
 }

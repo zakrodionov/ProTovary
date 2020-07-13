@@ -12,6 +12,7 @@ import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.data.repository.ProductRepository
 import com.zakrodionov.protovary.data.repository.ResearchRepository
+import com.zakrodionov.protovary.data.storage.PreferenceStorage
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.interactor.research.ResearchInteractor
 import okhttp3.OkHttpClient
@@ -33,10 +34,6 @@ val appModule = module {
     single { buildDataBase(get()) }
 
     single {
-        get<AppDatabase>().researchDao
-    }
-
-    single {
         get<AppDatabase>().productDao
     }
 
@@ -45,13 +42,15 @@ val appModule = module {
     single { ErrorHandler(get()) }
 
     single { ProductRepository(get(), get()) }
-    single { ResearchRepository(get(), get()) }
+    single { ResearchRepository(get()) }
 
     single { ProductInteractor(get(), get(), get(), get()) }
-    single { ResearchInteractor(get(), get(), get()) }
+    single { ResearchInteractor(get(), get()) }
 
     single { ProductMapper(get()) }
     single { ResourceManager(get()) }
+
+    single { PreferenceStorage(get()) }
 }
 
 private fun Scope.buildDataBase(resourceManager: ResourceManager) =

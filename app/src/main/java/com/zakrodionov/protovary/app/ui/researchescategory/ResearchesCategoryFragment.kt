@@ -47,7 +47,7 @@ class ResearchesCategoryFragment : BaseFragment(R.layout.fragment_researches_cat
     }
 
     private fun itemClickListener(research: Researches) {
-        val directions = ResearchesCategoryFragmentDirections.actionResearchesCategoryFragmentToResearchesFragment(research.id)
+        val directions = ResearchesCategoryFragmentDirections.actionResearchesCategoryFragmentToResearchesFragment(research)
         navController.navigate(directions)
     }
 

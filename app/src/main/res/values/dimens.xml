@@ -33,7 +33,7 @@
     <dimen name="toolbar_elevation_5">5dp</dimen>
 
     <dimen name="logo_size">150dp</dimen>
-    <dimen name="icon_tg_size">32dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
     <dimen name="collapsing_toolbar_size">300dp</dimen>
     <dimen name="logo_status_size">40dp</dimen>
     <dimen name="product_card_height">150dp</dimen>
@@ -47,4 +47,6 @@
 
     <dimen name="tv_trademark_size">14sp</dimen>
     <dimen name="tv_points_size">12sp</dimen>
+
+    <dimen name="item_menu_height">50dp</dimen>
 </resources>

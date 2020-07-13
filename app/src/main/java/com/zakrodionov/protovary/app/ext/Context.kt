@@ -45,7 +45,11 @@ fun Context.openAppLink(appPackage: String, url: String) {
     }
 }
 
-fun Context.openPlayMarket(pmPackage: String, errorMessage: String? = null, linkBrowser: String? = null) {
+fun Context.openPlayMarket(
+    pmPackage: String,
+    errorMessage: String? = null,
+    linkBrowser: String? = null
+) {
     val uri = Uri.parse(pmPackage + BuildConfig.APPLICATION_ID)
     var intent = Intent(Intent.ACTION_VIEW, uri)
     intent.addFlags(

@@ -1,37 +1,38 @@
 package com.zakrodionov.protovary.app.ui.research
 
-import android.annotation.SuppressLint
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.zakrodionov.protovary.R
+import com.snakydesign.livedataextensions.combineLatest
+import com.snakydesign.livedataextensions.toMutableLiveData
+import com.zakrodionov.protovary.app.ext.refresh
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.util.changeObservable
-import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
+import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_DEFAULT
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
-import com.zakrodionov.protovary.data.db.ProductDao
+import com.zakrodionov.protovary.data.entity.DescriptionHeader
+import com.zakrodionov.protovary.data.entity.Research
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.domain.interactor.product.ProductInteractor
 import com.zakrodionov.protovary.domain.model.Product
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 
 class ResearchViewModel(
     val id: Long,
+    private val publishTime: Long?,
     private val productInteractor: ProductInteractor,
-    private val productMapper: ProductMapper,
-    private val productDao: ProductDao,
-    val context: Context
+    private val productMapper: ProductMapper
 ) : BaseViewModel() {
 
-    private val productsFlow = productDao.getProducts().map { productMapper.mapToProducts(it) }
-    private val sourceProducts = mutableListOf<Product>()
+    val researchDescription = MutableLiveData<DescriptionHeader>()
 
-    val researchDescription = MutableLiveData<List<String>>()
-    val filteredProducts = MutableLiveData<List<Product>>()
+    private val sourceProducts = MutableLiveData<List<Product>>()
+    private val favoriteProducts = productInteractor.getFavoriteProducts()
 
-    var sortType by changeObservable(BY_RATING_DECREASE) { applyFilters() }
-    var filterType by changeObservable(BY_DEFAULT) { applyFilters() }
-    var queryText by changeObservable("") { applyFilters() }
+    val products = combineLatest(sourceProducts, favoriteProducts) { source, favorite ->
+        mapAndFilterProducts(source, favorite)
+    }
+
+    var sortType by changeObservable(BY_RATING_DECREASE) { sourceProducts.refresh() }
+    var filterType by changeObservable(BY_DEFAULT) { sourceProducts.refresh() }
+    var queryText by changeObservable("") { sourceProducts.refresh() }
 
     init {
         loadResearch(id)
@@ -43,49 +44,37 @@ class ResearchViewModel(
         }
     }
 
-    private fun handleProductsInfo(info: String?) {
-        if (!info.isNullOrBlank()) {
-            researchDescription.value = listOf(info)
+    private fun handleProductsInfo(research: Research) {
+        if (!research.anons.isNullOrBlank()) {
+            researchDescription.value = DescriptionHeader(publishTime, research.anons)
         }
-        collectProducts()
+
+        sourceProducts.value = productMapper.mapToProducts(research.productInfo)
     }
 
-    private fun collectProducts() {
-        launch {
-            productsFlow.collect {
-                sourceProducts.clear()
-                sourceProducts.addAll(it ?: listOf())
-                applyFilters()
+    private fun mapAndFilterProducts(
+        sourceProducts: List<Product>?,
+        favoriteProducts: List<Product>?
+    ): List<Product>? {
+        val mappedProducts = sourceProducts?.map { sourceProduct ->
+            sourceProduct.copy(isFavorite = favoriteProducts?.find { sourceProduct.id == it.id } != null)
+        }
+
+        val filteredList = mappedProducts
+            ?.filter {
+                it.name.contains(queryText, true)
+                        || it.trademark.contains(queryText, true)
             }
-        }
-    }
-
-    @SuppressLint("DefaultLocale")
-    fun applyFilters() {
-        val mutableList = sourceProducts.toMutableList()
-
-        when (filterType) {
-            BY_QUALITY_MARK -> {
-                mutableList.retainAll { it.status == context.getString(R.string.status_sign) }
+            ?.filter { it.status == filterType.value }
+            ?.let {
+                when (sortType) {
+                    BY_RATING_DECREASE -> it.sortedByDescending { it.points }
+                    BY_RATING_INCREASE -> it.sortedBy { it.points }
+                    BY_TRADEMARK -> it.sortedBy { it.trademark }
+                }
             }
-            BY_PRODUCT_WITH_VIOLATION -> {
-                mutableList.retainAll { it.status == context.getString(R.string.status_violation) }
-            }
-            BY_DEFAULT -> Unit
-        }
 
-        mutableList.retainAll {
-            it.name.toLowerCase().contains(queryText.toLowerCase()) ||
-                    it.trademark.toLowerCase().contains(queryText.toLowerCase())
-        }
-
-        when (sortType) {
-            BY_RATING_DECREASE -> mutableList.sortByDescending { it.points }
-            BY_RATING_INCREASE -> mutableList.sortBy { it.points }
-            BY_TRADEMARK -> mutableList.sortBy { it.trademark }
-        }
-
-        filteredProducts.value = mutableList
+        return filteredList
     }
 
     fun actionFavorite(product: Product) {
