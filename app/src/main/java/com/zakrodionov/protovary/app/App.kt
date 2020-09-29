@@ -14,6 +14,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.get
+import org.koin.core.logger.Level.ERROR
 
 class App : Application(), KoinComponent {
 
@@ -42,7 +43,7 @@ class App : Application(), KoinComponent {
     private fun initKoin() {
         startKoin {
             androidContext(this@App)
-            androidLogger()
+            androidLogger(ERROR)
             modules(listOf(appModule, viewModelModule))
         }
     }

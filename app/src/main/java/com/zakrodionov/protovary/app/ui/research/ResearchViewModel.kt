@@ -2,7 +2,6 @@ package com.zakrodionov.protovary.app.ui.research
 
 import androidx.lifecycle.MutableLiveData
 import com.snakydesign.livedataextensions.combineLatest
-import com.snakydesign.livedataextensions.toMutableLiveData
 import com.zakrodionov.protovary.app.ext.refresh
 import com.zakrodionov.protovary.app.platform.BaseViewModel
 import com.zakrodionov.protovary.app.util.changeObservable

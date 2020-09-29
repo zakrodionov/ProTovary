@@ -93,7 +93,7 @@ object Libs {
     const val html_textview = "org.sufficientlysecure:html-textview:${Versions.html_textview}"
 
     //Lives
-    const val lives = "com.snakydesign.livedataextensions:lives:1.3.0"
+    const val lives = "com.snakydesign.livedataextensions:lives:2.0.0"
 
     //Test
     const val junit = "junit:junit:${Versions.junit}"

@@ -42,8 +42,9 @@ class DescriptionHeaderAdapter : Adapter<DescriptionHeaderAdapter.ViewHolder>() 
                 }
             }
 
-            tvDesc.setOnClickATagListener { _, href ->
+            tvDesc.setOnClickATagListener { _, _, href ->
                 context.tryOpenLink("${getString(R.string.base_url)}$href")
+                true
             }
         }
 

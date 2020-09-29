@@ -1,25 +1,25 @@
 object Versions {
     //Plugins
-    const val android_gradle_plugin = "3.6.2"
+    const val android_gradle_plugin = "4.0.1"
     const val google_services_plugin = "4.0.1"
-    const val kotlin_gradle_plugin = "1.3.72"
+    const val kotlin_gradle_plugin = "1.4.10"
     const val fabric_plugin = "1.+"
-    const val gradle_versions_plugin = "0.28.0"
-    const val navigation_safe_args_plugin = "2.1.0-rc01"
-    const val ktlint_plugin_version = "9.2.1"
+    const val gradle_versions_plugin = "0.33.0"
+    const val navigation_safe_args_plugin = "2.3.0"
+    const val ktlint_plugin_version = "9.4.0"
 
     //AndroidX
-    const val androidx_appcompat = "1.1.0"
-    const val androidx_constraint_layout = "2.0.0-beta4"
-    const val androidx_material = "1.2.0-alpha06"
+    const val androidx_appcompat = "1.2.0"
+    const val androidx_constraint_layout = "2.0.1"
+    const val androidx_material = "1.2.1"
     const val androidx_cardview = "1.0.0"
     const val androidx_recyclerview = "1.2.0-alpha02"
-    const val ktx = "1.3.0-rc01"
+    const val ktx = "1.3.1"
     const val multidex = "2.0.1"
     const val fragment = "1.3.0-alpha03"
 
     //Kotlin
-    const val kotlin_coroutines = "1.3.5"
+    const val kotlin_coroutines = "1.3.9"
 
     //Koin
     const val koin = "2.1.5"
@@ -65,7 +65,7 @@ object Versions {
     const val anko = "0.10.8"
 
     //Navigation
-    const val navigation = "2.3.0-alpha05"
+    const val navigation = "2.3.0"
 
     //Permission
     const val permissions_dispatcher = "4.7.0"
@@ -77,10 +77,10 @@ object Versions {
     const val adapter_delegates = "4.3.0"
 
     //ExpandableLayout
-    const val expandable_layout = "1.0.5"
+    const val expandable_layout = "1.0.6"
 
     //Html textview
-    const val html_textview = "3.9"
+    const val html_textview = "4.0"
 
     //Test
     const val junit = "4.12"
