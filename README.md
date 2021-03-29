@@ -6,19 +6,19 @@
 [Последний выпуск здесь](https://github.com/zakrodionov/ProTovary/releases).
 
 ## Stack
-• Android Jetpack's Navigation
-
 • Kotlin
 
 • Gradle DSL
 
 • MVVM
 
+• Android Jetpack's Navigation
+
+• Retrofit, Coroutines
+
 • Koin
 
 • Livedata, Lifecycle
-
-• Retrofit, Coroutines
 
 • Room
 
