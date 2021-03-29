@@ -38,12 +38,14 @@
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
 
         <ImageView
+            android:id="@+id/ivRatingDecreaseDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/default_end_margin_20"
-            android:src="@drawable/ic_done" />
+            android:src="@drawable/ic_done"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
@@ -66,12 +68,14 @@
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
 
         <ImageView
+            android:id="@+id/ivRatingIncreaseDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/default_end_margin_20"
-            android:src="@drawable/ic_done" />
+            android:src="@drawable/ic_done"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
@@ -94,12 +98,14 @@
             android:textAppearance="@style/TextAppearance.App.WhiteSelector" />
 
         <ImageView
+            android:id="@+id/ivTradeMarkDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/default_end_margin_20"
-            android:src="@drawable/ic_done" />
+            android:src="@drawable/ic_done"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

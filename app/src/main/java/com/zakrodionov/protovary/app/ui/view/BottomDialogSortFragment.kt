@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.zakrodionov.protovary.R
+import com.zakrodionov.protovary.app.ext.visible
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType.*
 import kotlinx.android.synthetic.main.dialog_sort_research.view.*
@@ -24,9 +25,18 @@ class BottomDialogSortFragment : BottomSheetDialogFragment() {
         val type = arguments?.getSerializable(ARG_SORT_TYPE) ?: BY_RATING_DECREASE
 
         when (type) {
-            BY_RATING_DECREASE -> view.rlRatingDecrease.isSelected = true
-            BY_RATING_INCREASE -> view.rlRatingIncrease.isSelected = true
-            BY_TRADEMARK -> view.rlTradeMark.isSelected = true
+            BY_RATING_DECREASE -> {
+                view.rlRatingDecrease.isSelected = true
+                view.ivRatingDecreaseDone.visible()
+            }
+            BY_RATING_INCREASE -> {
+                view.rlRatingIncrease.isSelected = true
+                view.ivRatingIncreaseDone.visible()
+            }
+            BY_TRADEMARK -> {
+                view.rlTradeMark.isSelected = true
+                view.ivTradeMarkDone.visible()
+            }
         }
 
         val parentFragment = targetFragment as? BottomDialogSortListener
