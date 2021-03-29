@@ -14,4 +14,5 @@
 /captures
 .externalNativeBuild
 /home/zak/Рабочий стол/ProTovary/app/google-services.json
-!/keystore.properties
+/keystore.properties
+/protovary.jks
