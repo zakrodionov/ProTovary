@@ -6,7 +6,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("io.fabric")
+    id("com.google.firebase.crashlytics")
     id("androidx.navigation.safeargs.kotlin")
     id("org.jlleitschuh.gradle.ktlint")
 }
@@ -147,8 +147,10 @@ dependencies {
     implementation(Libs.lifecycle_viewmodel)
 
     // Firebase
-    implementation(Libs.firebase_core)
-    implementation(Libs.firebase_messaging)
+    implementation(platform(Libs.firebase_bom))
+    implementation(Libs.firebase_analytics_ktx)
+    implementation(Libs.firebase_crashlytics_ktx)
+    implementation(Libs.firebase_messaging_ktx)
 
     // Crashlytics
     implementation(Libs.crashlytics) {
@@ -197,5 +199,3 @@ repositories {
     mavenCentral()
     maven("http://repository.jetbrains.com/all")
 }
-
-apply(mapOf("plugin" to "com.google.gms.google-services"))

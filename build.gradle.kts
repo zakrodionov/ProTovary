@@ -5,13 +5,12 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven("https://maven.fabric.io/public")
     }
     dependencies {
         classpath(Libs.android_gradle_plugin)
         classpath(Libs.kotlin_gradle_plugin)
         classpath(Libs.google_services_plugin)
-        classpath(Libs.fabric_plugin)
+        classpath(Libs.google_firebase_crashlytics)
         classpath(Libs.navigation_safe_args_plugin)
     }
 }

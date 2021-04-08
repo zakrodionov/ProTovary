@@ -1,9 +1,8 @@
 object Versions {
     //Plugins
-    const val android_gradle_plugin = "4.0.1"
-    const val google_services_plugin = "4.0.1"
+    const val android_gradle_plugin = "4.1.3"
+    const val google_services_plugin = "4.3.5"
     const val kotlin_gradle_plugin = "1.4.10"
-    const val fabric_plugin = "1.+"
     const val gradle_versions_plugin = "0.33.0"
     const val navigation_safe_args_plugin = "2.3.0"
     const val ktlint_plugin_version = "9.4.0"
@@ -40,8 +39,7 @@ object Versions {
     const val glide = "4.11.0"
 
     //Firebase
-    const val firebase_core = "17.1.0"
-    const val firebase_messaging = "20.0.0"
+    const val firebase_bom = "26.8.0"
 
     //Cicerone
     const val cicerone = "5.0.0"

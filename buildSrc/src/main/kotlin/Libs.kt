@@ -2,8 +2,8 @@ object Libs {
     //Plugins
     const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
     const val google_services_plugin = "com.google.gms:google-services:${Versions.google_services_plugin}"
+    const val google_firebase_crashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.5.2"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_gradle_plugin}"
-    const val fabric_plugin = "io.fabric.tools:gradle:${Versions.fabric_plugin}"
     const val gradle_versions_plugin = "com.github.ben-manes.versions"
     const val navigation_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_safe_args_plugin}"
     const val ktlint_plugin = "org.jlleitschuh.gradle.ktlint"
@@ -47,8 +47,10 @@ object Libs {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //Firebase
-    const val firebase_core = "com.google.firebase:firebase-core:${Versions.firebase_core}"
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
+    const val firebase_bom = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
+    const val firebase_crashlytics_ktx = "com.google.firebase:firebase-crashlytics-ktx"
+    const val firebase_analytics_ktx = "com.google.firebase:firebase-analytics-ktx"
+    const val firebase_messaging_ktx = "com.google.firebase:firebase-messaging-ktx"
 
     //Cicerone
     const val cicerone = "ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
