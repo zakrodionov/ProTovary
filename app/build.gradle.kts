@@ -199,3 +199,5 @@ repositories {
     mavenCentral()
     maven("http://repository.jetbrains.com/all")
 }
+
+apply(mapOf("plugin" to "com.google.gms.google-services"))
