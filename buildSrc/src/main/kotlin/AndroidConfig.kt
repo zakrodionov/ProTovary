@@ -4,8 +4,8 @@ object AndroidConfig {
     const val TARGET_SDK_VERSION = 30
     const val BUILD_TOOLS_VERSION = "30.0.0"
 
-    const val VERSION_CODE = 32
-    const val VERSION_NAME = "1.16"
+    const val VERSION_CODE = 33
+    const val VERSION_NAME = "1.17"
 
     const val APPLICATION_ID = "com.zakrodionov.protovary"
     const val TEST_INSTRUMENTATION_RUNNER = "android.support.test.runner.AndroidJUnitRunner"
