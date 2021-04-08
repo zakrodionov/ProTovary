@@ -8,6 +8,7 @@ import com.zakrodionov.protovary.app.platform.ErrorHandler
 import com.zakrodionov.protovary.app.platform.NetworkHandler
 import com.zakrodionov.protovary.app.platform.ResourceManager
 import com.zakrodionov.protovary.data.db.AppDatabase
+import com.zakrodionov.protovary.data.db.AppDatabase.Companion.MIGRATION_1_2
 import com.zakrodionov.protovary.data.mapper.ProductMapper
 import com.zakrodionov.protovary.data.network.Api
 import com.zakrodionov.protovary.data.repository.ProductRepository
@@ -54,7 +55,10 @@ val appModule = module {
 }
 
 private fun Scope.buildDataBase(resourceManager: ResourceManager) =
-    Room.databaseBuilder(get(), AppDatabase::class.java, resourceManager.getString(R.string.db_name)).build()
+    Room.databaseBuilder(get(), AppDatabase::class.java, resourceManager.getString(R.string.db_name))
+        .addMigrations(MIGRATION_1_2)
+        .fallbackToDestructiveMigration()
+        .build()
 
 private fun Scope.buildApi(): Api = get<Retrofit>().create(Api::class.java)
 
