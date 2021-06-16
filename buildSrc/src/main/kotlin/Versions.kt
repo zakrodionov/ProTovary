@@ -4,7 +4,6 @@ object Versions {
     const val google_services_plugin = "4.3.5"
     const val kotlin_gradle_plugin = "1.4.10"
     const val gradle_versions_plugin = "0.33.0"
-    const val navigation_safe_args_plugin = "2.3.0"
     const val ktlint_plugin_version = "9.4.0"
 
     //AndroidX
@@ -28,7 +27,7 @@ object Versions {
     const val lifecycle = "2.3.0-alpha01"
 
     //Room
-    const val room = "2.2.5"
+    const val room = "2.3.0"
 
     //Networking
     const val retrofit = "2.8.1"
@@ -36,7 +35,7 @@ object Versions {
     const val stetho = "1.5.1"
 
     //Glide
-    const val glide = "4.11.0"
+    const val glide = "4.12.0"
 
     //Firebase
     const val firebase_bom = "26.8.0"
@@ -63,7 +62,7 @@ object Versions {
     const val anko = "0.10.8"
 
     //Navigation
-    const val navigation = "2.3.0"
+    const val navigation = "2.4.0-alpha02"
 
     //Permission
     const val permissions_dispatcher = "4.7.0"

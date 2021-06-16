@@ -7,9 +7,7 @@
     <fragment
         android:id="@+id/researchesCategoryFragment"
         android:name="com.zakrodionov.protovary.app.ui.researchescategory.ResearchesCategoryFragment"
-        android:label="ResearchesFragment"
-        app:launchSingleTop="true"
-        app:popUpToInclusive="true">
+        android:label="ResearchesFragment">
 
         <action
             android:id="@+id/action_researchesCategoryFragment_to_researchesFragment"

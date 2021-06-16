@@ -7,14 +7,13 @@
     <fragment
         android:id="@+id/barcodeFragment"
         android:name="com.zakrodionov.protovary.app.ui.barcode.BarcodeFragment"
-        android:label="BarcodeFragment"
-        app:launchSingleTop="true"
-        app:popUpToInclusive="true">
+        android:label="BarcodeFragment">
 
         <action
             android:id="@+id/action_barcodeFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/scannerFragment"
         android:name="com.zakrodionov.protovary.app.ui.scanner.ScannerFragment"

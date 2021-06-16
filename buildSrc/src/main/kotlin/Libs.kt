@@ -5,7 +5,7 @@ object Libs {
     const val google_firebase_crashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.5.2"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_gradle_plugin}"
     const val gradle_versions_plugin = "com.github.ben-manes.versions"
-    const val navigation_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_safe_args_plugin}"
+    const val navigation_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     const val ktlint_plugin = "org.jlleitschuh.gradle.ktlint"
 
     //AndroidX

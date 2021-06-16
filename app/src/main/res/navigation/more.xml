@@ -7,9 +7,7 @@
     <fragment
         android:id="@+id/moreFragment"
         android:name="com.zakrodionov.protovary.app.ui.more.MoreFragment"
-        android:label="MoreFragment"
-        app:launchSingleTop="true"
-        app:popUpToInclusive="true">
+        android:label="MoreFragment">
         <action
             android:id="@+id/action_moreFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
@@ -17,6 +15,7 @@
             android:id="@+id/actionShowThemePreferenceDialog"
             app:destination="@id/themePreferenceDialog" />
     </fragment>
+
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.zakrodionov.protovary.app.ui.about.AboutFragment"
