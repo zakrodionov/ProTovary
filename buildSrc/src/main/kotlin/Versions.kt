@@ -62,7 +62,7 @@ object Versions {
     const val anko = "0.10.8"
 
     //Navigation
-    const val navigation = "2.4.0-alpha02"
+    const val navigation = "2.4.0-alpha06"
 
     //Permission
     const val permissions_dispatcher = "4.7.0"
