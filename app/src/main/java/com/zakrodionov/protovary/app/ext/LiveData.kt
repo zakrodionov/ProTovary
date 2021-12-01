@@ -1,7 +1,6 @@
 package com.zakrodionov.protovary.app.ext
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.zakrodionov.protovary.app.platform.Event
 
 fun <T : Any?> MutableLiveData<T>.refresh() = apply { setValue(value) }

@@ -7,14 +7,14 @@ object Versions {
     const val ktlint_plugin_version = "9.4.0"
 
     //AndroidX
-    const val androidx_appcompat = "1.2.0"
-    const val androidx_constraint_layout = "2.0.1"
+    const val androidx_appcompat = "1.4.0"
+    const val androidx_constraint_layout = "2.1.2"
     const val androidx_material = "1.2.1"
     const val androidx_cardview = "1.0.0"
-    const val androidx_recyclerview = "1.2.0-alpha02"
-    const val ktx = "1.3.1"
+    const val androidx_recyclerview = "1.2.1"
+    const val ktx = "1.7.0"
     const val multidex = "2.0.1"
-    const val fragment = "1.3.0-alpha03"
+    const val fragment = "1.4.0"
 
     //Kotlin
     const val kotlin_coroutines = "1.3.9"
@@ -24,7 +24,7 @@ object Versions {
 
     //Lifecycle
     const val lifecycle_ext = "2.2.0"
-    const val lifecycle = "2.3.0-alpha01"
+    const val lifecycle = "2.4.0"
 
     //Room
     const val room = "2.3.0"
@@ -62,7 +62,7 @@ object Versions {
     const val anko = "0.10.8"
 
     //Navigation
-    const val navigation = "2.4.0-alpha06"
+    const val navigation = "2.4.0-beta02"
 
     //Permission
     const val permissions_dispatcher = "4.7.0"

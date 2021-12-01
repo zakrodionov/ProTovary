@@ -6,8 +6,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import com.zakrodionov.protovary.R
 import com.zakrodionov.protovary.app.ext.*
 import com.zakrodionov.protovary.app.platform.BaseFragment
@@ -16,7 +16,9 @@ import com.zakrodionov.protovary.app.ui.research.adapters.ProductsAdapter
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment
 import com.zakrodionov.protovary.app.ui.view.BottomDialogSortFragment.BottomDialogSortListener
 import com.zakrodionov.protovary.app.util.ColorUtils
-import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.*
+import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_DEFAULT
+import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_PRODUCT_WITH_VIOLATION
+import com.zakrodionov.protovary.app.util.enums.ResearchFilterType.BY_QUALITY_MARK
 import com.zakrodionov.protovary.app.util.enums.ResearchSortType
 import com.zakrodionov.protovary.data.entity.DescriptionHeader
 import com.zakrodionov.protovary.domain.model.Product
@@ -118,12 +120,12 @@ class ResearchFragment : BaseFragment(R.layout.fragment_research), BottomDialogS
         rvResearch.adapter = buildMergeAdapter()
     }
 
-    private fun buildMergeAdapter(): MergeAdapter {
-        val config = MergeAdapter.Config.Builder()
-            .setStableIdMode(MergeAdapter.Config.StableIdMode.ISOLATED_STABLE_IDS)
+    private fun buildMergeAdapter(): ConcatAdapter {
+        val config = ConcatAdapter.Config.Builder()
+            .setStableIdMode(ConcatAdapter.Config.StableIdMode.ISOLATED_STABLE_IDS)
             .setIsolateViewTypes(true)
             .build()
-        return MergeAdapter(config, descriptionAdapter, productsAdapter)
+        return ConcatAdapter(config, descriptionAdapter, productsAdapter)
     }
 
     private fun renderResearchDescription(descriptionHeader: DescriptionHeader?) {

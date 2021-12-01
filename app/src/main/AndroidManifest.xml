@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme.Launcher"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.zakrodionov.protovary.app.ui.AppActivity">
+        <activity
+            android:name="com.zakrodionov.protovary.app.ui.AppActivity"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
