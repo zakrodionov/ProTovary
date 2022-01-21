@@ -1,13 +1,16 @@
 package com.zakrodionov.protovary.app.ui
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.model.*
 import com.zakrodionov.protovary.R
@@ -72,6 +75,7 @@ class AppActivity : BaseActivity() {
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             when {
                 appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> {
+                    Log.d("Log__updates", "start IMMEDIATE")
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_IMMEDIATE_REQUEST_CODE
                     )
@@ -101,6 +105,7 @@ class AppActivity : BaseActivity() {
                         }
                     }
 
+                    Log.d("Log__updates", "start FLEXIBLE")
                     appUpdateManager.registerListener(listener)
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo, AppUpdateType.FLEXIBLE, this, UPDATE_FLEXIBLE_REQUEST_CODE
@@ -112,6 +117,16 @@ class AppActivity : BaseActivity() {
 
         appUpdateInfoTask.addOnFailureListener {
             showSnackbar(it?.message ?: "")
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("Log__updates", "onActivityResult requestCode = $requestCode, resultCode = $resultCode")
+        if (requestCode == UPDATE_IMMEDIATE_REQUEST_CODE) {
+            if (resultCode == RESULT_CANCELED) {
+                finishAffinity()
+            }
         }
     }
 
