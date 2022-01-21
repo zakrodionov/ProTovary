@@ -29,7 +29,7 @@ class AppActivity : BaseActivity() {
 
         setupBottomNavigationView()
 
-        checkForUpdates(true)
+        checkForUpdates()
     }
 
     private fun setupBottomNavigationView() {
@@ -65,86 +65,47 @@ class AppActivity : BaseActivity() {
         }
     }
 
-    private fun checkForUpdates(userTriggered: Boolean = false) {
+    private fun checkForUpdates() {
         val appUpdateManager = AppUpdateManagerFactory.create(this)
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            when (appUpdateInfo.updateAvailability()) {
-                UpdateAvailability.UPDATE_AVAILABLE -> {
-                    when {
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> {
-                            appUpdateManager.startUpdateFlowForResult(
-                                appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_IMMEDIATE_REQUEST_CODE
-                            )
-                        }
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> {
-                            val listener = { state: InstallState ->
-                                // Show module progress, log state, or install the update.
-                                when (state.installStatus()) {
-                                    InstallStatus.DOWNLOADED -> {
-                                        // After the update is downloaded, show a notification
-                                        // and request user confirmation to restart the app.
-                                        showSnackbar(
-                                            getString(R.string.update_download_finished),
-                                            getString(R.string.update_restart)
-                                        ) {
-                                            appUpdateManager.completeUpdate()
-                                        }
-                                    }
-                                    InstallStatus.FAILED -> {
-                                        showSnackbar(
-                                            getString(R.string.update_download_failed),
-                                            getString(R.string.update_retry)
-                                        ) {
-                                            checkForUpdates()
-                                        }
-                                    }
+            when {
+                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_IMMEDIATE_REQUEST_CODE
+                    )
+                }
+                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> {
+                    val listener = { state: InstallState ->
+                        // Show module progress, log state, or install the update.
+                        when (state.installStatus()) {
+                            InstallStatus.DOWNLOADED -> {
+                                // After the update is downloaded, show a notification
+                                // and request user confirmation to restart the app.
+                                showSnackbar(
+                                    getString(R.string.update_download_finished),
+                                    getString(R.string.update_restart)
+                                ) {
+                                    appUpdateManager.completeUpdate()
                                 }
                             }
-
-                            // Before starting an update, register a listener for updates.
-                            appUpdateManager.registerListener(listener)
-
-                            // Start an update.
-                            appUpdateManager.startUpdateFlowForResult(
-                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                                appUpdateInfo,
-                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-                                AppUpdateType.IMMEDIATE,
-                                // The current activity making the update request.
-                                this,
-                                // Include a request code to later monitor this update request.
-                                UPDATE_IMMEDIATE_REQUEST_CODE
-                            )
-
-                            // When status updates are no longer needed, unregister the listener.
-                            appUpdateManager.unregisterListener(listener)
+                            InstallStatus.FAILED -> {
+                                showSnackbar(
+                                    getString(R.string.update_download_failed),
+                                    getString(R.string.update_retry)
+                                ) {
+                                    checkForUpdates()
+                                }
+                            }
                         }
                     }
-                }
-                UpdateAvailability.UPDATE_NOT_AVAILABLE -> {
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.update_notavailable_title))
-                        .setMessage(getString(R.string.update_notavailable_message))
-                        .setPositiveButton(getString(R.string.update_notavailable_ok), null)
-                        .show()
-                }
-                UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> {
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.update_inprogress_title))
-                        .setMessage(getString(R.string.update_inprogress_message))
-                        .setPositiveButton(getString(R.string.update_inprogress_ok), null)
-                        .show()
-                }
-                UpdateAvailability.UNKNOWN -> {
-                    if (userTriggered) {
-                        MaterialAlertDialogBuilder(this)
-                            .setTitle(getString(R.string.update_unknown_title))
-                            .setMessage(getString(R.string.update_unknown_message))
-                            .setPositiveButton(getString(R.string.update_unknown_ok), null)
-                            .show()
-                    }
+
+                    appUpdateManager.registerListener(listener)
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, UPDATE_FLEXIBLE_REQUEST_CODE
+                    )
+                    appUpdateManager.unregisterListener(listener)
                 }
             }
         }
