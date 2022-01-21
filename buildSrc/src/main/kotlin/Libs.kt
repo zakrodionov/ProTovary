@@ -46,6 +46,8 @@ object Libs {
     const val glide_runtime = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
+    const val play_core = "com.google.android.play:core:1.10.3"
+
     //Firebase
     const val firebase_bom = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
     const val firebase_crashlytics_ktx = "com.google.firebase:firebase-crashlytics-ktx"

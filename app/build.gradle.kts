@@ -146,6 +146,8 @@ dependencies {
     implementation(Libs.lifecycle_livedata)
     implementation(Libs.lifecycle_viewmodel)
 
+    implementation(Libs.play_core)
+
     // Firebase
     implementation(platform(Libs.firebase_bom))
     implementation(Libs.firebase_analytics_ktx)
