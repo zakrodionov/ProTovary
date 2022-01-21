@@ -2,13 +2,13 @@ package com.zakrodionov.protovary.app.ext
 
 import android.content.Context
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.Factory
 import androidx.lifecycle.ViewModelProviders
 import com.zakrodionov.protovary.app.platform.BaseFragment
 
-inline fun androidx.fragment.app.FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> androidx.fragment.app.FragmentTransaction) =
+inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
     beginTransaction().func().commit()
 
 inline fun <reified T : ViewModel> Fragment.viewModel(factory: Factory, body: T.() -> Unit): T {
