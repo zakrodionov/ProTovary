@@ -79,62 +79,65 @@ class AppActivity : BaseActivity() {
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             when (appUpdateInfo.updateAvailability()) {
                 UpdateAvailability.UPDATE_AVAILABLE -> {
-                    if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                        // Immediate, required update
-                        appUpdateManager.startUpdateFlowForResult(
-                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                            appUpdateInfo,
-                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-                            AppUpdateType.IMMEDIATE,
-                            // The current activity making the update request.
-                            this,
-                            // Include a request code to later monitor this update request.
-                            UPDATE_IMMEDIATE_REQUEST_CODE
-                        )
-                    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                        // Flexible, optional update
-                        // Create a listener to track request state updates.
-                        val listener = { state: InstallState ->
-                            // Show module progress, log state, or install the update.
-                            when (state.installStatus()) {
-                                InstallStatus.DOWNLOADED -> {
-                                    // After the update is downloaded, show a notification
-                                    // and request user confirmation to restart the app.
-                                    showSnackbar(
-                                        getString(R.string.update_download_finished),
-                                        getString(R.string.update_restart)
-                                    ) {
-                                        appUpdateManager.completeUpdate()
+                    when {
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> {
+                            // Immediate, required update
+                            appUpdateManager.startUpdateFlowForResult(
+                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                                appUpdateInfo,
+                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                                AppUpdateType.IMMEDIATE,
+                                // The current activity making the update request.
+                                this,
+                                // Include a request code to later monitor this update request.
+                                UPDATE_IMMEDIATE_REQUEST_CODE
+                            )
+                        }
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> {
+                            // Flexible, optional update
+                            // Create a listener to track request state updates.
+                            val listener = { state: InstallState ->
+                                // Show module progress, log state, or install the update.
+                                when (state.installStatus()) {
+                                    InstallStatus.DOWNLOADED -> {
+                                        // After the update is downloaded, show a notification
+                                        // and request user confirmation to restart the app.
+                                        showSnackbar(
+                                            getString(R.string.update_download_finished),
+                                            getString(R.string.update_restart)
+                                        ) {
+                                            appUpdateManager.completeUpdate()
+                                        }
                                     }
-                                }
-                                InstallStatus.FAILED -> {
-                                    showSnackbar(
-                                        getString(R.string.update_download_failed),
-                                        getString(R.string.update_retry)
-                                    ) {
-                                        checkForUpdates()
+                                    InstallStatus.FAILED -> {
+                                        showSnackbar(
+                                            getString(R.string.update_download_failed),
+                                            getString(R.string.update_retry)
+                                        ) {
+                                            checkForUpdates()
+                                        }
                                     }
                                 }
                             }
+
+                            // Before starting an update, register a listener for updates.
+                            appUpdateManager.registerListener(listener)
+
+                            // Start an update.
+                            appUpdateManager.startUpdateFlowForResult(
+                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                                appUpdateInfo,
+                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                                AppUpdateType.IMMEDIATE,
+                                // The current activity making the update request.
+                                this,
+                                // Include a request code to later monitor this update request.
+                                UPDATE_FLEXIBLE_REQUEST_CODE
+                            )
+
+                            // When status updates are no longer needed, unregister the listener.
+                            appUpdateManager.unregisterListener(listener)
                         }
-
-                        // Before starting an update, register a listener for updates.
-                        appUpdateManager.registerListener(listener)
-
-                        // Start an update.
-                        appUpdateManager.startUpdateFlowForResult(
-                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                            appUpdateInfo,
-                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-                            AppUpdateType.FLEXIBLE,
-                            // The current activity making the update request.
-                            this,
-                            // Include a request code to later monitor this update request.
-                            UPDATE_FLEXIBLE_REQUEST_CODE
-                        )
-
-                        // When status updates are no longer needed, unregister the listener.
-                        appUpdateManager.unregisterListener(listener)
                     }
                 }
                 UpdateAvailability.UPDATE_NOT_AVAILABLE -> {
