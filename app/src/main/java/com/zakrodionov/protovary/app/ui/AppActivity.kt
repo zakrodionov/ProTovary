@@ -57,10 +57,7 @@ class AppActivity : BaseActivity() {
                 UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> {
                     if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                         appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            AppUpdateType.IMMEDIATE,
-                            this,
-                            UPDATE_IMMEDIATE_REQUEST_CODE
+                            appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_IMMEDIATE_REQUEST_CODE
                         )
                     }
                 }
@@ -68,34 +65,20 @@ class AppActivity : BaseActivity() {
         }
     }
 
-    fun checkForUpdates(userTriggered: Boolean = false) {
-        // Creates instance of the manager.
+    private fun checkForUpdates(userTriggered: Boolean = false) {
         val appUpdateManager = AppUpdateManagerFactory.create(this)
-
-        // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
-        // Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             when (appUpdateInfo.updateAvailability()) {
                 UpdateAvailability.UPDATE_AVAILABLE -> {
                     when {
                         appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> {
-                            // Immediate, required update
                             appUpdateManager.startUpdateFlowForResult(
-                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                                appUpdateInfo,
-                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-                                AppUpdateType.IMMEDIATE,
-                                // The current activity making the update request.
-                                this,
-                                // Include a request code to later monitor this update request.
-                                UPDATE_IMMEDIATE_REQUEST_CODE
+                                appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_IMMEDIATE_REQUEST_CODE
                             )
                         }
                         appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> {
-                            // Flexible, optional update
-                            // Create a listener to track request state updates.
                             val listener = { state: InstallState ->
                                 // Show module progress, log state, or install the update.
                                 when (state.installStatus()) {
@@ -132,7 +115,7 @@ class AppActivity : BaseActivity() {
                                 // The current activity making the update request.
                                 this,
                                 // Include a request code to later monitor this update request.
-                                UPDATE_FLEXIBLE_REQUEST_CODE
+                                UPDATE_IMMEDIATE_REQUEST_CODE
                             )
 
                             // When status updates are no longer needed, unregister the listener.
