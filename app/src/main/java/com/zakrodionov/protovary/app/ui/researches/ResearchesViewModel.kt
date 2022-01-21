@@ -23,7 +23,7 @@ class ResearchesViewModel(
     }
 
     private fun handleResearches(researches: Researches) {
-        title.value = researches.name
+        title.value = researches.name ?: ""
         sourceResearches.clear()
         sourceResearches.addAll(researches.researches?.sortedBy { it.name } ?: listOf())
         applyQueryText()
