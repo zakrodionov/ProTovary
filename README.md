@@ -1,7 +1,16 @@
 # ПроТовары [<img src="https://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" width="20%" align="right">](https://play.google.com/store/apps/details?id=com.zakrodionov.protovary)
-                                
- 
-ПроТовары – это приложение, с помощью которого вы можете проверять качество продуктов и товаров. Информация взята с портала ["Роскачество"](https://rskrf.ru/).
+[ENG]  
+ProProducts - is an application with which you can check the quality of products and goods. You can search for products by category or by scanning the barcode.
+Information taken from the portal ["Roskachestvo"](https://rskrf.ru/).
+
+[Latest release here](https://github.com/zakrodionov/ProTovary/releases).
+  
+
+
+      
+[РУ]   
+ПроТовары – это приложение, с помощью которого вы можете проверять качество продуктов и товаров. Вы можете искать товары по категориям или отсанировав штрихкод.
+Информация взята с портала ["Роскачество"](https://rskrf.ru/).
 
 [Последний выпуск здесь](https://github.com/zakrodionov/ProTovary/releases).
 
