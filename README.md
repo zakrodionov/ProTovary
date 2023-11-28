@@ -1,4 +1,6 @@
 # ПроТовары [<img src="https://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" width="20%" align="right">](https://play.google.com/store/apps/details?id=com.zakrodionov.protovary)
+
+Open-source Application for the resource "Roskachestvo". 
 [ENG]  
 ProProducts - is an application with which you can check the quality of products and goods. You can search for products by category or by scanning the barcode.
 Information taken from the portal ["Roskachestvo"](https://rskrf.ru/).
